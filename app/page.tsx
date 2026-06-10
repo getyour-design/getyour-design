@@ -130,7 +130,7 @@ export default function Home() {
     <main className="bg-[#f3f2ef]">
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-12 lg:px-10 lg:py-16">
         <div className="mx-auto grid max-w-[1540px] gap-14 lg:min-h-[600px] lg:grid-cols-[0.382fr_0.618fr] lg:items-center">
-          <div className="max-w-[36rem] self-center lg:pb-10">
+          <div className="max-w-[36rem] self-center">
             <h1 className="serif text-balance text-[1.8rem] font-normal leading-[1.24] text-[#10100f] md:text-[2.35rem] lg:text-[2.65rem]">
               Sagen Sie mir, was Sie umgibt,
               <br />
@@ -150,14 +150,6 @@ export default function Home() {
               <Link className="border-b border-black/20 pb-2 text-[#353b3e] transition hover:border-black hover:text-[#10100f]" href="/collections">
                 Kollektionen ansehen
               </Link>
-            </div>
-            <div className="mt-8 max-w-[34rem] border-y hairline py-5">
-              <p className="text-sm leading-7 text-[#4b5050]">
-                GETYOUR.DESIGN ist eine kuratierte Commerce-Plattform für
-                Kunstwerke, Designmöbel, Designobjekte, Wohnaccessoires,
-                Leuchten, Skulpturen, Keramik, Teppiche, Interior Design und
-                Collectible Design.
-              </p>
             </div>
           </div>
           <div className="self-stretch border-l hairline pl-0 lg:pl-12">
