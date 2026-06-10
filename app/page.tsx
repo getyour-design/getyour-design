@@ -128,26 +128,26 @@ function ProductVisual({ index, palette }: { index: number; palette: string }) {
 export default function Home() {
   return (
     <main className="bg-[#f3f2ef]">
-      <section className="border-b hairline bg-[#f3f2ef] px-5 py-12 lg:px-10 lg:py-16">
-        <div className="mx-auto grid max-w-[1540px] gap-14 lg:min-h-[600px] lg:grid-cols-[0.382fr_0.618fr] lg:items-center">
-          <div className="flex max-w-[35rem] flex-col self-center">
-            <h1 className="serif text-balance text-[1.55rem] font-normal leading-[1.24] text-[#10100f] md:text-[2.05rem] lg:text-[2.3rem]">
+      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-20 pt-10 lg:px-10 lg:pb-24 lg:pt-12">
+        <div className="mx-auto grid max-w-[1540px] gap-6 lg:min-h-[720px] lg:grid-cols-[0.36fr_0.64fr] lg:items-center xl:gap-8">
+          <div className="flex max-w-[33rem] flex-col self-center lg:translate-y-8 lg:pr-0">
+            <h1 className="serif text-balance text-[1.45rem] font-normal leading-[1.22] text-[#10100f] md:text-[1.85rem] lg:text-[2.12rem]">
               Sagen Sie mir,
               <br />
               was Sie umgibt,
               <br />
-              <span className="mt-5 block">
+              <span className="mt-6 block">
                 und ich sage Ihnen,
                 <br />
                 wer Sie sind.
               </span>
             </h1>
-            <p className="mt-6 max-w-[34rem] text-base leading-8 text-[#353839] md:text-lg md:leading-8">
+            <p className="mt-6 max-w-[30rem] text-[0.98rem] leading-7 text-[#353839] md:text-base md:leading-8">
               Kunstwerke, Designmöbel, Designobjekte, Wohnaccessoires und
               Collectible Design ausgewählter Künstler, Ateliers,
               Manufakturen und Hersteller.
             </p>
-            <div className="mt-10 flex flex-col gap-4 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:flex-row sm:gap-8">
+            <div className="mt-14 flex flex-col gap-4 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:flex-row sm:gap-8">
               <Link className="border-b border-black/40 pb-2 transition hover:border-black" href="/shop">
                 Shop entdecken
               </Link>
@@ -156,11 +156,11 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="self-stretch border-l hairline pl-0 lg:pl-12 lg:py-4">
-            <div className="h-full border hairline bg-[#e7ecef] p-0">
+          <div className="self-stretch lg:-mr-10 lg:py-0">
+            <div className="h-full bg-[#e7ecef] p-0">
               <img
                 alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
-                className="h-full min-h-[440px] w-full object-cover object-[58%_56%]"
+                className="h-full min-h-[520px] w-full object-cover object-[58%_59%] lg:min-h-[720px]"
                 src="/images/hero-lc2-blue.jpg"
               />
             </div>
@@ -168,12 +168,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b hairline bg-[#f3f2ef] px-5 py-16 lg:px-10 lg:py-20">
+      <section className="border-b hairline bg-[#f3f2ef] px-5 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-[1540px]">
           <div className="grid gap-12 lg:grid-cols-[0.382fr_0.618fr] lg:items-start">
             <div className="max-w-[34rem]">
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Was Sie hier finden</p>
-              <h2 className="serif mt-4 text-balance text-xl leading-snug tracking-[0.08em] lg:text-2xl">
+              <h2 className="serif mt-4 text-balance text-lg leading-snug tracking-[0.08em] lg:text-[1.35rem]">
                 Was Sie bei GETYOUR.DESIGN finden.
               </h2>
               <p className="mt-6 max-w-lg text-sm leading-7 text-[#4b5356]">
@@ -193,7 +193,7 @@ export default function Home() {
                     Bereich 0{index + 1}
                   </p>
                   <div>
-                    <h3 className="serif text-xl leading-snug tracking-[0.08em]">{area.title}</h3>
+                    <h3 className="serif text-lg leading-snug tracking-[0.08em]">{area.title}</h3>
                     <p className="mt-4 text-sm leading-6 text-[#4b5356]">{area.description}</p>
                   </div>
                 </Link>
