@@ -196,14 +196,14 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1540px] gap-6 lg:min-h-[720px] lg:grid-cols-[0.36fr_0.64fr] lg:items-center xl:gap-8">
           <div className="flex max-w-[33rem] flex-col self-center lg:translate-y-8 lg:pr-0">
             <h1 className="serif text-balance text-[1.45rem] font-normal leading-[1.22] text-[#10100f] md:text-[1.85rem] lg:text-[2.12rem]">
-              Sagen Sie uns,
+              Sagen Sie uns
               <br />
-              was Sie umgibt,
+              was Sie umgibt
               <br />
               <span className="mt-6 block">
-                und wir sagen Ihnen,
+                und wir sagen Ihnen
                 <br />
-                wer Sie sind.
+                wer Sie sind
               </span>
             </h1>
             <p className="mt-6 max-w-[30rem] text-[0.98rem] leading-7 text-[#353839] md:text-base md:leading-8">

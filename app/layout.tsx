@@ -33,6 +33,14 @@ export const metadata: Metadata = {
       "Contemporary Design, Kunst, Möbel, Objekte, Leuchten, Teppiche und Editionen.",
     type: "website",
   },
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -42,6 +50,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
+      <head>
+        <meta name="robots" content="noindex,nofollow" />
+        <meta name="googlebot" content="noindex,nofollow" />
+      </head>
       <body>
         <Navigation />
         {children}
