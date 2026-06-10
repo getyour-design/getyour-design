@@ -157,17 +157,17 @@ function ProductVisual({ index, palette }: { index: number; palette: string }) {
 export default function Home() {
   return (
     <main className="bg-[#fbfaf6]">
-      <section className="border-b hairline px-5 py-10 lg:px-10 lg:py-16">
-        <div className="mx-auto grid max-w-[1540px] gap-10 lg:min-h-[600px] lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="max-w-5xl">
-            <h1 className="serif text-balance text-[2.9rem] font-medium leading-[1.04] text-[#10100f] md:text-[4.5rem] lg:text-[5.45rem]">
+      <section className="border-b hairline bg-[#f4f5f2] px-5 py-10 lg:px-10 lg:py-14">
+        <div className="mx-auto grid max-w-[1540px] gap-10 lg:min-h-[560px] lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+          <div className="max-w-4xl">
+            <h1 className="serif text-balance text-[2.35rem] font-normal leading-[1.1] text-[#10100f] md:text-[3.35rem] lg:text-[4.05rem]">
               Sagen Sie mir,
               <br />
               was Sie umgibt,
               <br className="hidden md:block" />
               und ich sage Ihnen, wer Sie sind.
             </h1>
-            <p className="mt-5 max-w-3xl text-base leading-8 text-[#4d4841] md:text-lg md:leading-8">
+            <p className="mt-5 max-w-3xl text-base leading-8 text-[#353839] md:text-lg md:leading-8">
               Kunstwerke, Designmöbel, Designobjekte, Wohnaccessoires und
               Collectible Design ausgewählter Künstler, Ateliers,
               Manufakturen und Hersteller.
@@ -181,7 +181,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="mt-7 max-w-4xl border-y hairline py-5">
-              <p className="text-sm leading-7 text-[#5f5a52]">
+              <p className="text-sm leading-7 text-[#4b5050]">
                 GETYOUR.DESIGN ist eine kuratierte Commerce-Plattform für
                 Kunstwerke, Designmöbel, Designobjekte, Wohnaccessoires,
                 Leuchten, Skulpturen, Keramik, Teppiche, Interior Design und
@@ -190,11 +190,11 @@ export default function Home() {
             </div>
           </div>
           <div className="self-end border-l hairline pl-0 lg:pl-10">
-            <div className="border hairline bg-[#f1ede4] p-5 lg:p-7">
+            <div className="border hairline bg-[#e7ebea] p-5 lg:p-7">
               <img
-                alt="Skulpturale Keramik, Papierarbeit, Naturstein und Bronze als ruhige Objektkomposition"
+                alt="Hellblauer LC2-Sessel als Referenz für klassische Moderne, Architektur und Interior Design"
                 className="aspect-[5/4] w-full object-cover"
-                src="/images/hero-object-composition.svg"
+                src="/images/hero-lc2-reference.svg"
               />
               <div className="mt-6 grid gap-4 border-t hairline pt-5 md:grid-cols-3 lg:grid-cols-1">
                 <div>
