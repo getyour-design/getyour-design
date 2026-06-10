@@ -7,4 +7,5 @@ export const navItems = [
   { label: "Materialien", href: "/materials" },
   { label: "Journal", href: "/stories" },
   { label: "Trade", href: "/trade" },
+  { label: "Arbeit einreichen", href: "/arbeit-einreichen" },
 ];

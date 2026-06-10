@@ -339,6 +339,35 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="border-b hairline bg-[#e8eceb] px-5 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.38fr_0.62fr] lg:items-end">
+          <div>
+            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Arbeit einreichen</p>
+            <h2 className="serif mt-4 text-xl font-normal leading-snug tracking-[0.08em]">
+              Arbeit einreichen
+            </h2>
+          </div>
+          <div className="max-w-3xl">
+            <p className="text-sm leading-7 text-[#4b5356]">
+              Wir interessieren uns für außergewöhnliche Arbeiten aus Kunst,
+              Design und Objektkultur.
+            </p>
+            <p className="mt-4 text-sm leading-7 text-[#4b5356]">
+              Wenn Sie eine Arbeit, Edition, Kollektion, Leuchte, ein
+              Möbelstück oder ein Objekt einreichen möchten, freuen wir uns
+              über Ihre Nachricht.
+            </p>
+            <p className="mt-4 text-sm leading-7 text-[#4b5356]">
+              Jede Einsendung wird individuell geprüft. Eine Aufnahme erfolgt
+              ausschließlich nach kuratorischer Auswahl.
+            </p>
+            <Link className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href="/arbeit-einreichen">
+              Arbeit einreichen
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-12 lg:px-10 lg:py-14">
         <div className="mx-auto max-w-[1540px]">
           <div className="grid gap-10 lg:grid-cols-[0.32fr_0.68fr] lg:items-start">
