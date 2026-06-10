@@ -11,12 +11,12 @@ export default function ContactPage() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <p className="text-xs uppercase tracking-[0.22em] text-[#786f64]">Kontakt</p>
-          <h1 className="serif mt-4 text-balance text-6xl leading-none lg:text-8xl">
+          <h1 className="serif mt-4 text-balance text-3xl leading-tight tracking-[0.08em] lg:text-4xl">
             Finden Sie das Objekt, das den Raum trägt.
           </h1>
         </div>
         <div className="border hairline bg-[#fbf8f1] p-6 lg:p-10">
-          <p className="serif text-4xl">Private Anfragen</p>
+          <p className="serif text-2xl tracking-[0.08em]">Private Anfragen</p>
           <p className="mt-5 max-w-xl text-sm leading-7 text-[#5f574f]">
             Teilen Sie uns Raum, Materialwunsch, Zeitrahmen und Bedarf mit:
             einzelnes Objekt, kuratierte Auswahl, Kunstwerk oder Trade-Projekt.

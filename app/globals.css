@@ -2,12 +2,12 @@
 
 :root {
   --ink: #080808;
-  --paper: #f4f5f2;
-  --cream: #eceee9;
-  --stone: #a9ada8;
+  --paper: #f3f2ef;
+  --cream: #f7f7f5;
+  --stone: #9aa2a4;
   --charcoal: #171717;
-  --font-futura: "Futura PT", Futura, "Avenir Next", Avenir, "Century Gothic",
-    Arial, Helvetica, sans-serif;
+  --font-canela: "Canela Light", Canela, "Canela Deck", "Canela Text",
+    "Times New Roman", serif;
 }
 
 * {
@@ -22,7 +22,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-futura);
+  font-family: var(--font-canela);
   letter-spacing: 0.01em;
 }
 
@@ -37,7 +37,10 @@ a {
 }
 
 .serif {
-  font-family: var(--font-futura);
+  font-family: var(--font-canela);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .text-balance {
