@@ -74,6 +74,24 @@ const commerceModels = [
   "Sonderanfertigungen",
 ];
 
+const productImages = [
+  "/images/product-stone-object.svg",
+  "/images/product-stone-table.svg",
+  "/images/product-ceramic.svg",
+  "/images/product-paper.svg",
+  "/images/product-rug.svg",
+  "/images/product-bronze-lamp.svg",
+];
+
+const collectionImages = [
+  "/images/collection-materials.svg",
+  "/images/collection-studio.svg",
+  "/images/collection-art.svg",
+  "/images/collection-ceramic.svg",
+  "/images/collection-lighting.svg",
+  "/images/collection-textile.svg",
+];
+
 function ProductVisual({ index, palette }: { index: number; palette: string }) {
   const modes = [
     "lounge",
@@ -173,22 +191,11 @@ export default function Home() {
           </div>
           <div className="self-end border-l hairline pl-0 lg:pl-10">
             <div className="border hairline bg-[#f1ede4] p-5 lg:p-7">
-              <div className="grid aspect-[5/4] grid-cols-[1fr_0.72fr] gap-4">
-                <div className="relative overflow-hidden bg-[#fbfaf6]">
-                  <div className="absolute inset-8 border border-black/12 bg-[#d8d0c3]" />
-                  <div className="absolute left-[25%] top-[24%] h-[38%] w-[48%] bg-[#171615]" />
-                  <div className="absolute bottom-[19%] left-[25%] h-px w-[50%] bg-black/25" />
-                </div>
-                <div className="grid gap-4">
-                  <div className="relative overflow-hidden bg-[#d6cbbc]">
-                    <div className="absolute bottom-6 left-[28%] h-[52%] w-[44%] rounded-t-full bg-[#fbfaf6]" />
-                    <div className="absolute bottom-[40%] left-[40%] h-[12%] w-[20%] rounded-full bg-[#d6cbbc]" />
-                  </div>
-                  <div className="relative overflow-hidden bg-[#171615]">
-                    <div className="absolute bottom-6 left-[20%] h-[54%] w-[60%] bg-[#b8ad9f]" />
-                  </div>
-                </div>
-              </div>
+              <img
+                alt="Skulpturale Keramik, Papierarbeit, Naturstein und Bronze als ruhige Objektkomposition"
+                className="aspect-[5/4] w-full object-cover"
+                src="/images/hero-object-composition.svg"
+              />
               <div className="mt-6 grid gap-4 border-t hairline pt-5 md:grid-cols-3 lg:grid-cols-1">
                 <div>
                   <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Sortiment</p>
@@ -264,7 +271,13 @@ export default function Home() {
           <div className="mt-8 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((item, index) => (
               <article className="group" key={item.title}>
-                <ProductVisual index={index} palette={item.palette} />
+                <div className="overflow-hidden border hairline bg-[#eee8dd]">
+                  <img
+                    alt={item.title}
+                    className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    src={productImages[index % productImages.length]}
+                  />
+                </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
                     <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#777068]">{item.type}</p>
@@ -360,7 +373,11 @@ export default function Home() {
                   Kollektion 0{index + 1}
                 </p>
                 <div>
-                  <div className={`mb-6 h-32 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
+                  <img
+                    alt={item.title}
+                    className="mb-6 h-32 w-full object-cover"
+                    src={collectionImages[index % collectionImages.length]}
+                  />
                   <h3 className="serif text-3xl leading-tight">{item.title}</h3>
                 </div>
               </Link>
