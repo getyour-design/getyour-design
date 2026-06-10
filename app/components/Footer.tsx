@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navItems } from "../data";
+import { footerNavItems } from "../data";
 
 export function Footer() {
   const serviceLinks = ["Versand", "Retouren", "Authentifizierung", "Pflegehinweise"];
@@ -21,7 +21,7 @@ export function Footer() {
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">Shop</p>
           <div className="mt-5 grid gap-3 text-sm text-[#37332e]">
-            {navItems.map((item) => (
+            {footerNavItems.map((item) => (
               <Link className="hover:text-black" href={item.href} key={item.href}>
                 {item.label}
               </Link>

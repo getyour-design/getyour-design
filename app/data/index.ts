@@ -1,4 +1,6 @@
 export { navItems } from "./navigation";
+export { secondaryNavItems } from "./navigation";
+export { footerNavItems } from "./navigation";
 export { products } from "./products";
 export { artworks } from "./artworks";
 export { brands } from "./brands";
