@@ -1,37 +1,33 @@
 import type { Metadata } from "next";
+import { PageHero } from "../components/PageHero";
+import { stories } from "../data/stories";
 
 export const metadata: Metadata = {
   title: "Stories",
-  description: "Editorial stories on collectible design, material culture, and the interiors shaped by GETYOUR.DESIGN.",
+  description: "Read GETYOUR.DESIGN journal stories on interiors, materials, brands, design, markets, and trade sourcing.",
 };
-
-const stories = [
-  "The return of the formal object",
-  "Why low seating changes a room",
-  "A collector's guide to quiet materials",
-];
 
 export default function StoriesPage() {
   return (
-    <main className="section-pad">
-      <div className="mx-auto max-w-7xl">
-        <p className="text-xs uppercase tracking-[0.22em] text-[#786f64]">Stories</p>
-        <h1 className="serif mt-4 max-w-4xl text-balance text-6xl leading-none lg:text-8xl">
-          Notes on interiors, collecting, and material presence.
-        </h1>
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+    <main>
+      <PageHero
+        eyebrow="Stories"
+        title="Editorial context for collectible design decisions."
+        description="Journal cards prepare a future content layer for buying guides, artist features, material essays, and trade intelligence."
+      />
+      <section className="section-pad bg-[#fbfaf6]">
+        <div className="mx-auto grid max-w-[1540px] gap-6 md:grid-cols-2 lg:grid-cols-3">
           {stories.map((story) => (
-            <article className="border-t border-black/20 pt-6" key={story}>
-              <p className="text-xs uppercase tracking-[0.18em] text-[#786f64]">Journal</p>
-              <h2 className="serif mt-4 text-4xl leading-tight">{story}</h2>
-              <p className="mt-5 text-sm leading-6 text-[#5f574f]">
-                Editorial perspective for designers, collectors, and clients
-                shaping spaces with fewer, better pieces.
-              </p>
+            <article className="grid min-h-80 content-between border hairline bg-[#f6f2eb] p-6" key={story.title}>
+              <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#777068]">{story.category}</p>
+              <div>
+                <h2 className="serif text-4xl leading-tight">{story.title}</h2>
+                <p className="mt-5 text-sm leading-7 text-[#5f5a52]">{story.teaser}</p>
+              </div>
             </article>
           ))}
         </div>
-      </div>
+      </section>
     </main>
   );
 }

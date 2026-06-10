@@ -19,10 +19,10 @@ export function Navigation() {
           ))}
         </div>
         <div className="flex justify-end gap-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f]">
-          <Link className="hidden sm:inline" href="/objects">Search</Link>
-          <Link className="hidden sm:inline" href="/objects">Heart</Link>
-          <Link className="hidden md:inline" href="/contact">Account</Link>
-          <Link href="/contact">Cart (0)</Link>
+          <Link className="hidden sm:inline" href="/shop">Search</Link>
+          <Link className="hidden sm:inline" href="/shop">Heart</Link>
+          <Link className="hidden md:inline" href="/trade">Account</Link>
+          <Link href="/shop">Cart (0)</Link>
         </div>
       </nav>
     </header>

@@ -32,7 +32,7 @@ export function Footer() {
           <p className="text-xs uppercase tracking-[0.2em] text-[#777068]">Service</p>
           <div className="mt-5 grid gap-3 text-sm text-[#37332e]">
             {serviceLinks.map((item) => (
-              <Link className="hover:text-black" href="/contact" key={item}>
+              <Link className="hover:text-black" href="/trade" key={item}>
                 {item}
               </Link>
             ))}
@@ -42,7 +42,7 @@ export function Footer() {
           <p className="text-xs uppercase tracking-[0.2em] text-[#777068]">Studio Desk</p>
           <div className="mt-5 grid gap-3 text-sm text-[#37332e]">
             {tradeLinks.map((item) => (
-              <Link className="hover:text-black" href="/contact" key={item}>
+              <Link className="hover:text-black" href="/trade" key={item}>
                 {item}
               </Link>
             ))}

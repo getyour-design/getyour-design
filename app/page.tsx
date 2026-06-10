@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { collections, newArrivals, stories } from "./data";
+import { artists } from "./data/artists";
+import { artworks } from "./data/artworks";
+import { brands } from "./data/brands";
+import { collections } from "./data/collections";
+import { materialCards } from "./data/materials";
+import { products } from "./data/products";
+import { stories } from "./data/stories";
 
 export default function Home() {
   return (
@@ -19,10 +25,10 @@ export default function Home() {
               independent ateliers.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link className="border border-black bg-black px-7 py-4 text-center text-xs uppercase tracking-[0.2em] text-white transition hover:bg-[#2a2723]" href="/objects">
+              <Link className="border border-black bg-black px-7 py-4 text-center text-xs uppercase tracking-[0.2em] text-white transition hover:bg-[#2a2723]" href="/shop">
                 Shop New Arrivals
               </Link>
-              <Link className="border border-black px-7 py-4 text-center text-xs uppercase tracking-[0.2em] transition hover:bg-[#eee9df]" href="/gallery">
+              <Link className="border border-black px-7 py-4 text-center text-xs uppercase tracking-[0.2em] transition hover:bg-[#eee9df]" href="/collections">
                 Explore Collections
               </Link>
             </div>
@@ -48,20 +54,21 @@ export default function Home() {
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">New Arrivals</p>
               <h2 className="serif mt-3 text-5xl font-medium lg:text-6xl">Recently sourced pieces</h2>
             </div>
-            <Link className="text-xs uppercase tracking-[0.2em] underline underline-offset-8" href="/objects">
+            <Link className="text-xs uppercase tracking-[0.2em] underline underline-offset-8" href="/shop">
               Shop all
             </Link>
           </div>
           <div className="mt-8 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {newArrivals.map((item) => (
+            {products.map((item) => (
               <article className="group" key={item.title}>
                 <div className="aspect-[4/5] overflow-hidden border hairline bg-[#f0ece3] p-6">
                   <div className={`h-full transition duration-500 group-hover:scale-[1.02] ${item.palette}`} />
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#777068]">{item.maker}</p>
+                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#777068]">{item.type}</p>
                     <h3 className="serif mt-2 text-3xl leading-tight">{item.title}</h3>
+                    <p className="mt-2 text-sm text-[#5f5a52]">{item.maker}</p>
                   </div>
                   <p className="shrink-0 text-sm text-[#4d4841]">{item.price}</p>
                 </div>
@@ -85,26 +92,77 @@ export default function Home() {
               This month, the gallery focuses on stone, linen, and softened
               geometries from a studio known for quiet monumentality.
             </p>
-            <Link className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href="/stories">
-              Read the editorial
+            <Link className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href="/artists">
+              Explore artists
             </Link>
           </div>
         </div>
       </section>
 
+      <section className="section-pad border-b hairline bg-[#fbfaf6]">
+        <div className="mx-auto grid max-w-[1540px] gap-5 lg:grid-cols-3">
+          <Link className="border hairline bg-[#f6f2eb] p-7 transition hover:bg-[#eee8dd]" href="/art">
+            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Art & Collectibles</p>
+            <div className="mt-8 h-40 bg-[#11100f]" />
+            <h2 className="serif mt-6 text-4xl leading-tight">{artworks[0].title}</h2>
+            <p className="mt-4 text-sm leading-7 text-[#5f5a52]">Artwork profiles with artist, medium, year, and inquiry logic.</p>
+          </Link>
+          <Link className="border hairline bg-[#f6f2eb] p-7 transition hover:bg-[#eee8dd]" href="/brands">
+            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Featured Brands</p>
+            <div className="mt-8 h-40 bg-[#c7beb1]" />
+            <h2 className="serif mt-6 text-4xl leading-tight">{brands[0].name}</h2>
+            <p className="mt-4 text-sm leading-7 text-[#5f5a52]">{brands[0].description}</p>
+          </Link>
+          <Link className="border hairline bg-[#f6f2eb] p-7 transition hover:bg-[#eee8dd]" href="/artists">
+            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Featured Artists</p>
+            <div className="mt-8 h-40 bg-[#d8d0c3]" />
+            <h2 className="serif mt-6 text-4xl leading-tight">{artists[0].name}</h2>
+            <p className="mt-4 text-sm leading-7 text-[#5f5a52]">{artists[0].profile}</p>
+          </Link>
+        </div>
+      </section>
+
       <section className="section-pad">
         <div className="mx-auto max-w-[1540px]">
-          <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Curated Collections</p>
-          <div className="mt-6 grid gap-4 lg:grid-cols-5">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Curated Collections</p>
+              <h2 className="serif mt-3 text-5xl font-medium lg:text-6xl">Editorial buying paths</h2>
+            </div>
+            <Link className="text-xs uppercase tracking-[0.2em] underline underline-offset-8" href="/collections">
+              View collections
+            </Link>
+          </div>
+          <div className="mt-8 grid gap-4 lg:grid-cols-6">
             {collections.map((item, index) => (
-              <Link className="group grid min-h-80 content-between border hairline bg-[#f6f2eb] p-5 transition hover:bg-[#eee8dd]" href="/gallery" key={item}>
+              <Link className="group grid min-h-80 content-between border hairline bg-[#f6f2eb] p-5 transition hover:bg-[#eee8dd]" href="/collections" key={item.title}>
                 <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#777068]">
                   Collection 0{index + 1}
                 </p>
                 <div>
                   <div className={`mb-6 h-32 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
-                  <h3 className="serif text-3xl leading-tight">{item}</h3>
+                  <h3 className="serif text-3xl leading-tight">{item.title}</h3>
                 </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y hairline bg-[#f1ede4] px-5 py-14 lg:px-10">
+        <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+          <div>
+            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Materials Library</p>
+            <h2 className="serif mt-4 text-5xl leading-none">Filterable surfaces for future product data.</h2>
+            <Link className="mt-7 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href="/materials">
+              Explore materials
+            </Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {materialCards.map((material) => (
+              <Link className="border hairline bg-[#fbfaf6] p-5" href="/materials" key={material.name}>
+                <div className={`mb-5 h-24 ${material.palette}`} />
+                <h3 className="serif text-3xl">{material.name}</h3>
               </Link>
             ))}
           </div>
@@ -120,8 +178,8 @@ export default function Home() {
             </div>
             <div className="divide-y divide-black/15 border-y border-black/15">
               {stories.map((story) => (
-                <Link className="grid gap-5 py-7 md:grid-cols-[1fr_auto] md:items-center" href="/stories" key={story}>
-                  <h3 className="serif text-3xl leading-tight">{story}</h3>
+                <Link className="grid gap-5 py-7 md:grid-cols-[1fr_auto] md:items-center" href="/stories" key={story.title}>
+                  <h3 className="serif text-3xl leading-tight">{story.title}</h3>
                   <span className="text-xs uppercase tracking-[0.2em] text-[#777068]">Read</span>
                 </Link>
               ))}
@@ -139,7 +197,7 @@ export default function Home() {
               Access sourcing support, reserved editions, project quotes, and
               tailored material recommendations for professional interiors.
             </p>
-            <Link className="mt-8 inline-block border border-[#fbfaf6] px-6 py-3 text-xs uppercase tracking-[0.2em]" href="/contact">
+            <Link className="mt-8 inline-block border border-[#fbfaf6] px-6 py-3 text-xs uppercase tracking-[0.2em]" href="/trade">
               Apply for trade
             </Link>
           </article>
@@ -150,7 +208,7 @@ export default function Home() {
               <div className="flex-1 border border-black/20 bg-[#fbfaf6] px-4 py-4 text-sm text-[#777068]">
                 Email address
               </div>
-              <Link className="border border-black bg-black px-6 py-4 text-center text-xs uppercase tracking-[0.2em] text-white" href="/contact">
+              <Link className="border border-black bg-black px-6 py-4 text-center text-xs uppercase tracking-[0.2em] text-white" href="/stories">
                 Sign up
               </Link>
             </div>
