@@ -9,22 +9,22 @@ export { stories } from "./stories";
 
 export const featuredObjects = [
   {
-    title: "Caldera Console",
+    title: "Konsole aus Naturstein",
     category: "Steinobjekt",
     material: "Geschliffener Travertin, geräucherte Eiche",
   },
   {
-    title: "Monolith Lounge Chair",
+    title: "Sitzobjekt aus dunklem Holz",
     category: "Skulpturales Sitzen",
     material: "Wolle, geschwärzter Stahl",
   },
   {
-    title: "Keramikobjekt Alba",
+    title: "Keramikobjekt mit Grifföffnung",
     category: "Sammelbares Objekt",
     material: "Handgeformte Keramik",
   },
   {
-    title: "Faltobjekt Liora",
+    title: "Faltobjekt aus Leinen und Holz",
     category: "Raumobjekt",
     material: "Leinen, Nussbaum, patinierte Bronze",
   },

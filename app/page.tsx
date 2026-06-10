@@ -10,90 +10,205 @@ import { stories } from "./data/stories";
 const platformAreas = [
   {
     title: "Neu eingetroffen",
-    description: "Neue Produkte, Kunstwerke, Editionen und besondere Objekte.",
+    description: "Neue Kunstwerke, Designmöbel, Designobjekte und Wohnaccessoires.",
     href: "/shop",
   },
   {
     title: "Kunst",
-    description: "Kunstwerke als integrierte Shop-Kategorie, nicht als separate Galerie.",
+    description: "Kunstwerke als Teil des Sortiments: Papierarbeiten, Skulpturen und Editionen.",
     href: "/art",
   },
   {
     title: "Designmöbel",
-    description: "Sitzobjekte, Tische, Leuchten und Möbel mit Sammlerwert.",
+    description: "Sessel, Tische, Leuchten und Möbel mit gestalterischem Anspruch.",
     href: "/shop",
   },
   {
-    title: "Objekte",
-    description: "Keramik, Bronze, Papierarbeiten und außergewöhnliche Einzelstücke.",
+    title: "Designobjekte",
+    description: "Außergewöhnliche Produkte, kleine Editionen und Objekte für Räume.",
+    href: "/shop",
+  },
+  {
+    title: "Wohnaccessoires",
+    description: "Teppiche, Keramik, Leuchten und Accessoires mit klarer Haltung.",
+    href: "/shop",
+  },
+  {
+    title: "Leuchten",
+    description: "Lichtobjekte, Tischleuchten und skulpturale Beleuchtung für Interior Design.",
+    href: "/shop",
+  },
+  {
+    title: "Skulpturen",
+    description: "Skulpturen, Wandobjekte und Collectible Design für besondere Räume.",
     href: "/shop",
   },
   {
     title: "Künstler & Ateliers",
-    description: "Fiktive Profile für Editionen, Kollaborationen und Herkunft.",
+    description: "Künstler, Ateliers, Manufakturen und Hersteller als Herkunft der Stücke.",
     href: "/artists",
   },
   {
     title: "Kollektionen",
-    description: "Kuratierte Einstiege nach Stil, Material, Raum und Thema.",
+    description: "Kuratierte Einstiege nach Stil, Material, Raum, Objektart und Thema.",
     href: "/collections",
   },
   {
     title: "Journal",
-    description: "Verkaufsunterstützender Content für Suche, Inspiration und Verlinkung.",
+    description: "Beiträge, die Produkte zeigen, Materialien erklären und Künstler vorstellen.",
     href: "/stories",
   },
   {
     title: "Für Architekten & Interior Designer",
-    description: "Trade-Anfragen, Projektlisten, Sonderanfertigungen und Objektbeschaffung.",
+    description: "Trade-Projekte, Projektlisten, Sonderanfertigungen und Objektbeschaffung.",
     href: "/trade",
   },
 ];
 
 const commerceModels = [
-  "Produkte",
+  "Eigene Produkte",
   "Kunstwerke",
   "Partnerprodukte",
   "Affiliate-Produkte",
-  "Trade-Projekte",
+  "Projektanfragen",
   "Sonderanfertigungen",
 ];
+
+function ProductVisual({ index, palette }: { index: number; palette: string }) {
+  const modes = [
+    "lounge",
+    "table",
+    "ceramic",
+    "paper",
+    "rug",
+    "lamp",
+  ];
+  const mode = modes[index % modes.length];
+
+  return (
+    <div className="relative aspect-[4/5] overflow-hidden border hairline bg-[#eee8dd]">
+      <div className="absolute inset-x-8 bottom-8 h-px bg-black/20" />
+      {mode === "lounge" && (
+        <>
+          <div className={`absolute bottom-16 left-[18%] h-[34%] w-[54%] rounded-t-[42%] ${palette}`} />
+          <div className="absolute bottom-16 left-[18%] h-[9%] w-[64%] bg-[#171615]" />
+          <div className="absolute bottom-10 left-[25%] h-8 w-px bg-black/35" />
+          <div className="absolute bottom-10 right-[22%] h-8 w-px bg-black/35" />
+        </>
+      )}
+      {mode === "table" && (
+        <>
+          <div className={`absolute bottom-28 left-[24%] h-[28%] w-[52%] ${palette}`} />
+          <div className="absolute bottom-20 left-[18%] h-4 w-[64%] bg-[#171615]" />
+        </>
+      )}
+      {mode === "ceramic" && (
+        <>
+          <div className={`absolute bottom-20 left-[31%] h-[45%] w-[38%] rounded-t-full ${palette}`} />
+          <div className="absolute bottom-[45%] left-[40%] h-[11%] w-[20%] rounded-full bg-[#fbfaf6]" />
+        </>
+      )}
+      {mode === "paper" && (
+        <>
+          <div className="absolute inset-10 bg-[#fbfaf6] shadow-[18px_18px_0_rgba(0,0,0,0.08)]" />
+          <div className={`absolute left-[24%] top-[24%] h-[36%] w-[42%] ${palette}`} />
+          <div className="absolute bottom-[24%] left-[24%] h-px w-[52%] bg-black/30" />
+        </>
+      )}
+      {mode === "rug" && (
+        <>
+          <div className={`absolute bottom-16 left-[18%] h-[58%] w-[64%] ${palette}`} />
+          <div className="absolute bottom-16 left-[24%] h-[58%] w-px bg-black/12" />
+          <div className="absolute bottom-16 right-[24%] h-[58%] w-px bg-black/12" />
+        </>
+      )}
+      {mode === "lamp" && (
+        <>
+          <div className={`absolute top-[20%] left-[31%] h-[28%] w-[38%] rounded-t-full ${palette}`} />
+          <div className="absolute bottom-[22%] left-1/2 h-[30%] w-px bg-[#171615]" />
+          <div className="absolute bottom-[18%] left-[36%] h-3 w-[28%] bg-[#171615]" />
+        </>
+      )}
+      <p className="absolute left-6 top-6 text-[0.62rem] uppercase tracking-[0.2em] text-[#777068]">
+        Objekt 0{index + 1}
+      </p>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
     <main className="bg-[#fbfaf6]">
       <section className="border-b hairline px-5 py-10 lg:px-10 lg:py-16">
-        <div className="mx-auto grid max-w-[1540px] gap-10 lg:min-h-[720px] lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-          <div className="max-w-3xl">
-            <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#777068]">
-              Kunst · Design · Interior · Collectible Design
-            </p>
-            <h1 className="serif mt-8 text-balance text-6xl font-medium leading-[0.92] text-[#10100f] md:text-8xl lg:text-[8.5rem]">
-              Sagen Sie mir, womit Sie sich umgeben, und ich sage Ihnen, wer Sie sind.
+        <div className="mx-auto grid max-w-[1540px] gap-10 lg:min-h-[600px] lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="max-w-5xl">
+            <h1 className="serif text-balance text-[2.9rem] font-medium leading-[1.04] text-[#10100f] md:text-[4.5rem] lg:text-[5.45rem]">
+              Sagen Sie mir,
+              <br />
+              was Sie umgibt,
+              <br className="hidden md:block" />
+              und ich sage Ihnen, wer Sie sind.
             </h1>
-            <p className="mt-8 max-w-xl text-base leading-8 text-[#5f5a52] md:text-lg">
-              Kunstwerke, Designmöbel, Objekte und Collectible Design für
-              Menschen mit Stil, Individualität und einem eigenen Blick auf
-              Gestaltung.
+            <p className="mt-5 max-w-3xl text-base leading-8 text-[#4d4841] md:text-lg md:leading-8">
+              Kunstwerke, Designmöbel, Designobjekte, Wohnaccessoires und
+              Collectible Design ausgewählter Künstler, Ateliers,
+              Manufakturen und Hersteller.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link className="border border-black bg-black px-7 py-4 text-center text-xs uppercase tracking-[0.2em] text-white transition hover:bg-[#2a2723]" href="/shop">
+            <div className="mt-8 flex flex-col gap-4 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:flex-row sm:gap-8">
+              <Link className="border-b border-black/40 pb-2 transition hover:border-black" href="/shop">
                 Shop entdecken
               </Link>
-              <Link className="border border-black px-7 py-4 text-center text-xs uppercase tracking-[0.2em] transition hover:bg-[#eee9df]" href="/collections">
-                Bereiche ansehen
+              <Link className="border-b border-black/20 pb-2 text-[#4d4841] transition hover:border-black hover:text-[#10100f]" href="/collections">
+                Kollektionen ansehen
               </Link>
             </div>
-          </div>
-          <div className="relative min-h-[520px] overflow-hidden bg-[#ebe5da] lg:min-h-[680px]">
-            <div className="absolute inset-x-[12%] bottom-0 h-[78%] rounded-t-full bg-[#cfc5b6]" />
-            <div className="absolute left-[18%] top-[12%] h-[52%] w-[54%] bg-[#11100f]" />
-            <div className="absolute bottom-[14%] right-[10%] h-[36%] w-[38%] bg-[#f8f4eb] shadow-[-26px_26px_0_rgba(114,105,94,0.24)]" />
-            <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between border-t border-black/20 pt-5">
-              <p className="max-w-[12rem] text-xs uppercase leading-5 tracking-[0.18em] text-[#4d4841]">
-                Produkte, Kunst, Ateliers, Journal und Trade in einem System
+            <div className="mt-7 max-w-4xl border-y hairline py-5">
+              <p className="text-sm leading-7 text-[#5f5a52]">
+                GETYOUR.DESIGN ist eine kuratierte Commerce-Plattform für
+                Kunstwerke, Designmöbel, Designobjekte, Wohnaccessoires,
+                Leuchten, Skulpturen, Keramik, Teppiche, Interior Design und
+                Collectible Design.
               </p>
-              <p className="serif text-5xl">01</p>
+            </div>
+          </div>
+          <div className="self-end border-l hairline pl-0 lg:pl-10">
+            <div className="border hairline bg-[#f1ede4] p-5 lg:p-7">
+              <div className="grid aspect-[5/4] grid-cols-[1fr_0.72fr] gap-4">
+                <div className="relative overflow-hidden bg-[#fbfaf6]">
+                  <div className="absolute inset-8 border border-black/12 bg-[#d8d0c3]" />
+                  <div className="absolute left-[25%] top-[24%] h-[38%] w-[48%] bg-[#171615]" />
+                  <div className="absolute bottom-[19%] left-[25%] h-px w-[50%] bg-black/25" />
+                </div>
+                <div className="grid gap-4">
+                  <div className="relative overflow-hidden bg-[#d6cbbc]">
+                    <div className="absolute bottom-6 left-[28%] h-[52%] w-[44%] rounded-t-full bg-[#fbfaf6]" />
+                    <div className="absolute bottom-[40%] left-[40%] h-[12%] w-[20%] rounded-full bg-[#d6cbbc]" />
+                  </div>
+                  <div className="relative overflow-hidden bg-[#171615]">
+                    <div className="absolute bottom-6 left-[20%] h-[54%] w-[60%] bg-[#b8ad9f]" />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 grid gap-4 border-t hairline pt-5 md:grid-cols-3 lg:grid-cols-1">
+                <div>
+                  <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Sortiment</p>
+                  <p className="mt-2 text-sm leading-6 text-[#4d4841]">
+                    Kunstwerke, Designmöbel, Designobjekte und Wohnaccessoires.
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Herkunft</p>
+                  <p className="mt-2 text-sm leading-6 text-[#4d4841]">
+                    Künstler, Ateliers, Manufakturen und Hersteller.
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Commerce</p>
+                  <p className="mt-2 text-sm leading-6 text-[#4d4841]">
+                    Kaufen, anfragen, vormerken oder für Projekte zusammenstellen.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -101,22 +216,23 @@ export default function Home() {
 
       <section className="border-b hairline bg-[#fbfaf6] px-5 py-14 lg:px-10">
         <div className="mx-auto max-w-[1540px]">
-          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+          <div className="grid gap-8 lg:grid-cols-[0.58fr_1.42fr] lg:items-start">
             <div>
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Was Sie hier finden</p>
               <h2 className="serif mt-4 text-balance text-5xl leading-none lg:text-6xl">
-                Eine kuratierte Commerce-Plattform, keine reine Inspirationsseite.
+                Produkte, Kunst, Inhalte und Trade in einem System.
               </h2>
               <p className="mt-6 max-w-lg text-sm leading-7 text-[#5f5a52]">
-                GETYOUR.DESIGN verbindet kaufbare Produkte, Kunst, Ateliers,
-                Materialien, Journal-Inhalte und Trade-Anfragen zu einer
-                klaren Plattformarchitektur.
+                Die Startseite zeigt sofort, welche Bereiche zur Plattform
+                gehören und welche Wege später in den Shop, zu Künstlern,
+                Herstellern, Materialien, Journal-Beiträgen und Trade-Anfragen
+                führen.
               </p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
               {platformAreas.map((area, index) => (
                 <Link
-                  className="grid min-h-52 content-between border hairline bg-[#f6f2eb] p-5 transition hover:bg-[#eee8dd]"
+                  className="grid min-h-48 content-between border hairline bg-[#f6f2eb] p-5 transition hover:bg-[#eee8dd]"
                   href={area.href}
                   key={area.title}
                 >
@@ -146,11 +262,9 @@ export default function Home() {
             </Link>
           </div>
           <div className="mt-8 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((item) => (
+            {products.map((item, index) => (
               <article className="group" key={item.title}>
-                <div className="aspect-[4/5] overflow-hidden border hairline bg-[#f0ece3] p-6">
-                  <div className={`h-full transition duration-500 group-hover:scale-[1.02] ${item.palette}`} />
-                </div>
+                <ProductVisual index={index} palette={item.palette} />
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
                     <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#777068]">{item.type}</p>
@@ -215,7 +329,7 @@ export default function Home() {
           <div>
             <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Commerce-Logik</p>
             <h2 className="serif mt-4 text-5xl leading-none">
-              Mehrere Angebotsformen, ein kuratiertes System.
+              Die Plattform ist für unterschiedliche Angebotsformen vorbereitet.
             </h2>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

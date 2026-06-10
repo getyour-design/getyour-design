@@ -1,18 +1,18 @@
 export const artists = [
   {
-    name: "Elena Maris",
+    name: "Fiktive Künstlerposition A",
     profile: "Künstlerin mit Fokus auf leise Geometrien, Leinen und mineralische Farbigkeit.",
   },
   {
-    name: "Jonas Ried",
+    name: "Fiktive Künstlerposition B",
     profile: "Bildhauer mit Arbeiten aus Bronze, Wachsoberflächen und kompakten architektonischen Formen.",
   },
   {
-    name: "Mara Vell",
+    name: "Fiktive Künstlerposition C",
     profile: "Arbeitet mit Papier, Naturpigmenten und ruhigen Flächen für sammelbare Wandobjekte.",
   },
   {
-    name: "Theo Arden",
+    name: "Fiktive Künstlerposition D",
     profile: "Entwickelt Reliefs und Objekte aus Holz mit klarer räumlicher Wirkung.",
   },
 ];

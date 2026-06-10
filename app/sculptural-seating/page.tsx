@@ -5,7 +5,12 @@ export const metadata: Metadata = {
   description: "Skulpturale Sitzobjekte von GETYOUR.DESIGN mit Komfort, Silhouette und materieller Zurückhaltung.",
 };
 
-const seating = ["Monolith Lounge Chair", "Low Arc Chair", "Split Stone Sofa", "Club Chair Sora"];
+const seating = [
+  "Sitzobjekt aus dunklem Holz",
+  "Niedriger Sessel mit Bogenform",
+  "Sofa mit skulpturaler Steinbasis",
+  "Loungesessel in hellem Wollstoff",
+];
 
 export default function SculpturalSeatingPage() {
   return (
