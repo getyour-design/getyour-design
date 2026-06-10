@@ -1,18 +1,18 @@
 export const brands = [
   {
-    name: "Fiktives Atelier A",
+    name: "Atelier A",
     description: "Steinbasierte Möbel und Objekte mit ruhiger, architektonischer Präsenz.",
   },
   {
-    name: "Fiktive Manufaktur B",
+    name: "Manufaktur B",
     description: "Limitierte Sitzobjekte und Editionen mit skulpturalen, weichen Linien.",
   },
   {
-    name: "Fiktive Textilmanufaktur C",
+    name: "Textilmanufaktur C",
     description: "Textile Objekte, Teppiche und maßgefertigte Stücke für anspruchsvolle Räume.",
   },
   {
-    name: "Fiktives Keramikatelier D",
+    name: "Keramikatelier D",
     description: "Keramik, Gefäße und kleine Editionen mit handwerklicher Tiefe.",
   },
 ];

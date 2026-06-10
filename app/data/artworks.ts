@@ -1,7 +1,7 @@
 export const artworks = [
   {
     title: "Papierarbeit mit mineralischer Fläche",
-    artist: "Fiktive Künstlerposition A",
+    artist: "Künstlerposition A",
     medium: "Mineralpigment auf Leinen",
     year: "2026",
     price: "EUR 4,200",
@@ -9,7 +9,7 @@ export const artworks = [
   },
   {
     title: "Kleine Skulptur aus Bronze",
-    artist: "Fiktive Künstlerposition B",
+    artist: "Künstlerposition B",
     medium: "Gegossene Bronze",
     year: "2025",
     price: "Auf Anfrage",
@@ -17,7 +17,7 @@ export const artworks = [
   },
   {
     title: "Arbeit aus Papier, Asche und Pigment",
-    artist: "Fiktive Künstlerposition C",
+    artist: "Künstlerposition C",
     medium: "Papier, Asche, Naturpigment",
     year: "2026",
     price: "EUR 2,900",
@@ -25,7 +25,7 @@ export const artworks = [
   },
   {
     title: "Reliefobjekt aus hellem Holz",
-    artist: "Fiktive Künstlerposition D",
+    artist: "Künstlerposition D",
     medium: "Geschnitztes Eichenrelief",
     year: "2024",
     price: "Auf Anfrage",
