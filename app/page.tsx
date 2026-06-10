@@ -7,6 +7,58 @@ import { materialCards } from "./data/materials";
 import { products } from "./data/products";
 import { stories } from "./data/stories";
 
+const platformAreas = [
+  {
+    title: "Neu eingetroffen",
+    description: "Neue Produkte, Kunstwerke, Editionen und besondere Objekte.",
+    href: "/shop",
+  },
+  {
+    title: "Kunst",
+    description: "Kunstwerke als integrierte Shop-Kategorie, nicht als separate Galerie.",
+    href: "/art",
+  },
+  {
+    title: "Designmöbel",
+    description: "Sitzobjekte, Tische, Leuchten und Möbel mit Sammlerwert.",
+    href: "/shop",
+  },
+  {
+    title: "Objekte",
+    description: "Keramik, Bronze, Papierarbeiten und außergewöhnliche Einzelstücke.",
+    href: "/shop",
+  },
+  {
+    title: "Künstler & Ateliers",
+    description: "Fiktive Profile für Editionen, Kollaborationen und Herkunft.",
+    href: "/artists",
+  },
+  {
+    title: "Kollektionen",
+    description: "Kuratierte Einstiege nach Stil, Material, Raum und Thema.",
+    href: "/collections",
+  },
+  {
+    title: "Journal",
+    description: "Verkaufsunterstützender Content für Suche, Inspiration und Verlinkung.",
+    href: "/stories",
+  },
+  {
+    title: "Für Architekten & Interior Designer",
+    description: "Trade-Anfragen, Projektlisten, Sonderanfertigungen und Objektbeschaffung.",
+    href: "/trade",
+  },
+];
+
+const commerceModels = [
+  "Produkte",
+  "Kunstwerke",
+  "Partnerprodukte",
+  "Affiliate-Produkte",
+  "Trade-Projekte",
+  "Sonderanfertigungen",
+];
+
 export default function Home() {
   return (
     <main className="bg-[#fbfaf6]">
@@ -14,22 +66,22 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1540px] gap-10 lg:min-h-[720px] lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div className="max-w-3xl">
             <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#777068]">
-              Kuratierte Commerce-Plattform
+              Kunst · Design · Interior · Collectible Design
             </p>
             <h1 className="serif mt-8 text-balance text-6xl font-medium leading-[0.92] text-[#10100f] md:text-8xl lg:text-[8.5rem]">
-              Kuratiertes Design. Zeitlose Werte.
+              Sagen Sie mir, womit Sie sich umgeben, und ich sage Ihnen, wer Sie sind.
             </h1>
             <p className="mt-8 max-w-xl text-base leading-8 text-[#5f5a52] md:text-lg">
-              Möbel, Kunst, Objekte und Editionen für anspruchsvolle Räume.
-              Sorgfältig kuratiert für Räume, in denen Material, Form und Wert
-              zusammenwirken.
+              Kunstwerke, Designmöbel, Objekte und Collectible Design für
+              Menschen mit Stil, Individualität und einem eigenen Blick auf
+              Gestaltung.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link className="border border-black bg-black px-7 py-4 text-center text-xs uppercase tracking-[0.2em] text-white transition hover:bg-[#2a2723]" href="/shop">
-                Neu im Shop
+                Shop entdecken
               </Link>
               <Link className="border border-black px-7 py-4 text-center text-xs uppercase tracking-[0.2em] transition hover:bg-[#eee9df]" href="/collections">
-                Kollektionen entdecken
+                Bereiche ansehen
               </Link>
             </div>
           </div>
@@ -39,9 +91,44 @@ export default function Home() {
             <div className="absolute bottom-[14%] right-[10%] h-[36%] w-[38%] bg-[#f8f4eb] shadow-[-26px_26px_0_rgba(114,105,94,0.24)]" />
             <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between border-t border-black/20 pt-5">
               <p className="max-w-[12rem] text-xs uppercase leading-5 tracking-[0.18em] text-[#4d4841]">
-                Limitierte Editionen für besondere Räume
+                Produkte, Kunst, Ateliers, Journal und Trade in einem System
               </p>
               <p className="serif text-5xl">01</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b hairline bg-[#fbfaf6] px-5 py-14 lg:px-10">
+        <div className="mx-auto max-w-[1540px]">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+            <div>
+              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Was Sie hier finden</p>
+              <h2 className="serif mt-4 text-balance text-5xl leading-none lg:text-6xl">
+                Eine kuratierte Commerce-Plattform, keine reine Inspirationsseite.
+              </h2>
+              <p className="mt-6 max-w-lg text-sm leading-7 text-[#5f5a52]">
+                GETYOUR.DESIGN verbindet kaufbare Produkte, Kunst, Ateliers,
+                Materialien, Journal-Inhalte und Trade-Anfragen zu einer
+                klaren Plattformarchitektur.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {platformAreas.map((area, index) => (
+                <Link
+                  className="grid min-h-52 content-between border hairline bg-[#f6f2eb] p-5 transition hover:bg-[#eee8dd]"
+                  href={area.href}
+                  key={area.title}
+                >
+                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-[#777068]">
+                    Bereich 0{index + 1}
+                  </p>
+                  <div>
+                    <h3 className="serif text-3xl leading-tight">{area.title}</h3>
+                    <p className="mt-4 text-sm leading-6 text-[#5f5a52]">{area.description}</p>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -52,7 +139,7 @@ export default function Home() {
           <div className="flex flex-col justify-between gap-6 border-b hairline pb-7 md:flex-row md:items-end">
             <div>
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Neu im Shop</p>
-              <h2 className="serif mt-3 text-5xl font-medium lg:text-6xl">Außergewöhnliche Objekte für besondere Räume</h2>
+              <h2 className="serif mt-3 text-5xl font-medium lg:text-6xl">Was Sie kaufen, anfragen oder vormerken können</h2>
             </div>
             <Link className="text-xs uppercase tracking-[0.2em] underline underline-offset-8" href="/shop">
               Zum Shop
@@ -86,11 +173,12 @@ export default function Home() {
           <div className="max-w-xl lg:pl-10">
             <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Künstler im Fokus</p>
             <h2 className="serif mt-5 text-balance text-5xl leading-none lg:text-7xl">
-              Elena Maris übersetzt Zurückhaltung in sammelbare Formen.
+              Künstler, Ateliers und Marken werden Teil des Shop-Systems.
             </h2>
             <p className="mt-7 text-base leading-8 text-[#5f5a52]">
-              Der Shop verbindet Kunst, Objekte und Editionen zu einer
-              kuratierten Commerce-Struktur für hochwertige Räume.
+              Profile, Kunstwerke, Editionen und Produkte sollen langfristig
+              miteinander verknüpft werden: für bessere Orientierung, interne
+              Verlinkung und klare Kauf- oder Anfragewege.
             </p>
             <Link className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href="/artists">
               Künstler entdecken
@@ -119,6 +207,24 @@ export default function Home() {
             <h2 className="serif mt-6 text-4xl leading-tight">{artists[0].name}</h2>
             <p className="mt-4 text-sm leading-7 text-[#5f5a52]">{artists[0].profile}</p>
           </Link>
+        </div>
+      </section>
+
+      <section className="border-b hairline bg-[#fbfaf6] px-5 py-14 lg:px-10">
+        <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div>
+            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777068]">Commerce-Logik</p>
+            <h2 className="serif mt-4 text-5xl leading-none">
+              Mehrere Angebotsformen, ein kuratiertes System.
+            </h2>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {commerceModels.map((model) => (
+              <div className="border-t border-black/20 py-5 text-sm uppercase tracking-[0.16em] text-[#3f3932]" key={model}>
+                {model}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
