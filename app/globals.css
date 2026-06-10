@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #080808;
+  --paper: #f7f3ea;
+  --cream: #eee6d8;
+  --stone: #b9ad9f;
+  --charcoal: #171717;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.section-pad {
+  padding: clamp(4rem, 8vw, 8rem) clamp(1.25rem, 4vw, 4rem);
+}
+
+.hairline {
+  border-color: rgba(8, 8, 8, 0.16);
+}
