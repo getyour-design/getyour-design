@@ -130,20 +130,24 @@ export default function Home() {
     <main className="bg-[#f3f2ef]">
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-12 lg:px-10 lg:py-16">
         <div className="mx-auto grid max-w-[1540px] gap-14 lg:min-h-[600px] lg:grid-cols-[0.382fr_0.618fr] lg:items-center">
-          <div className="max-w-[36rem] self-center">
-            <h1 className="serif text-balance text-[1.8rem] font-normal leading-[1.24] text-[#10100f] md:text-[2.35rem] lg:text-[2.65rem]">
-              Sagen Sie mir, was Sie umgibt,
+          <div className="flex max-w-[35rem] flex-col self-center">
+            <h1 className="serif text-balance text-[1.55rem] font-normal leading-[1.24] text-[#10100f] md:text-[2.05rem] lg:text-[2.3rem]">
+              Sagen Sie mir,
               <br />
-              und ich sage Ihnen,
+              was Sie umgibt,
               <br />
-              wer Sie sind.
+              <span className="mt-5 block">
+                und ich sage Ihnen,
+                <br />
+                wer Sie sind.
+              </span>
             </h1>
             <p className="mt-6 max-w-[34rem] text-base leading-8 text-[#353839] md:text-lg md:leading-8">
               Kunstwerke, Designmöbel, Designobjekte, Wohnaccessoires und
               Collectible Design ausgewählter Künstler, Ateliers,
               Manufakturen und Hersteller.
             </p>
-            <div className="mt-8 flex flex-col gap-4 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:flex-row sm:gap-8">
+            <div className="mt-10 flex flex-col gap-4 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:flex-row sm:gap-8">
               <Link className="border-b border-black/40 pb-2 transition hover:border-black" href="/shop">
                 Shop entdecken
               </Link>
@@ -152,11 +156,11 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="self-stretch border-l hairline pl-0 lg:pl-12">
+          <div className="self-stretch border-l hairline pl-0 lg:pl-12 lg:py-4">
             <div className="h-full border hairline bg-[#e7ecef] p-0">
               <img
                 alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
-                className="h-full min-h-[460px] w-full object-cover object-[58%_50%]"
+                className="h-full min-h-[440px] w-full object-cover object-[58%_56%]"
                 src="/images/hero-lc2-blue.jpg"
               />
             </div>
@@ -169,7 +173,7 @@ export default function Home() {
           <div className="grid gap-12 lg:grid-cols-[0.382fr_0.618fr] lg:items-start">
             <div className="max-w-[34rem]">
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Was Sie hier finden</p>
-              <h2 className="serif mt-4 text-balance text-xl leading-snug tracking-[0.08em] lg:text-3xl">
+              <h2 className="serif mt-4 text-balance text-xl leading-snug tracking-[0.08em] lg:text-2xl">
                 Was Sie bei GETYOUR.DESIGN finden.
               </h2>
               <p className="mt-6 max-w-lg text-sm leading-7 text-[#4b5356]">
@@ -204,7 +208,7 @@ export default function Home() {
           <div className="flex flex-col justify-between gap-6 border-b hairline pb-7 md:flex-row md:items-end">
             <div>
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Neu im Shop</p>
-              <h2 className="serif mt-3 text-xl font-normal lg:text-2xl tracking-[0.08em]">Was Sie kaufen, anfragen oder vormerken können</h2>
+              <h2 className="serif mt-3 text-lg font-normal tracking-[0.08em] lg:text-xl">Was Sie kaufen, anfragen oder vormerken können</h2>
             </div>
             <Link className="text-xs uppercase tracking-[0.2em] underline underline-offset-8" href="/shop">
               Zum Shop
@@ -222,9 +226,8 @@ export default function Home() {
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{item.type}</p>
+                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{item.maker}</p>
                     <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{item.title}</h3>
-                    <p className="mt-2 text-sm text-[#4b5356]">{item.maker}</p>
                   </div>
                   <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
                 </div>
@@ -241,7 +244,7 @@ export default function Home() {
           </div>
           <div className="max-w-xl lg:pl-10">
             <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Künstler im Fokus</p>
-            <h2 className="serif mt-5 text-balance text-xl leading-snug lg:text-2xl tracking-[0.08em]">
+            <h2 className="serif mt-5 text-balance text-lg leading-snug tracking-[0.08em] lg:text-xl">
               Künstler, Ateliers und Marken prägen die Auswahl.
             </h2>
             <p className="mt-7 text-base leading-8 text-[#4b5356]">
@@ -261,19 +264,19 @@ export default function Home() {
           <Link className="border hairline bg-[#f7f7f5] p-7 transition hover:bg-[#f8f8f6]" href="/art">
             <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Kunst im Shop</p>
             <div className="mt-8 h-40 bg-[#11100f]" />
-            <h2 className="serif mt-6 text-2xl leading-snug tracking-[0.08em]">{artworks[0].title}</h2>
+            <h2 className="serif mt-6 text-xl leading-snug tracking-[0.08em]">{artworks[0].title}</h2>
             <p className="mt-4 text-sm leading-7 text-[#4b5356]">Kunst als integrierte Shop-Kategorie mit Medium, Jahr und Anfrage-Logik.</p>
           </Link>
           <Link className="border hairline bg-[#f7f7f5] p-7 transition hover:bg-[#f8f8f6]" href="/brands">
             <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Marken & Ateliers</p>
             <div className="mt-8 h-40 bg-[#c7beb1]" />
-            <h2 className="serif mt-6 text-2xl leading-snug tracking-[0.08em]">{brands[0].name}</h2>
+            <h2 className="serif mt-6 text-xl leading-snug tracking-[0.08em]">{brands[0].name}</h2>
             <p className="mt-4 text-sm leading-7 text-[#4b5356]">{brands[0].description}</p>
           </Link>
           <Link className="border hairline bg-[#f7f7f5] p-7 transition hover:bg-[#f8f8f6]" href="/artists">
             <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Künstler</p>
             <div className="mt-8 h-40 bg-[#d8d0c3]" />
-            <h2 className="serif mt-6 text-2xl leading-snug tracking-[0.08em]">{artists[0].name}</h2>
+            <h2 className="serif mt-6 text-xl leading-snug tracking-[0.08em]">{artists[0].name}</h2>
             <p className="mt-4 text-sm leading-7 text-[#4b5356]">{artists[0].profile}</p>
           </Link>
         </div>
@@ -284,7 +287,7 @@ export default function Home() {
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Kuratierte Kollektionen</p>
-              <h2 className="serif mt-3 text-xl font-normal lg:text-2xl tracking-[0.08em]">Einstiege in den Shop</h2>
+              <h2 className="serif mt-3 text-lg font-normal tracking-[0.08em] lg:text-xl">Einstiege in den Shop</h2>
             </div>
             <Link className="text-xs uppercase tracking-[0.2em] underline underline-offset-8" href="/collections">
               Kollektionen ansehen
