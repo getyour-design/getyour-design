@@ -14,7 +14,7 @@ export default function CollectionsPage() {
       <PageHero
         eyebrow="Kollektionen"
         title="Kuratierte Einstiege in den Shop."
-        description="Kollektionen ordnen Möbel, Kunst, Objekte, Marken, Künstler und Materialien zu klaren Commerce-Pfaden."
+        description="Kollektionen führen Möbel, Kunstwerke, Objekte, Leuchten, Teppiche und Materialien zu klaren Raum- und Objektwelten."
       />
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2 lg:grid-cols-3">

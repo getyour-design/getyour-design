@@ -41,4 +41,18 @@ export const products = [
     price: "Projektangebot",
     palette: "bg-[#c8c0b2]",
   },
+  {
+    title: "Vase aus glasierter Keramik",
+    maker: "Fiktives Keramikatelier G",
+    type: "Objekt",
+    price: "EUR 180",
+    palette: "bg-[#e8eceb]",
+  },
+  {
+    title: "Kerzenhalter aus patinierter Bronze",
+    maker: "Fiktive Werkstatt H",
+    type: "Edition",
+    price: "EUR 390",
+    palette: "bg-[#8b8174]",
+  },
 ];

@@ -5,7 +5,7 @@ import { PageHero } from "../components/PageHero";
 export const metadata: Metadata = {
   title: "Trade",
   description:
-    "Trade für Architekten, Interior Designer, Hotels und Projektkunden als zusätzlicher Vertriebskanal von GETYOUR.DESIGN.",
+    "Trade für Architekten, Interior Designer, Hotels und Projektkunden mit Möbeln, Kunstwerken, Objekten, Leuchten und Editionen.",
 };
 
 const audiences = ["Architekten", "Interior Designer", "Hotels", "Projektkunden"];
@@ -16,8 +16,8 @@ export default function TradePage() {
     <main>
       <PageHero
         eyebrow="Trade"
-        title="Ein zusätzlicher Vertriebskanal für professionelle Projekte."
-        description="Die Trade-Seite definiert Zielgruppen, Vorteile und Anfragewege, bevor Authentifizierung, Angebotsprozesse oder Checkout-Funktionen eingeführt werden."
+        title="Objekte, Kunstwerke und Editionen für professionelle Projekte."
+        description="Für Architekten, Interior Designer, Hotels und Projektkunden mit Bedarf an besonderen Möbeln, Leuchten, Materialien und Arbeiten."
       />
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-6 lg:grid-cols-[0.8fr_1.2fr]">
@@ -36,7 +36,7 @@ export default function TradePage() {
                 <div className="border-t border-black/20 pt-4 text-sm leading-7 text-[#353b3e]" key={benefit}>{benefit}</div>
               ))}
             </div>
-            <h2 className="serif mt-12 max-w-2xl text-xl leading-snug tracking-[0.08em]">Projektlisten vorbereiten, bevor die vollständige Commerce-Infrastruktur folgt.</h2>
+            <h2 className="serif mt-12 max-w-2xl text-xl leading-snug tracking-[0.08em]">Objekte, Editionen und Materialien für konkrete Räume anfragen.</h2>
             <Link className="mt-8 inline-block border border-black bg-black px-7 py-4 text-xs uppercase tracking-[0.2em] text-white" href="/contact">
               Trade-Anfrage senden
             </Link>

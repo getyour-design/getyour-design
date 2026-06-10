@@ -3,7 +3,7 @@ import { featuredObjects } from "../data";
 
 export const metadata: Metadata = {
   title: "Objekte",
-  description: "Sammelbare Designobjekte von GETYOUR.DESIGN als Teil der kuratierten Commerce-Plattform.",
+  description: "Sammelbare Designobjekte, Skulpturen und Editionen von GETYOUR.DESIGN.",
 };
 
 export default function ObjectsPage() {

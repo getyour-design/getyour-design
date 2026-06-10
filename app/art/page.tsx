@@ -6,7 +6,7 @@ import { artworks } from "../data/artworks";
 export const metadata: Metadata = {
   title: "Kunst",
   description:
-    "Kunst als integrierte Shop-Kategorie von GETYOUR.DESIGN mit fiktiven Kunstwerken, Medium, Jahr und Anfrage-Logik.",
+    "Kunstwerke, Papierarbeiten, Skulpturen und Editionen bei GETYOUR.DESIGN.",
 };
 
 export default function ArtPage() {
@@ -14,8 +14,8 @@ export default function ArtPage() {
     <main>
       <PageHero
         eyebrow="Kunst"
-        title="Kunst als integrierte Kategorie im Shop."
-        description="Kunstwerke werden als kauf- und anfragefähige Kategorie innerhalb der Commerce-Plattform verstanden."
+        title="Kunstwerke, Papierarbeiten, Skulpturen und Editionen."
+        description="Ausgewählte Arbeiten für Räume, Sammlungen und Interieurs mit eigenem Blick."
       />
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-4">

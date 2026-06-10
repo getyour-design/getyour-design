@@ -2,7 +2,7 @@ export const stories = [
   {
     title: "Wie Designobjekte einen Raum sichtbar verändern",
     category: "Produkte zeigen",
-    teaser: "Ein Journal-Beitrag als Einstieg zu Keramik, Leuchten, Skulpturen und Wohnaccessoires im Shop.",
+    teaser: "Ein Journal-Beitrag als Einstieg zu Keramik, Leuchten, Skulpturen, Tabletop und Editionen im Shop.",
   },
   {
     title: "Materialien, die altern dürfen",

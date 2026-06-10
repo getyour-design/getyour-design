@@ -5,7 +5,7 @@ import { brands } from "../data/brands";
 export const metadata: Metadata = {
   title: "Marken & Ateliers",
   description:
-    "Fiktive Marken und Ateliers als Grundlage für spätere Partnerprofile auf GETYOUR.DESIGN.",
+    "Ateliers, Manufakturen und Hersteller ausgewählter Möbel, Objekte, Leuchten und Editionen.",
 };
 
 export default function BrandsPage() {
@@ -13,8 +13,8 @@ export default function BrandsPage() {
     <main>
       <PageHero
         eyebrow="Marken & Ateliers"
-        title="Partnerstrukturen für einen kuratierten Design-Shop."
-        description="Marken- und Atelierprofile bereiten spätere Partnerflächen, Sortimente, Beschaffungsbeziehungen und Commerce-Verknüpfungen vor."
+        title="Ateliers, Manufakturen und Hersteller mit eigener Haltung."
+        description="Profile zu ausgewählten Werkstätten, Objektserien, Materialien und Editionen."
       />
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2">

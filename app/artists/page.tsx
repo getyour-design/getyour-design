@@ -5,7 +5,7 @@ import { artists } from "../data/artists";
 export const metadata: Metadata = {
   title: "Künstler",
   description:
-    "Fiktive Künstlerprofile für Kunst, Editionen und kuratierte Objekte innerhalb der GETYOUR.DESIGN Commerce-Plattform.",
+    "Künstlerprofile für Kunstwerke, Editionen, Objekte und Räume bei GETYOUR.DESIGN.",
 };
 
 export default function ArtistsPage() {
@@ -14,7 +14,7 @@ export default function ArtistsPage() {
       <PageHero
         eyebrow="Künstler"
         title="Künstler, die Objekte, Oberflächen und Räume prägen."
-        description="Die Profile bereiten spätere Biografien, Kunstwerke, Editionen, Kollaborationen und interne Shop-Verlinkungen vor."
+        description="Kurzprofile zu Positionen, Arbeiten, Materialien und Ateliergeschichten."
       />
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2 lg:grid-cols-4">

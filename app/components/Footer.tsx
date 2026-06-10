@@ -11,8 +11,8 @@ export function Footer() {
         <div>
           <p className="serif text-2xl tracking-[0.08em]">GETYOUR.DESIGN</p>
           <p className="mt-6 max-w-sm text-sm leading-7 text-[#4b5356]">
-            Eine kuratierte Commerce-Plattform für Möbel, Kunst, Objekte,
-            limitierte Editionen und Materialien mit bleibendem Wert.
+            Contemporary Design, Kunst, Objekte, Leuchten, Teppiche und
+            Editionen ausgewählter Künstler, Ateliers und Hersteller.
           </p>
           <p className="mt-10 text-[0.65rem] uppercase tracking-[0.22em] text-[#667174]">
             Weltweiter Versand aus ausgewählten Ateliers

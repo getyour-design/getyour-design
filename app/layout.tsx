@@ -5,19 +5,21 @@ import { Navigation } from "./components/Navigation";
 
 export const metadata: Metadata = {
   title: {
-    default: "GETYOUR.DESIGN | Kuratierte Commerce-Plattform für Design",
+    default: "GETYOUR.DESIGN | Contemporary Design, Kunst und Objekte",
     template: "%s | GETYOUR.DESIGN",
   },
   description:
-    "GETYOUR.DESIGN ist eine kuratierte Commerce-Plattform für Kunstwerke, Designmöbel, Designobjekte, Wohnaccessoires, Leuchten, Skulpturen, Künstler, Ateliers, Hersteller, Interior Design und Collectible Design.",
+    "GETYOUR.DESIGN zeigt Contemporary Design, Kunst, Möbel, Objekte, Leuchten, Teppiche und Editionen ausgewählter Künstler, Ateliers und Hersteller.",
   keywords: [
     "kuratierter Design Shop",
     "sammelbares Design",
     "skulpturales Sitzen",
     "Kunst und Objekte",
     "Designmöbel",
-    "Wohnaccessoires",
     "Leuchten",
+    "Tabletop",
+    "Editionen",
+    "Collectible Design",
     "Skulpturen",
     "Künstler und Ateliers",
     "Hersteller",
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "GETYOUR.DESIGN",
     description:
-      "Kuratierte Commerce-Plattform für Möbel, Kunst, Objekte und Editionen.",
+      "Contemporary Design, Kunst, Möbel, Objekte, Leuchten, Teppiche und Editionen.",
     type: "website",
   },
 };
