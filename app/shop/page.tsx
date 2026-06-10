@@ -6,7 +6,7 @@ import { products } from "../data/products";
 export const metadata: Metadata = {
   title: "Shop",
   description:
-    "Shop the GETYOUR.DESIGN Phase-0 marketplace prototype with own products, partner products, affiliate pieces, artworks, custom work, and trade inquiries.",
+    "Der GETYOUR.DESIGN Shop als Hauptsystem für eigene Produkte, Partnerprodukte, Affiliate-Produkte, Kunstwerke, Maßanfertigungen und Trade-Anfragen.",
 };
 
 export default function ShopPage() {
@@ -14,8 +14,8 @@ export default function ShopPage() {
     <main>
       <PageHero
         eyebrow="Shop"
-        title="A structured catalogue for future commerce."
-        description="Static product cards model the future marketplace logic: owned inventory, partner products, affiliate references, artworks, custom commissions, and trade-only inquiries."
+        title="Das Hauptsystem für Möbel, Kunst, Objekte und Editionen."
+        description="Statische Produktkarten zeigen bereits die spätere Commerce-Logik: eigene Produkte, Partnerprodukte, Affiliate-Produkte, Kunstwerke, Maßanfertigungen und Trade-Anfragen."
       />
       <section className="section-pad bg-[#fbfaf6]">
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">

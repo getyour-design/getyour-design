@@ -3,17 +3,17 @@ import { PageHero } from "../components/PageHero";
 import { stories } from "../data/stories";
 
 export const metadata: Metadata = {
-  title: "Stories",
-  description: "Read GETYOUR.DESIGN journal stories on interiors, materials, brands, design, markets, and trade sourcing.",
+  title: "Journal",
+  description: "Journal für Räume, Materialien, Kunst und kuratierte Objekte als verkaufsunterstützender Content von GETYOUR.DESIGN.",
 };
 
 export default function StoriesPage() {
   return (
     <main>
       <PageHero
-        eyebrow="Stories"
-        title="Editorial context for collectible design decisions."
-        description="Journal cards prepare a future content layer for buying guides, artist features, material essays, and trade intelligence."
+        eyebrow="Journal"
+        title="Verkaufsunterstützender Content für Räume, Materialien und Objekte."
+        description="Das Journal unterstützt SEO, Pinterest, Inspiration und interne Verlinkung zu Shop-Kategorien, Kollektionen, Kunst und Trade."
       />
       <section className="section-pad bg-[#fbfaf6]">
         <div className="mx-auto grid max-w-[1540px] gap-6 md:grid-cols-2 lg:grid-cols-3">

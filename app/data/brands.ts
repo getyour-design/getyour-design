@@ -1,18 +1,18 @@
 export const brands = [
   {
-    name: "Atelier Voss",
-    description: "Stone-led furniture and plinths shaped with architectural restraint.",
+    name: "Atelier Nordform",
+    description: "Steinbasierte Möbel und Objekte mit ruhiger, architektonischer Präsenz.",
   },
   {
-    name: "Maison Orsetti",
-    description: "Limited seating and upholstered editions with soft, sculptural silhouettes.",
+    name: "Studio Arven",
+    description: "Limitierte Sitzobjekte und Editionen mit skulpturalen, weichen Linien.",
   },
   {
-    name: "North Archive",
-    description: "Smoked woods, quiet storage pieces, and gallery-grade interior objects.",
+    name: "Maison Liora",
+    description: "Textile Objekte, Teppiche und maßgefertigte Stücke für anspruchsvolle Interiors.",
   },
   {
-    name: "Forme Libre",
-    description: "Lighting and small furniture balancing handcraft with collectible clarity.",
+    name: "Keramikwerk Alba",
+    description: "Keramik, Gefäße und kleine Editionen mit handwerklicher Tiefe.",
   },
 ];

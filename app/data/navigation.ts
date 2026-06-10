@@ -1,10 +1,10 @@
 export const navItems = [
   { label: "Shop", href: "/shop" },
-  { label: "Collections", href: "/collections" },
-  { label: "Art", href: "/art" },
-  { label: "Brands", href: "/brands" },
-  { label: "Artists", href: "/artists" },
-  { label: "Materials", href: "/materials" },
-  { label: "Stories", href: "/stories" },
+  { label: "Kollektionen", href: "/collections" },
+  { label: "Kunst", href: "/art" },
+  { label: "Marken & Ateliers", href: "/brands" },
+  { label: "Künstler", href: "/artists" },
+  { label: "Materialien", href: "/materials" },
+  { label: "Journal", href: "/stories" },
   { label: "Trade", href: "/trade" },
 ];

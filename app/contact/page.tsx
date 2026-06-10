@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Contact GETYOUR.DESIGN for private sourcing, gallery inquiries, material direction, and collectible design requests.",
+  title: "Kontakt",
+  description: "Kontakt zu GETYOUR.DESIGN für private Beschaffung, Trade-Anfragen, Materialauswahl und kuratierte Objekte.",
 };
 
 export default function ContactPage() {
@@ -10,23 +10,23 @@ export default function ContactPage() {
     <main className="section-pad">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
-          <p className="text-xs uppercase tracking-[0.22em] text-[#786f64]">Contact</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-[#786f64]">Kontakt</p>
           <h1 className="serif mt-4 text-balance text-6xl leading-none lg:text-8xl">
-            Source the piece that anchors the room.
+            Finden Sie das Objekt, das den Raum trägt.
           </h1>
         </div>
         <div className="border hairline bg-[#fbf8f1] p-6 lg:p-10">
-          <p className="serif text-4xl">Private inquiries</p>
+          <p className="serif text-4xl">Private Anfragen</p>
           <p className="mt-5 max-w-xl text-sm leading-7 text-[#5f574f]">
-            Tell us about the space, desired materials, timeline, and whether
-            you are sourcing a single object or shaping a full collection.
+            Teilen Sie uns Raum, Materialwunsch, Zeitrahmen und Bedarf mit:
+            einzelnes Objekt, kuratierte Auswahl, Kunstwerk oder Trade-Projekt.
           </p>
           <div className="mt-10 grid gap-5 text-sm">
             <a className="border-b border-black/20 pb-4" href="mailto:studio@getyour.design">
               studio@getyour.design
             </a>
-            <p className="border-b border-black/20 pb-4">Berlin · Paris · Remote</p>
-            <p className="border-b border-black/20 pb-4">Trade and collector appointments available.</p>
+            <p className="border-b border-black/20 pb-4">Berlin · Remote</p>
+            <p className="border-b border-black/20 pb-4">Termine für Trade und private Auswahl auf Anfrage.</p>
           </div>
         </div>
       </div>

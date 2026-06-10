@@ -10,33 +10,33 @@ export { stories } from "./stories";
 export const featuredObjects = [
   {
     title: "Caldera Console",
-    category: "Stone Object",
-    material: "Honed travertine, smoked oak",
+    category: "Steinobjekt",
+    material: "Geschliffener Travertin, geräucherte Eiche",
   },
   {
-    title: "No. 18 Lounge",
-    category: "Sculptural Seating",
-    material: "Ivory boucle, blackened steel",
+    title: "Monolith Lounge Chair",
+    category: "Skulpturales Sitzen",
+    material: "Wolle, geschwärzter Stahl",
   },
   {
-    title: "Linea Vessel",
-    category: "Collectible Object",
-    material: "Hand-thrown porcelain",
+    title: "Keramikobjekt Alba",
+    category: "Sammelbares Objekt",
+    material: "Handgeformte Keramik",
   },
   {
-    title: "Atelier Screen",
-    category: "Spatial Piece",
-    material: "Linen, walnut, patinated brass",
+    title: "Faltobjekt Liora",
+    category: "Raumobjekt",
+    material: "Leinen, Nussbaum, patinierte Bronze",
   },
 ];
 
 export const materials = [
-  "Arabescato marble",
-  "Smoked walnut",
-  "Ivory boucle",
-  "Patinated brass",
-  "Burnished steel",
-  "Raw linen",
+  "Arabescato-Marmor",
+  "Geräucherter Nussbaum",
+  "Wolle in Naturweiß",
+  "Patinierte Bronze",
+  "Brünierter Stahl",
+  "Rohes Leinen",
 ];
 
 export { products as newArrivals } from "./products";

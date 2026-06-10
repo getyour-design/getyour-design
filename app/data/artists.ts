@@ -1,18 +1,18 @@
 export const artists = [
   {
-    name: "Elena Mar",
-    profile: "Barcelona-based artist exploring softened geometry, linen, and mineral color.",
+    name: "Elena Maris",
+    profile: "Künstlerin mit Fokus auf leise Geometrien, Leinen und mineralische Farbigkeit.",
   },
   {
-    name: "Jonas Vale",
-    profile: "Sculptor working in bronze and waxed patina for intimate architectural forms.",
+    name: "Jonas Ried",
+    profile: "Bildhauer mit Arbeiten aus Bronze, Wachsoberflächen und kompakten architektonischen Formen.",
   },
   {
-    name: "Mira Sato",
-    profile: "Mixed-media artist focused on paper, natural dye, ash, and quiet tonal fields.",
+    name: "Mara Vell",
+    profile: "Arbeitet mit Papier, Naturpigmenten und ruhigen Flächen für sammelbare Wandobjekte.",
   },
   {
-    name: "Theo Kline",
-    profile: "Wood relief artist creating carved wall works with strong spatial presence.",
+    name: "Theo Arden",
+    profile: "Entwickelt Reliefs und Objekte aus Holz mit klarer räumlicher Wirkung.",
   },
 ];

@@ -4,18 +4,18 @@ import { PlaceholderArtwork } from "../components/PlaceholderArtwork";
 import { artworks } from "../data/artworks";
 
 export const metadata: Metadata = {
-  title: "Art",
+  title: "Kunst",
   description:
-    "Explore collectible artworks prepared for the GETYOUR.DESIGN future art and design commerce architecture.",
+    "Kunst als integrierte Shop-Kategorie von GETYOUR.DESIGN mit fiktiven Kunstwerken, Medium, Jahr und Anfrage-Logik.",
 };
 
 export default function ArtPage() {
   return (
     <main>
       <PageHero
-        eyebrow="Art"
-        title="Artworks selected for interiors with presence."
-        description="A future-ready art section with artist, medium, year, and price or inquiry logic represented through static editorial cards."
+        eyebrow="Kunst"
+        title="Kunst als integrierte Kategorie im Shop."
+        description="Kunstwerke werden als kauf- und anfragefähige Kategorie innerhalb der Commerce-Plattform verstanden."
       />
       <section className="section-pad bg-[#fbfaf6]">
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-4">

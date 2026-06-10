@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import { featuredObjects } from "../data";
 
 export const metadata: Metadata = {
-  title: "Objects",
-  description: "Discover collectible design objects curated by GETYOUR.DESIGN, from vessels to consoles and spatial pieces.",
+  title: "Objekte",
+  description: "Sammelbare Designobjekte von GETYOUR.DESIGN als Teil der kuratierten Commerce-Plattform.",
 };
 
 export default function ObjectsPage() {
   return (
     <main className="section-pad">
       <div className="mx-auto max-w-7xl">
-        <p className="text-xs uppercase tracking-[0.22em] text-[#786f64]">Objects</p>
+        <p className="text-xs uppercase tracking-[0.22em] text-[#786f64]">Objekte</p>
         <h1 className="serif mt-4 max-w-4xl text-balance text-6xl leading-none lg:text-8xl">
-          Collectible forms for rooms with discipline.
+          Sammelbare Formen für Räume mit Haltung.
         </h1>
         <div className="mt-12 divide-y divide-black/15 border-y border-black/15">
           {featuredObjects.map((item) => (

@@ -5,7 +5,7 @@ export function Navigation() {
   return (
     <header className="sticky top-0 z-50 border-b hairline bg-[#fbfaf6]/95 backdrop-blur">
       <div className="border-b hairline px-5 py-2 text-center text-[0.65rem] uppercase tracking-[0.24em] text-[#5f5a52] lg:px-10">
-        Worldwide Shipping
+        Weltweiter Versand
       </div>
       <nav className="mx-auto grid max-w-[1540px] grid-cols-[1fr_auto] items-center gap-5 px-5 py-5 lg:grid-cols-[auto_1fr_auto] lg:px-10">
         <Link className="serif text-xl tracking-[0.16em]" href="/">
@@ -19,10 +19,10 @@ export function Navigation() {
           ))}
         </div>
         <div className="flex justify-end gap-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f]">
-          <Link className="hidden sm:inline" href="/shop">Search</Link>
-          <Link className="hidden sm:inline" href="/shop">Heart</Link>
-          <Link className="hidden md:inline" href="/trade">Account</Link>
-          <Link href="/shop">Cart (0)</Link>
+          <Link className="hidden sm:inline" href="/shop">Suche</Link>
+          <Link className="hidden sm:inline" href="/shop">Merkliste</Link>
+          <Link className="hidden md:inline" href="/trade">Konto</Link>
+          <Link href="/shop">Warenkorb (0)</Link>
         </div>
       </nav>
     </header>

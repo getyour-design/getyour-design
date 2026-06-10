@@ -1,26 +1,26 @@
 export const collections = [
   {
-    title: "Raw Beauty",
-    description: "Unpolished textures, mineral tones, and pieces that keep their maker's trace.",
+    title: "Rohe Schönheit",
+    description: "Unpolierte Texturen, mineralische Töne und Objekte mit sichtbarer Materialspur.",
   },
   {
-    title: "Quiet Luxury",
-    description: "Subtle materials, measured proportions, and objects built around restraint.",
+    title: "Leiser Luxus",
+    description: "Subtile Materialien, ausgewogene Proportionen und Objekte mit Zurückhaltung.",
   },
   {
-    title: "Collectible Design",
-    description: "Limited editions and future-facing furniture for long-term collection value.",
+    title: "Sammelbares Design",
+    description: "Limitierte Editionen und Möbel mit langfristigem Wert für kuratierte Räume.",
   },
   {
-    title: "Artist Editions",
-    description: "Works and objects from artists crossing sculpture, furniture, and interiors.",
+    title: "Künstlereditionen",
+    description: "Arbeiten und Objekte an der Schnittstelle von Kunst, Möbel und Interior.",
   },
   {
-    title: "Sculptural Seating",
-    description: "Chairs, lounges, and sofas with strong silhouettes and room-defining presence.",
+    title: "Skulpturales Sitzen",
+    description: "Sessel, Lounges und Sofas mit starker Silhouette und raumprägender Präsenz.",
   },
   {
-    title: "Natural Materials",
-    description: "Wood, wool, stone, leather, ceramic, and bronze with tactile permanence.",
+    title: "Natürliche Materialien",
+    description: "Holz, Wolle, Stein, Leder, Keramik und Bronze mit taktiler Beständigkeit.",
   },
 ];

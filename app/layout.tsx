@@ -17,23 +17,23 @@ const serif = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: {
-    default: "GETYOUR.DESIGN | Luxury Design Marketplace",
+    default: "GETYOUR.DESIGN | Kuratierte Commerce-Plattform für Design",
     template: "%s | GETYOUR.DESIGN",
   },
   description:
-    "GETYOUR.DESIGN is a luxury marketplace concept for collectible design, sculptural seating, rare objects, refined materials, and design stories.",
+    "GETYOUR.DESIGN ist eine kuratierte Commerce-Plattform für Möbel, Kunst, Objekte, Editionen und Materialien für anspruchsvolle Räume.",
   keywords: [
-    "luxury design marketplace",
-    "collectible design",
-    "sculptural seating",
-    "interior objects",
-    "materials",
-    "gallery",
+    "kuratierter Design Shop",
+    "sammelbares Design",
+    "skulpturales Sitzen",
+    "Kunst und Objekte",
+    "Materialien",
+    "Trade für Interior Designer",
   ],
   openGraph: {
     title: "GETYOUR.DESIGN",
     description:
-      "A curated luxury design marketplace for sculptural interiors and collectible objects.",
+      "Kuratierte Commerce-Plattform für Möbel, Kunst, Objekte und Editionen.",
     type: "website",
   },
 };

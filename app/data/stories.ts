@@ -1,32 +1,32 @@
 export const stories = [
   {
-    title: "Inside the Paris apartment shaping collectible minimalism",
-    category: "Interiors",
-    teaser: "A quiet residence shows how fewer, stronger pieces can define a room.",
+    title: "Wie kuratierte Objekte einen Raum bestimmen",
+    category: "Räume",
+    teaser: "Warum wenige, starke Stücke mehr Wirkung entfalten als austauschbare Fülle.",
   },
   {
-    title: "How patina became the new signature of luxury interiors",
-    category: "Materials",
-    teaser: "Bronze, leather, and stone age into value when chosen with care.",
+    title: "Patina als Wert: Materialien, die altern dürfen",
+    category: "Materialien",
+    teaser: "Bronze, Leder und Stein gewinnen an Tiefe, wenn sie bewusst gewählt werden.",
   },
   {
-    title: "Five materials collectors are requesting this season",
-    category: "Market",
-    teaser: "From travertine to wool, the palette is tactile, grounded, and warm.",
+    title: "Sechs Materialien für anspruchsvolle Räume",
+    category: "Shop-Guide",
+    teaser: "Von Travertin bis Wolle: eine ruhige Palette für Räume mit Bestand.",
   },
   {
-    title: "The studio model behind limited furniture editions",
-    category: "Brands",
-    teaser: "Independent makers are reshaping how collectible objects reach clients.",
+    title: "Warum Ateliers für limitierte Editionen entscheidend sind",
+    category: "Marken & Ateliers",
+    teaser: "Fiktive Ateliers zeigen, wie kuratierte Commerce-Strukturen später wachsen können.",
   },
   {
-    title: "Why sculptural seating anchors modern spaces",
+    title: "Skulpturales Sitzen als Anker im Raum",
     category: "Design",
-    teaser: "Strong silhouettes create visual rhythm before a room is fully furnished.",
+    teaser: "Klare Silhouetten schaffen Rhythmus, bevor ein Raum vollständig eingerichtet ist.",
   },
   {
-    title: "A trade guide to sourcing art-led interiors",
+    title: "Trade: Beschaffung für Projekte mit Kunst und Design",
     category: "Trade",
-    teaser: "How designers can combine editions, custom work, and artist commissions.",
+    teaser: "Wie Projektkunden Editionen, Maßanfertigungen und Kunstobjekte sinnvoll bündeln.",
   },
 ];
