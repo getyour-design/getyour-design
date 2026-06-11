@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navItems, secondaryNavItems } from "../data";
+import { navItems } from "../data";
 
 export function Navigation() {
   return (
@@ -8,21 +8,12 @@ export function Navigation() {
         <Link className="serif text-xl tracking-[0.16em]" href="/">
           GETYOUR.DESIGN
         </Link>
-        <div className="order-3 col-span-2 grid gap-3 overflow-x-auto border-t hairline pt-4 uppercase text-[#26231f] lg:order-none lg:col-span-1 lg:justify-center lg:border-0 lg:pt-0">
-          <div className="flex gap-6 text-[0.68rem] tracking-[0.18em] lg:justify-center">
-            {navItems.map((item) => (
-              <Link className="shrink-0 transition hover:text-black" href={item.href} key={item.href}>
-                {item.label}
-              </Link>
-            ))}
-          </div>
-          <div className="flex gap-5 text-[0.6rem] tracking-[0.16em] text-[#667174] lg:justify-center">
-            {secondaryNavItems.map((item) => (
-              <Link className="shrink-0 transition hover:text-black" href={item.href} key={item.href}>
-                {item.label}
-              </Link>
-            ))}
-          </div>
+        <div className="order-3 col-span-2 flex gap-6 overflow-x-auto border-t hairline pt-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f] lg:order-none lg:col-span-1 lg:justify-center lg:border-0 lg:pt-0">
+          {navItems.map((item) => (
+            <Link className="shrink-0 transition hover:text-black" href={item.href} key={item.href}>
+              {item.label}
+            </Link>
+          ))}
         </div>
         <div className="flex justify-end gap-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f]">
           <Link className="hidden sm:inline" href="/shop">Suche</Link>

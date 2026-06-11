@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "../components/PageHero";
 import { brands } from "../data/brands";
 
@@ -28,6 +29,19 @@ export default function BrandsPage() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+      <section className="border-t hairline bg-[#e8eceb] px-5 py-12 lg:px-10">
+        <div className="mx-auto flex max-w-[1540px] flex-col justify-between gap-6 md:flex-row md:items-center">
+          <p className="max-w-2xl text-sm leading-7 text-[#4b5356]">
+            Möbel, Leuchten, Objekte und Editionen der Ateliers werden im Shop
+            und in kuratierten Kollektionen zusammengeführt.
+          </p>
+          <div className="flex flex-wrap gap-6 text-xs uppercase tracking-[0.2em]">
+            <Link className="border-b border-black pb-2" href="/shop">Zum Shop</Link>
+            <Link className="border-b border-black/30 pb-2" href="/collections">Kollektionen</Link>
+            <Link className="border-b border-black/30 pb-2" href="/materials">Materialien</Link>
+          </div>
         </div>
       </section>
     </main>

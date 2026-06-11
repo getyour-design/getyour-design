@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "../components/PageHero";
 import { PlaceholderArtwork } from "../components/PlaceholderArtwork";
 import { products } from "../data/products";
@@ -46,7 +47,9 @@ export default function ShopPage() {
                 <div>
                   <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Objekt 0{index + 1}</p>
                   <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{product.title}</h2>
-                  <p className="mt-2 text-sm text-[#4b5356]">{product.maker}</p>
+                  <Link className="mt-2 inline-block text-sm text-[#4b5356] hover:text-black" href={product.maker.includes("Künstlerposition") ? "/artists" : "/brands"}>
+                    {product.maker}
+                  </Link>
                 </div>
                 <p className="shrink-0 text-sm text-[#353b3e]">{product.price}</p>
               </div>
