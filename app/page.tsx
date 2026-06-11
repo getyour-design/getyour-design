@@ -243,7 +243,7 @@ export default function Home() {
             </Link>
           </div>
           <div className="mt-8 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((item, index) => (
+            {products.slice(0, 8).map((item, index) => (
               <article className="group" key={item.title}>
                 <div className="overflow-hidden border hairline bg-[#f8f8f6]">
                   <img

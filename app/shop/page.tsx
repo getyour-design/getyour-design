@@ -2,18 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "../components/PageHero";
 import { PlaceholderArtwork } from "../components/PlaceholderArtwork";
-import { products } from "../data/products";
-
-const shopAreas = [
-  "Möbel",
-  "Leuchten",
-  "Kunst",
-  "Teppiche",
-  "Objekte",
-  "Tabletop",
-  "Collectible Design",
-  "Editionen",
-];
+import { products, shopCategories } from "../data/products";
 
 export const metadata: Metadata = {
   title: "Shop",
@@ -31,10 +20,10 @@ export default function ShopPage() {
       />
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
         <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
-          {shopAreas.map((area) => (
-            <div className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e]" key={area}>
-              {area}
-            </div>
+          {shopCategories.map((area) => (
+            <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={`/shop/${area.slug}`} key={area.slug}>
+              {area.title}
+            </Link>
           ))}
         </div>
       </section>
@@ -42,11 +31,15 @@ export default function ShopPage() {
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
             <article className="group" key={product.title}>
-              <PlaceholderArtwork index={index} palette={product.palette} />
+              <Link href={`/shop/${product.slug}`}>
+                <PlaceholderArtwork index={index} palette={product.palette} />
+              </Link>
               <div className="mt-5 flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Objekt 0{index + 1}</p>
-                  <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{product.title}</h2>
+                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{product.category}</p>
+                  <Link href={`/shop/${product.slug}`}>
+                    <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{product.title}</h2>
+                  </Link>
                   <Link className="mt-2 inline-block text-sm text-[#4b5356] hover:text-black" href={product.maker.includes("Künstlerposition") ? "/artists" : "/brands"}>
                     {product.maker}
                   </Link>
