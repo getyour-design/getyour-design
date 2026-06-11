@@ -12,7 +12,7 @@ const journalConnections = [
   {
     title: "Ateliers & Marken",
     text: "Werkstätten, Manufakturen und Hersteller hinter Möbeln, Leuchten, Objekten und Editionen.",
-    href: "/brands",
+    href: "/ateliers",
   },
   {
     title: "Materialien",

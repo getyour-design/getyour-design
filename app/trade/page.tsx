@@ -54,6 +54,17 @@ export default function TradePage() {
           </Link>
         </div>
       </section>
+      <section className="border-t hairline bg-[#e8eceb] px-5 py-12 lg:px-10">
+        <div className="mx-auto flex max-w-[1540px] flex-col justify-between gap-6 md:flex-row md:items-center">
+          <p className="max-w-2xl text-sm leading-7 text-[#4b5356]">
+            Ateliers, Werkstätten und Herstellungsprozesse bilden die Grundlage
+            für individuelle Arbeiten und Commissioned Pieces.
+          </p>
+          <Link className="border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href="/ateliers">
+            Ateliers ansehen
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }
