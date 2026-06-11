@@ -13,7 +13,7 @@ export function Navigation() {
         <Link className="serif text-xl tracking-[0.16em]" href="/">
           GETYOUR.DESIGN
         </Link>
-        <div className="order-3 col-span-2 flex gap-6 overflow-x-auto border-t hairline pt-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f] lg:order-none lg:col-span-1 lg:justify-center lg:border-0 lg:pt-0">
+        <div className="order-3 col-span-2 flex items-center gap-6 overflow-x-auto border-t hairline pt-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f] lg:order-none lg:col-span-1 lg:justify-center lg:border-0 lg:pt-0">
           {navItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -22,9 +22,9 @@ export function Navigation() {
 
             return (
               <Link
-                className={`shrink-0 border-b pb-1 transition hover:text-black ${
+                className={`shrink-0 border-b leading-none transition hover:text-black ${
                   isActive ? "border-black font-semibold text-black" : "border-transparent"
-                } ${isShop ? "font-semibold text-black ring-1 ring-black/20 px-2 py-1" : ""}`}
+                } ${isShop ? "font-semibold text-black" : ""}`}
                 href={item.href}
                 key={item.href}
               >
@@ -33,7 +33,7 @@ export function Navigation() {
             );
           })}
         </div>
-        <div className="flex justify-end gap-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f]">
+        <div className="flex items-center justify-end gap-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f]">
           <Link className="hidden sm:inline" href="/shop">Suche</Link>
           <Link className="hidden md:inline" href="/trade">Konto</Link>
           <Link href="/warenkorb">Warenkorb (0)</Link>
