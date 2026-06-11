@@ -1,10 +1,10 @@
 export const navItems = [
-  { label: "Shop", href: "/shop" },
   { label: "Kunst", href: "/art" },
   { label: "Kollektionen", href: "/collections" },
   { label: "Journal", href: "/journal" },
   { label: "Commissions & Collaborations", href: "/trade" },
   { label: "Ateliers", href: "/ateliers" },
+  { label: "Shop", href: "/shop" },
 ];
 
 export const secondaryNavItems = [

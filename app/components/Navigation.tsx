@@ -18,12 +18,13 @@ export function Navigation() {
             const isActive =
               pathname === item.href ||
               (item.href !== "/" && pathname.startsWith(`${item.href}/`));
+            const isShop = item.href === "/shop";
 
             return (
               <Link
                 className={`shrink-0 border-b pb-1 transition hover:text-black ${
                   isActive ? "border-black font-semibold text-black" : "border-transparent"
-                }`}
+                } ${isShop ? "font-semibold text-black ring-1 ring-black/20 px-2 py-1" : ""}`}
                 href={item.href}
                 key={item.href}
               >

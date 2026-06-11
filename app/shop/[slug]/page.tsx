@@ -2,12 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PlaceholderArtwork } from "../../components/PlaceholderArtwork";
-import { PageHero } from "../../components/PageHero";
 import { getProductCta } from "../../lib/commerce";
 import { products, shopCategories } from "../../data/products";
 
 type ShopSlugPageProps = {
   params: Promise<{ slug: string }>;
+};
+
+const categoryDescriptions: Record<string, string> = {
+  Kunst: "Kuratierte Kunstwerke, Editionen und Sammlerstücke ausgewählter Künstler und Ateliers.",
+  Möbel: "Designmöbel mit architektonischer Haltung und zeitloser Materialität.",
+  Leuchten: "Leuchten als funktionale Objekte mit skulpturaler Präsenz.",
+  Objekte: "Objekte, Editionen und Sammlerstücke für besondere Räume.",
+  Tabletop: "Kleine Objekte und funktionale Stücke für den täglichen Gebrauch.",
+  Teppiche: "Textile Arbeiten und Teppiche mit Charakter, Struktur und Herkunft.",
+  Editionen: "Limitierte Editionen und ausgewählte Arbeiten in kleiner Auflage.",
+  "Collectible Design": "Sammlerobjekte zwischen Design, Handwerk und Kunst.",
 };
 
 export async function generateStaticParams() {
@@ -47,6 +57,8 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
   if (product) {
     const cta = getProductCta(product.status);
     const productIndex = products.findIndex((item) => item.slug === product.slug);
+    const productCategory = shopCategories.find((item) => item.title === product.category);
+    const categoryHref = productCategory ? `/shop/${productCategory.slug}` : "/shop";
 
     return (
       <main>
@@ -54,7 +66,12 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
           <div className="mx-auto grid max-w-[1540px] gap-10 lg:grid-cols-[0.55fr_0.45fr] lg:items-start">
             <PlaceholderArtwork index={productIndex} palette={product.palette} />
             <div>
-              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{product.category}</p>
+              <Link className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]" href={categoryHref}>
+                ← Zurück zu {product.category}
+              </Link>
+              <p className="mt-6 text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">
+                Shop / {product.category} / {product.title}
+              </p>
               <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
                 {product.title}
               </h1>
@@ -99,14 +116,27 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
         item.category === category.title ||
         item.secondaryCategories?.includes(category.title),
     );
+    const description = categoryDescriptions[category.title] ?? `${category.title} bei GETYOUR.DESIGN entdecken.`;
 
     return (
       <main>
-        <PageHero
-          eyebrow="Shop"
-          title={category.title}
-          description={`${category.title} aus dem Sortiment von GETYOUR.DESIGN.`}
-        />
+        <section className="border-b hairline bg-[#f3f2ef] px-5 py-14 lg:px-10 lg:py-20">
+          <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.9fr_0.75fr] lg:items-end">
+            <div>
+              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#667174]">Shop / {category.title}</p>
+              <Link className="mt-5 inline-block text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]" href="/shop">
+                ← Zurück zum Shop
+              </Link>
+              <h1 className="serif mt-5 max-w-5xl text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
+                {category.title}
+              </h1>
+              <p className="mt-5 text-sm uppercase tracking-[0.2em] text-[#667174]">
+                {categoryProducts.length} Arbeiten
+              </p>
+            </div>
+            <p className="max-w-xl text-base leading-8 text-[#4b5356]">{description}</p>
+          </div>
+        </section>
         <section className="section-pad bg-[#f3f2ef]">
           <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {categoryProducts.map((item) => {
