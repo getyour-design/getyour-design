@@ -3,7 +3,7 @@ import { footerNavItems } from "../data";
 
 export function Footer() {
   const serviceLinks = ["Versand", "Retouren", "Authentifizierung", "Pflegehinweise"];
-  const tradeLinks = ["Trade-Programm", "Private Beschaffung", "Atelier-Anfragen", "Kontakt"];
+  const tradeLinks = ["Projektanfragen", "Private Beschaffung", "Atelier-Anfragen", "Arbeit einreichen", "Kontakt"];
 
   return (
     <footer className="border-t hairline bg-[#e8eceb] px-5 py-14 text-[#111] lg:px-10">
@@ -13,9 +13,6 @@ export function Footer() {
           <p className="mt-6 max-w-sm text-sm leading-7 text-[#4b5356]">
             Contemporary Design, Kunst, Objekte, Leuchten, Teppiche und
             Editionen ausgewählter Künstler, Ateliers und Hersteller.
-          </p>
-          <p className="mt-10 text-[0.65rem] uppercase tracking-[0.22em] text-[#667174]">
-            Weltweiter Versand aus ausgewählten Ateliers
           </p>
         </div>
         <div>
@@ -39,10 +36,10 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">Trade</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">Commissions & Collaborations</p>
           <div className="mt-5 grid gap-3 text-sm text-[#37332e]">
             {tradeLinks.map((item) => (
-              <Link className="hover:text-black" href="/trade" key={item}>
+              <Link className="hover:text-black" href={item === "Arbeit einreichen" ? "/arbeit-einreichen" : "/trade"} key={item}>
                 {item}
               </Link>
             ))}

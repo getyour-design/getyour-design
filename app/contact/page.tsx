@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Kontakt",
-  description: "Kontakt zu GETYOUR.DESIGN für private Beschaffung, Trade-Anfragen, Materialauswahl und kuratierte Objekte.",
+  description: "Kontakt zu GETYOUR.DESIGN für private Beschaffung, Projektanfragen, Materialauswahl und kuratierte Objekte.",
 };
 
 export default function ContactPage() {
@@ -19,14 +19,14 @@ export default function ContactPage() {
           <p className="serif text-2xl tracking-[0.08em]">Private Anfragen</p>
           <p className="mt-5 max-w-xl text-sm leading-7 text-[#5f574f]">
             Teilen Sie uns Raum, Materialwunsch, Zeitrahmen und Bedarf mit:
-            einzelnes Objekt, kuratierte Auswahl, Kunstwerk oder Trade-Projekt.
+            einzelnes Objekt, kuratierte Auswahl, Kunstwerk oder Projekt.
           </p>
           <div className="mt-10 grid gap-5 text-sm">
             <a className="border-b border-black/20 pb-4" href="mailto:studio@getyour.design">
               studio@getyour.design
             </a>
             <p className="border-b border-black/20 pb-4">Berlin · Remote</p>
-            <p className="border-b border-black/20 pb-4">Termine für Trade und private Auswahl auf Anfrage.</p>
+            <p className="border-b border-black/20 pb-4">Termine für Projekte und private Auswahl auf Anfrage.</p>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ export const navItems = [
   { label: "Kunst", href: "/art" },
   { label: "Kollektionen", href: "/collections" },
   { label: "Journal", href: "/journal" },
-  { label: "Trade", href: "/trade" },
+  { label: "Commissions & Collaborations", href: "/trade" },
 ];
 
 export const secondaryNavItems = [
@@ -21,6 +21,6 @@ export const footerNavItems = [
   { label: "Künstler", href: "/artists" },
   { label: "Materialien", href: "/materials" },
   { label: "Journal", href: "/journal" },
-  { label: "Trade", href: "/trade" },
+  { label: "Commissions & Collaborations", href: "/trade" },
   { label: "Arbeit einreichen", href: "/arbeit-einreichen" },
 ];

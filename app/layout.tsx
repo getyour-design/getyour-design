@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "Hersteller",
     "Interior Design",
     "Materialien",
-    "Trade für Interior Designer",
+    "Commissions & Collaborations",
   ],
   openGraph: {
     title: "GETYOUR.DESIGN",

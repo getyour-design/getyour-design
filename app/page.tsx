@@ -37,7 +37,7 @@ const platformAreas = [
     href: "/journal",
   },
   {
-    title: "Trade",
+    title: "Commissions & Collaborations",
     description: "Anfragen für Architekten, Interior Designer, Hotels und Projekte.",
     href: "/trade",
   },
@@ -374,7 +374,7 @@ export default function Home() {
             <div className="max-w-[28rem]">
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Orientierung</p>
               <h2 className="serif mt-4 text-balance text-base leading-snug tracking-[0.08em] lg:text-lg">
-                Einstiege in Sortiment, Kollektionen, Journal und Trade.
+                Einstiege in Sortiment, Kollektionen, Journal und Commissions.
               </h2>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -471,14 +471,14 @@ export default function Home() {
       <section className="px-5 py-16 lg:px-10">
         <div className="mx-auto grid max-w-[1540px] gap-5 lg:grid-cols-2">
           <article className="border hairline bg-[#11100f] p-8 text-[#f3f2ef] lg:p-12">
-            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#9fc6e3]">Trade</p>
+            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#9fc6e3]">Commissions & Collaborations</p>
             <h2 className="serif mt-5 text-xl leading-snug tracking-[0.08em]">Für Architekten, Interior Designer, Hotels und Projektkunden.</h2>
             <p className="mt-6 max-w-lg text-sm leading-7 text-[#d9d0c4]">
               Für Projektbeschaffung, reservierte Editionen, Materialauswahl
               und kuratierte Objektlisten.
             </p>
             <Link className="mt-8 inline-block border border-[#f3f2ef] px-6 py-3 text-xs uppercase tracking-[0.2em]" href="/trade">
-              Trade anfragen
+              Anfrage senden
             </Link>
           </article>
           <article className="border hairline bg-[#e8eceb] p-8 lg:p-12">

@@ -3,19 +3,19 @@ import Link from "next/link";
 import { PageHero } from "../components/PageHero";
 
 export const metadata: Metadata = {
-  title: "Trade",
+  title: "Commissions & Collaborations",
   description:
-    "Trade für Architekten, Interior Designer, Hotels und Projektkunden mit Möbeln, Kunstwerken, Objekten, Leuchten und Editionen.",
+    "Commissions & Collaborations für Architekten, Interior Designer, Hotels und Projektkunden mit Möbeln, Kunstwerken, Objekten, Leuchten und Editionen.",
 };
 
 const audiences = ["Architekten", "Interior Designer", "Hotels", "Projektkunden"];
-const benefits = ["Projektbezogene Beschaffung", "Reservierte Editionen", "Materialberatung", "Gebündelter Anfrageprozess", "Maßanfertigungen und Sonderwünsche", "Dokumentation für Projekte"];
+const benefits = ["Projektanfragen", "Private Beschaffung", "Atelier-Anfragen", "Arbeit einreichen", "Reservierte Editionen", "Materialberatung"];
 
 export default function TradePage() {
   return (
     <main>
       <PageHero
-        eyebrow="Trade"
+        eyebrow="Commissions & Collaborations"
         title="Objekte, Kunstwerke und Editionen für professionelle Projekte."
         description="Für Architekten, Interior Designer, Hotels und Projektkunden mit Bedarf an besonderen Möbeln, Leuchten, Materialien und Arbeiten."
       />
@@ -38,9 +38,20 @@ export default function TradePage() {
             </div>
             <h2 className="serif mt-12 max-w-2xl text-xl leading-snug tracking-[0.08em]">Objekte, Editionen und Materialien für konkrete Räume anfragen.</h2>
             <Link className="mt-8 inline-block border border-black bg-black px-7 py-4 text-xs uppercase tracking-[0.2em] text-white" href="/contact">
-              Trade-Anfrage senden
+              Anfrage senden
             </Link>
           </article>
+        </div>
+      </section>
+      <section className="border-t hairline bg-[#f3f2ef] px-5 py-12 lg:px-10">
+        <div className="mx-auto flex max-w-[1540px] flex-col justify-between gap-6 md:flex-row md:items-center">
+          <p className="max-w-2xl text-sm leading-7 text-[#4b5356]">
+            Sie möchten uns eine Arbeit, Edition, Kollektion, Leuchte, ein
+            Möbelstück oder ein Objekt vorstellen?
+          </p>
+          <Link className="inline-block w-fit border border-black bg-black px-7 py-4 text-xs uppercase tracking-[0.2em] text-white" href="/arbeit-einreichen">
+            Arbeit einreichen
+          </Link>
         </div>
       </section>
     </main>
