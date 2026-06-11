@@ -1,32 +1,22 @@
 export const stories = [
   {
-    title: "Wie Designobjekte einen Raum sichtbar verändern",
-    category: "Produkte zeigen",
-    teaser: "Ein Journal-Beitrag als Einstieg zu Keramik, Leuchten, Skulpturen, Tabletop und Editionen im Shop.",
+    title: "Die Wirkung einzelner Objekte im Raum",
+    category: "Objekte",
+    teaser: "Warum wenige, bewusst ausgewählte Arbeiten einen Raum stärker prägen als eine vollständige Einrichtung.",
   },
   {
-    title: "Materialien, die altern dürfen",
+    title: "Materialien, die mit der Zeit gewinnen",
     category: "Materialien",
-    teaser: "Bronze, Leder, Holz und Travertin werden erklärt und mit passenden Produkten verknüpft.",
+    teaser: "Über Keramik, Bronze, Leder, Holz und Naturstein und darüber, warum Spuren, Patina und Herkunft Teil eines Objekts werden.",
   },
   {
-    title: "Kunstwerke und Collectible Design im Raum",
-    category: "SEO & Inspiration",
-    teaser: "Ein Such- und Inspirationskontext für Kunstwerke, Editionen und sammelbares Design.",
+    title: "Wenn Design zum Sammlerstück wird",
+    category: "Collectible Design",
+    teaser: "Ein Blick auf Editionen, Einzelstücke und Arbeiten zwischen Funktion, Skulptur und Kunst.",
   },
   {
-    title: "Ateliers, Manufakturen und Hersteller verstehen",
-    category: "Hersteller vorstellen",
-    teaser: "Der Beitrag erklärt Herkunft, Fertigung und Rolle der Anbieter innerhalb des Sortiments.",
-  },
-  {
-    title: "Künstlerpositionen hinter Editionen und Objekten",
-    category: "Künstler vorstellen",
-    teaser: "Profile führen zu Kunstwerken, Papierarbeiten, Skulpturen und limitierten Editionen.",
-  },
-  {
-    title: "Räume mit Leuchten, Teppichen und Keramik planen",
-    category: "Pinterest & Trade",
-    teaser: "Visuelle Themen schaffen Reichweite und führen zu Produkten, Materialien und Projektanfragen.",
+    title: "Wo Arbeiten entstehen",
+    category: "Ateliers",
+    teaser: "Ateliers, Manufakturen und Werkstätten als Orte von Haltung, Materialwissen und handwerklicher Präzision.",
   },
 ];

@@ -34,7 +34,7 @@ const platformAreas = [
   {
     title: "Journal",
     description: "Beiträge zu Produkten, Materialien, Künstlern und Räumen.",
-    href: "/stories",
+    href: "/journal",
   },
   {
     title: "Trade",
@@ -458,7 +458,7 @@ export default function Home() {
             </div>
             <div className="divide-y divide-black/15 border-y border-black/15">
               {stories.map((story) => (
-                <Link className="grid gap-5 py-7 md:grid-cols-[1fr_auto] md:items-center" href="/stories" key={story.title}>
+                <Link className="grid gap-5 py-7 md:grid-cols-[1fr_auto] md:items-center" href="/journal" key={story.title}>
                   <h3 className="serif text-xl leading-snug tracking-[0.08em]">{story.title}</h3>
                   <span className="text-xs uppercase tracking-[0.2em] text-[#667174]">Lesen</span>
                 </Link>
@@ -488,7 +488,7 @@ export default function Home() {
               <div className="flex-1 border border-black/20 bg-[#f3f2ef] px-4 py-4 text-sm text-[#667174]">
                 E-Mail-Adresse
               </div>
-              <Link className="border border-black bg-black px-6 py-4 text-center text-xs uppercase tracking-[0.2em] text-white" href="/stories">
+              <Link className="border border-black bg-black px-6 py-4 text-center text-xs uppercase tracking-[0.2em] text-white" href="/journal">
                 Anmelden
               </Link>
             </div>
