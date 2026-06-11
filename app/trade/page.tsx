@@ -37,7 +37,7 @@ export default function TradePage() {
               ))}
             </div>
             <h2 className="serif mt-12 max-w-2xl text-xl leading-snug tracking-[0.08em]">Objekte, Editionen und Materialien für konkrete Räume anfragen.</h2>
-            <Link className="mt-8 inline-block border border-black bg-black px-7 py-4 text-xs uppercase tracking-[0.2em] text-white" href="/contact">
+            <Link className="mt-8 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href="/contact">
               Anfrage senden
             </Link>
           </article>
@@ -49,7 +49,7 @@ export default function TradePage() {
             Sie möchten uns eine Arbeit, Edition, Kollektion, Leuchte, ein
             Möbelstück oder ein Objekt vorstellen?
           </p>
-          <Link className="inline-block w-fit border border-black bg-black px-7 py-4 text-xs uppercase tracking-[0.2em] text-white" href="/arbeit-einreichen">
+          <Link className="inline-block w-fit border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href="/arbeit-einreichen">
             Arbeit einreichen
           </Link>
         </div>
