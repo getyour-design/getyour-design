@@ -10,14 +10,12 @@ export function SocialLinks({ className = "" }: SocialLinksProps) {
   return (
     <div className={className}>
       {socialLinks.map((item) => (
-        <a
+        <button
           aria-label={item.label}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border hairline bg-[#f7f7f5] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black"
-          href={item.href}
-          key={item.href}
-          rel="noopener noreferrer"
-          target="_blank"
+          className="inline-flex h-10 w-10 cursor-default items-center justify-center rounded-full border hairline bg-[#f7f7f5] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black"
+          key={item.label}
           title={item.label}
+          type="button"
         >
           {item.label === "Instagram" ? (
             <svg aria-hidden="true" className={iconClassName} fill="none" viewBox="0 0 24 24">
@@ -46,7 +44,7 @@ export function SocialLinks({ className = "" }: SocialLinksProps) {
               <rect height="16" rx="2" stroke="currentColor" strokeWidth="1.3" width="16" x="4" y="4" />
             </svg>
           ) : null}
-        </a>
+        </button>
       ))}
     </div>
   );
