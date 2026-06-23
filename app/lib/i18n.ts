@@ -93,8 +93,38 @@ export function getAlternateLanguages(routeKey: RouteKey, suffix = "") {
   };
 }
 
+export const englishShopCategorySlugs: Record<string, string> = {
+  moebel: "furniture",
+  leuchten: "lighting",
+  teppiche: "rugs",
+  objekte: "objects",
+  kunst: "artworks",
+  editionen: "editions",
+  tabletop: "accessories",
+};
+
+export const legacyEnglishShopCategorySlugs = Object.fromEntries(
+  Object.entries(englishShopCategorySlugs).map(([germanSlug, englishSlug]) => [englishSlug, germanSlug]),
+) as Record<string, string>;
+
+export function getLocalizedShopSlug(locale: Locale, slug: string) {
+  if (locale === "en") {
+    return englishShopCategorySlugs[slug] ?? slug;
+  }
+
+  return slug;
+}
+
+export function resolveShopSlug(locale: Locale, slug: string) {
+  if (locale === "en") {
+    return legacyEnglishShopCategorySlugs[slug] ?? slug;
+  }
+
+  return slug;
+}
+
 export function getShopPath(locale: Locale, slug = "") {
-  return `${localizedRoutes.shop[locale]}${slug ? `/${slug}` : ""}`;
+  return `${localizedRoutes.shop[locale]}${slug ? `/${getLocalizedShopSlug(locale, slug)}` : ""}`;
 }
 
 export function localizeHref(href: string, locale: Locale) {
@@ -107,7 +137,8 @@ export function localizeHref(href: string, locale: Locale) {
   }
 
   if (href.startsWith("/shop/")) {
-    return `${localizedRoutes.shop[locale]}${href.slice("/shop".length)}`;
+    const slug = href.slice("/shop/".length);
+    return getShopPath(locale, slug);
   }
 
   const rootTarget = rootRedirects[href];
@@ -125,7 +156,8 @@ export function getLocaleFromPath(pathname: string): Locale {
 
 export function getLanguageSwitchPath(pathname: string, targetLocale: Locale) {
   if (pathname.startsWith("/de/shop/") || pathname.startsWith("/en/shop/")) {
-    const slug = pathname.split("/").slice(3).join("/");
+    const currentLocale = getLocaleFromPath(pathname);
+    const slug = resolveShopSlug(currentLocale, pathname.split("/").slice(3).join("/"));
     return getShopPath(targetLocale, slug);
   }
 

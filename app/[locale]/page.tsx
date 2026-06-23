@@ -7,7 +7,7 @@ import { collections } from "../data/collections";
 import { materialCards } from "../data/materials";
 import { products } from "../data/products";
 import { stories } from "../data/stories";
-import { getAlternateLanguages, isLocale, localizedRoutes, type Locale } from "../lib/i18n";
+import { getAlternateLanguages, getShopPath, isLocale, localizedRoutes, type Locale } from "../lib/i18n";
 import { getEnglishProductTitle } from "../lib/productTitles";
 
 type LocalizedHomeProps = {
@@ -53,12 +53,12 @@ export default async function LocalizedHome({ params }: LocalizedHomeProps) {
 }
 
 const englishShopHubLinks = [
-  { label: "Furniture", href: "/en/shop/moebel" },
-  { label: "Rugs", href: "/en/shop/teppiche" },
-  { label: "Lighting", href: "/en/shop/leuchten" },
-  { label: "Accessories", href: "/en/shop/tabletop" },
-  { label: "Objects", href: "/en/shop/objekte" },
-  { label: "Artworks", href: "/en/shop/kunst" },
+  { label: "Furniture", href: getShopPath("en", "moebel") },
+  { label: "Rugs", href: getShopPath("en", "teppiche") },
+  { label: "Lighting", href: getShopPath("en", "leuchten") },
+  { label: "Accessories", href: getShopPath("en", "tabletop") },
+  { label: "Objects", href: getShopPath("en", "objekte") },
+  { label: "Artworks", href: getShopPath("en", "kunst") },
 ];
 
 const productImages = [

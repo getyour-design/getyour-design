@@ -33,10 +33,12 @@ import { stories } from "../../data/stories";
 import { getEnglishProductTitle } from "../../lib/productTitles";
 import {
   getAlternateLanguages,
+  getLocalizedShopSlug,
   getShopPath,
   isLocale,
   localizedPathToRouteKey,
   localizedRoutes,
+  resolveShopSlug,
   type Locale,
   type RouteKey,
 } from "../../lib/i18n";
@@ -129,7 +131,7 @@ export function generateStaticParams() {
   const localizedShopRoutes = (["de", "en"] as Locale[]).flatMap((locale) => [
     ...shopCategories.map((category) => ({
       locale,
-      slug: ["shop", category.slug],
+      slug: ["shop", getLocalizedShopSlug(locale, category.slug)],
     })),
     ...products.map((product) => ({
       locale,
@@ -238,10 +240,11 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
 }
 
 function getRoute(locale: Locale, slug: string[]) {
-  const path = slug.join("/");
+  const resolvedSlug = slug[0] === "shop" && slug[1] ? ["shop", resolveShopSlug(locale, slug[1])] : slug;
+  const path = resolvedSlug.join("/");
 
-  if (slug[0] === "shop" && slug[1]) {
-    return { kind: "shopItem" as const, slug: slug[1] };
+  if (resolvedSlug[0] === "shop" && resolvedSlug[1]) {
+    return { kind: "shopItem" as const, slug: resolvedSlug[1] };
   }
 
   if (path === "shop") {
@@ -352,7 +355,7 @@ function EnglishShopPage() {
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
         <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
           {shopCategories.map((area) => (
-            <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={`/en/shop/${area.slug}`} key={area.slug}>
+            <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath("en", area.slug)} key={area.slug}>
               {getCategoryLabel(area.title)}
             </Link>
           ))}
@@ -398,7 +401,7 @@ function EnglishShopSlugPage({ slug }: { slug: string }) {
   if (product) {
     const productIndex = products.findIndex((item) => item.slug === product.slug);
     const productCategory = shopCategories.find((item) => item.title === product.category);
-    const categoryHref = productCategory ? `/en/shop/${productCategory.slug}` : "/en/shop";
+    const categoryHref = productCategory ? getShopPath("en", productCategory.slug) : "/en/shop";
     const cta = getEnglishCta(product.status);
 
     return (

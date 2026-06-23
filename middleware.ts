@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { rootRedirects } from "./app/lib/i18n";
+import { englishShopCategorySlugs, rootRedirects } from "./app/lib/i18n";
 
 const publicFilePattern = /\.(.*)$/;
 
@@ -35,6 +35,12 @@ export function middleware(request: NextRequest) {
 
   if (pathname === "/en/terms") {
     return redirect(request, "/en/terms-and-conditions");
+  }
+
+  const legacyEnglishCategorySlug = pathname.match(/^\/en\/shop\/([^/]+)$/)?.[1];
+
+  if (legacyEnglishCategorySlug && englishShopCategorySlugs[legacyEnglishCategorySlug]) {
+    return redirect(request, `/en/shop/${englishShopCategorySlugs[legacyEnglishCategorySlug]}`);
   }
 
   if (pathname.startsWith("/shop/")) {
