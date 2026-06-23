@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { inquiryGroups } from "../data/inquiries";
+import { SocialLinks } from "../components/SocialLinks";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -28,11 +30,36 @@ export default function ContactPage() {
             <a className="border-b border-black/20 pb-4" href="mailto:studio@getyour.design">
               studio@getyour.design
             </a>
-            <p className="border-b border-black/20 pb-4">Berlin · Remote</p>
+            <p className="border-b border-black/20 pb-4">Remote · Termine auf Anfrage</p>
             <p className="border-b border-black/20 pb-4">Termine für Projekte und private Auswahl auf Anfrage.</p>
+          </div>
+          <div className="mt-10">
+            <p className="text-xs uppercase tracking-[0.2em] text-[#786f64]">Social</p>
+            <SocialLinks className="mt-5 flex flex-wrap gap-3 text-sm text-[#37332e]" />
           </div>
         </div>
       </div>
+      <section className="mx-auto mt-16 max-w-7xl border-t hairline pt-10">
+        <p className="text-xs uppercase tracking-[0.22em] text-[#786f64]">Anfragearten</p>
+        <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {inquiryGroups.map((group) => (
+            <article className="border hairline bg-[#f7f7f5] p-5" key={group.title}>
+              <h2 className="serif text-lg leading-snug tracking-[0.08em]">{group.title}</h2>
+              <div className="mt-5 grid gap-3 text-sm text-[#4b5356]">
+                {group.items.map((item) => (
+                  <a
+                    className="border-b border-black/15 pb-3 hover:text-black"
+                    href={`mailto:studio@getyour.design?subject=${encodeURIComponent(item)}`}
+                    key={item}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

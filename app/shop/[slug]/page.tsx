@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PlaceholderArtwork } from "../../components/PlaceholderArtwork";
+import { EntityActions } from "../../components/EntityActions";
 import { getProductCta } from "../../lib/commerce";
 import { products, shopCategories } from "../../data/products";
 
@@ -86,6 +87,12 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                 <p>{product.availability}</p>
               </div>
               <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{product.description}</p>
+              <EntityActions
+                href={`/shop/${product.slug}`}
+                id={`product:${product.slug}`}
+                title={product.title}
+                type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
+              />
               <dl className="mt-10 grid gap-5 border-t border-black/15 pt-6 text-sm md:grid-cols-2">
                 <div>
                   <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Maße</dt>
@@ -161,6 +168,12 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                         <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{item.title}</h2>
                       </Link>
                       <p className="mt-2 text-sm text-[#4b5356]">{item.maker}</p>
+                      <EntityActions
+                        href={`/shop/${item.slug}`}
+                        id={`product:${item.slug}`}
+                        title={item.title}
+                        type={item.category === "Kunst" || item.category === "Editionen" ? "Kunstwerk" : item.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
+                      />
                     </div>
                     <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
                   </div>

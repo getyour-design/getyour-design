@@ -1,35 +1,60 @@
 import type { MetadataRoute } from "next";
 import { products, shopCategories } from "./data/products";
+import { getAlternateLanguages, getShopPath, localizedRoutes, type RouteKey } from "./lib/i18n";
 
 const siteUrl = "https://www.getyour.design";
 const lastModified = new Date("2026-06-23");
 
-const staticRoutes = [
-  "",
-  "/arbeit-einreichen",
-  "/art",
-  "/artists",
-  "/ateliers",
-  "/brands",
-  "/collections",
-  "/contact",
-  "/gallery",
-  "/journal",
-  "/materials",
-  "/objects",
-  "/sculptural-seating",
-  "/shop",
-  "/trade",
-];
-
 export default function sitemap(): MetadataRoute.Sitemap {
+  const staticRoutes = Object.entries(localizedRoutes).flatMap(([routeKey, paths]) => [
+    {
+      url: `${siteUrl}${paths.de}`,
+      lastModified,
+      alternates: {
+        languages: absoluteLanguages(getAlternateLanguages(routeKey as RouteKey)),
+      },
+    },
+    {
+      url: `${siteUrl}${paths.en}`,
+      lastModified,
+      alternates: {
+        languages: absoluteLanguages(getAlternateLanguages(routeKey as RouteKey)),
+      },
+    },
+  ]);
   const shopRoutes = [
-    ...shopCategories.map((category) => `/shop/${category.slug}`),
-    ...products.map((product) => `/shop/${product.slug}`),
-  ];
+    ...shopCategories.map((category) => category.slug),
+    ...products.map((product) => product.slug),
+  ].flatMap((slug) => [
+    {
+      url: `${siteUrl}${getShopPath("de", slug)}`,
+      lastModified,
+      alternates: {
+        languages: absoluteLanguages({
+          de: getShopPath("de", slug),
+          en: getShopPath("en", slug),
+          "x-default": getShopPath("de", slug),
+        }),
+      },
+    },
+    {
+      url: `${siteUrl}${getShopPath("en", slug)}`,
+      lastModified,
+      alternates: {
+        languages: absoluteLanguages({
+          de: getShopPath("de", slug),
+          en: getShopPath("en", slug),
+          "x-default": getShopPath("de", slug),
+        }),
+      },
+    },
+  ]);
 
-  return [...staticRoutes, ...shopRoutes].map((route) => ({
-    url: `${siteUrl}${route}`,
-    lastModified,
-  }));
+  return [...staticRoutes, ...shopRoutes];
+}
+
+function absoluteLanguages(languages: Record<string, string>) {
+  return Object.fromEntries(
+    Object.entries(languages).map(([locale, path]) => [locale, `${siteUrl}${path}`]),
+  );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "../components/PageHero";
 import { PlaceholderArtwork } from "../components/PlaceholderArtwork";
+import { EntityActions } from "../components/EntityActions";
 import { products, shopCategories } from "../data/products";
 
 export const metadata: Metadata = {
@@ -46,6 +47,12 @@ export default function ShopPage() {
                   <Link className="mt-2 inline-block text-sm text-[#4b5356] hover:text-black" href={product.maker.includes("Künstlerposition") ? "/artists" : "/brands"}>
                     {product.maker}
                   </Link>
+                  <EntityActions
+                    href={`/shop/${product.slug}`}
+                    id={`product:${product.slug}`}
+                    title={product.title}
+                    type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
+                  />
                 </div>
                 <p className="shrink-0 text-sm text-[#353b3e]">{product.price}</p>
               </div>

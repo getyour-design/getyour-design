@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "../components/PageHero";
+import { EntityActions } from "../components/EntityActions";
 import { brands } from "../data/brands";
 
 export const metadata: Metadata = {
@@ -65,6 +66,12 @@ export default function AteliersPage() {
                   <div className={`mb-8 h-28 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
                   <h3 className="serif text-2xl tracking-[0.08em]">{brand.name}</h3>
                   <p className="mt-4 max-w-xl text-sm leading-7 text-[#4b5356]">{brand.description}</p>
+                  <EntityActions
+                    href="/ateliers"
+                    id={`atelier:${brand.name}`}
+                    title={brand.name}
+                    type="Atelier"
+                  />
                 </div>
               </article>
             ))}

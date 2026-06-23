@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "../components/PageHero";
 import { PlaceholderArtwork } from "../components/PlaceholderArtwork";
+import { EntityActions } from "../components/EntityActions";
 import { artworks } from "../data/artworks";
 
 export const metadata: Metadata = {
@@ -32,6 +33,12 @@ export default function ArtPage() {
                   {artwork.medium}, {artwork.year}
                 </p>
                 <p className="mt-3 text-sm text-[#11100f]">{artwork.price}</p>
+                <EntityActions
+                  href="/art"
+                  id={`artwork:${artwork.title}`}
+                  title={artwork.title}
+                  type="Kunstwerk"
+                />
               </div>
             </article>
           ))}
