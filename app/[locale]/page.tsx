@@ -206,10 +206,12 @@ function EnglishHome() {
                 who you are
               </span>
             </h1>
-            <p className="serif mt-10 max-w-[34rem] text-[1.28rem] font-normal leading-snug tracking-[0.06em] text-[#10100f] md:text-[1.45rem] lg:whitespace-nowrap">
-              Design and art for individualists.
+            <p className="serif mt-12 max-w-[24rem] text-[1.05rem] font-normal leading-[1.45] tracking-[0.06em] text-[#10100f] md:text-[1.2rem]">
+              DESIGN AND ART
+              <br />
+              FOR INDIVIDUALISTS.
             </p>
-            <div className="mt-14 grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
+            <div className="mt-12 grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
               <Link className="border hairline bg-[#f7f7f5] px-5 py-4 text-center transition hover:bg-[#f8f8f6] hover:text-black" href="/en/shop">
                 Explore Shop
               </Link>

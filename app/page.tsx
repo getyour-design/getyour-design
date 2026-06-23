@@ -222,10 +222,12 @@ export default function Home() {
                 wer Sie sind
               </span>
             </h1>
-            <p className="serif mt-10 max-w-[34rem] text-[1.28rem] font-normal leading-snug tracking-[0.06em] text-[#10100f] md:text-[1.45rem] lg:whitespace-nowrap">
-              Design und Kunst für Individualisten.
+            <p className="serif mt-12 max-w-[24rem] text-[1.05rem] font-normal leading-[1.45] tracking-[0.06em] text-[#10100f] md:text-[1.2rem]">
+              DESIGN UND KUNST
+              <br />
+              FÜR INDIVIDUALISTEN.
             </p>
-            <div className="mt-14 grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
+            <div className="mt-12 grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
               <Link className="border hairline bg-[#f7f7f5] px-5 py-4 text-center transition hover:bg-[#f8f8f6] hover:text-black" href="/shop">
                 Shop entdecken
               </Link>
