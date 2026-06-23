@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Commissions & Collaborations",
   description:
     "Commissions & Collaborations für Architekten, Interior Designer, Hotels und Projektkunden mit Möbeln, Kunstwerken, Objekten, Leuchten und Editionen.",
+  alternates: {
+    canonical: "/trade",
+  },
 };
 
 const audiences = ["Architekten", "Interior Designer", "Hotels", "Projektkunden"];

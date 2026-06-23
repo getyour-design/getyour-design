@@ -29,7 +29,7 @@ export const shopCategories = [
   { title: "Kunst", slug: "kunst" },
   { title: "Teppiche", slug: "teppiche" },
   { title: "Objekte", slug: "objekte" },
-  { title: "Tabletop", slug: "tabletop" },
+  { title: "Tabletop", label: "Accessoires", slug: "tabletop" },
   { title: "Collectible Design", slug: "collectible-design" },
   { title: "Editionen", slug: "editionen" },
 ];

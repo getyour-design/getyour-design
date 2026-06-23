@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Marken & Ateliers",
   description:
     "Ateliers, Manufakturen und Hersteller ausgewählter Möbel, Objekte, Leuchten und Editionen.",
+  alternates: {
+    canonical: "/brands",
+  },
 };
 
 export default function BrandsPage() {

@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Künstler",
   description:
     "Künstlerprofile für Kunstwerke, Editionen, Objekte und Räume bei GETYOUR.DESIGN.",
+  alternates: {
+    canonical: "/artists",
+  },
 };
 
 export default function ArtistsPage() {

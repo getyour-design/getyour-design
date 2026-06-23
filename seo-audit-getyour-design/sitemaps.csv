@@ -1,0 +1,8 @@
+source,finalUrl,statusCode,contentType,kind,urlCount
+https://www.getyour.design/sitemap.xml,https://www.getyour.design/sitemap.xml,404,text/html; charset=utf-8,other,0
+https://www.getyour.design/sitemap_index.xml,https://www.getyour.design/sitemap_index.xml,404,text/html; charset=utf-8,other,0
+https://www.getyour.design/server-sitemap.xml,https://www.getyour.design/server-sitemap.xml,404,text/html; charset=utf-8,other,0
+https://www.getyour.design/robots.txt,https://www.getyour.design/robots.txt,200,text/plain; charset=utf-8,robots,0
+https://getyour.design/sitemap.xml,https://www.getyour.design/sitemap.xml,404,text/html; charset=utf-8,other,0
+https://getyour.design/sitemap_index.xml,https://www.getyour.design/sitemap_index.xml,404,text/html; charset=utf-8,other,0
+https://getyour.design/robots.txt,https://www.getyour.design/robots.txt,200,text/plain; charset=utf-8,robots,0

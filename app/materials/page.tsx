@@ -6,6 +6,9 @@ import { materialCards } from "../data/materials";
 export const metadata: Metadata = {
   title: "Materialien",
   description: "Materialbibliothek von GETYOUR.DESIGN mit Wolle, Leder, Keramik, Holz, Travertin und Bronze.",
+  alternates: {
+    canonical: "/materials",
+  },
 };
 
 export default function MaterialsPage() {

@@ -4,6 +4,10 @@ import { prepareCheckout } from "../lib/commerce";
 export const metadata: Metadata = {
   title: "Warenkorb",
   description: "Warenkorb von GETYOUR.DESIGN.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const previewItems = [

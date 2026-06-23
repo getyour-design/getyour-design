@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Ateliers",
   description:
     "Ateliers, Werkstätten, Herstellungsprozesse und individuelle Projektanfragen bei GETYOUR.DESIGN.",
+  alternates: {
+    canonical: "/ateliers",
+  },
 };
 
 const atelierTopics = [

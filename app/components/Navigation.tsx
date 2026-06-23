@@ -24,7 +24,7 @@ export function Navigation() {
               <Link
                 className={`shrink-0 border-b pb-1 transition hover:text-black ${
                   isActive ? "border-black font-semibold text-black" : "border-transparent"
-                } ${isShop ? "font-semibold text-black ring-1 ring-black/20 px-2 py-1" : ""}`}
+                } ${isShop ? "font-semibold text-black" : ""}`}
                 href={item.href}
                 key={item.href}
               >

@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Arbeit einreichen",
   description:
     "Arbeiten, Editionen, Kollektionen, Leuchten, Möbelstücke und Objekte zur kuratorischen Prüfung bei GETYOUR.DESIGN einreichen.",
+  alternates: {
+    canonical: "/arbeit-einreichen",
+  },
 };
 
 const fields = [

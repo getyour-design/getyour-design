@@ -4,6 +4,7 @@ import { Footer } from "./components/Footer";
 import { Navigation } from "./components/Navigation";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.getyour.design"),
   title: {
     default: "GETYOUR.DESIGN | Contemporary Design, Kunst und Objekte",
     template: "%s | GETYOUR.DESIGN",
@@ -32,13 +33,14 @@ export const metadata: Metadata = {
     description:
       "Contemporary Design, Kunst, Möbel, Objekte, Leuchten, Teppiche und Editionen.",
     type: "website",
+    url: "https://www.getyour.design",
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
     },
   },
 };
@@ -50,10 +52,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <head>
-        <meta name="robots" content="noindex,nofollow" />
-        <meta name="googlebot" content="noindex,nofollow" />
-      </head>
       <body>
         <Navigation />
         {children}

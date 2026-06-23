@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Kollektionen",
   description:
     "Kuratierte GETYOUR.DESIGN Kollektionen für Shop-Einstiege wie Rohe Schönheit, Leiser Luxus, sammelbares Design und natürliche Materialien.",
+  alternates: {
+    canonical: "/collections",
+  },
 };
 
 export default function CollectionsPage() {

@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kontakt",
   description: "Kontakt zu GETYOUR.DESIGN für private Beschaffung, Projektanfragen, Materialauswahl und kuratierte Objekte.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {

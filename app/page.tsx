@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { artworks } from "./data/artworks";
 import { collections } from "./data/collections";
@@ -5,10 +6,16 @@ import { materialCards } from "./data/materials";
 import { products } from "./data/products";
 import { stories } from "./data/stories";
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
 const platformAreas = [
   {
     title: "Shop",
-    description: "Möbel, Leuchten, Kunst, Teppiche, Objekte, Tabletop und Editionen entdecken.",
+    description: "Möbel, Leuchten, Kunst, Teppiche, Objekte, Accessoires und Editionen entdecken.",
     href: "/shop",
   },
   {
@@ -97,7 +104,7 @@ const smallObjects = [
   },
   {
     title: "Schale aus hellem Steinzeug",
-    type: "Tabletop",
+    type: "Accessoires",
     price: "EUR 240",
     image: productImages[0],
   },
@@ -125,6 +132,15 @@ const smallObjects = [
     price: "EUR 620",
     image: productImages[3],
   },
+];
+
+const shopHubLinks = [
+  { label: "Möbel", href: "/shop/moebel" },
+  { label: "Teppiche", href: "/shop/teppiche" },
+  { label: "Leuchten", href: "/shop/leuchten" },
+  { label: "Accessoires", href: "/shop/tabletop" },
+  { label: "Objekte", href: "/shop/objekte" },
+  { label: "Kunstwerke", href: "/shop/kunst" },
 ];
 
 function ProductVisual({ index, palette }: { index: number; palette: string }) {
@@ -192,7 +208,7 @@ function ProductVisual({ index, palette }: { index: number; palette: string }) {
 export default function Home() {
   return (
     <main className="bg-[#f3f2ef]">
-      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-20 pt-10 lg:px-10 lg:pb-24 lg:pt-12">
+      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-6 pt-10 lg:px-10 lg:pb-8 lg:pt-12">
         <div className="mx-auto grid max-w-[1540px] gap-6 lg:min-h-[720px] lg:grid-cols-[0.36fr_0.64fr] lg:items-center xl:gap-8">
           <div className="flex max-w-[33rem] flex-col self-center lg:translate-y-8 lg:pr-0">
             <h1 className="serif text-balance text-[1.45rem] font-normal leading-[1.22] text-[#10100f] md:text-[1.85rem] lg:text-[2.12rem]">
@@ -206,15 +222,14 @@ export default function Home() {
                 wer Sie sind
               </span>
             </h1>
-            <p className="mt-6 max-w-[30rem] text-[0.98rem] leading-7 text-[#353839] md:text-base md:leading-8">
-              Möbel, Kunstwerke, Objekte, Leuchten, Teppiche und Editionen
-              ausgewählter Künstler, Ateliers und Hersteller.
+            <p className="serif mt-10 max-w-[34rem] text-[1.28rem] font-normal leading-snug tracking-[0.06em] text-[#10100f] md:text-[1.45rem] lg:whitespace-nowrap">
+              Design und Kunst für Individualisten.
             </p>
-            <div className="mt-14 flex flex-col gap-4 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:flex-row sm:gap-8">
-              <Link className="border-b border-black/40 pb-2 transition hover:border-black" href="/shop">
+            <div className="mt-14 grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
+              <Link className="border hairline bg-[#f7f7f5] px-5 py-4 text-center transition hover:bg-[#f8f8f6] hover:text-black" href="/shop">
                 Shop entdecken
               </Link>
-              <Link className="border-b border-black/20 pb-2 text-[#353b3e] transition hover:border-black hover:text-[#10100f]" href="/collections">
+              <Link className="border hairline bg-[#f7f7f5] px-5 py-4 text-center text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href="/collections">
                 Kollektionen ansehen
               </Link>
             </div>
@@ -228,6 +243,20 @@ export default function Home() {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="border-b hairline bg-[#f3f2ef] px-5 py-6 lg:px-10">
+        <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-6">
+          {shopHubLinks.map((item) => (
+            <Link
+              className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black"
+              href={item.href}
+              key={item.href}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       </section>
 

@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Kollektionen",
   description: "Kuratierte Commerce-Einstiege von GETYOUR.DESIGN für Möbel, Kunst, Objekte und Materialien.",
+  alternates: {
+    canonical: "/gallery",
+  },
 };
 
 const gallery = ["Wohnraum-Edit", "Sammler-Suite", "Atelier-Auswahl", "Objekttisch", "Materialraum", "Private Auswahl"];

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Shop",
   description:
     "Möbel, Leuchten, Kunst, Teppiche, Objekte, Tabletop, Collectible Design und Editionen ausgewählter Künstler, Ateliers und Hersteller.",
+  alternates: {
+    canonical: "/shop",
+  },
 };
 
 export default function ShopPage() {
@@ -16,13 +19,13 @@ export default function ShopPage() {
       <PageHero
         eyebrow="Shop"
         title="Möbel, Leuchten, Kunst, Teppiche, Objekte und Editionen."
-        description="Eine Auswahl aus Designmöbeln, Kunstwerken, Leuchten, Teppichen, Tabletop, Collectible Design, Objekten und Editionen für besondere Räume."
+        description="Eine Auswahl aus Designmöbeln, Kunstwerken, Leuchten, Teppichen, Accessoires, Collectible Design, Objekten und Editionen für besondere Räume."
       />
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
         <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
           {shopCategories.map((area) => (
             <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={`/shop/${area.slug}`} key={area.slug}>
-              {area.title}
+              {"label" in area ? area.label : area.title}
             </Link>
           ))}
         </div>

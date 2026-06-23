@@ -4,6 +4,9 @@ import { featuredObjects } from "../data";
 export const metadata: Metadata = {
   title: "Objekte",
   description: "Sammelbare Designobjekte, Skulpturen und Editionen von GETYOUR.DESIGN.",
+  alternates: {
+    canonical: "/objects",
+  },
 };
 
 export default function ObjectsPage() {

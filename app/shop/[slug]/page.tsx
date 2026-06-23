@@ -36,6 +36,9 @@ export async function generateMetadata({ params }: ShopSlugPageProps): Promise<M
     return {
       title: product.title,
       description: `${product.title} bei GETYOUR.DESIGN: ${product.category}, ${product.material}, ${product.price}.`,
+      alternates: {
+        canonical: `/shop/${product.slug}`,
+      },
     };
   }
 
@@ -43,6 +46,9 @@ export async function generateMetadata({ params }: ShopSlugPageProps): Promise<M
     return {
       title: category.title,
       description: `${category.title} bei GETYOUR.DESIGN entdecken.`,
+      alternates: {
+        canonical: `/shop/${category.slug}`,
+      },
     };
   }
 
@@ -111,6 +117,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
   }
 
   if (category) {
+    const categoryTitle = "label" in category ? category.label : category.title;
     const categoryProducts = products.filter(
       (item) =>
         item.category === category.title ||
@@ -123,12 +130,12 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
         <section className="border-b hairline bg-[#f3f2ef] px-5 py-14 lg:px-10 lg:py-20">
           <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.9fr_0.75fr] lg:items-end">
             <div>
-              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#667174]">Shop / {category.title}</p>
+              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#667174]">Shop / {categoryTitle}</p>
               <Link className="mt-5 inline-block text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]" href="/shop">
                 ← Zurück zum Shop
               </Link>
               <h1 className="serif mt-5 max-w-5xl text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
-                {category.title}
+                {categoryTitle}
               </h1>
               <p className="mt-5 text-sm uppercase tracking-[0.2em] text-[#667174]">
                 {categoryProducts.length} Arbeiten

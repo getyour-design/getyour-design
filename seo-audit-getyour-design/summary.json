@@ -1,0 +1,159 @@
+{
+  "generatedAt": "2026-06-23T11:53:14.426Z",
+  "root": "https://www.getyour.design",
+  "pages": 117,
+  "sitemapUrls": 0,
+  "robotsDisallowAll": true,
+  "globalNoindexPages": 117,
+  "indexablePages": 0,
+  "images": 25,
+  "internalLinks": 1729,
+  "externalLinks": 0,
+  "affiliatePages": 0,
+  "geoPages": 1,
+  "duplicateRisks": 4,
+  "topAuthority": [
+    {
+      "url": "https://www.getyour.design/",
+      "pageType": "Startseite",
+      "category": "Startseite",
+      "title": "GETYOUR.DESIGN | Contemporary Design, Kunst und Objekte",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 11,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Design-Shop"
+    },
+    {
+      "url": "https://www.getyour.design/arbeit-einreichen",
+      "pageType": "Landingpage",
+      "category": "Ateliers",
+      "title": "Arbeit einreichen | GETYOUR.DESIGN",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 11,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Ateliers"
+    },
+    {
+      "url": "https://www.getyour.design/art",
+      "pageType": "Landingpage",
+      "category": "Kunst",
+      "title": "Kunst | GETYOUR.DESIGN",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 11,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Kunst"
+    },
+    {
+      "url": "https://www.getyour.design/artists",
+      "pageType": "Künstler",
+      "category": "Kunst",
+      "title": "Künstler | GETYOUR.DESIGN",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 11,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Kunst"
+    },
+    {
+      "url": "https://www.getyour.design/ateliers",
+      "pageType": "Atelier",
+      "category": "Ateliers",
+      "title": "Ateliers | GETYOUR.DESIGN",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 11,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Ateliers"
+    },
+    {
+      "url": "https://www.getyour.design/brands",
+      "pageType": "Atelier",
+      "category": "Ateliers",
+      "title": "Marken & Ateliers | GETYOUR.DESIGN",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 11,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Ateliers"
+    },
+    {
+      "url": "https://www.getyour.design/collections",
+      "pageType": "Kategorie",
+      "category": "Kollektionen",
+      "title": "Kollektionen | GETYOUR.DESIGN",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 11,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Kollektionen"
+    },
+    {
+      "url": "https://www.getyour.design/journal",
+      "pageType": "Journal",
+      "category": "Journal",
+      "title": "Journal | GETYOUR.DESIGN",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 11,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Journal"
+    },
+    {
+      "url": "https://www.getyour.design/materials",
+      "pageType": "Landingpage",
+      "category": "Ateliers",
+      "title": "Materialien | GETYOUR.DESIGN",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 11,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Ateliers"
+    },
+    {
+      "url": "https://www.getyour.design/shop",
+      "pageType": "Produkt",
+      "category": "Design",
+      "title": "Shop | GETYOUR.DESIGN",
+      "incomingInternalLinks": 116,
+      "outgoingInternalLinks": 115,
+      "internalAuthority": "Hoch",
+      "recommendedNewStructure": "Design-Shop"
+    }
+  ],
+  "sitemapProblems": [
+    {
+      "source": "https://www.getyour.design/sitemap.xml",
+      "finalUrl": "https://www.getyour.design/sitemap.xml",
+      "statusCode": 404,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "other",
+      "urlCount": 0
+    },
+    {
+      "source": "https://www.getyour.design/sitemap_index.xml",
+      "finalUrl": "https://www.getyour.design/sitemap_index.xml",
+      "statusCode": 404,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "other",
+      "urlCount": 0
+    },
+    {
+      "source": "https://www.getyour.design/server-sitemap.xml",
+      "finalUrl": "https://www.getyour.design/server-sitemap.xml",
+      "statusCode": 404,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "other",
+      "urlCount": 0
+    },
+    {
+      "source": "https://getyour.design/sitemap.xml",
+      "finalUrl": "https://www.getyour.design/sitemap.xml",
+      "statusCode": 404,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "other",
+      "urlCount": 0
+    },
+    {
+      "source": "https://getyour.design/sitemap_index.xml",
+      "finalUrl": "https://www.getyour.design/sitemap_index.xml",
+      "statusCode": 404,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "other",
+      "urlCount": 0
+    }
+  ]
+}

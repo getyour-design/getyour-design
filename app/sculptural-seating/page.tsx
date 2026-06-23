@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Skulpturales Sitzen",
   description: "Skulpturale Sitzobjekte von GETYOUR.DESIGN mit Komfort, Silhouette und materieller Zurückhaltung.",
+  alternates: {
+    canonical: "/sculptural-seating",
+  },
 };
 
 const seating = [

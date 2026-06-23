@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   title: "Journal",
   description:
     "Einblicke in Kunst, Design, Materialien, Ateliers und Räume bei GETYOUR.DESIGN.",
+  alternates: {
+    canonical: "/journal",
+  },
 };
 
 export default function JournalPage() {
