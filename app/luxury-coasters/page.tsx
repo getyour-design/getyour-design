@@ -3,9 +3,9 @@ import { LuxuryCoastersPage } from "../components/LuxuryCoastersPage";
 import { localizedRoutes } from "../lib/i18n";
 
 export const metadata: Metadata = {
-  title: "Luxury Coasters",
+  title: "Luxury Cowhide Coasters",
   description:
-    "Natural stone coasters, refined tabletop objects and gift-ready material details curated by GETYOUR.DESIGN.",
+    "Handcrafted European cowhide coasters by 54 COUTURE, made in Germany and presented in a luxury gift box.",
   alternates: {
     canonical: "/luxury-coasters",
     languages: {
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Luxury Coasters | GETYOUR.DESIGN",
+    title: "Luxury Cowhide Coasters | GETYOUR.DESIGN",
     description:
-      "Natural stone coasters, refined tabletop objects and gift-ready material details curated by GETYOUR.DESIGN.",
+      "Handcrafted European cowhide coasters by 54 COUTURE, made in Germany and presented in a luxury gift box.",
     url: "/luxury-coasters",
   },
 };
@@ -25,4 +25,3 @@ export const metadata: Metadata = {
 export default function LuxuryCoastersRootPage() {
   return <LuxuryCoastersPage locale="en" />;
 }
-
