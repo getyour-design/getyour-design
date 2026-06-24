@@ -49,8 +49,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
   ]);
+  const legacyRoutes = [
+    {
+      url: `${siteUrl}/luxury-coasters`,
+      lastModified,
+      alternates: {
+        languages: absoluteLanguages({
+          de: localizedRoutes["luxury-coasters"].de,
+          en: localizedRoutes["luxury-coasters"].en,
+          "x-default": "/luxury-coasters",
+        }),
+      },
+    },
+  ];
 
-  return [...staticRoutes, ...shopRoutes];
+  return [...staticRoutes, ...legacyRoutes, ...shopRoutes];
 }
 
 function absoluteLanguages(languages: Record<string, string>) {

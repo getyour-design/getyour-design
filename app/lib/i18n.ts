@@ -16,6 +16,7 @@ export type RouteKey =
   | "gallery"
   | "impressum"
   | "journal"
+  | "luxury-coasters"
   | "materials"
   | "objects"
   | "sculptural-seating"
@@ -38,6 +39,7 @@ export const localizedRoutes: Record<RouteKey, Record<Locale, string>> = {
   gallery: { de: "/de/galerie", en: "/en/gallery" },
   impressum: { de: "/de/impressum", en: "/en/legal-notice" },
   journal: { de: "/de/journal", en: "/en/journal" },
+  "luxury-coasters": { de: "/de/luxus-untersetzer", en: "/en/luxury-coasters" },
   materials: { de: "/de/materialien", en: "/en/materials" },
   objects: { de: "/de/objekte", en: "/en/objects" },
   "sculptural-seating": { de: "/de/sculptural-seating", en: "/en/sculptural-seating" },

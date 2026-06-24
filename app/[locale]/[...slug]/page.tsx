@@ -25,6 +25,7 @@ import CartPage from "../../warenkorb/page";
 import { PageHero } from "../../components/PageHero";
 import { PlaceholderArtwork } from "../../components/PlaceholderArtwork";
 import { EntityActions } from "../../components/EntityActions";
+import { LuxuryCoastersPage } from "../../components/LuxuryCoastersPage";
 import { products, shopCategories } from "../../data/products";
 import { collections } from "../../data/collections";
 import { artworks } from "../../data/artworks";
@@ -83,6 +84,7 @@ const titles: Record<RouteKey, string> = {
   gallery: "Gallery",
   impressum: "Impressum",
   journal: "Journal",
+  "luxury-coasters": "Luxus-Untersetzer",
   materials: "Materialien",
   objects: "Objekte",
   "sculptural-seating": "Sculptural Seating",
@@ -101,6 +103,7 @@ const englishTitles: Partial<Record<RouteKey, string>> = {
   datenschutz: "Privacy Policy",
   impressum: "Legal Notice",
   journal: "Journal",
+  "luxury-coasters": "Luxury Coasters",
   shop: "Design Shop",
   suche: "Search",
   warenkorb: "Cart",
@@ -112,6 +115,7 @@ const englishDescriptions: Partial<Record<RouteKey, string>> = {
   collections: "Curated collections for discovering design, art, materials and objects at GETYOUR.DESIGN.",
   contact: "Contact GETYOUR.DESIGN for private sourcing, product enquiries, artworks and project requests.",
   journal: "Essays, interviews and background stories on design, art, materials and ateliers.",
+  "luxury-coasters": "Natural stone coasters, refined tabletop objects and gift-ready material details curated by GETYOUR.DESIGN.",
   shop: "Curated furniture, lighting, rugs, artworks, accessories and objects at GETYOUR.DESIGN.",
   suche: "Search design, art, ateliers and objects at GETYOUR.DESIGN.",
   warenkorb: "Cart at GETYOUR.DESIGN.",
@@ -220,6 +224,10 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
     }
 
     return <ShopSlugPage params={Promise.resolve({ slug: route.slug })} />;
+  }
+
+  if (route.key === "luxury-coasters") {
+    return <LuxuryCoastersPage locale={locale} />;
   }
 
   if (locale === "en" && ["agb", "datenschutz", "impressum"].includes(route.key)) {
