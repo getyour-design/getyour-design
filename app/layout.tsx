@@ -3,6 +3,8 @@ import "./globals.css";
 import { Footer } from "./components/Footer";
 import { Navigation } from "./components/Navigation";
 
+const pinterestVerificationCode = "58d43fc30c175ae8e21a59237709dc23";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.getyour.design"),
   title: {
@@ -43,6 +45,15 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+  ...(pinterestVerificationCode
+    ? {
+        verification: {
+          other: {
+            "p:domain_verify": pinterestVerificationCode,
+          },
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({
