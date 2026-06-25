@@ -1,64 +1,43 @@
 import type { MetadataRoute } from "next";
 import { products, shopCategories } from "./data/products";
-import { getAlternateLanguages, getShopPath, localizedRoutes, type RouteKey } from "./lib/i18n";
+import { getAlternateLanguages, getShopPath, localizedRoutes, locales, type RouteKey } from "./lib/i18n";
 
 const siteUrl = "https://www.getyour.design";
 const lastModified = new Date("2026-06-23");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = Object.entries(localizedRoutes).flatMap(([routeKey, paths]) => [
-    {
-      url: `${siteUrl}${paths.de}`,
+  const staticRoutes = Object.entries(localizedRoutes).flatMap(([routeKey, paths]) =>
+    locales.map((locale) => ({
+      url: `${siteUrl}${paths[locale]}`,
       lastModified,
       alternates: {
         languages: absoluteLanguages(getAlternateLanguages(routeKey as RouteKey)),
       },
-    },
-    {
-      url: `${siteUrl}${paths.en}`,
-      lastModified,
-      alternates: {
-        languages: absoluteLanguages(getAlternateLanguages(routeKey as RouteKey)),
-      },
-    },
-  ]);
+    })),
+  );
   const shopRoutes = [
     ...shopCategories.map((category) => category.slug),
     ...products.map((product) => product.slug),
-  ].flatMap((slug) => [
-    {
-      url: `${siteUrl}${getShopPath("de", slug)}`,
+  ].flatMap((slug) => {
+    const languages = {
+      ...Object.fromEntries(locales.map((locale) => [locale, getShopPath(locale, slug)])),
+      "x-default": getShopPath("de", slug),
+    };
+
+    return locales.map((locale) => ({
+      url: `${siteUrl}${getShopPath(locale, slug)}`,
       lastModified,
       alternates: {
-        languages: absoluteLanguages({
-          de: getShopPath("de", slug),
-          en: getShopPath("en", slug),
-          "x-default": getShopPath("de", slug),
-        }),
+        languages: absoluteLanguages(languages),
       },
-    },
-    {
-      url: `${siteUrl}${getShopPath("en", slug)}`,
-      lastModified,
-      alternates: {
-        languages: absoluteLanguages({
-          de: getShopPath("de", slug),
-          en: getShopPath("en", slug),
-          "x-default": getShopPath("de", slug),
-        }),
-      },
-    },
-  ]);
+    }));
+  });
   const legacyRoutes = [
     {
       url: `${siteUrl}/luxury-coasters`,
       lastModified,
       alternates: {
-        languages: absoluteLanguages({
-          de: localizedRoutes["luxury-coasters"].de,
-          en: localizedRoutes["luxury-coasters"].en,
-          "x-default": "/luxury-coasters",
-        }),
+        languages: absoluteLanguages(getAlternateLanguages("luxury-coasters")),
       },
     },
   ];

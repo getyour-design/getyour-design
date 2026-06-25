@@ -3,37 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { footerNavItems } from "../data";
+import { getDictionary } from "../data/dictionaries";
 import { getLocaleFromPath, localizeHref } from "../lib/i18n";
 import { SocialLinks } from "./SocialLinks";
 
 export function Footer() {
   const locale = getLocaleFromPath(usePathname());
+  const dictionary = getDictionary(locale);
   const serviceLinks = ["Versand", "Retouren", "Authentifizierung", "Pflegehinweise"];
   const tradeLinks = ["Projektanfragen", "Private Beschaffung", "Atelier-Anfragen", "Arbeit einreichen", "Kontakt"];
-  const englishFooterLabels: Record<string, string> = {
-    Shop: "Shop",
-    Kunst: "Art",
-    Kollektionen: "Collections",
-    "Marken & Ateliers": "Brands & Ateliers",
-    Künstler: "Artists",
-    Materialien: "Materials",
-    Journal: "Journal",
-    "Commissions & Collaborations": "Commissions & Collaborations",
-    Ateliers: "Ateliers",
-    "Arbeit einreichen": "Submit Work",
-    Versand: "Shipping",
-    Retouren: "Returns",
-    Authentifizierung: "Authentication",
-    Pflegehinweise: "Care Notes",
-    Projektanfragen: "Project Inquiries",
-    "Private Beschaffung": "Private Sourcing",
-    "Atelier-Anfragen": "Atelier Inquiries",
-    Kontakt: "Contact",
-  };
   const legalLinks = [
-    { deLabel: "Impressum", enLabel: "Legal Notice", href: "/impressum" },
-    { deLabel: "Datenschutz", enLabel: "Privacy Policy", href: "/datenschutz" },
-    { deLabel: "AGB", enLabel: "Terms & Conditions", href: "/agb" },
+    { label: dictionary.footer.legal.imprint, href: "/impressum" },
+    { label: dictionary.footer.legal.privacy, href: "/datenschutz" },
+    { label: dictionary.footer.legal.terms, href: "/agb" },
   ];
 
   return (
@@ -42,41 +24,39 @@ export function Footer() {
         <div>
           <p className="serif text-2xl tracking-[0.08em]">GETYOUR.DESIGN</p>
           <p className="mt-6 max-w-sm text-sm leading-7 text-[#4b5356]">
-            {locale === "en"
-              ? "Contemporary design, art, objects, lighting, rugs and editions by selected artists, ateliers and makers."
-              : "Contemporary Design, Kunst, Objekte, Leuchten, Teppiche und Editionen ausgewählter Künstler, Ateliers und Hersteller."}
+            {dictionary.footer.description}
           </p>
         </div>
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">{locale === "en" ? "Shop" : "Shop"}</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">{dictionary.footer.shopHeading}</p>
           <div className="mt-5 grid gap-3 text-sm text-[#37332e]">
             {footerNavItems.map((item) => (
               <Link className="hover:text-black" href={localizeHref(item.href, locale)} key={item.href}>
-                {locale === "en" ? englishFooterLabels[item.label] ?? item.label : item.label}
+                {dictionary.footer.labels[item.label] ?? item.label}
               </Link>
             ))}
           </div>
         </div>
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">Service</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">{dictionary.footer.serviceHeading}</p>
           <div className="mt-5 grid gap-3 text-sm text-[#37332e]">
             {serviceLinks.map((item) => (
               <Link className="hover:text-black" href={localizeHref("/trade", locale)} key={item}>
-                {locale === "en" ? englishFooterLabels[item] ?? item : item}
+                {dictionary.footer.labels[item] ?? item}
               </Link>
             ))}
           </div>
         </div>
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">Commissions & Collaborations</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">{dictionary.footer.tradeHeading}</p>
           <div className="mt-5 grid gap-3 text-sm text-[#37332e]">
             {tradeLinks.map((item) => (
               <Link className="hover:text-black" href={localizeHref(item === "Arbeit einreichen" ? "/arbeit-einreichen" : "/trade", locale)} key={item}>
-                {locale === "en" ? englishFooterLabels[item] ?? item : item}
+                {dictionary.footer.labels[item] ?? item}
               </Link>
             ))}
           </div>
-          <p className="mt-8 text-xs uppercase tracking-[0.2em] text-[#667174]">Social</p>
+          <p className="mt-8 text-xs uppercase tracking-[0.2em] text-[#667174]">{dictionary.footer.socialHeading}</p>
           <SocialLinks className="mt-5 flex flex-wrap gap-3 text-sm text-[#37332e]" />
         </div>
       </div>
@@ -85,7 +65,7 @@ export function Footer() {
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           {legalLinks.map((item) => (
             <Link className="hover:text-black" href={localizeHref(item.href, locale)} key={item.href}>
-              {locale === "en" ? item.enLabel : item.deLabel}
+              {item.label}
             </Link>
           ))}
         </div>

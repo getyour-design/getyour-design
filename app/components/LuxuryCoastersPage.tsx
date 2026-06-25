@@ -117,7 +117,7 @@ function ImageSlot({
 }
 
 export function LuxuryCoastersPage({ locale }: LuxuryCoastersPageProps) {
-  const content = copy[locale];
+  const content = copy[locale === "de" ? "de" : "en"];
 
   return (
     <main className="bg-[#f3f2ef] text-[#10100f]">
@@ -253,4 +253,3 @@ export function LuxuryCoastersPage({ locale }: LuxuryCoastersPageProps) {
     </main>
   );
 }
-

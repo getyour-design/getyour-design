@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
+import { getDictionary } from "../data/dictionaries";
 import { getLocaleFromPath } from "../lib/i18n";
 
 type EntityActionsProps = {
@@ -48,6 +49,7 @@ function writeSavedEntities(items: SavedEntity[]) {
 export function EntityActions({ id, title, type, href }: EntityActionsProps) {
   const [isSaved, setIsSaved] = useState(false);
   const locale = getLocaleFromPath(usePathname());
+  const dictionary = getDictionary(locale);
   const absoluteUrl = useMemo(() => {
     if (typeof window === "undefined") {
       return href;
@@ -104,14 +106,14 @@ export function EntityActions({ id, title, type, href }: EntityActionsProps) {
         onClick={toggleSaved}
         type="button"
       >
-        {isSaved ? (locale === "en" ? "Saved" : "Gemerkt") : locale === "en" ? "Save" : "Merken"}
+        {isSaved ? dictionary.ui.saved : dictionary.ui.save}
       </button>
       <button
         className="border hairline bg-[#f7f7f5] px-4 py-3 transition hover:bg-[#f8f8f6] hover:text-black"
         onClick={shareEntity}
         type="button"
       >
-        {locale === "en" ? "Share" : "Teilen"}
+        {dictionary.ui.share}
       </button>
     </div>
   );

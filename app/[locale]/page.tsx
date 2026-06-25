@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Home from "../page";
+import { LocalizedHomePage } from "../components/LocalizedHomePage";
+import { getDictionary } from "../data/dictionaries";
 import { artworks } from "../data/artworks";
 import { collections } from "../data/collections";
 import { materialCards } from "../data/materials";
 import { products } from "../data/products";
 import { stories } from "../data/stories";
-import { getAlternateLanguages, getShopPath, isLocale, localizedRoutes, type Locale } from "../lib/i18n";
+import { getAlternateLanguages, getShopPath, isLocale, localizedRoutes, locales, type Locale } from "../lib/i18n";
 import { getEnglishProductTitle } from "../lib/productTitles";
 
 type LocalizedHomeProps = {
@@ -15,7 +17,7 @@ type LocalizedHomeProps = {
 };
 
 export function generateStaticParams() {
-  return [{ locale: "de" }, { locale: "en" }];
+  return locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({ params }: LocalizedHomeProps): Promise<Metadata> {
@@ -25,12 +27,11 @@ export async function generateMetadata({ params }: LocalizedHomeProps): Promise<
     return {};
   }
 
+  const dictionary = getDictionary(locale);
+
   return {
-    title: locale === "en" ? "Curated Design, Art and Objects" : undefined,
-    description:
-      locale === "en"
-        ? "GETYOUR.DESIGN is a curated platform for contemporary design, art, objects, lighting, rugs and editions."
-        : undefined,
+    title: dictionary.metadata.title,
+    description: dictionary.metadata.description,
     alternates: {
       canonical: localizedRoutes.home[locale],
       languages: getAlternateLanguages("home"),
@@ -45,11 +46,11 @@ export default async function LocalizedHome({ params }: LocalizedHomeProps) {
     notFound();
   }
 
-  if (locale === "en") {
-    return <EnglishHome />;
+  if (locale === "de") {
+    return <Home />;
   }
 
-  return <Home />;
+  return <LocalizedHomePage locale={locale} />;
 }
 
 const englishShopHubLinks = [

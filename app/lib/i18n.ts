@@ -1,4 +1,4 @@
-export const locales = ["de", "en"] as const;
+export const locales = ["de", "en", "fr", "es", "zh", "ar"] as const;
 
 export type Locale = (typeof locales)[number];
 
@@ -25,28 +25,46 @@ export type RouteKey =
   | "trade"
   | "warenkorb";
 
+function localizedPath(dePath: string, internationalPath: string): Record<Locale, string> {
+  return {
+    de: dePath,
+    en: `/en${internationalPath}`,
+    fr: `/fr${internationalPath}`,
+    es: `/es${internationalPath}`,
+    zh: `/zh${internationalPath}`,
+    ar: `/ar${internationalPath}`,
+  };
+}
+
 export const localizedRoutes: Record<RouteKey, Record<Locale, string>> = {
-  home: { de: "/de", en: "/en" },
-  agb: { de: "/de/agb", en: "/en/terms-and-conditions" },
-  "arbeit-einreichen": { de: "/de/arbeit-einreichen", en: "/en/submit-work" },
-  art: { de: "/de/kunst", en: "/en/art" },
-  artists: { de: "/de/kuenstler", en: "/en/artists" },
-  ateliers: { de: "/de/ateliers", en: "/en/ateliers" },
-  brands: { de: "/de/marken", en: "/en/brands" },
-  collections: { de: "/de/kollektionen", en: "/en/collections" },
-  contact: { de: "/de/kontakt", en: "/en/contact" },
-  datenschutz: { de: "/de/datenschutz", en: "/en/privacy-policy" },
-  gallery: { de: "/de/galerie", en: "/en/gallery" },
-  impressum: { de: "/de/impressum", en: "/en/legal-notice" },
-  journal: { de: "/de/journal", en: "/en/journal" },
-  "luxury-coasters": { de: "/de/luxus-untersetzer", en: "/en/luxury-coasters" },
-  materials: { de: "/de/materialien", en: "/en/materials" },
-  objects: { de: "/de/objekte", en: "/en/objects" },
-  "sculptural-seating": { de: "/de/sculptural-seating", en: "/en/sculptural-seating" },
-  shop: { de: "/de/shop", en: "/en/shop" },
-  suche: { de: "/de/suche", en: "/en/search" },
-  trade: { de: "/de/projekte", en: "/en/trade" },
-  warenkorb: { de: "/de/warenkorb", en: "/en/cart" },
+  home: {
+    de: "/de",
+    en: "/en",
+    fr: "/fr",
+    es: "/es",
+    zh: "/zh",
+    ar: "/ar",
+  },
+  agb: localizedPath("/de/agb", "/terms-and-conditions"),
+  "arbeit-einreichen": localizedPath("/de/arbeit-einreichen", "/submit-work"),
+  art: localizedPath("/de/kunst", "/art"),
+  artists: localizedPath("/de/kuenstler", "/artists"),
+  ateliers: localizedPath("/de/ateliers", "/ateliers"),
+  brands: localizedPath("/de/marken", "/brands"),
+  collections: localizedPath("/de/kollektionen", "/collections"),
+  contact: localizedPath("/de/kontakt", "/contact"),
+  datenschutz: localizedPath("/de/datenschutz", "/privacy-policy"),
+  gallery: localizedPath("/de/galerie", "/gallery"),
+  impressum: localizedPath("/de/impressum", "/legal-notice"),
+  journal: localizedPath("/de/journal", "/journal"),
+  "luxury-coasters": localizedPath("/de/luxus-untersetzer", "/luxury-coasters"),
+  materials: localizedPath("/de/materialien", "/materials"),
+  objects: localizedPath("/de/objekte", "/objects"),
+  "sculptural-seating": localizedPath("/de/sculptural-seating", "/sculptural-seating"),
+  shop: localizedPath("/de/shop", "/shop"),
+  suche: localizedPath("/de/suche", "/search"),
+  trade: localizedPath("/de/projekte", "/trade"),
+  warenkorb: localizedPath("/de/warenkorb", "/cart"),
 };
 
 export const rootRedirects: Record<string, string> = {
@@ -76,8 +94,9 @@ export const rootRedirects: Record<string, string> = {
 
 export const localizedPathToRouteKey = Object.entries(localizedRoutes).reduce(
   (routes, [key, paths]) => {
-    routes[paths.de.replace(/^\/(de|en)\//, "") || ""] = key as RouteKey;
-    routes[paths.en.replace(/^\/(de|en)\//, "") || ""] = key as RouteKey;
+    locales.forEach((locale) => {
+      routes[paths[locale].replace(/^\/(de|en|fr|es|zh|ar)\/?/, "") || ""] = key as RouteKey;
+    });
     return routes;
   },
   {} as Record<string, RouteKey>,
@@ -89,8 +108,9 @@ export function isLocale(value: string): value is Locale {
 
 export function getAlternateLanguages(routeKey: RouteKey, suffix = "") {
   return {
-    de: `${localizedRoutes[routeKey].de}${suffix}`,
-    en: `${localizedRoutes[routeKey].en}${suffix}`,
+    ...Object.fromEntries(
+      locales.map((locale) => [locale, `${localizedRoutes[routeKey][locale]}${suffix}`]),
+    ),
     "x-default": `${localizedRoutes[routeKey].de}${suffix}`,
   };
 }
@@ -110,7 +130,7 @@ export const legacyEnglishShopCategorySlugs = Object.fromEntries(
 ) as Record<string, string>;
 
 export function getLocalizedShopSlug(locale: Locale, slug: string) {
-  if (locale === "en") {
+  if (locale !== "de") {
     return englishShopCategorySlugs[slug] ?? slug;
   }
 
@@ -118,7 +138,7 @@ export function getLocalizedShopSlug(locale: Locale, slug: string) {
 }
 
 export function resolveShopSlug(locale: Locale, slug: string) {
-  if (locale === "en") {
+  if (locale !== "de") {
     return legacyEnglishShopCategorySlugs[slug] ?? slug;
   }
 
@@ -157,18 +177,20 @@ export function getLocaleFromPath(pathname: string): Locale {
 }
 
 export function getLanguageSwitchPath(pathname: string, targetLocale: Locale) {
-  if (pathname.startsWith("/de/shop/") || pathname.startsWith("/en/shop/")) {
+  const localeShopPattern = new RegExp(`^/(${locales.join("|")})/shop/`);
+
+  if (localeShopPattern.test(pathname)) {
     const currentLocale = getLocaleFromPath(pathname);
     const slug = resolveShopSlug(currentLocale, pathname.split("/").slice(3).join("/"));
     return getShopPath(targetLocale, slug);
   }
 
-  if (pathname === "/de" || pathname === "/en" || pathname === "/") {
+  if (locales.some((locale) => pathname === `/${locale}`) || pathname === "/") {
     return localizedRoutes.home[targetLocale];
   }
 
   for (const paths of Object.values(localizedRoutes)) {
-    if (pathname === paths.de || pathname === paths.en) {
+    if (locales.some((locale) => pathname === paths[locale])) {
       return paths[targetLocale];
     }
   }

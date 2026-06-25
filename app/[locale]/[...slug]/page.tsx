@@ -26,6 +26,7 @@ import { PageHero } from "../../components/PageHero";
 import { PlaceholderArtwork } from "../../components/PlaceholderArtwork";
 import { EntityActions } from "../../components/EntityActions";
 import { LuxuryCoastersPage } from "../../components/LuxuryCoastersPage";
+import { getDictionary } from "../../data/dictionaries";
 import { products, shopCategories } from "../../data/products";
 import { collections } from "../../data/collections";
 import { artworks } from "../../data/artworks";
@@ -39,6 +40,7 @@ import {
   isLocale,
   localizedPathToRouteKey,
   localizedRoutes,
+  locales,
   resolveShopSlug,
   type Locale,
   type RouteKey,
@@ -127,12 +129,12 @@ export function generateStaticParams() {
       return [];
     }
 
-    return (["de", "en"] as Locale[]).map((locale) => ({
+    return locales.map((locale) => ({
       locale,
       slug: paths[locale].replace(`/${locale}/`, "").split("/").filter(Boolean),
     }));
   });
-  const localizedShopRoutes = (["de", "en"] as Locale[]).flatMap((locale) => [
+  const localizedShopRoutes = locales.flatMap((locale) => [
     ...shopCategories.map((category) => ({
       locale,
       slug: ["shop", getLocalizedShopSlug(locale, category.slug)],
@@ -162,14 +164,15 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
   if (route.kind === "shopItem") {
     const product = products.find((item) => item.slug === route.slug);
     const category = shopCategories.find((item) => item.slug === route.slug);
-    const title = product ? (locale === "en" ? getEnglishProductTitle(product.title) : product.title) : (locale === "en" && category ? getCategoryLabel(category.title) : category?.title) ?? "Shop";
+    const dictionary = getDictionary(locale);
+    const title = product
+      ? getLocalizedProductTitle(locale, product.title, products.findIndex((item) => item.slug === product.slug))
+      : category
+        ? dictionary.shop.categories[category.title] ?? category.title
+        : dictionary.shop.title;
     const description = product
-      ? locale === "en"
-        ? `${getEnglishProductTitle(product.title)} at GETYOUR.DESIGN: ${getCategoryLabel(product.category)}, ${product.material}, ${product.price}.`
-        : `${product.title} bei GETYOUR.DESIGN: ${product.category}, ${product.material}, ${product.price}.`
-      : locale === "en"
-        ? `${title} at GETYOUR.DESIGN.`
-        : `${title} bei GETYOUR.DESIGN entdecken.`;
+      ? `${title} | GETYOUR.DESIGN: ${dictionary.shop.categories[product.category] ?? product.category}, ${product.material}, ${product.price}.`
+      : `${title} | GETYOUR.DESIGN.`;
 
     return {
       title,
@@ -182,22 +185,30 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
       alternates: {
         canonical: getShopPath(locale, route.slug),
         languages: {
-          de: getShopPath("de", route.slug),
-          en: getShopPath("en", route.slug),
+          ...Object.fromEntries(locales.map((targetLocale) => [
+            targetLocale,
+            getShopPath(targetLocale, route.slug),
+          ])),
           "x-default": getShopPath("de", route.slug),
         },
       },
     };
   }
 
+  const dictionary = getDictionary(locale);
+
   return {
-    title: locale === "en" ? englishTitles[route.key] ?? titles[route.key] : titles[route.key],
-    description: locale === "en" ? englishDescriptions[route.key] : undefined,
-    openGraph: locale === "en" ? {
-      title: englishTitles[route.key] ?? titles[route.key],
-      description: englishDescriptions[route.key],
-      url: localizedRoutes[route.key][locale],
+    title: locale === "de" ? titles[route.key] : englishTitles[route.key] ?? dictionary.metadata.title,
+    description: locale === "de" ? undefined : englishDescriptions[route.key] ?? dictionary.metadata.description,
+    robots: route.key === "warenkorb" ? {
+      index: false,
+      follow: false,
     } : undefined,
+    openGraph: locale === "de" ? undefined : {
+      title: englishTitles[route.key] ?? dictionary.metadata.title,
+      description: englishDescriptions[route.key] ?? dictionary.metadata.description,
+      url: localizedRoutes[route.key][locale],
+    },
     alternates: {
       canonical: localizedRoutes[route.key][locale],
       languages: getAlternateLanguages(route.key),
@@ -219,15 +230,15 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
   }
 
   if (route.kind === "shopItem") {
-    if (locale === "en") {
-      return <EnglishShopSlugPage slug={route.slug} />;
-    }
-
-    return <ShopSlugPage params={Promise.resolve({ slug: route.slug })} />;
+    return locale === "de"
+      ? <ShopSlugPage params={Promise.resolve({ slug: route.slug })} />
+      : <LocalizedShopSlugPage locale={locale} slug={route.slug} />;
   }
 
   if (route.key === "luxury-coasters") {
-    return <LuxuryCoastersPage locale={locale} />;
+    return locale === "de" || locale === "en"
+      ? <LuxuryCoastersPage locale={locale} />
+      : <LocalizedStaticPlaceholder locale={locale} routeKey={route.key} />;
   }
 
   if (locale === "en" && ["agb", "datenschutz", "impressum"].includes(route.key)) {
@@ -236,6 +247,10 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
 
   if (locale === "en") {
     return <EnglishStaticPage routeKey={route.key} />;
+  }
+
+  if (locale !== "de") {
+    return <LocalizedStaticPlaceholder locale={locale} routeKey={route.key} />;
   }
 
   const Component = pageComponents[route.key];
@@ -308,6 +323,295 @@ const ctaLabels: Record<string, string> = {
 
 function getCategoryLabel(value: string) {
   return categoryLabels[value] ?? value;
+}
+
+function getLocalizedCategoryLabel(locale: Locale, value: string) {
+  return getDictionary(locale).shop.categories[value] ?? getCategoryLabel(value);
+}
+
+function getLocalizedProductTitle(locale: Locale, title: string, index: number) {
+  if (locale === "de") {
+    return title;
+  }
+
+  if (locale === "en") {
+    return getEnglishProductTitle(title);
+  }
+
+  return `${getDictionary(locale).shop.genericProductTitle} ${String(index + 1).padStart(2, "0")}`;
+}
+
+function getLocalizedCta(locale: Locale, status: string) {
+  const dictionary = getDictionary(locale);
+
+  switch (status) {
+    case "sofort-kaufen":
+      return { label: dictionary.shop.cta["In den Warenkorb"], href: getShopPath(locale).replace(/\/shop$/, locale === "de" ? "/warenkorb" : "/cart"), disabled: false };
+    case "anfragen":
+      return { label: dictionary.shop.cta["Anfrage senden"], href: localizedRoutes.contact[locale], disabled: false };
+    case "preis-auf-anfrage":
+      return { label: dictionary.shop.cta["Preis anfragen"], href: localizedRoutes.contact[locale], disabled: false };
+    case "reserviert":
+      return { label: dictionary.shop.cta.Reserviert, href: localizedRoutes.contact[locale], disabled: true };
+    case "verkauft":
+      return { label: dictionary.shop.cta.Verkauft, href: localizedRoutes.contact[locale], disabled: true };
+    default:
+      return { label: dictionary.shop.cta["Anfrage senden"], href: localizedRoutes.contact[locale], disabled: false };
+  }
+}
+
+function LocalizedStaticPlaceholder({ locale, routeKey }: { locale: Locale; routeKey: RouteKey }) {
+  if (routeKey === "shop") {
+    return <LocalizedShopPage locale={locale} />;
+  }
+
+  if (routeKey === "journal") {
+    return <LocalizedJournalPage locale={locale} />;
+  }
+
+  if (routeKey === "warenkorb") {
+    return <LocalizedCartPage locale={locale} />;
+  }
+
+  const dictionary = getDictionary(locale);
+  const title = englishTitles[routeKey] ?? titles[routeKey];
+  const description = englishDescriptions[routeKey] ?? dictionary.metadata.description;
+
+  return (
+    <main>
+      <PageHero eyebrow="GETYOUR.DESIGN" title={title} description={description} />
+      <section className="section-pad bg-[#f3f2ef]">
+        <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {dictionary.home.areas.slice(0, 3).map((item) => (
+            <Link
+              className="grid min-h-56 content-between border hairline bg-[#f7f7f5] p-6 transition hover:bg-[#f8f8f6]"
+              href={localizedRoutes.shop[locale]}
+              key={item.title}
+            >
+              <h2 className="serif text-xl leading-snug tracking-[0.08em]">{item.title}</h2>
+              <p className="text-sm leading-7 text-[#4b5356]">{item.text}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function LocalizedShopPage({ locale }: { locale: Locale }) {
+  const dictionary = getDictionary(locale);
+
+  return (
+    <main>
+      <PageHero
+        eyebrow={dictionary.shop.title}
+        title={dictionary.home.newArrivalsTitle}
+        description={dictionary.shop.description}
+      />
+      <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
+        <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
+          {shopCategories.map((area) => (
+            <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath(locale, area.slug)} key={area.slug}>
+              {getLocalizedCategoryLabel(locale, area.title)}
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="section-pad bg-[#f3f2ef]">
+        <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product, index) => (
+            <article className="group" key={product.slug}>
+              <Link href={getShopPath(locale, product.slug)}>
+                <PlaceholderArtwork index={index} palette={product.palette} />
+              </Link>
+              <div className="mt-5 flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getLocalizedCategoryLabel(locale, product.category)}</p>
+                  <Link href={getShopPath(locale, product.slug)}>
+                    <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getLocalizedProductTitle(locale, product.title, index)}</h2>
+                  </Link>
+                  <p className="mt-2 text-sm text-[#4b5356]">{product.maker.replace("Künstlerposition", "Artist Position")}</p>
+                  <EntityActions
+                    href={getShopPath(locale, product.slug)}
+                    id={`product:${product.slug}`}
+                    title={getLocalizedProductTitle(locale, product.title, index)}
+                    type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
+                  />
+                </div>
+                <p className="shrink-0 text-sm text-[#353b3e]">{product.price}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string }) {
+  const dictionary = getDictionary(locale);
+  const product = products.find((item) => item.slug === slug);
+  const category = shopCategories.find((item) => item.slug === slug);
+
+  if (product) {
+    const productIndex = products.findIndex((item) => item.slug === product.slug);
+    const productCategory = shopCategories.find((item) => item.title === product.category);
+    const categoryHref = productCategory ? getShopPath(locale, productCategory.slug) : localizedRoutes.shop[locale];
+    const cta = getLocalizedCta(locale, product.status);
+    const productTitle = getLocalizedProductTitle(locale, product.title, productIndex);
+
+    return (
+      <main>
+        <section className="section-pad bg-[#f3f2ef]">
+          <div className="mx-auto grid max-w-[1540px] gap-10 lg:grid-cols-[0.55fr_0.45fr] lg:items-start">
+            <PlaceholderArtwork index={productIndex} palette={product.palette} />
+            <div>
+              <Link className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]" href={categoryHref}>
+                {dictionary.shop.backToCategory} {getLocalizedCategoryLabel(locale, product.category)}
+              </Link>
+              <p className="mt-6 text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">
+                {dictionary.shop.breadcrumbShop} / {getLocalizedCategoryLabel(locale, product.category)} / {productTitle}
+              </p>
+              <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
+                {productTitle}
+              </h1>
+              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 border-y border-black/15 py-5 text-sm text-[#353b3e]">
+                <p>{product.price}</p>
+                <p>{dictionary.shop.availability[product.availability] ?? product.availability}</p>
+              </div>
+              <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{dictionary.shop.productDescription}</p>
+              <EntityActions
+                href={getShopPath(locale, product.slug)}
+                id={`product:${product.slug}`}
+                title={productTitle}
+                type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
+              />
+              <dl className="mt-10 grid gap-5 border-t border-black/15 pt-6 text-sm md:grid-cols-2">
+                <div>
+                  <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.dimensions}</dt>
+                  <dd className="mt-2 text-[#353b3e]">{product.dimensions}</dd>
+                </div>
+                <div>
+                  <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.material}</dt>
+                  <dd className="mt-2 text-[#353b3e]">{product.material}</dd>
+                </div>
+                <div>
+                  <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.origin}</dt>
+                  <dd className="mt-2 text-[#353b3e]">{product.origin.replace("Künstlerposition", "Artist Position")}</dd>
+                </div>
+              </dl>
+              {cta.disabled ? (
+                <button className="mt-10 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>
+                  {cta.label}
+                </button>
+              ) : (
+                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={cta.href}>
+                  {cta.label}
+                </Link>
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  if (category) {
+    const categoryProducts = products.filter(
+      (item) =>
+        item.category === category.title ||
+        item.secondaryCategories?.includes(category.title),
+    );
+    const categoryTitle = getLocalizedCategoryLabel(locale, category.title);
+
+    return (
+      <main>
+        <section className="border-b hairline bg-[#f3f2ef] px-5 py-14 lg:px-10 lg:py-20">
+          <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.9fr_0.75fr] lg:items-end">
+            <div>
+              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#667174]">{dictionary.shop.breadcrumbShop} / {categoryTitle}</p>
+              <Link className="mt-5 inline-block text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]" href={localizedRoutes.shop[locale]}>
+                {dictionary.shop.backToShop}
+              </Link>
+              <h1 className="serif mt-5 max-w-5xl text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
+                {categoryTitle}
+              </h1>
+              <p className="mt-5 text-sm uppercase tracking-[0.2em] text-[#667174]">
+                {categoryProducts.length} {dictionary.shop.works}
+              </p>
+            </div>
+            <p className="max-w-xl text-base leading-8 text-[#4b5356]">{dictionary.shop.categoryDescriptions[category.title] ?? dictionary.shop.description}</p>
+          </div>
+        </section>
+        <section className="section-pad bg-[#f3f2ef]">
+          <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {categoryProducts.map((item) => {
+              const index = products.findIndex((productItem) => productItem.slug === item.slug);
+
+              return (
+                <article className="group" key={item.slug}>
+                  <Link href={getShopPath(locale, item.slug)}>
+                    <PlaceholderArtwork index={index} palette={item.palette} />
+                  </Link>
+                  <div className="mt-5 flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getLocalizedCategoryLabel(locale, item.category)}</p>
+                      <Link href={getShopPath(locale, item.slug)}>
+                        <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getLocalizedProductTitle(locale, item.title, index)}</h2>
+                      </Link>
+                      <p className="mt-2 text-sm text-[#4b5356]">{item.maker.replace("Künstlerposition", "Artist Position")}</p>
+                    </div>
+                    <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  notFound();
+}
+
+function LocalizedJournalPage({ locale }: { locale: Locale }) {
+  const dictionary = getDictionary(locale);
+
+  return (
+    <main>
+      <PageHero eyebrow={dictionary.journal.eyebrow} title={dictionary.journal.title} description={dictionary.journal.description} />
+      <section className="section-pad bg-[#f3f2ef]">
+        <div className="mx-auto grid max-w-[1540px] gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {stories.map((story, index) => (
+            <article className="grid min-h-80 content-between border hairline bg-[#f7f7f5] p-6" key={story.title}>
+              <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.journal.categories[index] ?? dictionary.journal.eyebrow}</p>
+              <div>
+                <h2 className="serif text-2xl leading-snug tracking-[0.08em]">{dictionary.journal.titles[index] ?? story.title}</h2>
+                <p className="mt-5 text-sm leading-7 text-[#4b5356]">{dictionary.journal.teasers[index] ?? dictionary.journal.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function LocalizedCartPage({ locale }: { locale: Locale }) {
+  const dictionary = getDictionary(locale);
+
+  return (
+    <main className="section-pad bg-[#f3f2ef]">
+      <div className="mx-auto grid max-w-[1540px] gap-10 lg:grid-cols-[0.38fr_0.62fr]">
+        <div>
+          <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{dictionary.nav.cart}</p>
+          <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">{dictionary.nav.cart}</h1>
+          <p className="mt-6 max-w-md text-sm leading-7 text-[#4b5356]">{dictionary.shop.productDescription}</p>
+        </div>
+      </div>
+    </main>
+  );
 }
 
 function EnglishStaticPage({ routeKey }: { routeKey: RouteKey }) {
