@@ -196,17 +196,18 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
   }
 
   const dictionary = getDictionary(locale);
+  const page = dictionary.pages[route.key];
 
   return {
-    title: locale === "de" ? titles[route.key] : englishTitles[route.key] ?? dictionary.metadata.title,
-    description: locale === "de" ? undefined : englishDescriptions[route.key] ?? dictionary.metadata.description,
+    title: page?.title ?? (locale === "de" ? titles[route.key] : englishTitles[route.key] ?? dictionary.metadata.title),
+    description: page?.description ?? (locale === "de" ? undefined : englishDescriptions[route.key] ?? dictionary.metadata.description),
     robots: route.key === "warenkorb" ? {
       index: false,
       follow: false,
     } : undefined,
     openGraph: locale === "de" ? undefined : {
-      title: englishTitles[route.key] ?? dictionary.metadata.title,
-      description: englishDescriptions[route.key] ?? dictionary.metadata.description,
+      title: page?.title ?? englishTitles[route.key] ?? dictionary.metadata.title,
+      description: page?.description ?? englishDescriptions[route.key] ?? dictionary.metadata.description,
       url: localizedRoutes[route.key][locale],
     },
     alternates: {
@@ -283,46 +284,8 @@ function getRoute(locale: Locale, slug: string[]) {
   return { kind: "static" as const, key: routeKey };
 }
 
-const categoryLabels: Record<string, string> = {
-  Möbel: "Furniture",
-  Leuchten: "Lighting",
-  Kunst: "Artworks",
-  Teppiche: "Rugs",
-  Objekte: "Objects",
-  Tabletop: "Accessories",
-  "Collectible Design": "Collectible Design",
-  Editionen: "Editions",
-};
-
-const categoryDescriptionsEn: Record<string, string> = {
-  Kunst: "Selected artworks, editions and collectable pieces by artists and ateliers.",
-  Möbel: "Furniture with architectural clarity, lasting materials and quiet presence.",
-  Leuchten: "Lighting as functional objects with sculptural presence.",
-  Objekte: "Objects, editions and collectable pieces for distinctive rooms.",
-  Tabletop: "Smaller accessories and functional objects for tables, shelves and ensembles.",
-  Teppiche: "Rugs and textile works with character, structure and provenance.",
-  Editionen: "Limited editions and selected works in small runs.",
-  "Collectible Design": "Collectible design between function, craft and art.",
-};
-
-const availabilityLabels: Record<string, string> = {
-  Verfügbar: "Available",
-  "Auf Anfrage verfügbar": "Available on request",
-  "Preis auf Anfrage": "Price on request",
-  Reserviert: "Reserved",
-  Verkauft: "Sold",
-};
-
-const ctaLabels: Record<string, string> = {
-  "In den Warenkorb": "Add to cart",
-  "Anfrage senden": "Send inquiry",
-  "Preis anfragen": "Request price",
-  Reserviert: "Reserved",
-  Verkauft: "Sold",
-};
-
 function getCategoryLabel(value: string) {
-  return categoryLabels[value] ?? value;
+  return getDictionary("en").shop.categories[value] ?? value;
 }
 
 function getLocalizedCategoryLabel(locale: Locale, value: string) {
@@ -369,17 +332,23 @@ function LocalizedStaticPlaceholder({ locale, routeKey }: { locale: Locale; rout
     return <LocalizedJournalPage locale={locale} />;
   }
 
+  if (routeKey === "collections") {
+    return <LocalizedCollectionsPage locale={locale} />;
+  }
+
   if (routeKey === "warenkorb") {
     return <LocalizedCartPage locale={locale} />;
   }
 
   const dictionary = getDictionary(locale);
-  const title = englishTitles[routeKey] ?? titles[routeKey];
-  const description = englishDescriptions[routeKey] ?? dictionary.metadata.description;
+  const page = dictionary.pages[routeKey] ?? {
+    title: englishTitles[routeKey] ?? titles[routeKey],
+    description: englishDescriptions[routeKey] ?? dictionary.metadata.description,
+  };
 
   return (
     <main>
-      <PageHero eyebrow="GETYOUR.DESIGN" title={title} description={description} />
+      <PageHero eyebrow="GETYOUR.DESIGN" title={page.title} description={page.description} />
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2 lg:grid-cols-3">
           {dictionary.home.areas.slice(0, 3).map((item) => (
@@ -405,7 +374,7 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
     <main>
       <PageHero
         eyebrow={dictionary.shop.title}
-        title={dictionary.home.newArrivalsTitle}
+        title={dictionary.shop.headline}
         description={dictionary.shop.description}
       />
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
@@ -598,6 +567,35 @@ function LocalizedJournalPage({ locale }: { locale: Locale }) {
   );
 }
 
+function LocalizedCollectionsPage({ locale }: { locale: Locale }) {
+  const dictionary = getDictionary(locale);
+  const page = dictionary.pages.collections;
+
+  return (
+    <main>
+      <PageHero eyebrow={page.title} title={page.title} description={page.description} />
+      <section className="section-pad bg-[#f3f2ef]">
+        <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {collections.map((collection, index) => {
+            const localizedCollection = dictionary.collections[collection.key] ?? collection;
+
+            return (
+              <article className="grid min-h-96 content-between border hairline bg-[#f7f7f5] p-6" key={collection.key}>
+                <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
+                <div>
+                  <div className={`mb-7 h-36 ${index % 3 === 0 ? "bg-[#11100f]" : index % 3 === 1 ? "bg-[#c7beb1]" : "bg-[#e8e1d6]"}`} />
+                  <h2 className="serif text-2xl leading-snug tracking-[0.08em]">{localizedCollection.title}</h2>
+                  <p className="mt-4 text-sm leading-7 text-[#4b5356]">{localizedCollection.description}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function LocalizedCartPage({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
 
@@ -616,7 +614,7 @@ function LocalizedCartPage({ locale }: { locale: Locale }) {
 
 function EnglishStaticPage({ routeKey }: { routeKey: RouteKey }) {
   if (routeKey === "shop") {
-    return <EnglishShopPage />;
+    return <LocalizedShopPage locale="en" />;
   }
 
   if (routeKey === "art") {
@@ -624,7 +622,7 @@ function EnglishStaticPage({ routeKey }: { routeKey: RouteKey }) {
   }
 
   if (routeKey === "collections") {
-    return <EnglishCollectionsPage />;
+    return <LocalizedCollectionsPage locale="en" />;
   }
 
   if (routeKey === "ateliers") {
@@ -632,7 +630,7 @@ function EnglishStaticPage({ routeKey }: { routeKey: RouteKey }) {
   }
 
   if (routeKey === "journal") {
-    return <EnglishJournalPage />;
+    return <LocalizedJournalPage locale="en" />;
   }
 
   if (routeKey === "contact") {
@@ -644,7 +642,7 @@ function EnglishStaticPage({ routeKey }: { routeKey: RouteKey }) {
   }
 
   if (routeKey === "warenkorb") {
-    return <EnglishCartPage />;
+    return <LocalizedCartPage locale="en" />;
   }
 
   const Component = pageComponents[routeKey];
@@ -654,206 +652,6 @@ function EnglishStaticPage({ routeKey }: { routeKey: RouteKey }) {
   }
 
   return <Component />;
-}
-
-function EnglishShopPage() {
-  return (
-    <main>
-      <PageHero
-        eyebrow="Design Shop"
-        title="Furniture, lighting, art, rugs, objects and editions."
-        description="A curated selection of design furniture, artworks, lighting, rugs, accessories, collectible design, objects and editions for distinctive rooms."
-      />
-      <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
-        <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
-          {shopCategories.map((area) => (
-            <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath("en", area.slug)} key={area.slug}>
-              {getCategoryLabel(area.title)}
-            </Link>
-          ))}
-        </div>
-      </section>
-      <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product, index) => (
-            <article className="group" key={product.title}>
-              <Link href={`/en/shop/${product.slug}`}>
-                <PlaceholderArtwork index={index} palette={product.palette} />
-              </Link>
-              <div className="mt-5 flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getCategoryLabel(product.category)}</p>
-                  <Link href={`/en/shop/${product.slug}`}>
-                    <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getEnglishProductTitle(product.title)}</h2>
-                  </Link>
-                  <Link className="mt-2 inline-block text-sm text-[#4b5356] hover:text-black" href={product.maker.includes("Künstlerposition") ? "/en/artists" : "/en/brands"}>
-                    {product.maker.includes("Künstlerposition") ? product.maker.replace("Künstlerposition", "Artist Position") : product.maker}
-                  </Link>
-                  <EntityActions
-                    href={`/en/shop/${product.slug}`}
-                    id={`product:${product.slug}`}
-                    title={getEnglishProductTitle(product.title)}
-                    type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
-                  />
-                </div>
-                <p className="shrink-0 text-sm text-[#353b3e]">{product.price}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    </main>
-  );
-}
-
-function EnglishShopSlugPage({ slug }: { slug: string }) {
-  const product = products.find((item) => item.slug === slug);
-  const category = shopCategories.find((item) => item.slug === slug);
-
-  if (product) {
-    const productIndex = products.findIndex((item) => item.slug === product.slug);
-    const productCategory = shopCategories.find((item) => item.title === product.category);
-    const categoryHref = productCategory ? getShopPath("en", productCategory.slug) : "/en/shop";
-    const cta = getEnglishCta(product.status);
-
-    return (
-      <main>
-        <section className="section-pad bg-[#f3f2ef]">
-          <div className="mx-auto grid max-w-[1540px] gap-10 lg:grid-cols-[0.55fr_0.45fr] lg:items-start">
-            <PlaceholderArtwork index={productIndex} palette={product.palette} />
-            <div>
-              <Link className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]" href={categoryHref}>
-                Back to {getCategoryLabel(product.category)}
-              </Link>
-              <p className="mt-6 text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">
-                Shop / {getCategoryLabel(product.category)} / {getEnglishProductTitle(product.title)}
-              </p>
-              <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
-                {getEnglishProductTitle(product.title)}
-              </h1>
-              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 border-y border-black/15 py-5 text-sm text-[#353b3e]">
-                <p>{product.price}</p>
-                <p>{availabilityLabels[product.availability] ?? product.availability}</p>
-              </div>
-              <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">
-                A curated {getCategoryLabel(product.category).toLowerCase()} selected for its material presence, proportion and lasting room quality.
-              </p>
-              <EntityActions
-                href={`/en/shop/${product.slug}`}
-                id={`product:${product.slug}`}
-                title={getEnglishProductTitle(product.title)}
-                type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
-              />
-              <dl className="mt-10 grid gap-5 border-t border-black/15 pt-6 text-sm md:grid-cols-2">
-                <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Dimensions</dt>
-                  <dd className="mt-2 text-[#353b3e]">{product.dimensions}</dd>
-                </div>
-                <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Material</dt>
-                  <dd className="mt-2 text-[#353b3e]">{product.material}</dd>
-                </div>
-                <div>
-                  <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Origin</dt>
-                  <dd className="mt-2 text-[#353b3e]">{product.origin.replace("Künstlerposition", "Artist Position")}</dd>
-                </div>
-              </dl>
-              {cta.disabled ? (
-                <button className="mt-10 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>
-                  {cta.label}
-                </button>
-              ) : (
-                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={cta.href}>
-                  {cta.label}
-                </Link>
-              )}
-            </div>
-          </div>
-        </section>
-      </main>
-    );
-  }
-
-  if (category) {
-    const categoryProducts = products.filter(
-      (item) =>
-        item.category === category.title ||
-        item.secondaryCategories?.includes(category.title),
-    );
-    const categoryTitle = getCategoryLabel(category.title);
-
-    return (
-      <main>
-        <section className="border-b hairline bg-[#f3f2ef] px-5 py-14 lg:px-10 lg:py-20">
-          <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.9fr_0.75fr] lg:items-end">
-            <div>
-              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#667174]">Shop / {categoryTitle}</p>
-              <Link className="mt-5 inline-block text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]" href="/en/shop">
-                Back to Shop
-              </Link>
-              <h1 className="serif mt-5 max-w-5xl text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
-                {categoryTitle}
-              </h1>
-              <p className="mt-5 text-sm uppercase tracking-[0.2em] text-[#667174]">
-                {categoryProducts.length} Works
-              </p>
-            </div>
-            <p className="max-w-xl text-base leading-8 text-[#4b5356]">{categoryDescriptionsEn[category.title] ?? `${categoryTitle} at GETYOUR.DESIGN.`}</p>
-          </div>
-        </section>
-        <section className="section-pad bg-[#f3f2ef]">
-          <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {categoryProducts.map((item) => {
-              const index = products.findIndex((productItem) => productItem.slug === item.slug);
-
-              return (
-                <article className="group" key={item.slug}>
-                  <Link href={`/en/shop/${item.slug}`}>
-                    <PlaceholderArtwork index={index} palette={item.palette} />
-                  </Link>
-                  <div className="mt-5 flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getCategoryLabel(item.category)}</p>
-                      <Link href={`/en/shop/${item.slug}`}>
-                        <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getEnglishProductTitle(item.title)}</h2>
-                      </Link>
-                      <p className="mt-2 text-sm text-[#4b5356]">{item.maker.replace("Künstlerposition", "Artist Position")}</p>
-                      <EntityActions
-                        href={`/en/shop/${item.slug}`}
-                        id={`product:${item.slug}`}
-                        title={getEnglishProductTitle(item.title)}
-                        type={item.category === "Kunst" || item.category === "Editionen" ? "Kunstwerk" : item.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
-                      />
-                    </div>
-                    <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-      </main>
-    );
-  }
-
-  notFound();
-}
-
-function getEnglishCta(status: string) {
-  switch (status) {
-    case "sofort-kaufen":
-      return { label: "Add to cart", href: "/en/cart", disabled: false };
-    case "anfragen":
-      return { label: "Send inquiry", href: "/en/contact", disabled: false };
-    case "preis-auf-anfrage":
-      return { label: "Request price", href: "/en/contact", disabled: false };
-    case "reserviert":
-      return { label: "Reserved", href: "/en/contact", disabled: true };
-    case "verkauft":
-      return { label: "Sold", href: "/en/contact", disabled: true };
-    default:
-      return { label: ctaLabels[status] ?? "Send inquiry", href: "/en/contact", disabled: false };
-  }
 }
 
 function EnglishArtPage() {
@@ -879,38 +677,6 @@ function EnglishArtPage() {
     </main>
   );
 }
-
-function EnglishCollectionsPage() {
-  return (
-    <main>
-      <PageHero eyebrow="Collections" title="Curated entries into the shop." description="Collections connect furniture, artworks, objects, lighting, rugs and materials into clear object worlds." />
-      <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {collections.map((collection, index) => (
-            <article className="grid min-h-96 content-between border hairline bg-[#f7f7f5] p-6" key={collection.title}>
-              <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Collection 0{index + 1}</p>
-              <div>
-                <div className={`mb-7 h-36 ${index % 3 === 0 ? "bg-[#11100f]" : index % 3 === 1 ? "bg-[#c7beb1]" : "bg-[#e8e1d6]"}`} />
-                <h2 className="serif text-2xl leading-snug tracking-[0.08em]">{englishCollectionTitles[index] ?? collection.title}</h2>
-                <p className="mt-4 text-sm leading-7 text-[#4b5356]">{englishCollectionDescriptions[index] ?? "A curated selection for distinctive rooms and lasting objects."}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    </main>
-  );
-}
-
-const englishCollectionTitles = ["Material and Surface", "Quiet Rooms", "Collectible Design", "Editions and Artworks", "Seating and Design Furniture", "Natural Materials"];
-const englishCollectionDescriptions = [
-  "Unpolished textures, mineral tones and objects with visible material traces.",
-  "Subtle materials, balanced proportions and objects with restraint.",
-  "Limited editions and furniture with long-term value for curated rooms.",
-  "Works and objects at the intersection of art, furniture and interiors.",
-  "Chairs, lounges and sofas with strong silhouettes and room-defining presence.",
-  "Wood, wool, stone, leather, ceramic and bronze with tactile permanence.",
-];
 
 function EnglishAteliersPage() {
   return (
@@ -940,36 +706,6 @@ const englishBrandDescriptions = [
   "Limited seating objects and editions with sculptural, soft lines.",
   "Textile objects, rugs and made-to-measure pieces for considered rooms.",
   "Ceramics, vessels and small editions with craft depth.",
-];
-
-function EnglishJournalPage() {
-  return (
-    <main>
-      <PageHero eyebrow="Journal" title="Stories about rooms, objects and works with permanence." description="Essays, interviews and background stories on art, design, materials, ateliers and rooms." />
-      <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {stories.map((story, index) => (
-            <article className="grid min-h-80 content-between border hairline bg-[#f7f7f5] p-6" key={story.title}>
-              <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{englishStoryCategories[index] ?? "Journal"}</p>
-              <div>
-                <h2 className="serif text-2xl leading-snug tracking-[0.08em]">{englishStoryTitles[index] ?? story.title}</h2>
-                <p className="mt-5 text-sm leading-7 text-[#4b5356]">{englishStoryTeasers[index] ?? "A concise editorial note connected to selected works, materials and rooms."}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    </main>
-  );
-}
-
-const englishStoryCategories = ["Objects", "Materials", "Collectible Design", "Ateliers"];
-const englishStoryTitles = ["How a Single Object Shapes a Room", "Materials That Gain Over Time", "When Design Becomes Collectible", "Where Works Are Made"];
-const englishStoryTeasers = [
-  "Why a few deliberately selected works can define a room more strongly than a complete interior scheme.",
-  "On ceramic, bronze, leather, wood and natural stone, and why traces, patina and origin become part of an object.",
-  "A look at editions, unique pieces and works between function, sculpture and art.",
-  "Ateliers, makers and workshops as places of attitude, material knowledge and precise craft.",
 ];
 
 function EnglishContactPage() {
@@ -1041,24 +777,6 @@ function EnglishSearchPage() {
               <Link className="border hairline bg-[#f3f2ef] px-4 py-3 hover:text-black" href={href} key={href}>{label}</Link>
             ))}
           </div>
-        </section>
-      </div>
-    </main>
-  );
-}
-
-function EnglishCartPage() {
-  return (
-    <main className="section-pad bg-[#f3f2ef]">
-      <div className="mx-auto grid max-w-[1540px] gap-10 lg:grid-cols-[0.38fr_0.62fr]">
-        <div>
-          <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Cart</p>
-          <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">Cart</h1>
-          <p className="mt-6 max-w-md text-sm leading-7 text-[#4b5356]">Checkout is currently being prepared.</p>
-        </div>
-        <section className="border hairline bg-[#f7f7f5] p-6 lg:p-8">
-          <p className="text-sm leading-7 text-[#4b5356]">Saved checkout functionality will be connected once the live provider setup is ready.</p>
-          <button className="mt-8 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>Prepare checkout</button>
         </section>
       </div>
     </main>

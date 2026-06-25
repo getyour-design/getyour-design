@@ -232,15 +232,20 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
           </div>
           <div className="mt-8 grid gap-4 lg:grid-cols-6">
             {collections.map((item, index) => (
-              <Link className="group grid min-h-80 content-between border hairline bg-[#f7f7f5] p-5 transition hover:bg-[#f8f8f6]" href={localizedHref("/collections", locale)} key={item.title}>
+              <Link className="group grid min-h-80 content-between border hairline bg-[#f7f7f5] p-5 transition hover:bg-[#f8f8f6]" href={localizedHref("/collections", locale)} key={item.key}>
                 <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
                 <div>
                   <img
-                    alt={item.title}
+                    alt={dictionary.collections[item.key]?.title ?? item.title}
                     className="mb-6 h-32 w-full object-cover"
                     src={collectionImages[index % collectionImages.length]}
                   />
-                  <h3 className="serif text-xl leading-snug tracking-[0.08em]">{item.title}</h3>
+                  <h3 className="serif text-xl leading-snug tracking-[0.08em]">
+                    {dictionary.collections[item.key]?.title ?? item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-[#4b5356]">
+                    {dictionary.collections[item.key]?.description ?? item.description}
+                  </p>
                 </div>
               </Link>
             ))}
@@ -261,7 +266,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             {materialCards.map((material) => (
               <Link className="border hairline bg-[#f3f2ef] p-5" href={localizedHref("/materials", locale)} key={material.name}>
                 <div className={`mb-5 h-24 ${material.palette}`} />
-                <h3 className="serif text-xl tracking-[0.08em]">{material.name}</h3>
+                <h3 className="serif text-xl tracking-[0.08em]">{dictionary.home.materialLabels[material.name] ?? material.name}</h3>
               </Link>
             ))}
           </div>
