@@ -123,6 +123,8 @@ const englishDescriptions: Partial<Record<RouteKey, string>> = {
   warenkorb: "Cart at GETYOUR.DESIGN.",
 };
 
+const legalRouteKeys: RouteKey[] = ["agb", "datenschutz", "impressum"];
+
 export function generateStaticParams() {
   const localizedStaticRoutes = Object.entries(localizedRoutes).flatMap(([routeKey, paths]) => {
     if (routeKey === "home") {
@@ -242,8 +244,12 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
       : <LocalizedStaticPlaceholder locale={locale} routeKey={route.key} />;
   }
 
-  if (locale === "en" && ["agb", "datenschutz", "impressum"].includes(route.key)) {
+  if (locale === "en" && legalRouteKeys.includes(route.key)) {
     return <EnglishLegalPage routeKey={route.key} />;
+  }
+
+  if (locale !== "de" && legalRouteKeys.includes(route.key)) {
+    return <LegalPlaceholderPage locale={locale} routeKey={route.key} />;
   }
 
   if (locale === "en") {
@@ -798,12 +804,63 @@ function EnglishLegalPage({ routeKey }: { routeKey: RouteKey }) {
           <h1 className="serif mt-4 text-balance text-3xl leading-tight tracking-[0.08em] lg:text-4xl">
             {content.title}
           </h1>
+          <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
+            This English version is provided for convenience. The German version is the legally binding version. In case of discrepancies, the German version prevails.
+          </p>
         </div>
         <section className="border hairline bg-[#f7f7f5] p-6 lg:p-10">
           <p className="serif text-2xl tracking-[0.08em]">{content.heading}</p>
           <div className="mt-10 grid gap-8 text-sm leading-7 text-[#4b5356]">
             {content.sections.map((section) => (
               <section className="border-t border-black/15 pt-6" key={section.title}>
+                <h2 className="text-xs uppercase tracking-[0.2em] text-[#667174]">{section.title}</h2>
+                <div className="mt-4 grid gap-4">
+                  {section.body.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}
+
+function LegalPlaceholderPage({ locale, routeKey }: { locale: Locale; routeKey: RouteKey }) {
+  const content = englishLegalContent[routeKey];
+
+  if (!content) {
+    notFound();
+  }
+
+  return (
+    <main className="section-pad bg-[#f3f2ef]">
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p className="text-xs uppercase tracking-[0.22em] text-[#786f64]">Legal placeholder</p>
+          <h1 className="serif mt-4 text-balance text-3xl leading-tight tracking-[0.08em] lg:text-4xl">
+            {content.title}
+          </h1>
+          <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
+            Official legal version available in English. This page is a non-binding presentation placeholder and is not a legal translation for the selected language.
+          </p>
+          <Link className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href={localizedRoutes[routeKey].en}>
+            Open official English version
+          </Link>
+        </div>
+        <section className="border hairline bg-[#f7f7f5] p-6 lg:p-10" lang="en" dir="ltr">
+          <div className="border border-black/15 bg-[#e8eceb] p-5 text-sm leading-7 text-[#353b3e]">
+            <p className="text-xs uppercase tracking-[0.2em] text-[#667174]">Non-binding placeholder</p>
+            <p className="mt-3">
+              Official legal version available in English. The following content is shown in English only for presentation and orientation.
+            </p>
+          </div>
+          <p className="serif mt-8 text-2xl tracking-[0.08em]">{content.heading}</p>
+          <div className="mt-10 grid gap-8 text-sm leading-7 text-[#4b5356]">
+            {content.sections.map((section) => (
+              <section className="border-t border-black/15 pt-6" key={`${locale}-${section.title}`}>
                 <h2 className="text-xs uppercase tracking-[0.2em] text-[#667174]">{section.title}</h2>
                 <div className="mt-4 grid gap-4">
                   {section.body.map((paragraph) => (
