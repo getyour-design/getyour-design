@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductCardMedia, ProductGallery } from "../../components/ProductMedia";
 import { EntityActions } from "../../components/EntityActions";
-import { getProductCta } from "../../lib/commerce";
+import { CheckoutButton } from "../../components/CheckoutButton";
+import { getProductCheckoutCta, getProductCta } from "../../lib/commerce";
 import { getProductPath } from "../../lib/i18n";
 import { products, shopCategories } from "../../data/products";
 
@@ -91,6 +92,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
     const categoryHref = productCategory ? `/shop/${productCategory.slug}` : "/shop";
     const productHref = getRootProductPath(product);
     const productCta = product.ctaLabel ? { ...cta, label: product.ctaLabel } : cta;
+    const checkoutCta = getProductCheckoutCta(product.slug);
 
     return (
       <main>
@@ -154,7 +156,14 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                   </div>
                 ) : null}
               </dl>
-              {productCta.disabled ? (
+              {checkoutCta.enabled ? (
+                <CheckoutButton
+                  errorMessage="Der Checkout ist derzeit nicht verfügbar. Bitte nutzen Sie alternativ die Anfrage."
+                  label={checkoutCta.label}
+                  loadingLabel="Checkout wird vorbereitet"
+                  productSlug={product.slug}
+                />
+              ) : productCta.disabled ? (
                 <button className="mt-10 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>
                   {productCta.label}
                 </button>

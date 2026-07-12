@@ -26,6 +26,7 @@ import { PageHero } from "../../components/PageHero";
 import { PlaceholderArtwork } from "../../components/PlaceholderArtwork";
 import { ProductCardMedia, ProductGallery, type ProductImageAsset } from "../../components/ProductMedia";
 import { EntityActions } from "../../components/EntityActions";
+import { CheckoutButton } from "../../components/CheckoutButton";
 import { LuxuryCoastersPage } from "../../components/LuxuryCoastersPage";
 import { getDictionary } from "../../data/dictionaries";
 import { products, shopCategories } from "../../data/products";
@@ -33,6 +34,7 @@ import { collections } from "../../data/collections";
 import { artworks } from "../../data/artworks";
 import { brands } from "../../data/brands";
 import { stories } from "../../data/stories";
+import { getProductCheckoutCta } from "../../lib/commerce";
 import { getEnglishProductTitle } from "../../lib/productTitles";
 import {
   getAlternateLanguages,
@@ -403,6 +405,41 @@ function getLocalizedCta(locale: Locale, status: string) {
   }
 }
 
+function getLocalizedCheckoutCopy(locale: Locale) {
+  return {
+    de: {
+      label: "KAUFEN",
+      loadingLabel: "Checkout wird vorbereitet",
+      errorMessage: "Der Checkout ist derzeit nicht verfügbar. Bitte nutzen Sie alternativ die Anfrage.",
+    },
+    en: {
+      label: "BUY",
+      loadingLabel: "Preparing checkout",
+      errorMessage: "Checkout is currently unavailable. Please use the enquiry option instead.",
+    },
+    fr: {
+      label: "ACHETER",
+      loadingLabel: "Preparation du checkout",
+      errorMessage: "Le checkout est actuellement indisponible. Veuillez utiliser la demande.",
+    },
+    es: {
+      label: "COMPRAR",
+      loadingLabel: "Preparando checkout",
+      errorMessage: "El checkout no esta disponible actualmente. Utilice la consulta.",
+    },
+    zh: {
+      label: "购买",
+      loadingLabel: "正在准备结账",
+      errorMessage: "结账当前不可用。请改用咨询选项。",
+    },
+    ar: {
+      label: "شراء",
+      loadingLabel: "جار تجهيز الدفع",
+      errorMessage: "الدفع غير متاح حاليا. يرجى استخدام خيار الاستفسار.",
+    },
+  }[locale];
+}
+
 function LocalizedStaticPlaceholder({ locale, routeKey }: { locale: Locale; routeKey: RouteKey }) {
   if (routeKey === "shop") {
     return <LocalizedShopPage locale={locale} />;
@@ -512,6 +549,8 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
     const productHref = getLocalizedProductPath(locale, product);
     const productCta = content?.ctaLabel ? { ...cta, label: content.ctaLabel } : cta;
     const productImages = getLocalizedProductImages(locale, product);
+    const checkoutCta = getProductCheckoutCta(product.slug);
+    const checkoutCopy = getLocalizedCheckoutCopy(locale);
 
     return (
       <main>
@@ -575,7 +614,14 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                   </div>
                 ) : null}
               </dl>
-              {productCta.disabled ? (
+              {checkoutCta.enabled ? (
+                <CheckoutButton
+                  errorMessage={checkoutCopy.errorMessage}
+                  label={checkoutCopy.label}
+                  loadingLabel={checkoutCopy.loadingLabel}
+                  productSlug={product.slug}
+                />
+              ) : productCta.disabled ? (
                 <button className="mt-10 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>
                   {productCta.label}
                 </button>
