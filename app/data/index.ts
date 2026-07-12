@@ -4,6 +4,7 @@ export { footerNavItems } from "./navigation";
 export { products } from "./products";
 export { artworks } from "./artworks";
 export { brands } from "./brands";
+export { getProductsByRoomSlug, getRoomBySlug, rooms } from "./rooms";
 export { artists } from "./artists";
 export { materialCards } from "./materials";
 export { collections } from "./collections";
