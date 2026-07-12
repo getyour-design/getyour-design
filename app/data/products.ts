@@ -70,6 +70,13 @@ type ProductSeed = {
   affiliateLink?: string;
   affiliatePartner?: string;
   affiliateCategory?: string;
+  affiliateDisclosure?: string;
+  affiliatePriceLabel?: string;
+  affiliateAvailabilityLabel?: string;
+  affiliateLastCheckedAt?: string;
+  affiliateImageSource?: string;
+  affiliateDataSource?: string;
+  affiliateNetwork?: string;
   country?: string;
   style?: string[];
   relatedProducts?: string[];
@@ -593,6 +600,13 @@ export const products = categorySeeds.flatMap((category) =>
       affiliateLink: item.affiliateLink,
       affiliatePartner: item.affiliatePartner,
       affiliateCategory: item.affiliateCategory,
+      affiliateDisclosure: item.affiliateDisclosure,
+      affiliatePriceLabel: item.affiliatePriceLabel,
+      affiliateAvailabilityLabel: item.affiliateAvailabilityLabel,
+      affiliateLastCheckedAt: item.affiliateLastCheckedAt,
+      affiliateImageSource: item.affiliateImageSource,
+      affiliateDataSource: item.affiliateDataSource,
+      affiliateNetwork: item.affiliateNetwork,
       country: item.country,
       style: item.style,
       relatedProducts: item.relatedProducts,

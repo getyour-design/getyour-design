@@ -22,6 +22,18 @@ type CommerceCtaInput = {
   labels: CommerceCtaLabels;
 };
 
+type AffiliateReadinessProduct = {
+  commerceMode?: CommerceMode;
+  affiliateLink?: string;
+  affiliatePartner?: string;
+  affiliateCategory?: string;
+  affiliateDisclosure?: string;
+  affiliateLastCheckedAt?: string;
+  affiliateImageSource?: string;
+  affiliateDataSource?: string;
+  sourceUrl?: string;
+};
+
 export type CommerceCta = {
   mode: CommerceMode | "status";
   label: string;
@@ -95,18 +107,64 @@ function toCommerceFallbackCta(fallbackCta: BaseProductCta, mode: CommerceCta["m
   };
 }
 
-function getSafeAffiliateHref(value?: string) {
+export function isValidAffiliateUrl(value?: string) {
   if (!value) {
-    return undefined;
+    return false;
   }
 
   try {
     const url = new URL(value);
 
-    return url.protocol === "https:" ? url.href : undefined;
+    return url.protocol === "https:";
   } catch {
-    return undefined;
+    return false;
   }
+}
+
+function getSafeAffiliateHref(value?: string) {
+  return isValidAffiliateUrl(value) ? new URL(value as string).href : undefined;
+}
+
+export function getAffiliateReadinessIssues(product: AffiliateReadinessProduct) {
+  const issues: string[] = [];
+
+  if (product.commerceMode !== "affiliate") {
+    issues.push("commerceMode is not affiliate");
+  }
+
+  if (!isValidAffiliateUrl(product.affiliateLink)) {
+    issues.push("affiliateLink must be an absolute HTTPS URL");
+  }
+
+  if (!product.affiliatePartner) {
+    issues.push("affiliatePartner is missing");
+  }
+
+  if (!product.affiliateCategory) {
+    issues.push("affiliateCategory is missing");
+  }
+
+  if (!product.affiliateDisclosure) {
+    issues.push("affiliateDisclosure is missing");
+  }
+
+  if (!product.affiliateLastCheckedAt) {
+    issues.push("affiliateLastCheckedAt is missing");
+  }
+
+  if (!product.affiliateImageSource) {
+    issues.push("affiliateImageSource is missing");
+  }
+
+  if (!product.affiliateDataSource && !product.sourceUrl) {
+    issues.push("affiliateDataSource or sourceUrl is missing");
+  }
+
+  return issues;
+}
+
+export function isAffiliateReadyProduct(product: AffiliateReadinessProduct) {
+  return getAffiliateReadinessIssues(product).length === 0;
 }
 
 export function getCommerceCta({
