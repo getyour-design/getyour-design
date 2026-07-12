@@ -7,7 +7,13 @@ export { brands } from "./brands";
 export { getProductsByRoomSlug, getRoomBySlug, rooms } from "./rooms";
 export { artists } from "./artists";
 export { materialCards } from "./materials";
-export { collections } from "./collections";
+export {
+  collections,
+  getCollectionByKey,
+  getCollectionBySlug,
+  getProductsByCollectionKey,
+  getProductsByCollectionSlug,
+} from "./collections";
 export { stories } from "./stories";
 
 export const featuredObjects = [
