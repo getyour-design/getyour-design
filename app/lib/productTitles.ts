@@ -1,4 +1,5 @@
 const englishProductTitles: Record<string, string> = {
+  "Sitzobjekt aus europäischem Kuhfell": "Sculptural Seat in European Cowhide",
   "Sitzobjekt aus dunklem Holz": "Dark Wood Seating Object",
   "Niedrige Bank aus Eiche": "Low Oak Bench",
   "Sessel mit Lederauflage": "Armchair with Leather Overlay",
@@ -101,4 +102,3 @@ export function getEnglishProductTitle(title: string) {
 }
 
 export const translatedEnglishProductTitles = englishProductTitles;
-

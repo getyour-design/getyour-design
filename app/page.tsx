@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { artworks } from "./data/artworks";
 import { collections } from "./data/collections";
+import { ProductCardMedia } from "./components/ProductMedia";
 import { materialCards } from "./data/materials";
 import { products } from "./data/products";
 import { stories } from "./data/stories";
@@ -276,17 +277,21 @@ export default function Home() {
           <div className="mt-8 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {products.slice(0, 8).map((item, index) => (
               <article className="group" key={item.title}>
-                <div className="overflow-hidden border hairline bg-[#f8f8f6]">
-                  <img
-                    alt={item.title}
-                    className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-                    src={productImages[index % productImages.length]}
-                  />
-                </div>
+                {item.images ? (
+                  <ProductCardMedia images={item.images} index={index} palette={item.palette} title={item.cardTitle} />
+                ) : (
+                  <div className="overflow-hidden border hairline bg-[#f8f8f6]">
+                    <img
+                      alt={item.cardTitle}
+                      className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                      src={productImages[index % productImages.length]}
+                    />
+                  </div>
+                )}
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
                     <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{item.maker}</p>
-                    <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{item.title}</h3>
+                    <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{item.cardTitle}</h3>
                   </div>
                   <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
                 </div>

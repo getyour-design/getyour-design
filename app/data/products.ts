@@ -5,12 +5,50 @@ export type ProductStatus =
   | "reserviert"
   | "verkauft";
 
+type ProductLocale = "de" | "en" | "fr" | "es" | "zh" | "ar";
+
+type ProductImage = {
+  src: string;
+  alt: string;
+};
+
+type LocalizedProductContent = {
+  title: string;
+  cardTitle: string;
+  priceNote: string;
+  shortDescription: string;
+  longDescription: string[];
+  dimensionsDetails: string[];
+  materialDetails: string[];
+  origin: string;
+  uniqueNote: string;
+  ctaLabel: string;
+  images: ProductImage[];
+  metaTitle: string;
+  metaDescription: string;
+};
+
 type ProductSeed = {
   title: string;
+  cardTitle?: string;
   price: string;
+  priceNote?: string;
   material: string;
+  materialDetails?: string[];
   dimensions: string;
+  dimensionsDetails?: string[];
   slug?: string;
+  status?: ProductStatus;
+  availability?: string;
+  description?: string;
+  longDescription?: string[];
+  origin?: string;
+  uniqueNote?: string;
+  ctaLabel?: string;
+  images?: ProductImage[];
+  metaTitle?: string;
+  metaDescription?: string;
+  localized?: Partial<Record<ProductLocale, LocalizedProductContent>>;
 };
 
 type ProductCategorySeed = {
@@ -75,6 +113,226 @@ const categorySeeds: ProductCategorySeed[] = [
     description:
       "Möbelstück mit klarer Form, präziser Materialwirkung und ruhiger Präsenz im Raum.",
     items: [
+      {
+        title: "Sitzobjekt aus europäischem Kuhfell",
+        cardTitle: "Sitzobjekt aus Kuhfell",
+        slug: "sitzobjekt-kuhfell",
+        price: "7.200 €",
+        priceNote: "inkl. gesetzlicher Umsatzsteuer, zzgl. Versandkosten",
+        material: "Echtes europäisches Kuhfell, hochwertiger Polsterkern",
+        materialDetails: [
+          "Echtes europäisches Kuhfell",
+          "Hochwertiger Polsterkern",
+          "Handgefertigt in Europa",
+        ],
+        dimensions: "Durchmesser 126 cm, Höhe 30 cm",
+        dimensionsDetails: ["Durchmesser: 126 cm", "Höhe: 30 cm"],
+        status: "anfragen",
+        availability: "Auf Anfrage verfügbar",
+        description:
+          "Ein skulpturales Sitzobjekt aus sorgfältig ausgewähltem europäischem Kuhfell. Die niedrige, kreisrunde Form lässt Material, Farbe und Fellstruktur in den Vordergrund treten.",
+        longDescription: [
+          "Das Sitzobjekt wird aus ausgewähltem europäischem Kuhfell gefertigt und von Hand verarbeitet.",
+          "Seine niedrige, kreisrunde Form wirkt zugleich ruhig und präsent. Die natürliche Zeichnung des Fells bestimmt den Charakter jedes einzelnen Stücks.",
+          "Mit einem Durchmesser von 126 Zentimetern ist das Objekt als großzügige Sitzfläche, Mittelpunkt eines Raumes oder frei stehendes Möbel einsetzbar.",
+          "Jedes Exemplar unterscheidet sich in Farbe, Struktur und Fellverlauf. Diese Abweichungen sind materialbedingt und machen jedes Sitzobjekt zu einem Einzelstück.",
+        ],
+        origin: "Handgefertigt in Europa",
+        uniqueNote:
+          "Farbe, Zeichnung und Fellverlauf unterscheiden sich bei jedem Exemplar. Die gezeigten Bilder dienen als Referenz für Form und Materialwirkung.",
+        ctaLabel: "Verfügbarkeit anfragen",
+        images: [
+          {
+            src: "/images/products/sculptural-cowhide-seat-hero.png",
+            alt: "Gelbes kreisrundes Sitzobjekt aus europäischem Kuhfell in hellem Raum",
+          },
+          {
+            src: "/images/products/yellow-cowhide-seat.webp",
+            alt: "Gelbes Sitzobjekt aus europäischem Kuhfell mit sichtbarer Fellstruktur",
+          },
+        ],
+        metaTitle: "Sitzobjekt aus europäischem Kuhfell",
+        metaDescription:
+          "Kreisrundes Sitzobjekt aus europäischem Kuhfell, handgefertigt in Europa, 126 cm Durchmesser und 30 cm Höhe.",
+        localized: {
+          en: {
+            title: "Sculptural Seat in European Cowhide",
+            cardTitle: "Cowhide Seating Object",
+            priceNote: "Including statutory VAT, excluding shipping.",
+            shortDescription:
+              "A sculptural seating object made from carefully selected European cowhide. Its low circular form brings the material, colour and natural texture into focus.",
+            longDescription: [
+              "The seating object is made from selected European cowhide and finished by hand.",
+              "Its low circular form is quiet yet visually present. The natural markings of the hide define the character of each individual piece.",
+              "With a diameter of 126 centimetres, it can be used as a generous seat, a central element within a room or a freestanding furniture object.",
+              "Each piece differs in colour, texture and hair direction. These natural variations make every object unique.",
+            ],
+            dimensionsDetails: ["Diameter: 126 cm", "Height: 30 cm"],
+            materialDetails: [
+              "Genuine European cowhide",
+              "High-quality upholstery core",
+              "Handcrafted in Europe",
+            ],
+            origin: "Handcrafted in Europe",
+            uniqueNote:
+              "Colour, markings and hair direction differ with every piece. The images shown serve as a reference for form and material effect.",
+            ctaLabel: "Request availability",
+            images: [
+              {
+                src: "/images/products/sculptural-cowhide-seat-hero.png",
+                alt: "Yellow circular seating object in European cowhide in a bright room",
+              },
+              {
+                src: "/images/products/yellow-cowhide-seat.webp",
+                alt: "Yellow seating object in European cowhide with visible hair texture",
+              },
+            ],
+            metaTitle: "Sculptural Seat in European Cowhide",
+            metaDescription:
+              "Circular seating object in European cowhide, handcrafted in Europe, 126 cm in diameter and 30 cm high.",
+          },
+          fr: {
+            title: "Assise sculpturale en peau de vache européenne",
+            cardTitle: "Assise en peau de vache",
+            priceNote: "TVA légale incluse, frais de livraison en supplément.",
+            shortDescription:
+              "Une assise sculpturale réalisée en peau de vache européenne soigneusement sélectionnée. Sa forme basse et circulaire met la matière, la couleur et la texture naturelle au premier plan.",
+            longDescription: [
+              "L'assise est réalisée en peau de vache européenne sélectionnée et finie à la main.",
+              "Sa forme basse et circulaire est à la fois calme et présente. Les marques naturelles de la peau déterminent le caractère de chaque pièce.",
+              "Avec un diamètre de 126 centimètres, elle peut servir d'assise généreuse, d'élément central dans une pièce ou de meuble indépendant.",
+              "Chaque exemplaire diffère par sa couleur, sa texture et le sens du poil. Ces variations naturelles font de chaque assise une pièce unique.",
+            ],
+            dimensionsDetails: ["Diamètre : 126 cm", "Hauteur : 30 cm"],
+            materialDetails: [
+              "Peau de vache européenne véritable",
+              "Noyau de rembourrage de haute qualité",
+              "Fabriqué à la main en Europe",
+            ],
+            origin: "Fabriqué à la main en Europe",
+            uniqueNote:
+              "La couleur, le dessin et le sens du poil varient d'un exemplaire à l'autre. Les images présentées servent de référence pour la forme et l'effet de matière.",
+            ctaLabel: "Demander la disponibilité",
+            images: [
+              {
+                src: "/images/products/sculptural-cowhide-seat-hero.png",
+                alt: "Assise circulaire jaune en peau de vache européenne dans un espace clair",
+              },
+              {
+                src: "/images/products/yellow-cowhide-seat.webp",
+                alt: "Assise jaune en peau de vache européenne avec texture du poil visible",
+              },
+            ],
+            metaTitle: "Assise sculpturale en peau de vache européenne",
+            metaDescription:
+              "Assise circulaire en peau de vache européenne, fabriquée à la main en Europe, 126 cm de diamètre et 30 cm de hauteur.",
+          },
+          es: {
+            title: "Asiento escultórico en piel de vaca europea",
+            cardTitle: "Asiento en piel de vaca",
+            priceNote: "IVA legal incluido, gastos de envío no incluidos.",
+            shortDescription:
+              "Un asiento escultórico realizado en piel de vaca europea cuidadosamente seleccionada. Su forma baja y circular sitúa el material, el color y la textura natural en primer plano.",
+            longDescription: [
+              "El asiento se realiza en piel de vaca europea seleccionada y se acaba a mano.",
+              "Su forma baja y circular resulta serena y visualmente presente. Las marcas naturales de la piel definen el carácter de cada pieza.",
+              "Con un diámetro de 126 centímetros, puede utilizarse como asiento amplio, elemento central de una estancia o mueble independiente.",
+              "Cada pieza difiere en color, textura y dirección del pelo. Estas variaciones naturales hacen que cada asiento sea único.",
+            ],
+            dimensionsDetails: ["Diámetro: 126 cm", "Altura: 30 cm"],
+            materialDetails: [
+              "Piel de vaca europea auténtica",
+              "Núcleo de tapicería de alta calidad",
+              "Hecho a mano en Europa",
+            ],
+            origin: "Hecho a mano en Europa",
+            uniqueNote:
+              "El color, el dibujo y la dirección del pelo varían en cada pieza. Las imágenes mostradas sirven como referencia de forma y efecto material.",
+            ctaLabel: "Consultar disponibilidad",
+            images: [
+              {
+                src: "/images/products/sculptural-cowhide-seat-hero.png",
+                alt: "Asiento circular amarillo en piel de vaca europea en un espacio luminoso",
+              },
+              {
+                src: "/images/products/yellow-cowhide-seat.webp",
+                alt: "Asiento amarillo en piel de vaca europea con textura visible",
+              },
+            ],
+            metaTitle: "Asiento escultórico en piel de vaca europea",
+            metaDescription:
+              "Asiento circular en piel de vaca europea, hecho a mano en Europa, 126 cm de diámetro y 30 cm de altura.",
+          },
+          zh: {
+            title: "欧洲牛皮雕塑感座椅",
+            cardTitle: "欧洲牛皮座椅",
+            priceNote: "含法定增值税，运费另计。",
+            shortDescription:
+              "一件采用严选欧洲牛皮制成的雕塑感座椅。低矮的圆形结构让材质、色彩与天然毛面纹理成为视觉重点。",
+            longDescription: [
+              "这件座椅采用严选欧洲牛皮制成，并以手工完成。",
+              "低矮的圆形形体安静而具有存在感。牛皮的天然纹理决定了每一件作品的性格。",
+              "直径 126 厘米的尺度使其可作为宽大的坐面、空间中心或独立家具使用。",
+              "每一件在颜色、纹理与毛流方向上都会有所不同。这些天然差异使每件座椅都成为独件。",
+            ],
+            dimensionsDetails: ["直径：126 厘米", "高度：30 厘米"],
+            materialDetails: ["真正的欧洲牛皮", "高品质软包内芯", "欧洲手工制作"],
+            origin: "欧洲手工制作",
+            uniqueNote:
+              "每件作品的颜色、纹理与毛流方向都会不同。所示图片用于说明形态与材质效果。",
+            ctaLabel: "咨询库存",
+            images: [
+              {
+                src: "/images/products/sculptural-cowhide-seat-hero.png",
+                alt: "明亮空间中的黄色圆形欧洲牛皮座椅",
+              },
+              {
+                src: "/images/products/yellow-cowhide-seat.webp",
+                alt: "可见毛面纹理的黄色欧洲牛皮座椅",
+              },
+            ],
+            metaTitle: "欧洲牛皮雕塑感座椅",
+            metaDescription:
+              "欧洲手工制作的圆形欧洲牛皮座椅，直径 126 厘米，高 30 厘米。",
+          },
+          ar: {
+            title: "مقعد نحتي من جلد البقر الأوروبي",
+            cardTitle: "مقعد من جلد البقر",
+            priceNote: "شامل ضريبة القيمة المضافة القانونية، ولا يشمل تكاليف الشحن.",
+            shortDescription:
+              "مقعد نحتي مصنوع من جلد بقر أوروبي مختار بعناية. يبرز شكله الدائري المنخفض المادة واللون والملمس الطبيعي للجلد.",
+            longDescription: [
+              "يصنع المقعد من جلد بقر أوروبي مختار وينهى يدويا.",
+              "يجمع شكله الدائري المنخفض بين الهدوء والحضور البصري. تحدد العلامات الطبيعية في الجلد طابع كل قطعة.",
+              "بقطر يبلغ 126 سم، يمكن استخدامه كمقعد واسع أو كعنصر مركزي في الغرفة أو كقطعة أثاث قائمة بذاتها.",
+              "تختلف كل قطعة في اللون والملمس واتجاه الشعر. هذه الاختلافات الطبيعية تجعل كل مقعد قطعة فريدة.",
+            ],
+            dimensionsDetails: ["القطر: 126 سم", "الارتفاع: 30 سم"],
+            materialDetails: [
+              "جلد بقر أوروبي حقيقي",
+              "لب تنجيد عالي الجودة",
+              "مصنوع يدويا في أوروبا",
+            ],
+            origin: "مصنوع يدويا في أوروبا",
+            uniqueNote:
+              "يختلف اللون والرسم الطبيعي واتجاه الشعر في كل قطعة. الصور المعروضة مرجع للشكل وتأثير المادة.",
+            ctaLabel: "استفسر عن التوفر",
+            images: [
+              {
+                src: "/images/products/sculptural-cowhide-seat-hero.png",
+                alt: "مقعد دائري أصفر من جلد البقر الأوروبي في مساحة مضيئة",
+              },
+              {
+                src: "/images/products/yellow-cowhide-seat.webp",
+                alt: "مقعد أصفر من جلد البقر الأوروبي مع ملمس شعر واضح",
+              },
+            ],
+            metaTitle: "مقعد نحتي من جلد البقر الأوروبي",
+            metaDescription:
+              "مقعد دائري من جلد البقر الأوروبي مصنوع يدويا في أوروبا، قطره 126 سم وارتفاعه 30 سم.",
+          },
+        },
+      },
       { title: "Sitzobjekt aus dunklem Holz", slug: "sitzobjekt-aus-dunklem-holz", price: "EUR 3,840", material: "Dunkles Holz, textile Polsterung", dimensions: "72 x 78 x 68 cm" },
       { title: "Niedrige Bank aus Eiche", price: "EUR 2,900", material: "Eiche, geölte Oberfläche", dimensions: "160 x 42 x 44 cm" },
       { title: "Sessel mit Lederauflage", price: "EUR 4,600", material: "Stahl, Leder", dimensions: "78 x 82 x 72 cm" },
@@ -271,19 +529,31 @@ export const products = categorySeeds.flatMap((category) =>
 
     return {
       title: item.title,
+      cardTitle: item.cardTitle ?? item.title,
       slug: item.slug ?? `${category.slug}-${String(index + 1).padStart(2, "0")}-${toSlug(item.title)}`,
       category: category.title,
+      categorySlug: category.slug,
       secondaryCategories: [] as string[],
       maker,
       type: category.type,
       price: item.price,
-      status,
-      availability: availabilityByStatus[status],
-      description: `${category.description} ${item.title} ist als Teil einer kuratierten Auswahl für besondere Räume vorgesehen.`,
+      priceNote: item.priceNote,
+      status: item.status ?? status,
+      availability: item.availability ?? availabilityByStatus[item.status ?? status],
+      description: item.description ?? `${category.description} ${item.title} ist als Teil einer kuratierten Auswahl für besondere Räume vorgesehen.`,
+      longDescription: item.longDescription,
       dimensions: item.dimensions,
+      dimensionsDetails: item.dimensionsDetails,
       material: item.material,
-      origin,
+      materialDetails: item.materialDetails,
+      origin: item.origin ?? origin,
+      uniqueNote: item.uniqueNote,
+      ctaLabel: item.ctaLabel,
+      images: item.images,
+      metaTitle: item.metaTitle,
+      metaDescription: item.metaDescription,
       palette: palettes[index % palettes.length],
+      localized: item.localized,
     };
   }),
 );

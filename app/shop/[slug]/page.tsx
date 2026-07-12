@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PlaceholderArtwork } from "../../components/PlaceholderArtwork";
+import { ProductCardMedia, ProductGallery } from "../../components/ProductMedia";
 import { EntityActions } from "../../components/EntityActions";
 import { getProductCta } from "../../lib/commerce";
+import { getProductPath } from "../../lib/i18n";
 import { products, shopCategories } from "../../data/products";
 
 type ShopSlugPageProps = {
@@ -34,11 +35,21 @@ export async function generateMetadata({ params }: ShopSlugPageProps): Promise<M
   const category = shopCategories.find((item) => item.slug === slug);
 
   if (product) {
+    const productCategory = shopCategories.find((item) => item.title === product.category);
+    const categorySlug = productCategory?.slug ?? product.categorySlug;
+    const productPath = getProductPath("de", categorySlug, product.slug);
+
     return {
-      title: product.title,
-      description: `${product.title} bei GETYOUR.DESIGN: ${product.category}, ${product.material}, ${product.price}.`,
+      title: product.metaTitle ?? product.title,
+      description: product.metaDescription ?? `${product.title} bei GETYOUR.DESIGN: ${product.category}, ${product.material}, ${product.price}.`,
+      openGraph: {
+        title: product.metaTitle ?? product.title,
+        description: product.metaDescription ?? product.description,
+        url: productPath,
+        images: product.images?.[0] ? [{ url: product.images[0].src, alt: product.images[0].alt }] : undefined,
+      },
       alternates: {
-        canonical: `/shop/${product.slug}`,
+        canonical: productPath,
       },
     };
   }
@@ -65,13 +76,16 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
     const cta = getProductCta(product.status);
     const productIndex = products.findIndex((item) => item.slug === product.slug);
     const productCategory = shopCategories.find((item) => item.title === product.category);
+    const categorySlug = productCategory?.slug ?? product.categorySlug;
     const categoryHref = productCategory ? `/shop/${productCategory.slug}` : "/shop";
+    const productHref = getProductPath("de", categorySlug, product.slug);
+    const productCta = product.ctaLabel ? { ...cta, label: product.ctaLabel } : cta;
 
     return (
       <main>
         <section className="section-pad bg-[#f3f2ef]">
           <div className="mx-auto grid max-w-[1540px] gap-10 lg:grid-cols-[0.55fr_0.45fr] lg:items-start">
-            <PlaceholderArtwork index={productIndex} palette={product.palette} />
+            <ProductGallery images={product.images} index={productIndex} palette={product.palette} title={product.title} />
             <div>
               <Link className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]" href={categoryHref}>
                 ← Zurück zu {product.category}
@@ -86,9 +100,17 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                 <p>{product.price}</p>
                 <p>{product.availability}</p>
               </div>
+              {product.priceNote ? <p className="mt-4 text-sm leading-7 text-[#4b5356]">{product.priceNote}</p> : null}
               <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{product.description}</p>
+              {product.longDescription ? (
+                <div className="mt-8 grid gap-4 text-sm leading-7 text-[#4b5356]">
+                  {product.longDescription.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              ) : null}
               <EntityActions
-                href={`/shop/${product.slug}`}
+                href={productHref}
                 id={`product:${product.slug}`}
                 title={product.title}
                 type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
@@ -96,24 +118,38 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
               <dl className="mt-10 grid gap-5 border-t border-black/15 pt-6 text-sm md:grid-cols-2">
                 <div>
                   <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Maße</dt>
-                  <dd className="mt-2 text-[#353b3e]">{product.dimensions}</dd>
+                  <dd className="mt-2 grid gap-1 text-[#353b3e]">
+                    {(product.dimensionsDetails ?? [product.dimensions]).map((detail) => (
+                      <span key={detail}>{detail}</span>
+                    ))}
+                  </dd>
                 </div>
                 <div>
                   <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Material</dt>
-                  <dd className="mt-2 text-[#353b3e]">{product.material}</dd>
+                  <dd className="mt-2 grid gap-1 text-[#353b3e]">
+                    {(product.materialDetails ?? [product.material]).map((detail) => (
+                      <span key={detail}>{detail}</span>
+                    ))}
+                  </dd>
                 </div>
                 <div>
                   <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Herkunft</dt>
                   <dd className="mt-2 text-[#353b3e]">{product.origin}</dd>
                 </div>
+                {product.uniqueNote ? (
+                  <div className="md:col-span-2">
+                    <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Unikathinweis</dt>
+                    <dd className="mt-2 text-[#353b3e]">{product.uniqueNote}</dd>
+                  </div>
+                ) : null}
               </dl>
-              {cta.disabled ? (
+              {productCta.disabled ? (
                 <button className="mt-10 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>
-                  {cta.label}
+                  {productCta.label}
                 </button>
               ) : (
-                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={cta.href ?? "/warenkorb"}>
-                  {cta.label}
+                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={productCta.href ?? "/contact"}>
+                  {productCta.label}
                 </Link>
               )}
             </div>
@@ -158,20 +194,20 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
 
               return (
                 <article className="group" key={item.slug}>
-                  <Link href={`/shop/${item.slug}`}>
-                    <PlaceholderArtwork index={index} palette={item.palette} />
+                  <Link href={`/shop/${category.slug}/${item.slug}`}>
+                    <ProductCardMedia images={item.images} index={index} palette={item.palette} title={item.cardTitle} />
                   </Link>
                   <div className="mt-5 flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{item.category}</p>
-                      <Link href={`/shop/${item.slug}`}>
-                        <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{item.title}</h2>
+                      <Link href={`/shop/${category.slug}/${item.slug}`}>
+                        <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{item.cardTitle}</h2>
                       </Link>
                       <p className="mt-2 text-sm text-[#4b5356]">{item.maker}</p>
                       <EntityActions
-                        href={`/shop/${item.slug}`}
+                        href={`/shop/${category.slug}/${item.slug}`}
                         id={`product:${item.slug}`}
-                        title={item.title}
+                        title={item.cardTitle}
                         type={item.category === "Kunst" || item.category === "Editionen" ? "Kunstwerk" : item.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
                       />
                     </div>

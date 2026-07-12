@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { products, shopCategories } from "./data/products";
-import { getAlternateLanguages, getShopPath, localizedRoutes, locales, type RouteKey } from "./lib/i18n";
+import { getAlternateLanguages, getProductPath, getShopPath, localizedRoutes, locales, type RouteKey } from "./lib/i18n";
 
 const siteUrl = "https://www.getyour.design";
 const lastModified = new Date("2026-06-23");
@@ -15,10 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     })),
   );
-  const shopRoutes = [
-    ...shopCategories.map((category) => category.slug),
-    ...products.map((product) => product.slug),
-  ].flatMap((slug) => {
+  const shopRoutes = shopCategories.map((category) => category.slug).flatMap((slug) => {
     const languages = {
       ...Object.fromEntries(locales.map((locale) => [locale, getShopPath(locale, slug)])),
       "x-default": getShopPath("de", slug),
@@ -26,6 +23,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return locales.map((locale) => ({
       url: `${siteUrl}${getShopPath(locale, slug)}`,
+      lastModified,
+      alternates: {
+        languages: absoluteLanguages(languages),
+      },
+    }));
+  });
+  const productRoutes = products.flatMap((product) => {
+    const languages = {
+      ...Object.fromEntries(locales.map((locale) => [locale, getProductPath(locale, product.categorySlug, product.slug)])),
+      "x-default": getProductPath("de", product.categorySlug, product.slug),
+    };
+
+    return locales.map((locale) => ({
+      url: `${siteUrl}${getProductPath(locale, product.categorySlug, product.slug)}`,
       lastModified,
       alternates: {
         languages: absoluteLanguages(languages),
@@ -42,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return [...staticRoutes, ...legacyRoutes, ...shopRoutes];
+  return [...staticRoutes, ...legacyRoutes, ...shopRoutes, ...productRoutes];
 }
 
 function absoluteLanguages(languages: Record<string, string>) {

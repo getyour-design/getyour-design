@@ -149,6 +149,10 @@ export function getShopPath(locale: Locale, slug = "") {
   return `${localizedRoutes.shop[locale]}${slug ? `/${getLocalizedShopSlug(locale, slug)}` : ""}`;
 }
 
+export function getProductPath(locale: Locale, categorySlug: string, productSlug: string) {
+  return `${getShopPath(locale, categorySlug)}/${productSlug}`;
+}
+
 export function localizeHref(href: string, locale: Locale) {
   if (!href.startsWith("/")) {
     return href;
@@ -159,8 +163,9 @@ export function localizeHref(href: string, locale: Locale) {
   }
 
   if (href.startsWith("/shop/")) {
-    const slug = href.slice("/shop/".length);
-    return getShopPath(locale, slug);
+    const [categorySlug, productSlug] = href.slice("/shop/".length).split("/");
+
+    return productSlug ? getProductPath(locale, categorySlug, productSlug) : getShopPath(locale, categorySlug);
   }
 
   const rootTarget = rootRedirects[href];
@@ -181,8 +186,12 @@ export function getLanguageSwitchPath(pathname: string, targetLocale: Locale) {
 
   if (localeShopPattern.test(pathname)) {
     const currentLocale = getLocaleFromPath(pathname);
-    const slug = resolveShopSlug(currentLocale, pathname.split("/").slice(3).join("/"));
-    return getShopPath(targetLocale, slug);
+    const [, , categorySlug, productSlug] = pathname.split("/").filter(Boolean);
+    const resolvedCategorySlug = resolveShopSlug(currentLocale, categorySlug);
+
+    return productSlug
+      ? getProductPath(targetLocale, resolvedCategorySlug, productSlug)
+      : getShopPath(targetLocale, resolvedCategorySlug);
   }
 
   if (locales.some((locale) => pathname === `/${locale}`) || pathname === "/") {
