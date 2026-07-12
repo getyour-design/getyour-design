@@ -1,10 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getDictionary } from "../data/dictionaries";
 import { collections } from "../data/collections";
 import { materialCards } from "../data/materials";
 import { products } from "../data/products";
 import { stories } from "../data/stories";
-import { getShopPath, localizeHref, type Locale } from "../lib/i18n";
+import { getProductPath, getShopPath, localizeHref, type Locale } from "../lib/i18n";
 import { getEnglishProductTitle } from "../lib/productTitles";
 
 const productImages = [
@@ -34,6 +35,8 @@ const shopHubLinks = [
   { label: "Kunst", slug: "kunst" },
 ];
 
+const featuredCommerceProduct = products.find((product) => product.slug === "sitzobjekt-kuhfell");
+
 function getProductTitle(locale: Locale, title: string, index: number) {
   if (locale === "de") {
     return title;
@@ -49,6 +52,13 @@ function getProductTitle(locale: Locale, title: string, index: number) {
 export function LocalizedHomePage({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
   const heroLines = dictionary.home.heroTitle;
+  const featuredProductContent = featuredCommerceProduct?.localized?.[locale];
+  const featuredProductImage = featuredProductContent?.images[0] ?? featuredCommerceProduct?.images?.[0];
+  const featuredProductTitle = featuredProductContent?.title ?? featuredCommerceProduct?.title;
+  const featuredProductDescription = featuredProductContent?.shortDescription ?? featuredCommerceProduct?.description;
+  const featuredProductHref = featuredCommerceProduct
+    ? getProductPath(locale, featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)
+    : undefined;
 
   return (
     <main className="bg-[#f3f2ef]">
@@ -103,6 +113,47 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
           ))}
         </div>
       </section>
+
+      {featuredCommerceProduct && featuredProductHref ? (
+        <section className="border-b hairline bg-[#f3f2ef] px-5 py-14 lg:px-10 lg:py-16">
+          <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.48fr_0.52fr] lg:items-center">
+            <Link className="group block" href={featuredProductHref}>
+              <div className="relative aspect-[3/2] overflow-hidden border hairline bg-[#f8f8f6]">
+                {featuredProductImage ? (
+                  <Image
+                    alt={featuredProductImage.alt}
+                    className="object-contain transition duration-500 group-hover:scale-[1.02]"
+                    fill
+                    sizes="(min-width: 1024px) 48vw, 100vw"
+                    src={featuredProductImage.src}
+                  />
+                ) : null}
+              </div>
+            </Link>
+            <div className="max-w-2xl">
+              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">
+                {dictionary.home.featuredProductEyebrow}
+              </p>
+              <p className="mt-7 text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">
+                {dictionary.shop.categories[featuredCommerceProduct.category] ?? featuredCommerceProduct.category}
+              </p>
+              <h2 className="serif mt-3 text-balance text-2xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-3xl">
+                <Link href={featuredProductHref}>{featuredProductTitle}</Link>
+              </h2>
+              <p className="mt-5 text-sm text-[#353b3e]">{featuredCommerceProduct.price}</p>
+              <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
+                {featuredProductDescription}
+              </p>
+              <Link
+                className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]"
+                href={featuredProductHref}
+              >
+                {dictionary.home.featuredProductLink}
+              </Link>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-pad">
         <div className="mx-auto max-w-[1540px]">

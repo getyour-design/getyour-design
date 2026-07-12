@@ -37,6 +37,8 @@ export type Dictionary = {
     primaryCta: string;
     secondaryCta: string;
     shopLinksTitle: string;
+    featuredProductEyebrow: string;
+    featuredProductLink: string;
     newArrivalsEyebrow: string;
     newArrivalsTitle: string;
     shopCta: string;
@@ -236,6 +238,8 @@ const english: Dictionary = {
     primaryCta: "Explore Shop",
     secondaryCta: "View Collections",
     shopLinksTitle: "Shop entry points",
+    featuredProductEyebrow: "Selected Object",
+    featuredProductLink: "View Object",
     newArrivalsEyebrow: "New Arrivals",
     newArrivalsTitle: "Furniture, artworks, objects, lighting, rugs and editions",
     shopCta: "Design Shop",
@@ -634,6 +638,8 @@ const french: Dictionary = {
     primaryCta: "Explorer la boutique",
     secondaryCta: "Voir les collections",
     shopLinksTitle: "Entrées boutique",
+    featuredProductEyebrow: "Objet sélectionné",
+    featuredProductLink: "Voir l’objet",
     newArrivalsEyebrow: "Nouveautés",
     newArrivalsTitle: "Mobilier, œuvres, objets, luminaires, tapis et éditions",
     shopCta: "Boutique Design",
@@ -842,6 +848,8 @@ const spanish: Dictionary = {
     primaryCta: "Explorar tienda",
     secondaryCta: "Ver colecciones",
     shopLinksTitle: "Entradas de tienda",
+    featuredProductEyebrow: "Objeto seleccionado",
+    featuredProductLink: "Ver objeto",
     newArrivalsEyebrow: "Novedades",
     newArrivalsTitle: "Mobiliario, obras, objetos, iluminación, alfombras y ediciones",
     shopCta: "Tienda de diseño",
@@ -1051,6 +1059,8 @@ const chinese: Dictionary = {
     primaryCta: "浏览商店",
     secondaryCta: "查看系列",
     shopLinksTitle: "商店入口",
+    featuredProductEyebrow: "精选物件",
+    featuredProductLink: "查看物件",
     newArrivalsEyebrow: "新品",
     newArrivalsTitle: "家具、艺术作品、物件、灯具、地毯与限量作品",
     shopCta: "设计商店",
@@ -1261,6 +1271,8 @@ const arabic: Dictionary = {
     primaryCta: "استكشاف المتجر",
     secondaryCta: "عرض المجموعات",
     shopLinksTitle: "مداخل المتجر",
+    featuredProductEyebrow: "قطعة مختارة",
+    featuredProductLink: "عرض القطعة",
     newArrivalsEyebrow: "وصل حديثا",
     newArrivalsTitle: "أثاث وأعمال فنية وقطع وإضاءة وسجاد وإصدارات",
     shopCta: "متجر التصميم",

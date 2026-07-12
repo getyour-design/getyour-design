@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { artworks } from "./data/artworks";
 import { collections } from "./data/collections";
 import { materialCards } from "./data/materials";
 import { products } from "./data/products";
 import { stories } from "./data/stories";
+import { getProductPath } from "./lib/i18n";
 
 export const metadata: Metadata = {
   alternates: {
@@ -143,6 +145,8 @@ const shopHubLinks = [
   { label: "Kunstwerke", href: "/shop/kunst" },
 ];
 
+const featuredCommerceProduct = products.find((product) => product.slug === "sitzobjekt-kuhfell");
+
 function ProductVisual({ index, palette }: { index: number; palette: string }) {
   const modes = [
     "lounge",
@@ -261,6 +265,50 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {featuredCommerceProduct ? (
+        <section className="border-b hairline bg-[#f3f2ef] px-5 py-14 lg:px-10 lg:py-16">
+          <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.48fr_0.52fr] lg:items-center">
+            <Link
+              className="group block"
+              href={getProductPath("de", featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)}
+            >
+              <div className="relative aspect-[3/2] overflow-hidden border hairline bg-[#f8f8f6]">
+                {featuredCommerceProduct.images?.[0] ? (
+                  <Image
+                    alt={featuredCommerceProduct.images[0].alt}
+                    className="object-contain transition duration-500 group-hover:scale-[1.02]"
+                    fill
+                    sizes="(min-width: 1024px) 48vw, 100vw"
+                    src={featuredCommerceProduct.images[0].src}
+                  />
+                ) : null}
+              </div>
+            </Link>
+            <div className="max-w-2xl">
+              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Ausgewähltes Objekt</p>
+              <p className="mt-7 text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">
+                {featuredCommerceProduct.category}
+              </p>
+              <h2 className="serif mt-3 text-balance text-2xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-3xl">
+                <Link href={getProductPath("de", featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)}>
+                  {featuredCommerceProduct.title}
+                </Link>
+              </h2>
+              <p className="mt-5 text-sm text-[#353b3e]">{featuredCommerceProduct.price}</p>
+              <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
+                {featuredCommerceProduct.description}
+              </p>
+              <Link
+                className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]"
+                href={getProductPath("de", featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)}
+              >
+                Zum Objekt
+              </Link>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-pad">
         <div className="mx-auto max-w-[1540px]">
