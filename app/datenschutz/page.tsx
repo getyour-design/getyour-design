@@ -8,12 +8,29 @@ export const metadata: Metadata = {
   },
 };
 
+const contactEmail = "home@2b.berlin";
+const renderMailto = (paragraph: string) => {
+  if (!paragraph.includes(contactEmail)) {
+    return paragraph;
+  }
+
+  const [before, after] = paragraph.split(contactEmail);
+
+  return (
+    <>
+      {before}
+      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      {after}
+    </>
+  );
+};
+
 const privacySections = [
   {
     title: "Verantwortliche Stelle",
     body: [
       "Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist die 2B Home GmbH, Kurfürstendamm 193d, 10707 Berlin.",
-      "Für datenschutzbezogene Anfragen erreichen Sie uns unter: home [at] 2b.berlin.",
+      `Für datenschutzbezogene Anfragen erreichen Sie uns unter: ${contactEmail}.`,
     ],
   },
   {
@@ -78,7 +95,7 @@ export default function DatenschutzPage() {
                 <h2 className="text-xs uppercase tracking-[0.2em] text-[#667174]">{section.title}</h2>
                 <div className="mt-4 grid gap-4">
                   {section.body.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                    <p key={paragraph}>{renderMailto(paragraph)}</p>
                   ))}
                 </div>
               </section>
@@ -89,4 +106,3 @@ export default function DatenschutzPage() {
     </main>
   );
 }
-

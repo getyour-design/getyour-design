@@ -816,7 +816,7 @@ function EnglishLegalPage({ routeKey }: { routeKey: RouteKey }) {
                 <h2 className="text-xs uppercase tracking-[0.2em] text-[#667174]">{section.title}</h2>
                 <div className="mt-4 grid gap-4">
                   {section.body.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                    <p key={paragraph}>{renderMailto(paragraph)}</p>
                   ))}
                 </div>
               </section>
@@ -864,7 +864,7 @@ function LegalPlaceholderPage({ locale, routeKey }: { locale: Locale; routeKey: 
                 <h2 className="text-xs uppercase tracking-[0.2em] text-[#667174]">{section.title}</h2>
                 <div className="mt-4 grid gap-4">
                   {section.body.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                    <p key={paragraph}>{renderMailto(paragraph)}</p>
                   ))}
                 </div>
               </section>
@@ -883,12 +883,29 @@ const companyDetails = [
   "Germany",
   "Phone: 030 8871 4880",
   "Fax: 030 1388 1599",
-  "Email: home [at] 2b.berlin",
-  "Represented by: D. Tarlig",
+  "Email: home@2b.berlin",
+  "Represented by: Diana Tarlig-Julich",
   "Register court: Amtsgericht Berlin",
   "Commercial register: HRB 235346 B",
   "VAT ID: DE348785133",
 ];
+
+const contactEmail = "home@2b.berlin";
+const renderMailto = (paragraph: string) => {
+  if (!paragraph.includes(contactEmail)) {
+    return paragraph;
+  }
+
+  const [before, after] = paragraph.split(contactEmail);
+
+  return (
+    <>
+      {before}
+      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      {after}
+    </>
+  );
+};
 
 const englishLegalContent: Partial<Record<RouteKey, {
   title: string;
@@ -926,7 +943,7 @@ const englishLegalContent: Partial<Record<RouteKey, {
         title: "Controller",
         body: [
           "The controller responsible for this website is 2B Home GmbH, Kurfürstendamm 193d, 10707 Berlin, Germany.",
-          "For privacy-related enquiries, please contact: home [at] 2b.berlin.",
+          `For privacy-related enquiries, please contact: ${contactEmail}.`,
         ],
       },
       {
