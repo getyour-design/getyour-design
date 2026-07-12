@@ -83,7 +83,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               <img
                 alt="GETYOUR.DESIGN interior context"
                 className="h-full min-h-[520px] w-full object-cover object-[58%_59%] lg:min-h-[720px]"
-                src="/images/hero-lc2-blue.jpg"
+                src="/images/hero-lc2-blue.png"
               />
             </div>
           </div>
