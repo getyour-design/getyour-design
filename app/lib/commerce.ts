@@ -1,3 +1,4 @@
+import type Stripe from "stripe";
 import type { ProductStatus } from "../data/products";
 
 const directCheckoutProducts = {
@@ -51,10 +52,10 @@ export function getProductCheckoutCta(productSlug: string) {
 }
 
 export function getCheckoutBaseUrl() {
-  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
   if (configuredUrl) {
-    return configuredUrl;
+    return getAllowedCheckoutBaseUrl(configuredUrl);
   }
 
   if (process.env.NODE_ENV !== "production") {
@@ -62,4 +63,43 @@ export function getCheckoutBaseUrl() {
   }
 
   return undefined;
+}
+
+export function getAllowedCheckoutBaseUrl(value: string) {
+  let url: URL;
+
+  try {
+    url = new URL(value);
+  } catch {
+    return undefined;
+  }
+
+  if (url.pathname !== "/" || url.search || url.hash || url.username || url.password) {
+    return undefined;
+  }
+
+  const origin = url.origin;
+
+  if (process.env.NODE_ENV === "production") {
+    return origin === "https://www.getyour.design" || origin === "https://getyour.design"
+      ? origin
+      : undefined;
+  }
+
+  return origin === "http://localhost:3000" || origin === "http://localhost:3001"
+    ? origin
+    : undefined;
+}
+
+export function validateDirectCheckoutSession(session: Pick<
+  Stripe.Checkout.Session,
+  "amount_total" | "currency" | "metadata" | "mode" | "payment_status"
+>) {
+  const checkoutProduct = directCheckoutProducts["sitzobjekt-kuhfell"];
+
+  return session.mode === "payment" &&
+    session.payment_status === "paid" &&
+    session.amount_total === checkoutProduct.amount &&
+    session.currency === checkoutProduct.currency &&
+    session.metadata?.productSlug === "sitzobjekt-kuhfell";
 }

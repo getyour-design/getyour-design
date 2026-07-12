@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Stripe from "stripe";
+import { isStripeCheckoutConfigured, validateDirectCheckoutSession } from "../../../lib/commerce";
 import { getProductPath, getShopPath, isLocale, type Locale } from "../../../lib/i18n";
 
 type CheckoutResultPageProps = {
   params: Promise<{ locale: string; result: string }>;
+  searchParams?: Promise<{ session_id?: string | string[] }>;
 };
 
 const productSlug = "sitzobjekt-kuhfell";
@@ -124,6 +127,57 @@ const copy: Record<Locale, Record<"success" | "cancel", {
   },
 };
 
+const unconfirmedSuccessCopy: Record<Locale, {
+  eyebrow: string;
+  title: string;
+  body: string;
+  productLink: string;
+  shopLink: string;
+}> = {
+  de: {
+    eyebrow: "Checkout",
+    title: "Zahlungsstatus nicht bestaetigt.",
+    body: "Der Zahlungsstatus konnte nicht bestaetigt werden. Bitte kehren Sie zum Produkt zurueck oder kontaktieren Sie uns bei Rueckfragen.",
+    productLink: "Zurueck zum Produkt",
+    shopLink: "Zum Shop",
+  },
+  en: {
+    eyebrow: "Checkout",
+    title: "Payment status not confirmed.",
+    body: "The payment status could not be confirmed. Please return to the product page or contact us with any questions.",
+    productLink: "Back to product",
+    shopLink: "To the shop",
+  },
+  fr: {
+    eyebrow: "Checkout",
+    title: "Statut du paiement non confirme.",
+    body: "Le statut du paiement n'a pas pu etre confirme. Veuillez retourner a la page produit ou nous contacter en cas de question.",
+    productLink: "Retour au produit",
+    shopLink: "Vers la boutique",
+  },
+  es: {
+    eyebrow: "Checkout",
+    title: "Estado del pago no confirmado.",
+    body: "No se ha podido confirmar el estado del pago. Vuelva a la pagina del producto o contacte con nosotros si tiene preguntas.",
+    productLink: "Volver al producto",
+    shopLink: "Ir a la tienda",
+  },
+  zh: {
+    eyebrow: "Checkout",
+    title: "付款状态未确认。",
+    body: "无法确认付款状态。请返回产品页面，或如有疑问请联系我们。",
+    productLink: "返回产品",
+    shopLink: "前往商店",
+  },
+  ar: {
+    eyebrow: "Checkout",
+    title: "تعذر تأكيد حالة الدفع.",
+    body: "تعذر تأكيد حالة الدفع. يرجى العودة إلى صفحة المنتج أو التواصل معنا عند وجود أسئلة.",
+    productLink: "العودة إلى المنتج",
+    shopLink: "إلى المتجر",
+  },
+};
+
 export function generateStaticParams() {
   return Object.entries(resultSlugs).flatMap(([locale, slugs]) => [
     { locale, result: slugs.success },
@@ -139,7 +193,11 @@ export async function generateMetadata({ params }: CheckoutResultPageProps): Pro
   }
 
   const resultType = getResultType(locale, result);
-  const pageCopy = resultType ? copy[locale][resultType] : undefined;
+  const pageCopy = resultType === "success"
+    ? unconfirmedSuccessCopy[locale]
+    : resultType
+      ? copy[locale][resultType]
+      : undefined;
 
   return {
     title: pageCopy?.title ?? "Checkout",
@@ -150,7 +208,7 @@ export async function generateMetadata({ params }: CheckoutResultPageProps): Pro
   };
 }
 
-export default async function CheckoutResultPage({ params }: CheckoutResultPageProps) {
+export default async function CheckoutResultPage({ params, searchParams }: CheckoutResultPageProps) {
   const { locale, result } = await params;
 
   if (!isLocale(locale)) {
@@ -163,7 +221,13 @@ export default async function CheckoutResultPage({ params }: CheckoutResultPageP
     notFound();
   }
 
-  const pageCopy = copy[locale][resultType];
+  const requestedSessionId = getSessionId(await searchParams);
+  const hasConfirmedCheckout = resultType === "success"
+    ? await isConfirmedCheckoutSession(requestedSessionId)
+    : false;
+  const pageCopy = resultType === "success" && !hasConfirmedCheckout
+    ? unconfirmedSuccessCopy[locale]
+    : copy[locale][resultType];
   const productHref = getProductPath(locale, productCategorySlug, productSlug);
 
   return (
@@ -197,4 +261,27 @@ function getResultType(locale: Locale, result: string) {
   }
 
   return undefined;
+}
+
+function getSessionId(searchParams?: { session_id?: string | string[] }) {
+  const sessionId = searchParams?.session_id;
+
+  return typeof sessionId === "string" ? sessionId : undefined;
+}
+
+async function isConfirmedCheckoutSession(sessionId: string | undefined) {
+  const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+
+  if (!sessionId || !stripeSecretKey || !isStripeCheckoutConfigured()) {
+    return false;
+  }
+
+  try {
+    const stripe = new Stripe(stripeSecretKey);
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    return validateDirectCheckoutSession(session);
+  } catch {
+    return false;
+  }
 }
