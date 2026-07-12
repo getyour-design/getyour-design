@@ -12,6 +12,20 @@ type ProductImage = {
   alt: string;
 };
 
+type ProductType =
+  | "affiliate"
+  | "physical"
+  | "manufacturer"
+  | "brand"
+  | "artwork"
+  | "edition"
+  | "collectible"
+  | "service";
+
+type CommerceMode = "direct" | "affiliate" | "inquiry";
+
+type InventoryMode = "tracked" | "untracked" | "made-to-order" | "single-piece";
+
 type LocalizedProductContent = {
   title: string;
   cardTitle: string;
@@ -49,6 +63,24 @@ type ProductSeed = {
   images?: ProductImage[];
   metaTitle?: string;
   metaDescription?: string;
+  brand?: string;
+  brandSlug?: string;
+  rooms?: string[];
+  collections?: string[];
+  affiliateLink?: string;
+  affiliatePartner?: string;
+  affiliateCategory?: string;
+  country?: string;
+  style?: string[];
+  relatedProducts?: string[];
+  externalId?: string;
+  sourceSystem?: string;
+  sourceUrl?: string;
+  productType?: ProductType;
+  commerceMode?: CommerceMode;
+  shippingProfile?: string;
+  taxCode?: string;
+  inventoryMode?: InventoryMode;
   localized?: Partial<Record<ProductLocale, LocalizedProductContent>>;
 };
 
@@ -554,6 +586,24 @@ export const products = categorySeeds.flatMap((category) =>
       images: item.images,
       metaTitle: item.metaTitle,
       metaDescription: item.metaDescription,
+      brand: item.brand,
+      brandSlug: item.brandSlug,
+      rooms: item.rooms,
+      collections: item.collections,
+      affiliateLink: item.affiliateLink,
+      affiliatePartner: item.affiliatePartner,
+      affiliateCategory: item.affiliateCategory,
+      country: item.country,
+      style: item.style,
+      relatedProducts: item.relatedProducts,
+      externalId: item.externalId,
+      sourceSystem: item.sourceSystem,
+      sourceUrl: item.sourceUrl,
+      productType: item.productType,
+      commerceMode: item.commerceMode,
+      shippingProfile: item.shippingProfile,
+      taxCode: item.taxCode,
+      inventoryMode: item.inventoryMode,
       palette: palettes[index % palettes.length],
       pathMode: item.pathMode ?? "flat",
       localized: item.localized,
