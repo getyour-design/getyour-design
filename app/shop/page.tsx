@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "../components/PageHero";
-import { ProductCardMedia } from "../components/ProductMedia";
+import { PlaceholderArtwork } from "../components/PlaceholderArtwork";
 import { EntityActions } from "../components/EntityActions";
 import { products, shopCategories } from "../data/products";
 
@@ -35,20 +35,20 @@ export default function ShopPage() {
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
             <article className="group" key={product.title}>
-              <Link href={`/shop/${product.categorySlug}/${product.slug}`}>
-                <ProductCardMedia images={product.images} index={index} palette={product.palette} title={product.cardTitle} />
+              <Link href={`/shop/${product.slug}`}>
+                <PlaceholderArtwork index={index} palette={product.palette} />
               </Link>
               <div className="mt-5 flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{product.category}</p>
-                  <Link href={`/shop/${product.categorySlug}/${product.slug}`}>
-                    <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{product.cardTitle}</h2>
+                  <Link href={`/shop/${product.slug}`}>
+                    <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{product.title}</h2>
                   </Link>
                   <Link className="mt-2 inline-block text-sm text-[#4b5356] hover:text-black" href={product.maker.includes("Künstlerposition") ? "/artists" : "/brands"}>
                     {product.maker}
                   </Link>
                   <EntityActions
-                    href={`/shop/${product.categorySlug}/${product.slug}`}
+                    href={`/shop/${product.slug}`}
                     id={`product:${product.slug}`}
                     title={product.title}
                     type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}

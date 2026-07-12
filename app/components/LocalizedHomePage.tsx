@@ -4,7 +4,6 @@ import { collections } from "../data/collections";
 import { materialCards } from "../data/materials";
 import { products } from "../data/products";
 import { stories } from "../data/stories";
-import { ProductCardMedia } from "./ProductMedia";
 import { getShopPath, localizeHref, type Locale } from "../lib/i18n";
 import { getEnglishProductTitle } from "../lib/productTitles";
 
@@ -35,33 +34,13 @@ const shopHubLinks = [
   { label: "Kunst", slug: "kunst" },
 ];
 
-type Product = (typeof products)[number];
-
-function getProductContent(locale: Locale, product: Product) {
+function getProductTitle(locale: Locale, title: string, index: number) {
   if (locale === "de") {
-    return {
-      title: product.title,
-      cardTitle: product.cardTitle,
-      images: product.images,
-    };
-  }
-
-  return product.localized?.[locale];
-}
-
-function getProductTitle(locale: Locale, product: Product, index: number) {
-  const content = getProductContent(locale, product);
-
-  if (content?.cardTitle) {
-    return content.cardTitle;
-  }
-
-  if (locale === "de") {
-    return product.cardTitle;
+    return title;
   }
 
   if (locale === "en") {
-    return getEnglishProductTitle(product.title);
+    return getEnglishProductTitle(title);
   }
 
   return `${getDictionary(locale).shop.genericProductTitle} ${String(index + 1).padStart(2, "0")}`;
@@ -139,21 +118,17 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
           <div className="mt-8 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {products.slice(0, 8).map((item, index) => (
               <article className="group" key={item.title}>
-                {getProductContent(locale, item)?.images ? (
-                  <ProductCardMedia images={getProductContent(locale, item)?.images} index={index} palette={item.palette} title={getProductTitle(locale, item, index)} />
-                ) : (
-                  <div className="overflow-hidden border hairline bg-[#f8f8f6]">
-                    <img
-                      alt={getProductTitle(locale, item, index)}
-                      className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-                      src={productImages[index % productImages.length]}
-                    />
-                  </div>
-                )}
+                <div className="overflow-hidden border hairline bg-[#f8f8f6]">
+                  <img
+                    alt={getProductTitle(locale, item.title, index)}
+                    className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    src={productImages[index % productImages.length]}
+                  />
+                </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
                     <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.categories[item.category] ?? item.category}</p>
-                    <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getProductTitle(locale, item, index)}</h3>
+                    <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getProductTitle(locale, item.title, index)}</h3>
                   </div>
                   <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
                 </div>
@@ -177,21 +152,17 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {products.slice(0, 4).map((work, index) => (
               <Link className="group" href={localizedHref("/shop", locale)} key={work.title}>
-                {getProductContent(locale, work)?.images ? (
-                  <ProductCardMedia images={getProductContent(locale, work)?.images} index={index} palette={work.palette} title={getProductTitle(locale, work, index)} />
-                ) : (
-                  <div className="overflow-hidden bg-[#f7f7f5]">
-                    <img
-                      alt={getProductTitle(locale, work, index)}
-                      className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
-                      src={productImages[index % productImages.length]}
-                    />
-                  </div>
-                )}
+                <div className="overflow-hidden bg-[#f7f7f5]">
+                  <img
+                    alt={getProductTitle(locale, work.title, index)}
+                    className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    src={productImages[index % productImages.length]}
+                  />
+                </div>
                 <div className="mt-5 flex items-start justify-between gap-5 border-t border-black/15 pt-4">
                   <div>
                     <p className="text-[0.65rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
-                    <h3 className="serif mt-2 text-lg leading-snug tracking-[0.08em]">{getProductTitle(locale, work, index)}</h3>
+                    <h3 className="serif mt-2 text-lg leading-snug tracking-[0.08em]">{getProductTitle(locale, work.title, index)}</h3>
                   </div>
                   <p className="max-w-[8rem] text-right text-xs leading-5 text-[#4b5356]">{dictionary.shop.categories[work.category] ?? work.category}</p>
                 </div>

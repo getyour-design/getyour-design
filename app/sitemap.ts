@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { products, shopCategories } from "./data/products";
-import { getAlternateLanguages, getProductPath, getShopPath, localizedRoutes, locales, type RouteKey } from "./lib/i18n";
+import { getAlternateLanguages, getProductPath, getShopPath, localizedRoutes, locales, type Locale, type RouteKey } from "./lib/i18n";
 
 const siteUrl = "https://www.getyour.design";
 const lastModified = new Date("2026-06-23");
@@ -31,12 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
   const productRoutes = products.flatMap((product) => {
     const languages = {
-      ...Object.fromEntries(locales.map((locale) => [locale, getProductPath(locale, product.categorySlug, product.slug)])),
-      "x-default": getProductPath("de", product.categorySlug, product.slug),
+      ...Object.fromEntries(locales.map((locale) => [locale, getProductCanonicalPath(locale, product)])),
+      "x-default": getProductCanonicalPath("de", product),
     };
 
     return locales.map((locale) => ({
-      url: `${siteUrl}${getProductPath(locale, product.categorySlug, product.slug)}`,
+      url: `${siteUrl}${getProductCanonicalPath(locale, product)}`,
       lastModified,
       alternates: {
         languages: absoluteLanguages(languages),
@@ -60,4 +60,12 @@ function absoluteLanguages(languages: Record<string, string>) {
   return Object.fromEntries(
     Object.entries(languages).map(([locale, path]) => [locale, `${siteUrl}${path}`]),
   );
+}
+
+type Product = (typeof products)[number];
+
+function getProductCanonicalPath(locale: Locale, product: Product) {
+  return product.pathMode === "nested"
+    ? getProductPath(locale, product.categorySlug, product.slug)
+    : getShopPath(locale, product.slug);
 }

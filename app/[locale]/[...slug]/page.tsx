@@ -18,6 +18,7 @@ import MaterialsPage from "../../materials/page";
 import ObjectsPage from "../../objects/page";
 import SculpturalSeatingPage from "../../sculptural-seating/page";
 import ShopPage from "../../shop/page";
+import ShopSlugPage from "../../shop/[slug]/page";
 import SearchPage from "../../suche/page";
 import TradePage from "../../trade/page";
 import CartPage from "../../warenkorb/page";
@@ -146,7 +147,7 @@ export function generateStaticParams() {
       locale,
       slug: ["shop", product.slug],
     })),
-    ...products.map((product) => ({
+    ...products.filter((product) => product.pathMode === "nested").map((product) => ({
       locale,
       slug: ["shop", getLocalizedShopSlug(locale, product.categorySlug), product.slug],
     })),
@@ -181,7 +182,7 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
     const description = product
       ? productContent?.metaDescription ?? `${title} | GETYOUR.DESIGN: ${dictionary.shop.categories[product.category] ?? product.category}, ${product.material}, ${product.price}.`
       : `${title} | GETYOUR.DESIGN.`;
-    const productCanonical = product ? getProductPath(locale, product.categorySlug, product.slug) : undefined;
+    const productCanonical = product ? getLocalizedProductPath(locale, product) : undefined;
 
     return {
       title,
@@ -197,9 +198,9 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
         languages: {
           ...Object.fromEntries(locales.map((targetLocale) => [
             targetLocale,
-            product ? getProductPath(targetLocale, product.categorySlug, product.slug) : getShopPath(targetLocale, route.slug),
+            product ? getLocalizedProductPath(targetLocale, product) : getShopPath(targetLocale, route.slug),
           ])),
-          "x-default": product ? getProductPath("de", product.categorySlug, product.slug) : getShopPath("de", route.slug),
+          "x-default": product ? getLocalizedProductPath("de", product) : getShopPath("de", route.slug),
         },
       },
     };
@@ -241,6 +242,10 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
   }
 
   if (route.kind === "shopItem") {
+    if (locale === "de") {
+      return <ShopSlugPage params={Promise.resolve({ slug: route.slug })} />;
+    }
+
     return <LocalizedShopSlugPage locale={locale} slug={route.slug} />;
   }
 
@@ -311,6 +316,12 @@ function getLocalizedCategoryLabel(locale: Locale, value: string) {
 }
 
 type Product = (typeof products)[number];
+
+function getLocalizedProductPath(locale: Locale, product: Product) {
+  return product.pathMode === "nested"
+    ? getProductPath(locale, product.categorySlug, product.slug)
+    : getShopPath(locale, product.slug);
+}
 
 function getLocalizedProductContent(locale: Locale, product: Product) {
   if (locale === "de") {
@@ -459,23 +470,18 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
             <article className="group" key={product.slug}>
-              <Link href={getProductPath(locale, product.categorySlug, product.slug)}>
-                <ProductCardMedia
-                  images={getLocalizedProductImages(locale, product)}
-                  index={index}
-                  palette={product.palette}
-                  title={getLocalizedProductCardTitle(locale, product, index)}
-                />
+              <Link href={getLocalizedProductPath(locale, product)}>
+                <PlaceholderArtwork index={index} palette={product.palette} />
               </Link>
               <div className="mt-5 flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getLocalizedCategoryLabel(locale, product.category)}</p>
-                  <Link href={getProductPath(locale, product.categorySlug, product.slug)}>
+                  <Link href={getLocalizedProductPath(locale, product)}>
                     <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getLocalizedProductCardTitle(locale, product, index)}</h2>
                   </Link>
                   <p className="mt-2 text-sm text-[#4b5356]">{product.maker.replace("Künstlerposition", "Artist Position")}</p>
                   <EntityActions
-                    href={getProductPath(locale, product.categorySlug, product.slug)}
+                    href={getLocalizedProductPath(locale, product)}
                     id={`product:${product.slug}`}
                     title={getLocalizedProductCardTitle(locale, product, index)}
                     type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
@@ -503,7 +509,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
     const cta = getLocalizedCta(locale, product.status);
     const content = getLocalizedProductContent(locale, product);
     const productTitle = getLocalizedProductTitle(locale, product, productIndex);
-    const productHref = getProductPath(locale, product.categorySlug, product.slug);
+    const productHref = getLocalizedProductPath(locale, product);
     const productCta = content?.ctaLabel ? { ...cta, label: content.ctaLabel } : cta;
     const productImages = getLocalizedProductImages(locale, product);
 
@@ -619,7 +625,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
 
               return (
                 <article className="group" key={item.slug}>
-                  <Link href={getProductPath(locale, item.categorySlug, item.slug)}>
+                  <Link href={getLocalizedProductPath(locale, item)}>
                     <ProductCardMedia
                       images={getLocalizedProductImages(locale, item)}
                       index={index}
@@ -630,12 +636,12 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                   <div className="mt-5 flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getLocalizedCategoryLabel(locale, item.category)}</p>
-                      <Link href={getProductPath(locale, item.categorySlug, item.slug)}>
+                      <Link href={getLocalizedProductPath(locale, item)}>
                         <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getLocalizedProductCardTitle(locale, item, index)}</h2>
                       </Link>
                       <p className="mt-2 text-sm text-[#4b5356]">{item.maker.replace("Künstlerposition", "Artist Position")}</p>
                       <EntityActions
-                        href={getProductPath(locale, item.categorySlug, item.slug)}
+                        href={getLocalizedProductPath(locale, item)}
                         id={`product:${item.slug}`}
                         title={getLocalizedProductCardTitle(locale, item, index)}
                         type={item.category === "Kunst" || item.category === "Editionen" ? "Kunstwerk" : item.category === "Collectible Design" ? "Collectible Design" : "Produkt"}

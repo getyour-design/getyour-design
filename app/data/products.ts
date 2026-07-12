@@ -31,6 +31,7 @@ type LocalizedProductContent = {
 type ProductSeed = {
   title: string;
   cardTitle?: string;
+  pathMode?: "flat" | "nested";
   price: string;
   priceNote?: string;
   material: string;
@@ -113,9 +114,22 @@ const categorySeeds: ProductCategorySeed[] = [
     description:
       "Möbelstück mit klarer Form, präziser Materialwirkung und ruhiger Präsenz im Raum.",
     items: [
+      { title: "Sitzobjekt aus dunklem Holz", slug: "sitzobjekt-aus-dunklem-holz", price: "EUR 3,840", material: "Dunkles Holz, textile Polsterung", dimensions: "72 x 78 x 68 cm" },
+      { title: "Niedrige Bank aus Eiche", price: "EUR 2,900", material: "Eiche, geölte Oberfläche", dimensions: "160 x 42 x 44 cm" },
+      { title: "Sessel mit Lederauflage", price: "EUR 4,600", material: "Stahl, Leder", dimensions: "78 x 82 x 72 cm" },
+      { title: "Konsole aus geräuchertem Holz", price: "EUR 5,200", material: "Geräucherte Eiche", dimensions: "180 x 38 x 82 cm" },
+      { title: "Tisch mit Steinplatte", price: "EUR 8,900", material: "Naturstein, Stahl", dimensions: "220 x 92 x 74 cm" },
+      { title: "Regalobjekt aus Nussbaum", price: "EUR 6,400", material: "Nussbaum, brünierter Stahl", dimensions: "120 x 36 x 180 cm" },
+      { title: "Daybed mit Wollbezug", price: "EUR 7,800", material: "Wolle, Holz, Stahl", dimensions: "195 x 82 x 42 cm" },
+      { title: "Hocker aus massivem Holz", price: "EUR 1,450", material: "Massivholz", dimensions: "38 x 38 x 46 cm" },
+      { title: "Schreibtisch mit klarer Kante", price: "EUR 5,900", material: "Eiche, Leder", dimensions: "150 x 70 x 74 cm" },
+      { title: "Sideboard mit Steinauflage", price: "EUR 9,200", material: "Holz, Naturstein", dimensions: "210 x 48 x 72 cm" },
+      { title: "Stuhl mit Stahlrahmen", price: "EUR 1,980", material: "Stahl, Leder", dimensions: "52 x 56 x 78 cm" },
+      { title: "Runder Tisch aus Esche", price: "EUR 4,300", material: "Esche, geölte Oberfläche", dimensions: "120 x 120 x 74 cm" },
       {
         title: "Sitzobjekt aus europäischem Kuhfell",
         cardTitle: "Sitzobjekt aus Kuhfell",
+        pathMode: "nested",
         slug: "sitzobjekt-kuhfell",
         price: "7.200 €",
         priceNote: "inkl. gesetzlicher Umsatzsteuer, zzgl. Versandkosten",
@@ -333,18 +347,6 @@ const categorySeeds: ProductCategorySeed[] = [
           },
         },
       },
-      { title: "Sitzobjekt aus dunklem Holz", slug: "sitzobjekt-aus-dunklem-holz", price: "EUR 3,840", material: "Dunkles Holz, textile Polsterung", dimensions: "72 x 78 x 68 cm" },
-      { title: "Niedrige Bank aus Eiche", price: "EUR 2,900", material: "Eiche, geölte Oberfläche", dimensions: "160 x 42 x 44 cm" },
-      { title: "Sessel mit Lederauflage", price: "EUR 4,600", material: "Stahl, Leder", dimensions: "78 x 82 x 72 cm" },
-      { title: "Konsole aus geräuchertem Holz", price: "EUR 5,200", material: "Geräucherte Eiche", dimensions: "180 x 38 x 82 cm" },
-      { title: "Tisch mit Steinplatte", price: "EUR 8,900", material: "Naturstein, Stahl", dimensions: "220 x 92 x 74 cm" },
-      { title: "Regalobjekt aus Nussbaum", price: "EUR 6,400", material: "Nussbaum, brünierter Stahl", dimensions: "120 x 36 x 180 cm" },
-      { title: "Daybed mit Wollbezug", price: "EUR 7,800", material: "Wolle, Holz, Stahl", dimensions: "195 x 82 x 42 cm" },
-      { title: "Hocker aus massivem Holz", price: "EUR 1,450", material: "Massivholz", dimensions: "38 x 38 x 46 cm" },
-      { title: "Schreibtisch mit klarer Kante", price: "EUR 5,900", material: "Eiche, Leder", dimensions: "150 x 70 x 74 cm" },
-      { title: "Sideboard mit Steinauflage", price: "EUR 9,200", material: "Holz, Naturstein", dimensions: "210 x 48 x 72 cm" },
-      { title: "Stuhl mit Stahlrahmen", price: "EUR 1,980", material: "Stahl, Leder", dimensions: "52 x 56 x 78 cm" },
-      { title: "Runder Tisch aus Esche", price: "EUR 4,300", material: "Esche, geölte Oberfläche", dimensions: "120 x 120 x 74 cm" },
     ],
   },
   {
@@ -553,6 +555,7 @@ export const products = categorySeeds.flatMap((category) =>
       metaTitle: item.metaTitle,
       metaDescription: item.metaDescription,
       palette: palettes[index % palettes.length],
+      pathMode: item.pathMode ?? "flat",
       localized: item.localized,
     };
   }),

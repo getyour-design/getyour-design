@@ -22,6 +22,20 @@ const categoryDescriptions: Record<string, string> = {
   "Collectible Design": "Sammlerobjekte zwischen Design, Handwerk und Kunst.",
 };
 
+type Product = (typeof products)[number];
+
+function getRootProductPath(product: Product) {
+  return product.pathMode === "nested"
+    ? `/shop/${product.categorySlug}/${product.slug}`
+    : `/shop/${product.slug}`;
+}
+
+function getProductCanonical(product: Product) {
+  return product.pathMode === "nested"
+    ? getProductPath("de", product.categorySlug, product.slug)
+    : `/shop/${product.slug}`;
+}
+
 export async function generateStaticParams() {
   return [
     ...shopCategories.map((category) => ({ slug: category.slug })),
@@ -35,9 +49,7 @@ export async function generateMetadata({ params }: ShopSlugPageProps): Promise<M
   const category = shopCategories.find((item) => item.slug === slug);
 
   if (product) {
-    const productCategory = shopCategories.find((item) => item.title === product.category);
-    const categorySlug = productCategory?.slug ?? product.categorySlug;
-    const productPath = getProductPath("de", categorySlug, product.slug);
+    const productPath = getProductCanonical(product);
 
     return {
       title: product.metaTitle ?? product.title,
@@ -76,9 +88,8 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
     const cta = getProductCta(product.status);
     const productIndex = products.findIndex((item) => item.slug === product.slug);
     const productCategory = shopCategories.find((item) => item.title === product.category);
-    const categorySlug = productCategory?.slug ?? product.categorySlug;
     const categoryHref = productCategory ? `/shop/${productCategory.slug}` : "/shop";
-    const productHref = getProductPath("de", categorySlug, product.slug);
+    const productHref = getRootProductPath(product);
     const productCta = product.ctaLabel ? { ...cta, label: product.ctaLabel } : cta;
 
     return (
@@ -194,18 +205,18 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
 
               return (
                 <article className="group" key={item.slug}>
-                  <Link href={`/shop/${category.slug}/${item.slug}`}>
+                  <Link href={getRootProductPath(item)}>
                     <ProductCardMedia images={item.images} index={index} palette={item.palette} title={item.cardTitle} />
                   </Link>
                   <div className="mt-5 flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{item.category}</p>
-                      <Link href={`/shop/${category.slug}/${item.slug}`}>
+                      <Link href={getRootProductPath(item)}>
                         <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{item.cardTitle}</h2>
                       </Link>
                       <p className="mt-2 text-sm text-[#4b5356]">{item.maker}</p>
                       <EntityActions
-                        href={`/shop/${category.slug}/${item.slug}`}
+                        href={getRootProductPath(item)}
                         id={`product:${item.slug}`}
                         title={item.cardTitle}
                         type={item.category === "Kunst" || item.category === "Editionen" ? "Kunstwerk" : item.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
