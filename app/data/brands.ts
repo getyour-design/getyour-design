@@ -1,3 +1,5 @@
+import { products } from "./products";
+
 export type BrandLocale = "de" | "en" | "fr" | "es" | "zh" | "ar";
 
 export type LocalizedBrandContent = {
@@ -48,3 +50,11 @@ export const brands: Brand[] = [
     status: "editorial",
   },
 ];
+
+export function getBrandBySlug(slug: string) {
+  return brands.find((brand) => brand.slug === slug);
+}
+
+export function getProductsByBrandSlug(slug: string) {
+  return products.filter((product) => product.brandSlug === slug);
+}
