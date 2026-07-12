@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ProductCardMedia, ProductGallery } from "../../components/ProductMedia";
 import { EntityActions } from "../../components/EntityActions";
 import { CheckoutButton } from "../../components/CheckoutButton";
-import { getProductCheckoutCta, getProductCta } from "../../lib/commerce";
+import { getCommerceCta, getProductCta } from "../../lib/commerce";
 import { getProductPath } from "../../lib/i18n";
 import { products, shopCategories } from "../../data/products";
 
@@ -92,7 +92,16 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
     const categoryHref = productCategory ? `/shop/${productCategory.slug}` : "/shop";
     const productHref = getRootProductPath(product);
     const productCta = product.ctaLabel ? { ...cta, label: product.ctaLabel } : cta;
-    const checkoutCta = getProductCheckoutCta(product.slug);
+    const commerceCta = getCommerceCta({
+      productSlug: product.slug,
+      commerceMode: product.commerceMode,
+      affiliateLink: product.affiliateLink,
+      fallbackCta: productCta,
+      labels: {
+        direct: "KAUFEN",
+        affiliate: "Beim Partner ansehen",
+      },
+    });
 
     return (
       <main>
@@ -156,20 +165,24 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                   </div>
                 ) : null}
               </dl>
-              {checkoutCta.enabled ? (
+              {commerceCta.action === "checkout" ? (
                 <CheckoutButton
                   errorMessage="Der Checkout ist derzeit nicht verfügbar. Bitte nutzen Sie alternativ die Anfrage."
-                  label={checkoutCta.label}
+                  label={commerceCta.label}
                   loadingLabel="Checkout wird vorbereitet"
                   productSlug={product.slug}
                 />
-              ) : productCta.disabled ? (
+              ) : commerceCta.disabled ? (
                 <button className="mt-10 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>
-                  {productCta.label}
+                  {commerceCta.label}
                 </button>
+              ) : commerceCta.external ? (
+                <a className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={commerceCta.href} rel={commerceCta.rel} target="_blank">
+                  {commerceCta.label}
+                </a>
               ) : (
-                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={productCta.href ?? "/contact"}>
-                  {productCta.label}
+                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={commerceCta.href ?? "/contact"}>
+                  {commerceCta.label}
                 </Link>
               )}
             </div>

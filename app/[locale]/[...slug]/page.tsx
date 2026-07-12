@@ -34,7 +34,7 @@ import { collections } from "../../data/collections";
 import { artworks } from "../../data/artworks";
 import { brands } from "../../data/brands";
 import { stories } from "../../data/stories";
-import { getProductCheckoutCta } from "../../lib/commerce";
+import { getCommerceCta } from "../../lib/commerce";
 import { getEnglishProductTitle } from "../../lib/productTitles";
 import {
   getAlternateLanguages,
@@ -549,8 +549,17 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
     const productHref = getLocalizedProductPath(locale, product);
     const productCta = content?.ctaLabel ? { ...cta, label: content.ctaLabel } : cta;
     const productImages = getLocalizedProductImages(locale, product);
-    const checkoutCta = getProductCheckoutCta(product.slug);
     const checkoutCopy = getLocalizedCheckoutCopy(locale);
+    const commerceCta = getCommerceCta({
+      productSlug: product.slug,
+      commerceMode: product.commerceMode,
+      affiliateLink: product.affiliateLink,
+      fallbackCta: productCta,
+      labels: {
+        direct: checkoutCopy.label,
+        affiliate: dictionary.shop.cta["Beim Partner ansehen"],
+      },
+    });
 
     return (
       <main>
@@ -614,20 +623,24 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                   </div>
                 ) : null}
               </dl>
-              {checkoutCta.enabled ? (
+              {commerceCta.action === "checkout" ? (
                 <CheckoutButton
                   errorMessage={checkoutCopy.errorMessage}
-                  label={checkoutCopy.label}
+                  label={commerceCta.label}
                   loadingLabel={checkoutCopy.loadingLabel}
                   productSlug={product.slug}
                 />
-              ) : productCta.disabled ? (
+              ) : commerceCta.disabled ? (
                 <button className="mt-10 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>
-                  {productCta.label}
+                  {commerceCta.label}
                 </button>
+              ) : commerceCta.external ? (
+                <a className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={commerceCta.href} rel={commerceCta.rel} target="_blank">
+                  {commerceCta.label}
+                </a>
               ) : (
-                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={productCta.href}>
-                  {productCta.label}
+                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={commerceCta.href ?? localizedRoutes.contact[locale]}>
+                  {commerceCta.label}
                 </Link>
               )}
             </div>

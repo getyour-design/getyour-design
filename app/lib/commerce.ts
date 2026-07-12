@@ -1,6 +1,38 @@
 import type Stripe from "stripe";
 import type { ProductStatus } from "../data/products";
 
+type CommerceMode = "direct" | "affiliate" | "inquiry";
+
+type BaseProductCta = {
+  label: string;
+  href?: string;
+  disabled: boolean;
+};
+
+type CommerceCtaLabels = {
+  direct: string;
+  affiliate: string;
+};
+
+type CommerceCtaInput = {
+  productSlug: string;
+  commerceMode?: CommerceMode;
+  affiliateLink?: string;
+  fallbackCta: BaseProductCta;
+  labels: CommerceCtaLabels;
+};
+
+export type CommerceCta = {
+  mode: CommerceMode | "status";
+  label: string;
+  href?: string;
+  action: "checkout" | "link" | "disabled";
+  external: boolean;
+  disabled: boolean;
+  rel?: string;
+  checkoutEnabled: boolean;
+};
+
 const directCheckoutProducts = {
   "sitzobjekt-kuhfell": {
     amount: 720000,
@@ -49,6 +81,87 @@ export function getProductCheckoutCta(productSlug: string) {
     enabled: Boolean(checkoutProduct) && isStripeCheckoutConfigured(),
     label: "KAUFEN",
   };
+}
+
+function toCommerceFallbackCta(fallbackCta: BaseProductCta, mode: CommerceCta["mode"] = "status"): CommerceCta {
+  return {
+    mode,
+    label: fallbackCta.label,
+    href: fallbackCta.href,
+    action: fallbackCta.disabled ? "disabled" : "link",
+    external: false,
+    disabled: fallbackCta.disabled,
+    checkoutEnabled: false,
+  };
+}
+
+function getSafeAffiliateHref(value?: string) {
+  if (!value) {
+    return undefined;
+  }
+
+  try {
+    const url = new URL(value);
+
+    return url.protocol === "https:" ? url.href : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export function getCommerceCta({
+  productSlug,
+  commerceMode,
+  affiliateLink,
+  fallbackCta,
+  labels,
+}: CommerceCtaInput): CommerceCta {
+  if (fallbackCta.disabled) {
+    return toCommerceFallbackCta(fallbackCta, commerceMode ?? "status");
+  }
+
+  const checkoutCta = getProductCheckoutCta(productSlug);
+  const legacyDirectCheckout = !commerceMode && checkoutCta.enabled;
+
+  if (commerceMode === "direct" || legacyDirectCheckout) {
+    if (checkoutCta.enabled) {
+      return {
+        mode: "direct",
+        label: labels.direct,
+        action: "checkout",
+        external: false,
+        disabled: false,
+        checkoutEnabled: true,
+      };
+    }
+
+    return toCommerceFallbackCta(fallbackCta, "direct");
+  }
+
+  if (commerceMode === "affiliate") {
+    const href = getSafeAffiliateHref(affiliateLink);
+
+    if (href) {
+      return {
+        mode: "affiliate",
+        label: labels.affiliate,
+        href,
+        action: "link",
+        external: true,
+        disabled: false,
+        rel: "sponsored nofollow noopener noreferrer",
+        checkoutEnabled: false,
+      };
+    }
+
+    return toCommerceFallbackCta(fallbackCta, "affiliate");
+  }
+
+  if (commerceMode === "inquiry") {
+    return toCommerceFallbackCta(fallbackCta, "inquiry");
+  }
+
+  return toCommerceFallbackCta(fallbackCta);
 }
 
 export function getCheckoutBaseUrl() {
