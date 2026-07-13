@@ -1,5 +1,7 @@
 # GETYOUR.DESIGN Brand, Design, Content and Technical DNA
 
+Aktualisierung zum committed Repository-Stand `3520e12` vom 2026-07-13: Die gestalterische und inhaltliche DNA dieses Dokuments bleibt verbindlich. Technische Aussagen zu Checkout, Commerce-Datenmodell und Kategorien sind seit den Commerce-Phasen erweitert worden. Stripe ist als Testcheckout nur feature-gated fuer `sitzobjekt-kuhfell` vorbereitet; es gibt keine globale Checkout-Aktivierung, keinen echten Warenkorbzustand, keine Bestellpersistenz und keine Affiliate-Live-Links. Der Shop verwendet inzwischen `visibleShopCategories` mit 16 sichtbaren Commerce-Kategorien. Bestehende Designregeln, Tonalitaet, Typografie, Farben, SEO-/i18n-Schutz und vorsichtige rechtliche Sprache bleiben unveraendert gueltig.
+
 Interne Arbeitsgrundlage fuer neue Produktseiten, Texte, Bilder, Uebersetzungen und technische Erweiterungen. Stand: Analyse des bestehenden Codes im Projekt `/Users/ibt/Code/getyour-design`.
 
 Diese Dokumentation beschreibt nur, was aus der bestehenden Website und dem Code ableitbar ist. Unsicherheiten und Inkonsistenzen stehen separat am Ende.
@@ -372,12 +374,13 @@ Standardstruktur fuer neue Produktseiten:
 
 ### Anfrage und Checkout
 
-`app/lib/commerce.ts` mappt Status auf CTA. `prepareCheckout()` ist deaktiviert und kommentiert als zukuenftiger Checkout-Anschluss.
+`app/lib/commerce.ts` mappt Status auf CTA und steuert zusaetzlich die zentrale Commerce-CTA-Entscheidung. `prepareCheckout()` bleibt fuer den Warenkorb-Preview deaktiviert. Der Stripe-Testcheckout ist separat serverseitig vorbereitet, aber nur fuer `sitzobjekt-kuhfell`, nur bei aktivem Feature-Flag und vorhandenen Credentials sichtbar.
 
 Regeln:
 
-- Keine Stripe-Integration ohne ausdruecklichen Auftrag.
-- Status "sofort-kaufen" fuehrt derzeit zum Warenkorb, aber Checkout ist noch nicht aktiv.
+- Keine globale Stripe- oder Checkout-Aktivierung ohne ausdruecklichen Auftrag.
+- Status "sofort-kaufen" fuehrt weiterhin zum Warenkorb/Status-Fallback; Checkoutfaehigkeit entsteht nicht automatisch aus dem Status.
+- Der vorhandene Stripe-Testcheckout darf nicht als allgemeiner Shop-Checkout interpretiert werden.
 - "Anfrage senden" und "Preis anfragen" fuehren zu Kontakt.
 - Bei "Reserviert" und "Verkauft" Button deaktivieren.
 
@@ -621,4 +624,3 @@ Unsicherheiten:
 - Ob alle Produktdaten Platzhalter oder finale Katalogeintraege sind, ist aus dem Code nicht eindeutig ableitbar.
 - Rechtliche Anforderungen fuer echte Checkout-/Produkt-Schema-Daten muessen vor Aktivierung extern geprueft werden.
 - Fuer echte Produktbilder fehlen im aktuellen Hauptkatalog produktbezogene Dateien; zukuenftige Bildregeln basieren daher auf vorhandenen Assets und Layouts.
-
