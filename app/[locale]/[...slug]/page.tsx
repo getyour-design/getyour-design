@@ -26,7 +26,7 @@ import { PageHero } from "../../components/PageHero";
 import { PlaceholderArtwork } from "../../components/PlaceholderArtwork";
 import { ProductCardMedia, ProductGallery, type ProductImageAsset } from "../../components/ProductMedia";
 import { EntityActions } from "../../components/EntityActions";
-import { CheckoutButton } from "../../components/CheckoutButton";
+import { ProductCommerceBlock } from "../../components/ProductCommerceBlock";
 import { LuxuryCoastersPage } from "../../components/LuxuryCoastersPage";
 import { getDictionary } from "../../data/dictionaries";
 import { products, shopCategories } from "../../data/products";
@@ -558,6 +558,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
       labels: {
         direct: checkoutCopy.label,
         affiliate: dictionary.shop.cta["Beim Partner ansehen"],
+        presentation: dictionary.shop.commerce,
       },
     });
 
@@ -581,6 +582,13 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                 <p>{dictionary.shop.availability[product.availability] ?? product.availability}</p>
               </div>
               {content?.priceNote ? <p className="mt-4 text-sm leading-7 text-[#4b5356]">{content.priceNote}</p> : null}
+              <ProductCommerceBlock
+                checkoutErrorMessage={checkoutCopy.errorMessage}
+                checkoutLoadingLabel={checkoutCopy.loadingLabel}
+                commerceCta={commerceCta}
+                fallbackHref={localizedRoutes.contact[locale]}
+                productSlug={product.slug}
+              />
               <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{content?.shortDescription ?? dictionary.shop.productDescription}</p>
               {content?.longDescription ? (
                 <div className="mt-8 grid gap-4 text-sm leading-7 text-[#4b5356]">
@@ -623,26 +631,6 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                   </div>
                 ) : null}
               </dl>
-              {commerceCta.action === "checkout" ? (
-                <CheckoutButton
-                  errorMessage={checkoutCopy.errorMessage}
-                  label={commerceCta.label}
-                  loadingLabel={checkoutCopy.loadingLabel}
-                  productSlug={product.slug}
-                />
-              ) : commerceCta.disabled ? (
-                <button className="mt-10 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>
-                  {commerceCta.label}
-                </button>
-              ) : commerceCta.external ? (
-                <a className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={commerceCta.href} rel={commerceCta.rel} target="_blank">
-                  {commerceCta.label}
-                </a>
-              ) : (
-                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={commerceCta.href ?? localizedRoutes.contact[locale]}>
-                  {commerceCta.label}
-                </Link>
-              )}
             </div>
           </div>
         </section>

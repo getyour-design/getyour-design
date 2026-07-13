@@ -93,6 +93,32 @@ export type Dictionary = {
     productDescription: string;
     availability: Record<string, string>;
     cta: Record<string, string>;
+    commerce: {
+      direct: {
+        modeLabel: string;
+        description: string;
+        sellerLabel: string;
+      };
+      affiliate: {
+        modeLabel: string;
+        description: string;
+        sellerLabel: string;
+        priceDisclaimer: string;
+      };
+      inquiry: {
+        modeLabel: string;
+        description: string;
+        sellerLabel: string;
+      };
+      status: {
+        modeLabel: string;
+        description: string;
+      };
+      unavailable: {
+        modeLabel: string;
+        description: string;
+      };
+    };
     categories: Record<string, string>;
     genericProductTitle: string;
   };
@@ -331,6 +357,37 @@ const english: Dictionary = {
       Reserviert: "Reserved",
       Verkauft: "Sold",
     },
+    commerce: {
+      direct: {
+        modeLabel: "Available directly from GETYOUR.DESIGN",
+        description:
+          "Purchase is handled directly by GETYOUR.DESIGN. Payment is processed securely through Stripe; shipping and delivery details follow the product information.",
+        sellerLabel: "Seller: GETYOUR.DESIGN",
+      },
+      affiliate: {
+        modeLabel: "Available from our partner",
+        description:
+          "Purchase takes place with the external partner. GETYOUR.DESIGN is not the seller of this product.",
+        sellerLabel: "External partner offer",
+        priceDisclaimer: "Price and availability may change on the partner site.",
+      },
+      inquiry: {
+        modeLabel: "Available on request",
+        description:
+          "This product is available by request. Availability, price or execution are confirmed individually through the existing enquiry process.",
+        sellerLabel: "Inquiry to GETYOUR.DESIGN",
+      },
+      status: {
+        modeLabel: "Current product status",
+        description:
+          "The next step follows the current product status and the existing GETYOUR.DESIGN enquiry or cart logic.",
+      },
+      unavailable: {
+        modeLabel: "Currently unavailable",
+        description:
+          "This product is currently reserved or sold. The action is inactive until availability changes.",
+      },
+    },
     categories: {
       Möbel: "Furniture",
       Leuchten: "Lighting",
@@ -514,6 +571,37 @@ const german: Dictionary = {
       "Neutraler Katalog-Platzhalter mit Fokus auf Materialpräsenz, Proportion und Raumqualität.",
     cta: {
       "Beim Partner ansehen": "Beim Partner ansehen",
+    },
+    commerce: {
+      direct: {
+        modeLabel: "Direkt über GETYOUR.DESIGN",
+        description:
+          "Der Kauf erfolgt direkt über GETYOUR.DESIGN. Die Zahlung wird sicher über Stripe verarbeitet; Versand- und Lieferinformationen ergeben sich aus den Produktinformationen.",
+        sellerLabel: "Verkäufer: GETYOUR.DESIGN",
+      },
+      affiliate: {
+        modeLabel: "Beim Partner erhältlich",
+        description:
+          "Der Kauf erfolgt beim externen Partner. GETYOUR.DESIGN ist nicht Verkäufer dieses Produkts.",
+        sellerLabel: "Externes Partnerangebot",
+        priceDisclaimer: "Preis und Verfügbarkeit können sich beim Partner ändern.",
+      },
+      inquiry: {
+        modeLabel: "Auf Anfrage erhältlich",
+        description:
+          "Dieses Produkt ist auf Anfrage erhältlich. Verfügbarkeit, Preis oder Ausführung werden individuell über die bestehende Anfrage bestätigt.",
+        sellerLabel: "Anfrage an GETYOUR.DESIGN",
+      },
+      status: {
+        modeLabel: "Aktueller Produktstatus",
+        description:
+          "Der nächste Schritt folgt dem aktuellen Produktstatus und der bestehenden Anfrage- oder Warenkorblogik von GETYOUR.DESIGN.",
+      },
+      unavailable: {
+        modeLabel: "Derzeit nicht verfügbar",
+        description:
+          "Dieses Produkt ist derzeit reserviert oder verkauft. Die Aktion bleibt inaktiv, bis sich die Verfügbarkeit ändert.",
+      },
     },
     categories: {
       Möbel: "Möbel",
@@ -734,6 +822,37 @@ const french: Dictionary = {
       Reserviert: "Réservé",
       Verkauft: "Vendu",
     },
+    commerce: {
+      direct: {
+        modeLabel: "Disponible directement chez GETYOUR.DESIGN",
+        description:
+          "L'achat est effectué directement via GETYOUR.DESIGN. Le paiement est traité de manière sécurisée par Stripe; les informations d'expédition et de livraison suivent les informations produit.",
+        sellerLabel: "Vendeur : GETYOUR.DESIGN",
+      },
+      affiliate: {
+        modeLabel: "Disponible chez notre partenaire",
+        description:
+          "L'achat est effectué auprès du partenaire externe. GETYOUR.DESIGN n'est pas le vendeur de ce produit.",
+        sellerLabel: "Offre d'un partenaire externe",
+        priceDisclaimer: "Le prix et la disponibilité peuvent changer chez le partenaire.",
+      },
+      inquiry: {
+        modeLabel: "Disponible sur demande",
+        description:
+          "Ce produit est disponible sur demande. La disponibilité, le prix ou l'exécution sont confirmés individuellement via la demande existante.",
+        sellerLabel: "Demande à GETYOUR.DESIGN",
+      },
+      status: {
+        modeLabel: "Statut actuel du produit",
+        description:
+          "L'étape suivante suit le statut actuel du produit et la logique existante de demande ou de panier de GETYOUR.DESIGN.",
+      },
+      unavailable: {
+        modeLabel: "Actuellement indisponible",
+        description:
+          "Ce produit est actuellement réservé ou vendu. L'action reste inactive jusqu'à ce que la disponibilité change.",
+      },
+    },
     genericProductTitle: "Œuvre sélectionnée",
   },
   journal: {
@@ -945,6 +1064,37 @@ const spanish: Dictionary = {
       Reserviert: "Reservado",
       Verkauft: "Vendido",
     },
+    commerce: {
+      direct: {
+        modeLabel: "Disponible directamente en GETYOUR.DESIGN",
+        description:
+          "La compra se realiza directamente a través de GETYOUR.DESIGN. El pago se procesa de forma segura con Stripe; la información de envío y entrega se basa en la información del producto.",
+        sellerLabel: "Vendedor: GETYOUR.DESIGN",
+      },
+      affiliate: {
+        modeLabel: "Disponible en nuestro socio",
+        description:
+          "La compra se realiza con el socio externo. GETYOUR.DESIGN no es el vendedor de este producto.",
+        sellerLabel: "Oferta de socio externo",
+        priceDisclaimer: "El precio y la disponibilidad pueden cambiar en el sitio del socio.",
+      },
+      inquiry: {
+        modeLabel: "Disponible bajo consulta",
+        description:
+          "Este producto está disponible bajo consulta. La disponibilidad, el precio o la ejecución se confirman individualmente mediante la consulta existente.",
+        sellerLabel: "Consulta a GETYOUR.DESIGN",
+      },
+      status: {
+        modeLabel: "Estado actual del producto",
+        description:
+          "El siguiente paso sigue el estado actual del producto y la lógica existente de consulta o carrito de GETYOUR.DESIGN.",
+      },
+      unavailable: {
+        modeLabel: "No disponible actualmente",
+        description:
+          "Este producto está reservado o vendido actualmente. La acción permanece inactiva hasta que cambie la disponibilidad.",
+      },
+    },
     genericProductTitle: "Obra seleccionada",
   },
   journal: {
@@ -1155,6 +1305,37 @@ const chinese: Dictionary = {
       "Beim Partner ansehen": "前往合作伙伴查看",
       Reserviert: "已保留",
       Verkauft: "已售出",
+    },
+    commerce: {
+      direct: {
+        modeLabel: "可直接通过 GETYOUR.DESIGN 购买",
+        description:
+          "购买流程直接通过 GETYOUR.DESIGN 完成。付款由 Stripe 安全处理；配送与交付信息以产品信息为准。",
+        sellerLabel: "卖方：GETYOUR.DESIGN",
+      },
+      affiliate: {
+        modeLabel: "可通过合作伙伴购买",
+        description:
+          "购买将在外部合作伙伴处完成。GETYOUR.DESIGN 不是该产品的卖方。",
+        sellerLabel: "外部合作伙伴报价",
+        priceDisclaimer: "价格和供应情况可能会在合作伙伴网站上发生变化。",
+      },
+      inquiry: {
+        modeLabel: "可咨询购买",
+        description:
+          "该产品可通过咨询获取。供应情况、价格或执行方式将通过现有咨询流程单独确认。",
+        sellerLabel: "向 GETYOUR.DESIGN 咨询",
+      },
+      status: {
+        modeLabel: "当前产品状态",
+        description:
+          "下一步取决于当前产品状态以及 GETYOUR.DESIGN 现有的咨询或购物车逻辑。",
+      },
+      unavailable: {
+        modeLabel: "当前不可用",
+        description:
+          "该产品目前已保留或售出。在供应情况变化之前，操作保持不可用。",
+      },
     },
     genericProductTitle: "精选作品",
   },
@@ -1368,6 +1549,37 @@ const arabic: Dictionary = {
       Reserviert: "محجوز",
       Verkauft: "مباع",
     },
+    commerce: {
+      direct: {
+        modeLabel: "متاح مباشرة عبر GETYOUR.DESIGN",
+        description:
+          "تتم عملية الشراء مباشرة عبر GETYOUR.DESIGN. تتم معالجة الدفع بأمان عبر Stripe؛ وتستند معلومات الشحن والتسليم إلى معلومات المنتج.",
+        sellerLabel: "البائع: GETYOUR.DESIGN",
+      },
+      affiliate: {
+        modeLabel: "متاح لدى شريكنا",
+        description:
+          "تتم عملية الشراء لدى الشريك الخارجي. GETYOUR.DESIGN ليس بائع هذا المنتج.",
+        sellerLabel: "عرض شريك خارجي",
+        priceDisclaimer: "قد يتغير السعر والتوفر على موقع الشريك.",
+      },
+      inquiry: {
+        modeLabel: "متاح عند الطلب",
+        description:
+          "هذا المنتج متاح عبر الاستفسار. يتم تأكيد التوفر أو السعر أو التنفيذ بشكل فردي من خلال مسار الاستفسار الحالي.",
+        sellerLabel: "استفسار إلى GETYOUR.DESIGN",
+      },
+      status: {
+        modeLabel: "حالة المنتج الحالية",
+        description:
+          "تتبع الخطوة التالية حالة المنتج الحالية ومنطق الاستفسار أو السلة الحالي لدى GETYOUR.DESIGN.",
+      },
+      unavailable: {
+        modeLabel: "غير متاح حاليا",
+        description:
+          "هذا المنتج محجوز أو مباع حاليا. يبقى الإجراء غير نشط إلى أن يتغير التوفر.",
+      },
+    },
     genericProductTitle: "عمل مختار",
   },
   journal: {
@@ -1463,6 +1675,10 @@ export function getDictionary(locale: Locale): Dictionary {
       cta: {
         ...english.shop.cta,
         ...dictionaries[locale].shop.cta,
+      },
+      commerce: {
+        ...english.shop.commerce,
+        ...dictionaries[locale].shop.commerce,
       },
       categories: {
         ...english.shop.categories,

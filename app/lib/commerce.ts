@@ -12,6 +12,7 @@ type BaseProductCta = {
 type CommerceCtaLabels = {
   direct: string;
   affiliate: string;
+  presentation: CommercePresentationLabels;
 };
 
 type CommerceCtaInput = {
@@ -20,6 +21,21 @@ type CommerceCtaInput = {
   affiliateLink?: string;
   fallbackCta: BaseProductCta;
   labels: CommerceCtaLabels;
+};
+
+type CommercePresentationCopy = {
+  modeLabel: string;
+  description: string;
+  sellerLabel?: string;
+  priceDisclaimer?: string;
+};
+
+type CommercePresentationLabels = {
+  direct: CommercePresentationCopy;
+  affiliate: CommercePresentationCopy;
+  inquiry: CommercePresentationCopy;
+  status: CommercePresentationCopy;
+  unavailable: CommercePresentationCopy;
 };
 
 type AffiliateReadinessProduct = {
@@ -43,6 +59,11 @@ export type CommerceCta = {
   disabled: boolean;
   rel?: string;
   checkoutEnabled: boolean;
+  modeLabel: string;
+  eyebrow: string;
+  description: string;
+  sellerLabel?: string;
+  priceDisclaimer?: string;
 };
 
 const directCheckoutProducts = {
@@ -95,7 +116,28 @@ export function getProductCheckoutCta(productSlug: string) {
   };
 }
 
-function toCommerceFallbackCta(fallbackCta: BaseProductCta, mode: CommerceCta["mode"] = "status"): CommerceCta {
+function getFallbackPresentationKey(
+  fallbackCta: BaseProductCta,
+  mode: CommerceCta["mode"],
+): keyof CommercePresentationLabels {
+  if (fallbackCta.disabled) {
+    return "unavailable";
+  }
+
+  if (mode === "inquiry" || fallbackCta.href?.includes("contact") || fallbackCta.href?.includes("kontakt")) {
+    return "inquiry";
+  }
+
+  return "status";
+}
+
+function toCommerceFallbackCta(
+  fallbackCta: BaseProductCta,
+  presentationLabels: CommercePresentationLabels,
+  mode: CommerceCta["mode"] = "status",
+): CommerceCta {
+  const presentation = presentationLabels[getFallbackPresentationKey(fallbackCta, mode)];
+
   return {
     mode,
     label: fallbackCta.label,
@@ -104,6 +146,11 @@ function toCommerceFallbackCta(fallbackCta: BaseProductCta, mode: CommerceCta["m
     external: false,
     disabled: fallbackCta.disabled,
     checkoutEnabled: false,
+    modeLabel: presentation.modeLabel,
+    eyebrow: presentation.modeLabel,
+    description: presentation.description,
+    sellerLabel: presentation.sellerLabel,
+    priceDisclaimer: presentation.priceDisclaimer,
   };
 }
 
@@ -175,7 +222,7 @@ export function getCommerceCta({
   labels,
 }: CommerceCtaInput): CommerceCta {
   if (fallbackCta.disabled) {
-    return toCommerceFallbackCta(fallbackCta, commerceMode ?? "status");
+    return toCommerceFallbackCta(fallbackCta, labels.presentation, commerceMode ?? "status");
   }
 
   const checkoutCta = getProductCheckoutCta(productSlug);
@@ -183,6 +230,8 @@ export function getCommerceCta({
 
   if (commerceMode === "direct" || legacyDirectCheckout) {
     if (checkoutCta.enabled) {
+      const presentation = labels.presentation.direct;
+
       return {
         mode: "direct",
         label: labels.direct,
@@ -190,16 +239,23 @@ export function getCommerceCta({
         external: false,
         disabled: false,
         checkoutEnabled: true,
+        modeLabel: presentation.modeLabel,
+        eyebrow: presentation.modeLabel,
+        description: presentation.description,
+        sellerLabel: presentation.sellerLabel,
+        priceDisclaimer: presentation.priceDisclaimer,
       };
     }
 
-    return toCommerceFallbackCta(fallbackCta, "direct");
+    return toCommerceFallbackCta(fallbackCta, labels.presentation, "direct");
   }
 
   if (commerceMode === "affiliate") {
     const href = getSafeAffiliateHref(affiliateLink);
 
     if (href) {
+      const presentation = labels.presentation.affiliate;
+
       return {
         mode: "affiliate",
         label: labels.affiliate,
@@ -209,17 +265,22 @@ export function getCommerceCta({
         disabled: false,
         rel: "sponsored nofollow noopener noreferrer",
         checkoutEnabled: false,
+        modeLabel: presentation.modeLabel,
+        eyebrow: presentation.modeLabel,
+        description: presentation.description,
+        sellerLabel: presentation.sellerLabel,
+        priceDisclaimer: presentation.priceDisclaimer,
       };
     }
 
-    return toCommerceFallbackCta(fallbackCta, "affiliate");
+    return toCommerceFallbackCta(fallbackCta, labels.presentation, "affiliate");
   }
 
   if (commerceMode === "inquiry") {
-    return toCommerceFallbackCta(fallbackCta, "inquiry");
+    return toCommerceFallbackCta(fallbackCta, labels.presentation, "inquiry");
   }
 
-  return toCommerceFallbackCta(fallbackCta);
+  return toCommerceFallbackCta(fallbackCta, labels.presentation);
 }
 
 export function getCheckoutBaseUrl() {

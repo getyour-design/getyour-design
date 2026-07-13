@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductCardMedia, ProductGallery } from "../../components/ProductMedia";
 import { EntityActions } from "../../components/EntityActions";
-import { CheckoutButton } from "../../components/CheckoutButton";
+import { ProductCommerceBlock } from "../../components/ProductCommerceBlock";
+import { getDictionary } from "../../data/dictionaries";
 import { getCommerceCta, getProductCta } from "../../lib/commerce";
 import { getProductPath } from "../../lib/i18n";
 import { products, shopCategories } from "../../data/products";
@@ -92,6 +93,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
     const categoryHref = productCategory ? `/shop/${productCategory.slug}` : "/shop";
     const productHref = getRootProductPath(product);
     const productCta = product.ctaLabel ? { ...cta, label: product.ctaLabel } : cta;
+    const dictionary = getDictionary("de");
     const commerceCta = getCommerceCta({
       productSlug: product.slug,
       commerceMode: product.commerceMode,
@@ -100,6 +102,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
       labels: {
         direct: "KAUFEN",
         affiliate: "Beim Partner ansehen",
+        presentation: dictionary.shop.commerce,
       },
     });
 
@@ -123,6 +126,13 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                 <p>{product.availability}</p>
               </div>
               {product.priceNote ? <p className="mt-4 text-sm leading-7 text-[#4b5356]">{product.priceNote}</p> : null}
+              <ProductCommerceBlock
+                checkoutErrorMessage="Der Checkout ist derzeit nicht verfügbar. Bitte nutzen Sie alternativ die Anfrage."
+                checkoutLoadingLabel="Checkout wird vorbereitet"
+                commerceCta={commerceCta}
+                fallbackHref="/contact"
+                productSlug={product.slug}
+              />
               <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{product.description}</p>
               {product.longDescription ? (
                 <div className="mt-8 grid gap-4 text-sm leading-7 text-[#4b5356]">
@@ -165,26 +175,6 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                   </div>
                 ) : null}
               </dl>
-              {commerceCta.action === "checkout" ? (
-                <CheckoutButton
-                  errorMessage="Der Checkout ist derzeit nicht verfügbar. Bitte nutzen Sie alternativ die Anfrage."
-                  label={commerceCta.label}
-                  loadingLabel="Checkout wird vorbereitet"
-                  productSlug={product.slug}
-                />
-              ) : commerceCta.disabled ? (
-                <button className="mt-10 border border-black/20 bg-[#e8eceb] px-7 py-4 text-xs uppercase tracking-[0.2em] text-[#667174]" disabled>
-                  {commerceCta.label}
-                </button>
-              ) : commerceCta.external ? (
-                <a className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={commerceCta.href} rel={commerceCta.rel} target="_blank">
-                  {commerceCta.label}
-                </a>
-              ) : (
-                <Link className="mt-10 inline-block border border-black bg-[#000000] px-7 py-4 text-xs uppercase tracking-[0.2em] !text-[#ffffff] transition hover:bg-[#111111] hover:!text-[#ffffff]" href={commerceCta.href ?? "/contact"}>
-                  {commerceCta.label}
-                </Link>
-              )}
             </div>
           </div>
         </section>
