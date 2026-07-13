@@ -54,17 +54,18 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
   return (
     <main className="bg-[#f3f2ef]">
       <section className="bg-[#8d8376]">
-        <div className="relative min-h-[760px] overflow-hidden bg-[#8d8376] md:min-h-[800px] lg:h-[clamp(828px,calc(100vh-72px),952px)]">
+        <div className="relative overflow-hidden bg-[#8d8376]">
           <Image
             alt="GETYOUR.DESIGN interior context"
-            className="object-cover object-[50%_48%]"
-            fill
+            className="block h-[760px] w-full object-cover object-[50%_48%] md:h-[800px] lg:h-auto lg:object-fill"
+            height={1024}
             priority
             sizes="100vw"
             src="/images/hero-editorial.png"
+            width={1536}
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,9,0.66)_0%,rgba(10,10,9,0.48)_24%,rgba(10,10,9,0.12)_40%,rgba(10,10,9,0)_50%)]" aria-hidden="true" />
-          <div className="relative z-10 mr-auto flex min-h-[760px] max-w-[36rem] flex-col justify-start px-6 pb-40 pt-28 text-[#f3f2ef] md:min-h-[800px] md:px-12 md:pt-36 lg:h-[clamp(828px,calc(100vh-72px),952px)] lg:w-[40rem] lg:max-w-[40rem] lg:pb-0 lg:pl-[114px] lg:pr-0 lg:pt-[205px]">
+          <div className="absolute left-6 right-6 top-28 z-10 max-w-[36rem] text-[#f3f2ef] md:left-12 md:right-auto md:top-36 lg:left-[6.8%] lg:top-[26%] lg:w-[42%] lg:max-w-[40rem]">
             <h1 className="serif text-balance text-[2.1rem] font-normal leading-[1.18] tracking-[0.02em] md:text-[2.5rem] lg:text-[2.65rem] xl:text-[2.78rem]">
               {heroLines[0]}
               <br />
@@ -88,7 +89,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               </Link>
             </div>
           </div>
-          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 font-sans md:px-8 lg:px-[41px] lg:pb-[55px]" aria-label={dictionary.home.shopLinksTitle}>
+          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 font-sans md:px-8 lg:bottom-[5.4%] lg:px-[2.7%] lg:pb-0" aria-label={dictionary.home.shopLinksTitle}>
             <div className="mx-auto grid max-w-none auto-cols-[9.5rem] grid-flow-col grid-rows-2 overflow-x-auto border-l border-t border-[#f3f2ef]/25 bg-[#0f0f0e]/10 sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-4 sm:overflow-hidden lg:grid-cols-8">
               {visibleShopCategories.map((item) => (
                 <Link
