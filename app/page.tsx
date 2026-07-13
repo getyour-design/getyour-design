@@ -206,18 +206,16 @@ export default function Home() {
   return (
     <main className="bg-[#f3f2ef]">
       <section className="bg-[#8d8376]">
-        <div className="overflow-hidden bg-[#8d8376] lg:flex lg:justify-center">
-          <div className="relative h-[760px] w-full md:h-[800px] lg:h-[calc(100vh-72px)] lg:max-h-[1024px] lg:w-fit lg:max-w-full">
+        <div className="relative h-[760px] w-full overflow-hidden bg-[#8d8376] md:h-[800px] lg:h-[calc(100svh-72px)] lg:min-h-[680px] lg:max-h-[960px]">
             <Image
               alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
-              className="block h-full w-full object-cover object-[50%_48%] lg:w-auto lg:max-w-full lg:object-contain"
-              height={1024}
+              className="object-cover object-center"
+              fill
               priority
               sizes="100vw"
               src="/images/hero-editorial.png"
-              width={1536}
             />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,9,0.66)_0%,rgba(10,10,9,0.48)_24%,rgba(10,10,9,0.12)_40%,rgba(10,10,9,0)_50%)]" aria-hidden="true" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,9,0.68)_0%,rgba(10,10,9,0.5)_24%,rgba(10,10,9,0.14)_43%,rgba(10,10,9,0)_55%)]" aria-hidden="true" />
             <div className="absolute left-6 right-6 top-28 z-10 max-w-[36rem] text-[#f3f2ef] md:left-12 md:right-auto md:top-36 lg:left-[6.8%] lg:top-[26%] lg:w-[42%] lg:max-w-[40rem] [@media_(min-width:1024px)_and_(max-height:900px)]:top-[24%]">
             <h1 className="serif text-balance text-[2.1rem] font-normal leading-[1.18] tracking-[0.02em] md:text-[2.5rem] lg:text-[2.65rem] xl:text-[2.78rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!text-[2.36rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!leading-[1.14]">
               Sagen Sie uns
@@ -257,7 +255,6 @@ export default function Home() {
               ))}
             </div>
             </div>
-          </div>
         </div>
       </section>
 
