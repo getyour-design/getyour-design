@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getDictionary } from "../data/dictionaries";
 import { collections } from "../data/collections";
 import { materialCards } from "../data/materials";
-import { products } from "../data/products";
+import { products, visibleShopCategories } from "../data/products";
 import { stories } from "../data/stories";
 import { getProductPath, getShopPath, localizeHref, type Locale } from "../lib/i18n";
 import { getEnglishProductTitle } from "../lib/productTitles";
@@ -24,15 +24,6 @@ const collectionImages = [
   "/images/collection-ceramic.svg",
   "/images/collection-lighting.svg",
   "/images/collection-textile.svg",
-];
-
-const shopHubLinks = [
-  { label: "Möbel", slug: "moebel" },
-  { label: "Teppiche", slug: "teppiche" },
-  { label: "Leuchten", slug: "leuchten" },
-  { label: "Tabletop", slug: "tabletop" },
-  { label: "Objekte", slug: "objekte" },
-  { label: "Kunst", slug: "kunst" },
 ];
 
 const featuredCommerceProduct = products.find((product) => product.slug === "sitzobjekt-kuhfell");
@@ -62,53 +53,56 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
 
   return (
     <main className="bg-[#f3f2ef]">
-      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-6 pt-10 lg:px-10 lg:pb-8 lg:pt-12">
-        <div className="mx-auto grid max-w-[1540px] gap-6 lg:min-h-[720px] lg:grid-cols-[0.36fr_0.64fr] lg:items-center xl:gap-8">
-          <div className="flex max-w-[33rem] flex-col self-center lg:translate-y-8 lg:pr-0">
-            <h1 className="serif text-balance text-[1.45rem] font-normal leading-[1.22] text-[#10100f] md:text-[1.85rem] lg:text-[2.12rem]">
-              {heroLines[0]}
-              <br />
-              {heroLines[1]}
-              <br />
-              <span className="mt-6 block">
-                {heroLines[2]}
+      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-6 pt-6 lg:px-10 lg:pb-8 lg:pt-8">
+        <div className="mx-auto max-w-[1540px] overflow-hidden border hairline bg-[#f7f7f5]">
+          <div className="relative min-h-[420px] bg-[#e7ecef] md:min-h-[540px] lg:min-h-[500px] xl:min-h-[560px]">
+            <Image
+              alt="GETYOUR.DESIGN interior context"
+              className="object-cover object-[58%_58%]"
+              fill
+              priority
+              sizes="100vw"
+              src="/images/hero-lc2-blue.png"
+            />
+          </div>
+          <div className="grid gap-8 border-t border-black/15 px-5 py-8 md:px-8 md:py-10 lg:grid-cols-[0.62fr_0.38fr] lg:items-end lg:px-10 xl:px-12">
+            <div>
+              <h1 className="serif text-balance text-[1.45rem] font-normal leading-[1.22] text-[#10100f] md:text-[1.85rem] lg:text-[2.35rem] xl:text-[2.65rem]">
+                {heroLines[0]}
                 <br />
-                {heroLines[3]}
-              </span>
-            </h1>
-            <p className="serif mt-12 max-w-[24rem] text-[1.05rem] font-normal leading-[1.45] tracking-[0.06em] text-[#10100f] md:text-[1.2rem]">
-              {dictionary.home.tagline}
-            </p>
-            <div className="mt-12 grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
-              <Link className="border hairline bg-[#f7f7f5] px-5 py-4 text-center transition hover:bg-[#f8f8f6] hover:text-black" href={localizedHref("/shop", locale)}>
+                {heroLines[1]}
+                <br />
+                <span className="mt-6 block">
+                  {heroLines[2]}
+                  <br />
+                  {heroLines[3]}
+                </span>
+              </h1>
+              <p className="serif mt-9 max-w-[24rem] text-[1.05rem] font-normal leading-[1.45] tracking-[0.06em] text-[#10100f] md:text-[1.2rem] lg:mt-10">
+                {dictionary.home.tagline}
+              </p>
+            </div>
+            <div className="grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
+              <Link className="border hairline bg-[#f3f2ef] px-5 py-4 text-center transition hover:bg-[#f8f8f6] hover:text-black" href={localizedHref("/shop", locale)}>
                 {dictionary.home.primaryCta}
               </Link>
-              <Link className="border hairline bg-[#f7f7f5] px-5 py-4 text-center text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={localizedHref("/collections", locale)}>
+              <Link className="border hairline bg-[#f3f2ef] px-5 py-4 text-center text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={localizedHref("/collections", locale)}>
                 {dictionary.home.secondaryCta}
               </Link>
-            </div>
-          </div>
-          <div className="self-stretch lg:-mr-10 lg:py-0">
-            <div className="h-full bg-[#e7ecef] p-0">
-              <img
-                alt="GETYOUR.DESIGN interior context"
-                className="h-full min-h-[520px] w-full object-cover object-[58%_59%] lg:min-h-[720px]"
-                src="/images/hero-lc2-blue.png"
-              />
             </div>
           </div>
         </div>
       </section>
 
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-6 lg:px-10" aria-label={dictionary.home.shopLinksTitle}>
-        <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-6">
-          {shopHubLinks.map((item) => (
+        <div className="mx-auto grid max-w-[1540px] grid-cols-2 border-l border-t border-black/15 sm:grid-cols-4 lg:grid-cols-8">
+          {visibleShopCategories.map((item) => (
             <Link
-              className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black"
+              className="border-b border-r border-black/15 bg-[#f7f7f5] px-3 py-5 text-center text-[0.62rem] uppercase tracking-[0.18em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black md:px-4 lg:py-6"
               href={getShopPath(locale, item.slug)}
               key={item.slug}
             >
-              {dictionary.shop.categories[item.label] ?? item.label}
+              {dictionary.shop.categories[item.title] ?? item.label ?? item.title}
             </Link>
           ))}
         </div>

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getDictionary } from "./data/dictionaries";
 import { artworks } from "./data/artworks";
 import { collections } from "./data/collections";
 import { materialCards } from "./data/materials";
-import { products } from "./data/products";
+import { products, visibleShopCategories } from "./data/products";
 import { stories } from "./data/stories";
-import { getProductPath } from "./lib/i18n";
+import { getProductPath, getShopPath } from "./lib/i18n";
 
 export const metadata: Metadata = {
   alternates: {
@@ -136,16 +137,8 @@ const smallObjects = [
   },
 ];
 
-const shopHubLinks = [
-  { label: "Möbel", href: "/shop/moebel" },
-  { label: "Teppiche", href: "/shop/teppiche" },
-  { label: "Leuchten", href: "/shop/leuchten" },
-  { label: "Accessoires", href: "/shop/tabletop" },
-  { label: "Objekte", href: "/shop/objekte" },
-  { label: "Kunstwerke", href: "/shop/kunst" },
-];
-
 const featuredCommerceProduct = products.find((product) => product.slug === "sitzobjekt-kuhfell");
+const dictionary = getDictionary("de");
 
 function ProductVisual({ index, palette }: { index: number; palette: string }) {
   const modes = [
@@ -212,55 +205,58 @@ function ProductVisual({ index, palette }: { index: number; palette: string }) {
 export default function Home() {
   return (
     <main className="bg-[#f3f2ef]">
-      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-6 pt-10 lg:px-10 lg:pb-8 lg:pt-12">
-        <div className="mx-auto grid max-w-[1540px] gap-6 lg:min-h-[720px] lg:grid-cols-[0.36fr_0.64fr] lg:items-center xl:gap-8">
-          <div className="flex max-w-[33rem] flex-col self-center lg:translate-y-8 lg:pr-0">
-            <h1 className="serif text-balance text-[1.45rem] font-normal leading-[1.22] text-[#10100f] md:text-[1.85rem] lg:text-[2.12rem]">
-              Sagen Sie uns
-              <br />
-              was Sie umgibt
-              <br />
-              <span className="mt-6 block">
-                und wir sagen Ihnen
+      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-6 pt-6 lg:px-10 lg:pb-8 lg:pt-8">
+        <div className="mx-auto max-w-[1540px] overflow-hidden border hairline bg-[#f7f7f5]">
+          <div className="relative min-h-[420px] bg-[#e7ecef] md:min-h-[540px] lg:min-h-[500px] xl:min-h-[560px]">
+            <Image
+              alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
+              className="object-cover object-[58%_58%]"
+              fill
+              priority
+              sizes="100vw"
+              src="/images/hero-lc2-blue.png"
+            />
+          </div>
+          <div className="grid gap-8 border-t border-black/15 px-5 py-8 md:px-8 md:py-10 lg:grid-cols-[0.62fr_0.38fr] lg:items-end lg:px-10 xl:px-12">
+            <div>
+              <h1 className="serif text-balance text-[1.45rem] font-normal leading-[1.22] text-[#10100f] md:text-[1.85rem] lg:text-[2.35rem] xl:text-[2.65rem]">
+                Sagen Sie uns
                 <br />
-                wer Sie sind
-              </span>
-            </h1>
-            <p className="serif mt-12 max-w-[24rem] text-[1.05rem] font-normal leading-[1.45] tracking-[0.06em] text-[#10100f] md:text-[1.2rem]">
-              DESIGN UND KUNST
-              <br />
-              FÜR INDIVIDUALISTEN.
-            </p>
-            <div className="mt-12 grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
-              <Link className="border hairline bg-[#f7f7f5] px-5 py-4 text-center transition hover:bg-[#f8f8f6] hover:text-black" href="/shop">
+                was Sie umgibt
+                <br />
+                <span className="mt-6 block">
+                  und wir sagen Ihnen
+                  <br />
+                  wer Sie sind
+                </span>
+              </h1>
+              <p className="serif mt-9 max-w-[24rem] text-[1.05rem] font-normal leading-[1.45] tracking-[0.06em] text-[#10100f] md:text-[1.2rem] lg:mt-10">
+                DESIGN UND KUNST
+                <br />
+                FÜR INDIVIDUALISTEN.
+              </p>
+            </div>
+            <div className="grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
+              <Link className="border hairline bg-[#f3f2ef] px-5 py-4 text-center transition hover:bg-[#f8f8f6] hover:text-black" href="/shop">
                 Shop entdecken
               </Link>
-              <Link className="border hairline bg-[#f7f7f5] px-5 py-4 text-center text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href="/collections">
+              <Link className="border hairline bg-[#f3f2ef] px-5 py-4 text-center text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href="/collections">
                 Kollektionen ansehen
               </Link>
-            </div>
-          </div>
-          <div className="self-stretch lg:-mr-10 lg:py-0">
-            <div className="h-full bg-[#e7ecef] p-0">
-              <img
-                alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
-                className="h-full min-h-[520px] w-full object-cover object-[58%_59%] lg:min-h-[720px]"
-                src="/images/hero-lc2-blue.png"
-              />
             </div>
           </div>
         </div>
       </section>
 
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-6 lg:px-10">
-        <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-6">
-          {shopHubLinks.map((item) => (
+        <div className="mx-auto grid max-w-[1540px] grid-cols-2 border-l border-t border-black/15 sm:grid-cols-4 lg:grid-cols-8">
+          {visibleShopCategories.map((item) => (
             <Link
-              className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black"
-              href={item.href}
-              key={item.href}
+              className="border-b border-r border-black/15 bg-[#f7f7f5] px-3 py-5 text-center text-[0.62rem] uppercase tracking-[0.18em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black md:px-4 lg:py-6"
+              href={getShopPath("de", item.slug)}
+              key={item.slug}
             >
-              {item.label}
+              {dictionary.shop.categories[item.title] ?? item.label ?? item.title}
             </Link>
           ))}
         </div>
