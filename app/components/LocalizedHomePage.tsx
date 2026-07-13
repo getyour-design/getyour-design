@@ -65,35 +65,35 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             width={1536}
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,9,0.66)_0%,rgba(10,10,9,0.48)_24%,rgba(10,10,9,0.12)_40%,rgba(10,10,9,0)_50%)]" aria-hidden="true" />
-          <div className="absolute left-6 right-6 top-28 z-10 max-w-[36rem] text-[#f3f2ef] md:left-12 md:right-auto md:top-36 lg:left-[6.8%] lg:top-[26%] lg:w-[42%] lg:max-w-[40rem]">
-            <h1 className="serif text-balance text-[2.1rem] font-normal leading-[1.18] tracking-[0.02em] md:text-[2.5rem] lg:text-[2.65rem] xl:text-[2.78rem]">
+          <div className="absolute left-6 right-6 top-28 z-10 max-w-[36rem] text-[#f3f2ef] md:left-12 md:right-auto md:top-36 lg:left-[6.8%] lg:top-[26%] lg:w-[42%] lg:max-w-[40rem] [@media_(min-width:1024px)_and_(max-height:900px)]:top-[24%]">
+            <h1 className="serif text-balance text-[2.1rem] font-normal leading-[1.18] tracking-[0.02em] md:text-[2.5rem] lg:text-[2.65rem] xl:text-[2.78rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!text-[2.36rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!leading-[1.14]">
               {heroLines[0]}
               <br />
               {heroLines[1]}
               <br />
-              <span className="mt-8 block">
+              <span className="mt-8 block [@media_(min-width:1024px)_and_(max-height:900px)]:mt-6">
                 <span className="lg:whitespace-nowrap">{heroLines[2]}</span>
                 <br />
                 {heroLines[3]}
               </span>
             </h1>
-            <p className="mt-9 max-w-[24rem] text-[1.18rem] font-normal uppercase leading-[1.45] tracking-[0.14em]">
+            <p className="mt-9 max-w-[24rem] text-[1.18rem] font-normal uppercase leading-[1.45] tracking-[0.14em] [@media_(min-width:1024px)_and_(max-height:900px)]:mt-7 [@media_(min-width:1024px)_and_(max-height:900px)]:!text-[1.02rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!leading-[1.34]">
               {dictionary.home.tagline}
             </p>
-            <div className="mt-12 grid gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] sm:flex">
-              <Link className="flex h-[62px] shrink-0 items-center justify-center border border-[#f3f2ef]/90 px-6 text-center transition hover:bg-[#f3f2ef] hover:text-black sm:w-[230px]" href={localizedHref("/shop", locale)}>
+            <div className="mt-12 grid gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] sm:flex [@media_(min-width:1024px)_and_(max-height:900px)]:mt-9 [@media_(min-width:1024px)_and_(max-height:900px)]:gap-3">
+              <Link className="flex h-[62px] shrink-0 items-center justify-center border border-[#f3f2ef]/90 px-6 text-center transition hover:bg-[#f3f2ef] hover:text-black sm:w-[230px] [@media_(min-width:1024px)_and_(max-height:900px)]:h-[54px]" href={localizedHref("/shop", locale)}>
                 {dictionary.home.primaryCta}
               </Link>
-              <Link className="flex h-[62px] shrink-0 items-center justify-center border border-[#f3f2ef]/90 px-6 text-center transition hover:bg-[#f3f2ef] hover:text-black sm:w-[272px]" href={localizedHref("/collections", locale)}>
+              <Link className="flex h-[62px] shrink-0 items-center justify-center border border-[#f3f2ef]/90 px-6 text-center transition hover:bg-[#f3f2ef] hover:text-black sm:w-[272px] [@media_(min-width:1024px)_and_(max-height:900px)]:h-[54px]" href={localizedHref("/collections", locale)}>
                 {dictionary.home.secondaryCta}
               </Link>
             </div>
           </div>
-          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 font-sans md:px-8 lg:bottom-[5.4%] lg:px-[2.7%] lg:pb-0" aria-label={dictionary.home.shopLinksTitle}>
+          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 font-sans md:px-8 lg:bottom-[5.4%] lg:px-[2.7%] lg:pb-0 [@media_(min-width:1024px)_and_(max-height:900px)]:bottom-[3.6%]" aria-label={dictionary.home.shopLinksTitle}>
             <div className="mx-auto grid max-w-none auto-cols-[9.5rem] grid-flow-col grid-rows-2 overflow-x-auto border-l border-t border-[#f3f2ef]/25 bg-[#0f0f0e]/10 sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-4 sm:overflow-hidden lg:grid-cols-8">
               {visibleShopCategories.map((item) => (
                 <Link
-                  className="flex min-h-[55px] items-center justify-center border-b border-r border-[#f3f2ef]/25 px-3 text-center font-sans text-[0.66rem] font-medium uppercase leading-tight tracking-[0.14em] transition hover:bg-white/10 md:px-4"
+                  className="flex min-h-[55px] items-center justify-center border-b border-r border-[#f3f2ef]/25 px-3 text-center font-sans text-[0.66rem] font-medium uppercase leading-tight tracking-[0.14em] transition hover:bg-white/10 md:px-4 [@media_(min-width:1024px)_and_(max-height:900px)]:min-h-[48px] [@media_(min-width:1024px)_and_(max-height:900px)]:text-[0.62rem]"
                   href={getShopPath(locale, item.slug)}
                   key={item.slug}
                 >
