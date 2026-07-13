@@ -209,31 +209,31 @@ export default function Home() {
         <div className="relative min-h-[760px] overflow-hidden bg-[#11100f] md:min-h-[800px] lg:min-h-[calc(100vh-72px)] lg:max-h-[952px]">
           <Image
             alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
-            className="object-cover object-[50%_50%]"
+            className="object-contain object-[50%_46%]"
             fill
             priority
             sizes="100vw"
             src="/images/hero-editorial.png"
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,9,0.74)_0%,rgba(10,10,9,0.55)_27%,rgba(10,10,9,0.18)_44%,rgba(10,10,9,0)_61%)]" aria-hidden="true" />
-          <div className="relative z-10 mr-auto flex min-h-[760px] max-w-[36rem] flex-col justify-start px-6 pb-40 pt-28 text-[#f3f2ef] md:min-h-[800px] md:px-12 md:pt-36 lg:min-h-[calc(100vh-72px)] lg:max-h-[952px] lg:w-[40rem] lg:max-w-[40rem] lg:pb-72 lg:pl-[84px] lg:pr-0 lg:pt-[205px]">
+          <div className="relative z-10 mr-auto flex min-h-[760px] max-w-[36rem] flex-col justify-start px-6 pb-40 pt-28 text-[#f3f2ef] md:min-h-[800px] md:px-12 md:pt-36 lg:min-h-[calc(100vh-72px)] lg:max-h-[952px] lg:w-[40rem] lg:max-w-[40rem] lg:pb-72 lg:pl-[114px] lg:pr-0 lg:pt-[205px]">
             <h1 className="serif text-balance text-[2.1rem] font-normal leading-[1.18] tracking-[0.02em] md:text-[2.5rem] lg:text-[2.65rem] xl:text-[2.78rem]">
               Sagen Sie uns
               <br />
               was Sie umgibt
               <br />
-              <span className="mt-10 block">
-                und wir sagen Ihnen
+              <span className="mt-8 block">
+                <span className="lg:whitespace-nowrap">und wir sagen Ihnen</span>
                 <br />
                 wer Sie sind
               </span>
             </h1>
-            <p className="mt-11 max-w-[24rem] text-[1.18rem] font-normal uppercase leading-[1.45] tracking-[0.14em]">
+            <p className="mt-9 max-w-[24rem] text-[1.18rem] font-normal uppercase leading-[1.45] tracking-[0.14em]">
               DESIGN UND KUNST
               <br />
               FÜR INDIVIDUALISTEN.
             </p>
-            <div className="mt-14 grid gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] sm:flex">
+            <div className="mt-12 grid gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] sm:flex">
               <Link className="flex h-[62px] shrink-0 items-center justify-center border border-[#f3f2ef]/90 px-6 text-center transition hover:bg-[#f3f2ef] hover:text-black sm:w-[230px]" href="/shop">
                 Shop entdecken
               </Link>
@@ -242,7 +242,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 md:px-8 lg:px-[41px] lg:pb-[73px]">
+          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 md:px-8 lg:px-[41px] lg:pb-[55px]">
             <div className="mx-auto grid max-w-none auto-cols-[9.5rem] grid-flow-col grid-rows-2 overflow-x-auto border-l border-t border-[#f3f2ef]/25 bg-[#0f0f0e]/10 sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-4 sm:overflow-hidden lg:grid-cols-8">
               {visibleShopCategories.map((item) => (
                 <Link
