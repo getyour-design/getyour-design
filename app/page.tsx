@@ -205,11 +205,11 @@ function ProductVisual({ index, palette }: { index: number; palette: string }) {
 export default function Home() {
   return (
     <main className="bg-[#f3f2ef]">
-      <section className="bg-[#11100f]">
-        <div className="relative min-h-[760px] overflow-hidden bg-[#11100f] md:min-h-[800px] lg:min-h-[calc(100vh-72px)] lg:max-h-[952px]">
+      <section className="bg-[#8d8376]">
+        <div className="relative min-h-[760px] overflow-hidden bg-[#8d8376] md:min-h-[800px] lg:min-h-[calc(100vh-72px)] lg:max-h-[952px]">
           <Image
             alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
-            className="object-contain object-[50%_46%]"
+            className="object-cover object-[50%_48%]"
             fill
             priority
             sizes="100vw"

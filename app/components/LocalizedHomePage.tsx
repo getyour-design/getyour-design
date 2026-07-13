@@ -53,11 +53,11 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
 
   return (
     <main className="bg-[#f3f2ef]">
-      <section className="bg-[#11100f]">
-        <div className="relative min-h-[760px] overflow-hidden bg-[#11100f] md:min-h-[800px] lg:min-h-[calc(100vh-72px)] lg:max-h-[952px]">
+      <section className="bg-[#8d8376]">
+        <div className="relative min-h-[760px] overflow-hidden bg-[#8d8376] md:min-h-[800px] lg:min-h-[calc(100vh-72px)] lg:max-h-[952px]">
           <Image
             alt="GETYOUR.DESIGN interior context"
-            className="object-contain object-[50%_46%]"
+            className="object-cover object-[50%_48%]"
             fill
             priority
             sizes="100vw"
