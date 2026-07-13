@@ -205,18 +205,18 @@ function ProductVisual({ index, palette }: { index: number; palette: string }) {
 export default function Home() {
   return (
     <main className="bg-[#f3f2ef]">
-      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-6 pt-6 lg:px-10 lg:pb-8 lg:pt-8">
-        <div className="relative mx-auto min-h-[760px] max-w-[1540px] overflow-hidden border hairline bg-[#11100f] md:min-h-[720px] lg:min-h-[760px]">
+      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-0 pt-6 lg:px-10 lg:pt-8">
+        <div className="relative mx-auto min-h-[800px] max-w-[1540px] overflow-hidden border hairline bg-[#11100f] md:min-h-[780px] lg:min-h-[860px] xl:min-h-[900px]">
           <Image
             alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
-            className="object-cover object-[58%_58%]"
+            className="object-cover object-[56%_45%] lg:object-contain lg:object-center"
             fill
             priority
             sizes="100vw"
             src="/images/hero-lc2-blue.png"
           />
           <div className="absolute inset-y-0 left-0 w-full bg-[#11100f]/35 sm:w-[58%] lg:w-[42%]" aria-hidden="true" />
-          <div className="relative z-10 mr-auto flex min-h-[760px] max-w-[42rem] flex-col justify-start px-5 pb-14 pt-16 text-[#f3f2ef] md:min-h-[720px] md:px-10 md:pb-16 md:pt-20 lg:min-h-[760px] lg:w-[42%] lg:justify-end lg:px-12 lg:pb-20 lg:pt-16 xl:px-16">
+          <div className="relative z-10 mr-auto flex min-h-[800px] max-w-[42rem] flex-col justify-start px-5 pb-32 pt-16 text-[#f3f2ef] md:min-h-[780px] md:px-10 md:pb-32 md:pt-20 lg:min-h-[860px] lg:w-[42%] lg:justify-end lg:px-12 lg:pb-60 lg:pt-16 xl:min-h-[900px] xl:px-16">
             <h1 className="serif text-balance text-[1.75rem] font-normal leading-[1.18] md:text-[2.35rem] lg:text-[2.65rem] xl:text-[3rem]">
               Sagen Sie uns
               <br />
@@ -233,7 +233,7 @@ export default function Home() {
               <br />
               FÜR INDIVIDUALISTEN.
             </p>
-            <div className="mt-auto grid gap-3 pt-8 text-xs uppercase tracking-[0.2em] sm:grid-cols-2 lg:mt-9 lg:max-w-[34rem] lg:pt-0">
+            <div className="mt-8 grid gap-3 text-xs uppercase tracking-[0.2em] sm:grid-cols-2 lg:mt-9 lg:max-w-[34rem]">
               <Link className="border border-[#f3f2ef]/80 px-5 py-4 text-center transition hover:bg-[#f3f2ef] hover:text-black" href="/shop">
                 Shop entdecken
               </Link>
@@ -242,20 +242,19 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="border-b hairline bg-[#f3f2ef] px-5 py-6 lg:px-10">
-        <div className="mx-auto grid max-w-[1540px] grid-cols-2 border-l border-t border-black/15 sm:grid-cols-4 lg:grid-cols-8">
-          {visibleShopCategories.map((item) => (
-            <Link
-              className="border-b border-r border-black/15 bg-[#f7f7f5] px-3 py-5 text-center text-[0.62rem] uppercase tracking-[0.18em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black md:px-4 lg:py-6"
-              href={getShopPath("de", item.slug)}
-              key={item.slug}
-            >
-              {dictionary.shop.categories[item.title] ?? item.label ?? item.title}
-            </Link>
-          ))}
+          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-5 lg:px-10 lg:pb-8">
+            <div className="mx-auto flex max-w-[1540px] overflow-x-auto border-l border-t border-[#f3f2ef]/30 bg-[#11100f]/50 lg:grid lg:grid-cols-8 lg:overflow-visible">
+              {visibleShopCategories.map((item) => (
+                <Link
+                  className="min-w-[9.5rem] border-b border-r border-[#f3f2ef]/30 px-3 py-5 text-center text-[0.62rem] uppercase tracking-[0.18em] text-[#f3f2ef] transition hover:bg-[#f3f2ef] hover:text-black md:px-4 lg:min-w-0 lg:py-4"
+                  href={getShopPath("de", item.slug)}
+                  key={item.slug}
+                >
+                  {dictionary.shop.categories[item.title] ?? item.label ?? item.title}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
