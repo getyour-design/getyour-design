@@ -627,7 +627,7 @@ const german: Dictionary = {
     title: "Design-Shop",
     headline: "Möbel, Leuchten, Kunst, Teppiche, Objekte und Editionen.",
     description:
-      "Eine kuratierte Auswahl aus Designmöbeln, Kunstwerken, Leuchten, Teppichen, Accessoires, Objekten und Editionen.",
+      "Eine kuratierte Auswahl aus Möbeln, Leuchten, Teppichen, Dekoration, Accessoires, Geschirr, Glaswaren, Textilien, Kunst, Collectible Design, Objekten und Editionen für besondere Räume.",
     backToShop: "Zurück zum Shop",
     backToCategory: "Zurück zu",
     works: "Arbeiten",
@@ -744,6 +744,14 @@ const german: Dictionary = {
       Tabletop: "Accessoires",
       "Collectible Design": "Collectible Design",
       Editionen: "Editionen",
+      Decoration: "Dekoration",
+      Tableware: "Geschirr",
+      Glassware: "Gläser",
+      Kitchen: "Küche",
+      Textiles: "Textilien",
+      Outdoor: "Outdoor",
+      Bath: "Bad",
+      Kids: "Kinder",
     },
   },
   collections: {
