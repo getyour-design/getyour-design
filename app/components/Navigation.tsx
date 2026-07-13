@@ -12,12 +12,12 @@ export function Navigation() {
   const dictionary = getDictionary(locale);
 
   return (
-    <header className="sticky top-0 z-50 border-b hairline bg-[#f3f2ef]/95 backdrop-blur">
-      <nav className="mx-auto grid max-w-[1540px] grid-cols-[1fr_auto] items-center gap-5 px-5 py-5 lg:grid-cols-[auto_1fr_auto] lg:px-10">
-        <Link className="serif text-xl tracking-[0.16em]" href={localizeHref("/", locale)}>
+    <header className="sticky top-0 z-50 bg-[#f7f6f2]">
+      <nav className="flex min-h-[72px] w-full items-center justify-between gap-4 px-5 md:px-10 lg:px-9 2xl:px-[68px]">
+        <Link className="serif shrink-0 text-[1.25rem] leading-none tracking-[0.12em] text-[#10100f] 2xl:text-[1.38rem]" href={localizeHref("/", locale)}>
           GETYOUR.DESIGN
         </Link>
-        <div className="order-3 col-span-2 flex gap-6 overflow-x-auto border-t hairline pt-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f] lg:order-none lg:col-span-1 lg:justify-center lg:border-0 lg:pt-0">
+        <div className="order-3 flex max-w-full gap-5 overflow-x-auto border-t hairline pt-4 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[#10100f] md:gap-7 lg:order-none lg:border-0 lg:pt-0 2xl:gap-11 2xl:text-[0.66rem] 2xl:tracking-[0.2em]">
           {navItems.map((item) => {
             const isActive =
               pathname === localizeHref(item.href, locale) ||
@@ -26,9 +26,9 @@ export function Navigation() {
 
             return (
               <Link
-                className={`shrink-0 border-b pb-1 transition hover:text-black ${
-                  isActive ? "border-black font-semibold text-black" : "border-transparent"
-                } ${isShop ? "font-semibold text-black" : ""}`}
+                className={`shrink-0 transition hover:text-black ${
+                  isActive || isShop ? "text-black" : "text-[#10100f]"
+                }`}
                 href={localizeHref(item.href, locale)}
                 key={item.href}
               >
@@ -37,16 +37,16 @@ export function Navigation() {
             );
           })}
         </div>
-        <div className="flex justify-end gap-4 text-[0.68rem] uppercase tracking-[0.18em] text-[#26231f]">
+        <div className="flex shrink-0 justify-end gap-3 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-[#10100f] md:gap-4 2xl:gap-5 2xl:text-[0.62rem] 2xl:tracking-[0.18em]">
           <Link className="hidden sm:inline" href={localizeHref("/suche", locale)}>{dictionary.nav.search}</Link>
           <Link className="hidden md:inline" href={localizeHref("/trade", locale)}>{dictionary.nav.account}</Link>
           <Link href={localizeHref("/warenkorb", locale)}>{dictionary.nav.cart}</Link>
-          <div className="hidden flex-wrap gap-x-2 gap-y-1 sm:flex">
+          <div className="hidden gap-x-2 sm:flex">
             {locales.map((targetLocale, index) => (
               <span className="contents" key={targetLocale}>
-                {index > 0 ? <span className="text-[#667174]">|</span> : null}
+                {index > 0 ? <span className="text-[#10100f]">|</span> : null}
                 <Link
-                  className={locale === targetLocale ? "text-black" : "text-[#667174]"}
+                  className={locale === targetLocale ? "text-black" : "text-[#10100f]"}
                   href={getLanguageSwitchPath(pathname, targetLocale)}
                 >
                   {targetLocale.toUpperCase()}

@@ -53,50 +53,50 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
 
   return (
     <main className="bg-[#f3f2ef]">
-      <section className="border-b hairline bg-[#f3f2ef] px-5 pb-0 pt-6 lg:px-10 lg:pt-8">
-        <div className="relative mx-auto min-h-[800px] max-w-[1540px] overflow-hidden border hairline bg-[#11100f] md:min-h-[780px] lg:min-h-[860px] xl:min-h-[900px]">
+      <section className="bg-[#11100f]">
+        <div className="relative min-h-[760px] overflow-hidden bg-[#11100f] md:min-h-[800px] lg:min-h-[calc(100vh-72px)] lg:max-h-[952px]">
           <Image
             alt="GETYOUR.DESIGN interior context"
-            className="object-cover object-[56%_45%] lg:object-contain lg:object-center"
+            className="object-cover object-[55%_45%] lg:object-[53%_49%]"
             fill
             priority
             sizes="100vw"
             src="/images/hero-lc2-blue.png"
           />
-          <div className="absolute inset-y-0 left-0 w-full bg-[#11100f]/35 sm:w-[58%] lg:w-[42%]" aria-hidden="true" />
-          <div className="relative z-10 mr-auto flex min-h-[800px] max-w-[42rem] flex-col justify-start px-5 pb-32 pt-16 text-[#f3f2ef] md:min-h-[780px] md:px-10 md:pb-32 md:pt-20 lg:min-h-[860px] lg:w-[42%] lg:justify-end lg:px-12 lg:pb-60 lg:pt-16 xl:min-h-[900px] xl:px-16">
-            <h1 className="serif text-balance text-[1.75rem] font-normal leading-[1.18] md:text-[2.35rem] lg:text-[2.65rem] xl:text-[3rem]">
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,9,0.88)_0%,rgba(10,10,9,0.68)_25%,rgba(10,10,9,0.24)_43%,rgba(10,10,9,0)_60%)]" aria-hidden="true" />
+          <div className="relative z-10 mr-auto flex min-h-[760px] max-w-[36rem] flex-col justify-start px-6 pb-40 pt-28 text-[#f3f2ef] md:min-h-[800px] md:px-12 md:pt-36 lg:min-h-[calc(100vh-72px)] lg:max-h-[952px] lg:w-[40rem] lg:max-w-[40rem] lg:pb-72 lg:pl-[84px] lg:pr-0 lg:pt-[205px]">
+            <h1 className="serif text-balance text-[2.1rem] font-normal leading-[1.18] tracking-[0.02em] md:text-[2.5rem] lg:text-[2.65rem] xl:text-[2.78rem]">
               {heroLines[0]}
               <br />
               {heroLines[1]}
               <br />
-              <span className="mt-7 block">
+              <span className="mt-10 block">
                 {heroLines[2]}
                 <br />
                 {heroLines[3]}
               </span>
             </h1>
-            <p className="serif mt-9 max-w-[24rem] text-[1.05rem] font-normal leading-[1.45] tracking-[0.06em] md:text-[1.2rem]">
+            <p className="mt-11 max-w-[24rem] text-[1.18rem] font-normal uppercase leading-[1.45] tracking-[0.14em]">
               {dictionary.home.tagline}
             </p>
-            <div className="mt-8 grid gap-3 text-xs uppercase tracking-[0.2em] sm:grid-cols-2 lg:mt-9 lg:max-w-[34rem]">
-              <Link className="border border-[#f3f2ef]/80 px-5 py-4 text-center transition hover:bg-[#f3f2ef] hover:text-black" href={localizedHref("/shop", locale)}>
+            <div className="mt-14 grid gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] sm:flex">
+              <Link className="flex h-[62px] shrink-0 items-center justify-center border border-[#f3f2ef]/90 px-6 text-center transition hover:bg-[#f3f2ef] hover:text-black sm:w-[230px]" href={localizedHref("/shop", locale)}>
                 {dictionary.home.primaryCta}
               </Link>
-              <Link className="border border-[#f3f2ef]/80 px-5 py-4 text-center transition hover:bg-[#f3f2ef] hover:text-black" href={localizedHref("/collections", locale)}>
+              <Link className="flex h-[62px] shrink-0 items-center justify-center border border-[#f3f2ef]/90 px-6 text-center transition hover:bg-[#f3f2ef] hover:text-black sm:w-[272px]" href={localizedHref("/collections", locale)}>
                 {dictionary.home.secondaryCta}
               </Link>
             </div>
           </div>
-          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-5 lg:px-10 lg:pb-8" aria-label={dictionary.home.shopLinksTitle}>
-            <div className="mx-auto flex max-w-[1540px] overflow-x-auto border-l border-t border-[#f3f2ef]/30 bg-[#11100f]/50 lg:grid lg:grid-cols-8 lg:overflow-visible">
+          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 md:px-8 lg:px-[41px] lg:pb-[73px]" aria-label={dictionary.home.shopLinksTitle}>
+            <div className="mx-auto grid max-w-none grid-cols-2 overflow-hidden border-l border-t border-[#f3f2ef]/25 bg-[#0f0f0e]/10 sm:grid-cols-4 lg:grid-cols-8">
               {visibleShopCategories.map((item) => (
                 <Link
-                  className="min-w-[9.5rem] border-b border-r border-[#f3f2ef]/30 px-3 py-5 text-center text-[0.62rem] uppercase tracking-[0.18em] text-[#f3f2ef] transition hover:bg-[#f3f2ef] hover:text-black md:px-4 lg:min-w-0 lg:py-4"
+                  className="flex min-h-[55px] items-center justify-center border-b border-r border-[#f3f2ef]/25 px-3 text-center text-[0.66rem] font-semibold uppercase tracking-[0.14em] transition hover:bg-white/10 md:px-4"
                   href={getShopPath(locale, item.slug)}
                   key={item.slug}
                 >
-                  {dictionary.shop.categories[item.title] ?? item.label ?? item.title}
+                  <span className="text-white">{dictionary.shop.categories[item.title] ?? item.label ?? item.title}</span>
                 </Link>
               ))}
             </div>
