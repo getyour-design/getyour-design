@@ -54,39 +54,36 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
   return (
     <main className="bg-[#f3f2ef]">
       <section className="border-b hairline bg-[#f3f2ef] px-5 pb-6 pt-6 lg:px-10 lg:pb-8 lg:pt-8">
-        <div className="mx-auto max-w-[1540px] overflow-hidden border hairline bg-[#f7f7f5]">
-          <div className="relative min-h-[420px] bg-[#e7ecef] md:min-h-[540px] lg:min-h-[500px] xl:min-h-[560px]">
-            <Image
-              alt="GETYOUR.DESIGN interior context"
-              className="object-cover object-[58%_58%]"
-              fill
-              priority
-              sizes="100vw"
-              src="/images/hero-lc2-blue.png"
-            />
-          </div>
-          <div className="grid gap-8 border-t border-black/15 px-5 py-8 md:px-8 md:py-10 lg:grid-cols-[0.62fr_0.38fr] lg:items-end lg:px-10 xl:px-12">
-            <div>
-              <h1 className="serif text-balance text-[1.45rem] font-normal leading-[1.22] text-[#10100f] md:text-[1.85rem] lg:text-[2.35rem] xl:text-[2.65rem]">
-                {heroLines[0]}
+        <div className="relative mx-auto min-h-[760px] max-w-[1540px] overflow-hidden border hairline bg-[#11100f] md:min-h-[720px] lg:min-h-[760px]">
+          <Image
+            alt="GETYOUR.DESIGN interior context"
+            className="object-cover object-[58%_58%]"
+            fill
+            priority
+            sizes="100vw"
+            src="/images/hero-lc2-blue.png"
+          />
+          <div className="absolute inset-y-0 left-0 w-full bg-[#11100f]/35 sm:w-[58%] lg:w-[42%]" aria-hidden="true" />
+          <div className="relative z-10 mr-auto flex min-h-[760px] max-w-[42rem] flex-col justify-start px-5 pb-14 pt-16 text-[#f3f2ef] md:min-h-[720px] md:px-10 md:pb-16 md:pt-20 lg:min-h-[760px] lg:w-[42%] lg:justify-end lg:px-12 lg:pb-20 lg:pt-16 xl:px-16">
+            <h1 className="serif text-balance text-[1.75rem] font-normal leading-[1.18] md:text-[2.35rem] lg:text-[2.65rem] xl:text-[3rem]">
+              {heroLines[0]}
+              <br />
+              {heroLines[1]}
+              <br />
+              <span className="mt-7 block">
+                {heroLines[2]}
                 <br />
-                {heroLines[1]}
-                <br />
-                <span className="mt-6 block">
-                  {heroLines[2]}
-                  <br />
-                  {heroLines[3]}
-                </span>
-              </h1>
-              <p className="serif mt-9 max-w-[24rem] text-[1.05rem] font-normal leading-[1.45] tracking-[0.06em] text-[#10100f] md:text-[1.2rem] lg:mt-10">
-                {dictionary.home.tagline}
-              </p>
-            </div>
-            <div className="grid gap-3 text-xs uppercase tracking-[0.2em] text-[#10100f] sm:grid-cols-2">
-              <Link className="border hairline bg-[#f3f2ef] px-5 py-4 text-center transition hover:bg-[#f8f8f6] hover:text-black" href={localizedHref("/shop", locale)}>
+                {heroLines[3]}
+              </span>
+            </h1>
+            <p className="serif mt-9 max-w-[24rem] text-[1.05rem] font-normal leading-[1.45] tracking-[0.06em] md:text-[1.2rem]">
+              {dictionary.home.tagline}
+            </p>
+            <div className="mt-auto grid gap-3 pt-8 text-xs uppercase tracking-[0.2em] sm:grid-cols-2 lg:mt-9 lg:max-w-[34rem] lg:pt-0">
+              <Link className="border border-[#f3f2ef]/80 px-5 py-4 text-center transition hover:bg-[#f3f2ef] hover:text-black" href={localizedHref("/shop", locale)}>
                 {dictionary.home.primaryCta}
               </Link>
-              <Link className="border hairline bg-[#f3f2ef] px-5 py-4 text-center text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={localizedHref("/collections", locale)}>
+              <Link className="border border-[#f3f2ef]/80 px-5 py-4 text-center transition hover:bg-[#f3f2ef] hover:text-black" href={localizedHref("/collections", locale)}>
                 {dictionary.home.secondaryCta}
               </Link>
             </div>
