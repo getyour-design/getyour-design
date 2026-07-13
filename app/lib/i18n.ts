@@ -115,34 +115,134 @@ export function getAlternateLanguages(routeKey: RouteKey, suffix = "") {
   };
 }
 
-export const englishShopCategorySlugs: Record<string, string> = {
-  moebel: "furniture",
-  leuchten: "lighting",
-  teppiche: "rugs",
-  objekte: "objects",
-  kunst: "artworks",
-  editionen: "editions",
-  tabletop: "accessories",
+export const localizedShopCategorySlugs: Record<Locale, Record<string, string>> = {
+  de: {
+    moebel: "moebel",
+    leuchten: "leuchten",
+    teppiche: "teppiche",
+    objekte: "objekte",
+    kunst: "kunst",
+    editionen: "editionen",
+    tabletop: "tabletop",
+    "collectible-design": "collectible-design",
+    decoration: "dekoration",
+    tableware: "geschirr",
+    glassware: "glaeser",
+    kitchen: "kueche",
+    textiles: "textilien",
+    outdoor: "outdoor",
+    bath: "bad",
+    kids: "kinder",
+  },
+  en: {
+    moebel: "furniture",
+    leuchten: "lighting",
+    teppiche: "rugs",
+    objekte: "objects",
+    kunst: "artworks",
+    editionen: "editions",
+    tabletop: "accessories",
+    "collectible-design": "collectible-design",
+    decoration: "decoration",
+    tableware: "tableware",
+    glassware: "glassware",
+    kitchen: "kitchen",
+    textiles: "textiles",
+    outdoor: "outdoor",
+    bath: "bath",
+    kids: "kids",
+  },
+  fr: {
+    moebel: "furniture",
+    leuchten: "lighting",
+    teppiche: "rugs",
+    objekte: "objects",
+    kunst: "artworks",
+    editionen: "editions",
+    tabletop: "accessories",
+    "collectible-design": "collectible-design",
+    decoration: "decoration",
+    tableware: "arts-de-la-table",
+    glassware: "verrerie",
+    kitchen: "cuisine",
+    textiles: "textiles",
+    outdoor: "outdoor",
+    bath: "bain",
+    kids: "enfants",
+  },
+  es: {
+    moebel: "furniture",
+    leuchten: "lighting",
+    teppiche: "rugs",
+    objekte: "objects",
+    kunst: "artworks",
+    editionen: "editions",
+    tabletop: "accessories",
+    "collectible-design": "collectible-design",
+    decoration: "decoracion",
+    tableware: "vajilla",
+    glassware: "cristaleria",
+    kitchen: "cocina",
+    textiles: "textiles",
+    outdoor: "exterior",
+    bath: "bano",
+    kids: "infantil",
+  },
+  zh: {
+    moebel: "furniture",
+    leuchten: "lighting",
+    teppiche: "rugs",
+    objekte: "objects",
+    kunst: "artworks",
+    editionen: "editions",
+    tabletop: "accessories",
+    "collectible-design": "collectible-design",
+    decoration: "zhuangshi",
+    tableware: "canju",
+    glassware: "boliqi",
+    kitchen: "chufang",
+    textiles: "fangzhi",
+    outdoor: "huwai",
+    bath: "weiyu",
+    kids: "ertong",
+  },
+  ar: {
+    moebel: "furniture",
+    leuchten: "lighting",
+    teppiche: "rugs",
+    objekte: "objects",
+    kunst: "artworks",
+    editionen: "editions",
+    tabletop: "accessories",
+    "collectible-design": "collectible-design",
+    decoration: "decor",
+    tableware: "tableware",
+    glassware: "glassware",
+    kitchen: "kitchen",
+    textiles: "textiles",
+    outdoor: "outdoor",
+    bath: "bath",
+    kids: "kids",
+  },
 };
+
+export const englishShopCategorySlugs: Record<string, string> = Object.fromEntries(
+  Object.entries(localizedShopCategorySlugs.en).filter(([slug, localizedSlug]) => slug !== localizedSlug),
+);
 
 export const legacyEnglishShopCategorySlugs = Object.fromEntries(
   Object.entries(englishShopCategorySlugs).map(([germanSlug, englishSlug]) => [englishSlug, germanSlug]),
 ) as Record<string, string>;
 
 export function getLocalizedShopSlug(locale: Locale, slug: string) {
-  if (locale !== "de") {
-    return englishShopCategorySlugs[slug] ?? slug;
-  }
-
-  return slug;
+  return localizedShopCategorySlugs[locale][slug] ?? slug;
 }
 
 export function resolveShopSlug(locale: Locale, slug: string) {
-  if (locale !== "de") {
-    return legacyEnglishShopCategorySlugs[slug] ?? slug;
-  }
+  const localizedSlugs = localizedShopCategorySlugs[locale];
+  const resolvedSlug = Object.entries(localizedSlugs).find(([, localizedSlug]) => localizedSlug === slug)?.[0];
 
-  return slug;
+  return resolvedSlug ?? slug;
 }
 
 export function getShopPath(locale: Locale, slug = "") {

@@ -29,7 +29,7 @@ import { EntityActions } from "../../components/EntityActions";
 import { ProductCommerceBlock } from "../../components/ProductCommerceBlock";
 import { LuxuryCoastersPage } from "../../components/LuxuryCoastersPage";
 import { getDictionary } from "../../data/dictionaries";
-import { products, shopCategories } from "../../data/products";
+import { products, visibleShopCategories } from "../../data/products";
 import { collections } from "../../data/collections";
 import { artworks } from "../../data/artworks";
 import { brands } from "../../data/brands";
@@ -141,7 +141,7 @@ export function generateStaticParams() {
     }));
   });
   const localizedShopRoutes = locales.flatMap((locale) => [
-    ...shopCategories.map((category) => ({
+    ...visibleShopCategories.map((category) => ({
       locale,
       slug: ["shop", getLocalizedShopSlug(locale, category.slug)],
     })),
@@ -173,17 +173,19 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
 
   if (route.kind === "shopItem") {
     const product = products.find((item) => item.slug === route.slug);
-    const category = shopCategories.find((item) => item.slug === route.slug);
+    const category = visibleShopCategories.find((item) => item.slug === route.slug);
     const dictionary = getDictionary(locale);
     const productContent = product ? getLocalizedProductContent(locale, product) : undefined;
     const title = product
       ? productContent?.metaTitle ?? productContent?.title ?? getLocalizedProductTitle(locale, product, products.findIndex((item) => item.slug === product.slug))
       : category
-        ? dictionary.shop.categories[category.title] ?? category.title
+        ? dictionary.shop.categoryMetaTitles[category.title] ?? dictionary.shop.categories[category.title] ?? category.title
         : dictionary.shop.title;
     const description = product
       ? productContent?.metaDescription ?? `${title} | GETYOUR.DESIGN: ${dictionary.shop.categories[product.category] ?? product.category}, ${product.material}, ${product.price}.`
-      : `${title} | GETYOUR.DESIGN.`;
+      : category
+        ? dictionary.shop.categoryMetaDescriptions[category.title] ?? `${title} | GETYOUR.DESIGN.`
+        : `${title} | GETYOUR.DESIGN.`;
     const productCanonical = product ? getLocalizedProductPath(locale, product) : undefined;
 
     return {
@@ -496,7 +498,7 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
       />
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
         <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
-          {shopCategories.map((area) => (
+          {visibleShopCategories.map((area) => (
             <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath(locale, area.slug)} key={area.slug}>
               {getLocalizedCategoryLabel(locale, area.title)}
             </Link>
@@ -537,11 +539,11 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
 function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string }) {
   const dictionary = getDictionary(locale);
   const product = products.find((item) => item.slug === slug);
-  const category = shopCategories.find((item) => item.slug === slug);
+  const category = visibleShopCategories.find((item) => item.slug === slug);
 
   if (product) {
     const productIndex = products.findIndex((item) => item.slug === product.slug);
-    const productCategory = shopCategories.find((item) => item.title === product.category);
+    const productCategory = visibleShopCategories.find((item) => item.title === product.category);
     const categoryHref = productCategory ? getShopPath(locale, productCategory.slug) : localizedRoutes.shop[locale];
     const cta = getLocalizedCta(locale, product.status);
     const content = getLocalizedProductContent(locale, product);
@@ -645,6 +647,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
         item.secondaryCategories?.includes(category.title),
     );
     const categoryTitle = getLocalizedCategoryLabel(locale, category.title);
+    const emptyState = dictionary.shop.categoryEmptyStates[category.title];
 
     return (
       <main>
@@ -666,8 +669,9 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
           </div>
         </section>
         <section className="section-pad bg-[#f3f2ef]">
-          <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {categoryProducts.map((item) => {
+          {categoryProducts.length > 0 ? (
+            <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {categoryProducts.map((item) => {
               const index = products.findIndex((productItem) => productItem.slug === item.slug);
 
               return (
@@ -698,8 +702,16 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                   </div>
                 </article>
               );
-            })}
-          </div>
+              })}
+            </div>
+          ) : (
+            <div className="mx-auto max-w-[1540px] border-y border-black/15 py-12">
+              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{emptyState?.title ?? dictionary.shop.headline}</p>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-[#4b5356]">
+                {emptyState?.text ?? dictionary.shop.description}
+              </p>
+            </div>
+          )}
         </section>
       </main>
     );

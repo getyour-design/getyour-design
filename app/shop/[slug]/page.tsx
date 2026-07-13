@@ -7,7 +7,7 @@ import { ProductCommerceBlock } from "../../components/ProductCommerceBlock";
 import { getDictionary } from "../../data/dictionaries";
 import { getCommerceCta, getProductCta } from "../../lib/commerce";
 import { getProductPath } from "../../lib/i18n";
-import { products, shopCategories } from "../../data/products";
+import { products, visibleShopCategories } from "../../data/products";
 
 type ShopSlugPageProps = {
   params: Promise<{ slug: string }>;
@@ -40,7 +40,7 @@ function getProductCanonical(product: Product) {
 
 export async function generateStaticParams() {
   return [
-    ...shopCategories.map((category) => ({ slug: category.slug })),
+    ...visibleShopCategories.map((category) => ({ slug: category.slug })),
     ...products.map((product) => ({ slug: product.slug })),
   ];
 }
@@ -48,7 +48,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: ShopSlugPageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = products.find((item) => item.slug === slug);
-  const category = shopCategories.find((item) => item.slug === slug);
+  const category = visibleShopCategories.find((item) => item.slug === slug);
+  const dictionary = getDictionary("de");
 
   if (product) {
     const productPath = getProductCanonical(product);
@@ -70,8 +71,8 @@ export async function generateMetadata({ params }: ShopSlugPageProps): Promise<M
 
   if (category) {
     return {
-      title: category.title,
-      description: `${category.title} bei GETYOUR.DESIGN entdecken.`,
+      title: dictionary.shop.categoryMetaTitles[category.title] ?? category.title,
+      description: dictionary.shop.categoryMetaDescriptions[category.title] ?? `${category.title} bei GETYOUR.DESIGN entdecken.`,
       alternates: {
         canonical: `/shop/${category.slug}`,
       },
@@ -84,12 +85,12 @@ export async function generateMetadata({ params }: ShopSlugPageProps): Promise<M
 export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
   const { slug } = await params;
   const product = products.find((item) => item.slug === slug);
-  const category = shopCategories.find((item) => item.slug === slug);
+  const category = visibleShopCategories.find((item) => item.slug === slug);
 
   if (product) {
     const cta = getProductCta(product.status);
     const productIndex = products.findIndex((item) => item.slug === product.slug);
-    const productCategory = shopCategories.find((item) => item.title === product.category);
+    const productCategory = visibleShopCategories.find((item) => item.title === product.category);
     const categoryHref = productCategory ? `/shop/${productCategory.slug}` : "/shop";
     const productHref = getRootProductPath(product);
     const productCta = product.ctaLabel ? { ...cta, label: product.ctaLabel } : cta;
@@ -183,13 +184,15 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
   }
 
   if (category) {
-    const categoryTitle = "label" in category ? category.label : category.title;
+    const dictionary = getDictionary("de");
+    const categoryTitle = dictionary.shop.categories[category.title] ?? category.label ?? category.title;
     const categoryProducts = products.filter(
       (item) =>
         item.category === category.title ||
         item.secondaryCategories?.includes(category.title),
     );
-    const description = categoryDescriptions[category.title] ?? `${category.title} bei GETYOUR.DESIGN entdecken.`;
+    const description = dictionary.shop.categoryDescriptions[category.title] ?? categoryDescriptions[category.title] ?? `${category.title} bei GETYOUR.DESIGN entdecken.`;
+    const emptyState = dictionary.shop.categoryEmptyStates[category.title];
 
     return (
       <main>
@@ -211,8 +214,9 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
           </div>
         </section>
         <section className="section-pad bg-[#f3f2ef]">
-          <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {categoryProducts.map((item) => {
+          {categoryProducts.length > 0 ? (
+            <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {categoryProducts.map((item) => {
               const index = products.findIndex((productItem) => productItem.slug === item.slug);
 
               return (
@@ -238,8 +242,16 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                   </div>
                 </article>
               );
-            })}
-          </div>
+              })}
+            </div>
+          ) : (
+            <div className="mx-auto max-w-[1540px] border-y border-black/15 py-12">
+              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{emptyState?.title ?? "Auswahl in Vorbereitung"}</p>
+              <p className="mt-5 max-w-2xl text-base leading-8 text-[#4b5356]">
+                {emptyState?.text ?? "Eine kuratierte Auswahl wird derzeit zusammengestellt. Neue Objekte und Empfehlungen werden schrittweise ergänzt."}
+              </p>
+            </div>
+          )}
         </section>
       </main>
     );

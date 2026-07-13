@@ -83,6 +83,12 @@ export type Dictionary = {
     headline: string;
     description: string;
     categoryDescriptions: Record<string, string>;
+    categoryMetaTitles: Record<string, string>;
+    categoryMetaDescriptions: Record<string, string>;
+    categoryEmptyStates: Record<string, {
+      title: string;
+      text: string;
+    }>;
     backToShop: string;
     backToCategory: string;
     works: string;
@@ -332,6 +338,68 @@ const english: Dictionary = {
       Teppiche: "Rugs and textile works with character, structure and provenance.",
       Editionen: "Limited editions and selected works in small runs.",
       "Collectible Design": "Collectible design between function, craft and art.",
+      Decoration: "Decorative objects, sculptural accents and quiet pieces for shelves, surfaces and rooms.",
+      Tableware: "Tableware for cultivated settings: plates, bowls, cups and serving pieces selected for material presence.",
+      Glassware: "Glassware, vessels and transparent objects for table, bar and display.",
+      Kitchen: "Functional kitchen objects with durable materials, calm forms and everyday usefulness.",
+      Textiles: "Textile pieces beyond rugs: throws, cushions, fabrics and soft surfaces for lived-in rooms.",
+      Outdoor: "Objects and furniture for terraces, gardens and open-air rooms, curated with material resilience in mind.",
+      Bath: "Bath objects, accessories and material details for quiet private spaces.",
+      Kids: "Design objects for children’s rooms, selected with calm forms, tactility and longevity.",
+    },
+    categoryMetaTitles: {
+      Decoration: "Decoration",
+      Tableware: "Tableware",
+      Glassware: "Glassware",
+      Kitchen: "Kitchen Objects",
+      Textiles: "Textiles",
+      Outdoor: "Outdoor Design",
+      Bath: "Bath Objects",
+      Kids: "Kids Design",
+    },
+    categoryMetaDescriptions: {
+      Decoration: "Decorative objects, sculptural accents and quiet room pieces at GETYOUR.DESIGN, curated with material presence and restraint.",
+      Tableware: "Tableware for cultivated settings: plates, bowls, cups and serving pieces selected for materiality, proportion and daily use.",
+      Glassware: "Glassware, vessels and transparent objects for table, bar and display, curated for quiet interiors.",
+      Kitchen: "Kitchen objects and functional pieces with durable materials, calm forms and considered everyday use.",
+      Textiles: "Textile pieces beyond rugs: throws, cushions, fabrics and soft surfaces selected for rooms with texture.",
+      Outdoor: "Outdoor design for terraces, gardens and open-air rooms, curated with material resilience and quiet forms.",
+      Bath: "Bath objects, accessories and material details for private spaces, selected with calm precision.",
+      Kids: "Design for children’s rooms with calm forms, tactile materials and durable objects selected for everyday life.",
+    },
+    categoryEmptyStates: {
+      Decoration: {
+        title: "A decorative edit is being composed.",
+        text: "Objects and accents for this category are being curated gradually, with a focus on material, proportion and room presence.",
+      },
+      Tableware: {
+        title: "Tableware is being selected.",
+        text: "Plates, bowls, cups and serving pieces will be added step by step once the selection is ready.",
+      },
+      Glassware: {
+        title: "Glass pieces are in preparation.",
+        text: "The future selection will focus on vessels, drinking glasses and transparent objects with quiet character.",
+      },
+      Kitchen: {
+        title: "Kitchen objects are being reviewed.",
+        text: "Functional pieces for preparation, storage and use will appear here as the curation develops.",
+      },
+      Textiles: {
+        title: "A textile selection is being built.",
+        text: "Soft surfaces, throws, cushions and fabrics will be added gradually with attention to touch and material.",
+      },
+      Outdoor: {
+        title: "Outdoor pieces are being curated.",
+        text: "Objects and furniture for open-air rooms will follow with careful attention to material and setting.",
+      },
+      Bath: {
+        title: "Bath objects are being prepared.",
+        text: "Accessories and material details for private spaces will be added as the category develops.",
+      },
+      Kids: {
+        title: "A quiet children’s edit is being assembled.",
+        text: "Durable, tactile and considered pieces for children’s rooms will be introduced gradually.",
+      },
     },
     backToShop: "Back to Shop",
     backToCategory: "Back to",
@@ -569,6 +637,70 @@ const german: Dictionary = {
     origin: "Herkunft",
     productDescription:
       "Neutraler Katalog-Platzhalter mit Fokus auf Materialpräsenz, Proportion und Raumqualität.",
+    categoryDescriptions: {
+      Decoration: "Dekorative Wohnobjekte, skulpturale Akzente und ruhige Stücke für Flächen, Regale und Räume.",
+      Tableware: "Geschirr und Tischkultur: Teller, Schalen, Tassen und Servierobjekte mit klarer Materialwirkung.",
+      Glassware: "Gläser, Gefäße und transparente Objekte für Tisch, Bar und Vitrine.",
+      Kitchen: "Funktionale Küchenobjekte mit langlebigen Materialien, ruhigen Formen und alltäglicher Präzision.",
+      Textiles: "Textile Stücke jenseits von Teppichen: Plaids, Kissen, Stoffe und weiche Oberflächen für bewohnte Räume.",
+      Outdoor: "Objekte und Möbel für Terrasse, Garten und Außenräume mit Blick auf Materialbeständigkeit.",
+      Bath: "Badobjekte, Accessoires und Materialdetails für ruhige private Räume.",
+      Kids: "Designobjekte für Kinderzimmer mit ruhiger Form, Haptik und langlebiger Materialität.",
+    },
+    categoryMetaTitles: {
+      Decoration: "Dekoration",
+      Tableware: "Geschirr",
+      Glassware: "Gläser",
+      Kitchen: "Küche",
+      Textiles: "Textilien",
+      Outdoor: "Outdoor Design",
+      Bath: "Bad",
+      Kids: "Kinderzimmer Design",
+    },
+    categoryMetaDescriptions: {
+      Decoration: "Dekorative Wohnobjekte, skulpturale Akzente und ruhige Stücke für Flächen, Regale und Räume bei GETYOUR.DESIGN.",
+      Tableware: "Geschirr und Tischkultur bei GETYOUR.DESIGN: Teller, Schalen, Tassen und Servierobjekte mit Materialpräsenz.",
+      Glassware: "Gläser, Gefäße und transparente Objekte für Tisch, Bar und Vitrine, kuratiert für ruhige Interieurs.",
+      Kitchen: "Funktionale Küchenobjekte mit langlebigen Materialien, ruhigen Formen und präziser Alltagstauglichkeit.",
+      Textiles: "Textile Stücke jenseits von Teppichen: Plaids, Kissen, Stoffe und weiche Oberflächen für besondere Räume.",
+      Outdoor: "Outdoor Design für Terrasse, Garten und Außenräume, kuratiert mit Blick auf Material und Beständigkeit.",
+      Bath: "Badobjekte, Accessoires und Materialdetails für private Räume, ruhig und präzise ausgewählt.",
+      Kids: "Design für Kinderzimmer mit ruhigen Formen, haptischen Materialien und langlebigen Objekten.",
+    },
+    categoryEmptyStates: {
+      Decoration: {
+        title: "Eine Auswahl für Dekoration entsteht.",
+        text: "Wohnobjekte und Akzente für diese Kategorie werden schrittweise kuratiert, mit Fokus auf Material, Proportion und Raumwirkung.",
+      },
+      Tableware: {
+        title: "Die Geschirr-Auswahl wird kuratiert.",
+        text: "Teller, Schalen, Tassen und Servierobjekte werden ergänzt, sobald die Auswahl in Material und Form stimmig ist.",
+      },
+      Glassware: {
+        title: "Gläser und Gefäße sind in Vorbereitung.",
+        text: "Die spätere Auswahl konzentriert sich auf Glasobjekte mit klarer Funktion, Transparenz und ruhigem Charakter.",
+      },
+      Kitchen: {
+        title: "Küchenobjekte werden geprüft.",
+        text: "Funktionale Stücke für Vorbereitung, Aufbewahrung und Gebrauch erscheinen hier nach und nach.",
+      },
+      Textiles: {
+        title: "Eine textile Auswahl wird aufgebaut.",
+        text: "Plaids, Kissen, Stoffe und weiche Oberflächen werden mit Blick auf Haptik und Material ergänzt.",
+      },
+      Outdoor: {
+        title: "Outdoor-Objekte werden kuratiert.",
+        text: "Stücke für Terrasse, Garten und Außenräume folgen mit besonderem Blick auf Material und Umgebung.",
+      },
+      Bath: {
+        title: "Badobjekte sind in Vorbereitung.",
+        text: "Accessoires und Materialdetails für private Räume werden ergänzt, sobald die Auswahl tragfähig ist.",
+      },
+      Kids: {
+        title: "Eine ruhige Auswahl für Kinderzimmer entsteht.",
+        text: "Langlebige, haptische und bewusst gestaltete Stücke für Kinderzimmer werden schrittweise eingeführt.",
+      },
+    },
     cta: {
       "Beim Partner ansehen": "Beim Partner ansehen",
     },
@@ -803,6 +935,68 @@ const french: Dictionary = {
       Teppiche: "Tapis et œuvres textiles avec structure et provenance.",
       Editionen: "Éditions limitées et travaux sélectionnés en petits tirages.",
       "Collectible Design": "Design de collection entre fonction, artisanat et art.",
+      Decoration: "Objets décoratifs, accents sculpturaux et pièces calmes pour surfaces, étagères et espaces.",
+      Tableware: "Arts de la table : assiettes, bols, tasses et pièces de service choisis pour leur matière.",
+      Glassware: "Verrerie, contenants et objets transparents pour la table, le bar et la présentation.",
+      Kitchen: "Objets de cuisine fonctionnels avec matières durables, formes calmes et usage quotidien.",
+      Textiles: "Pièces textiles au-delà des tapis : plaids, coussins, tissus et surfaces souples.",
+      Outdoor: "Objets et mobilier pour terrasses, jardins et espaces extérieurs, choisis pour leur tenue.",
+      Bath: "Objets de bain, accessoires et détails de matière pour espaces privés et calmes.",
+      Kids: "Objets de design pour chambres d'enfants, avec formes calmes, toucher et durée.",
+    },
+    categoryMetaTitles: {
+      Decoration: "Décoration",
+      Tableware: "Arts de la table",
+      Glassware: "Verrerie",
+      Kitchen: "Cuisine",
+      Textiles: "Textiles",
+      Outdoor: "Outdoor Design",
+      Bath: "Bain",
+      Kids: "Design enfant",
+    },
+    categoryMetaDescriptions: {
+      Decoration: "Objets décoratifs, accents sculpturaux et pièces calmes pour surfaces, étagères et espaces chez GETYOUR.DESIGN.",
+      Tableware: "Arts de la table chez GETYOUR.DESIGN : assiettes, bols, tasses et pièces de service choisis pour leur matière.",
+      Glassware: "Verrerie, contenants et objets transparents pour la table, le bar et la présentation.",
+      Kitchen: "Objets de cuisine fonctionnels avec matières durables, formes calmes et usage quotidien précis.",
+      Textiles: "Pièces textiles au-delà des tapis : plaids, coussins, tissus et surfaces souples pour espaces habités.",
+      Outdoor: "Design outdoor pour terrasses, jardins et espaces extérieurs, sélectionné avec attention à la matière.",
+      Bath: "Objets de bain, accessoires et détails de matière pour espaces privés, choisis avec calme et précision.",
+      Kids: "Design pour chambres d'enfants avec formes calmes, matières tactiles et objets durables.",
+    },
+    categoryEmptyStates: {
+      Decoration: {
+        title: "Une sélection décorative est en cours.",
+        text: "Les objets et accents seront ajoutés progressivement, avec attention à la matière, aux proportions et à l'espace.",
+      },
+      Tableware: {
+        title: "La sélection d'arts de la table se prépare.",
+        text: "Assiettes, bols, tasses et pièces de service seront ajoutés lorsque la curation sera prête.",
+      },
+      Glassware: {
+        title: "La verrerie est en préparation.",
+        text: "La sélection à venir portera sur des verres, contenants et objets transparents au caractère discret.",
+      },
+      Kitchen: {
+        title: "Les objets de cuisine sont examinés.",
+        text: "Des pièces fonctionnelles pour préparer, conserver et utiliser seront ajoutées au fil de la curation.",
+      },
+      Textiles: {
+        title: "Une sélection textile se construit.",
+        text: "Plaids, coussins, tissus et surfaces souples seront ajoutés avec attention au toucher et à la matière.",
+      },
+      Outdoor: {
+        title: "Les pièces outdoor sont en cours de curation.",
+        text: "Objets et mobilier pour espaces extérieurs suivront avec une attention particulière à la matière et au contexte.",
+      },
+      Bath: {
+        title: "Les objets de bain sont en préparation.",
+        text: "Accessoires et détails de matière pour espaces privés seront ajoutés à mesure que la catégorie se précise.",
+      },
+      Kids: {
+        title: "Une sélection calme pour enfants se prépare.",
+        text: "Des pièces durables, tactiles et considérées pour chambres d'enfants seront introduites progressivement.",
+      },
     },
     categories: {
       Möbel: "Mobilier",
@@ -813,6 +1007,14 @@ const french: Dictionary = {
       Tabletop: "Accessoires",
       "Collectible Design": "Design de collection",
       Editionen: "Éditions",
+      Decoration: "Décoration",
+      Tableware: "Arts de la table",
+      Glassware: "Verrerie",
+      Kitchen: "Cuisine",
+      Textiles: "Textiles",
+      Outdoor: "Outdoor",
+      Bath: "Bain",
+      Kids: "Enfants",
     },
     cta: {
       "In den Warenkorb": "Ajouter au panier",
@@ -1045,6 +1247,68 @@ const spanish: Dictionary = {
       Teppiche: "Alfombras y textiles con estructura y procedencia.",
       Editionen: "Ediciones limitadas y trabajos seleccionados en tiradas pequeñas.",
       "Collectible Design": "Diseño coleccionable entre función, oficio y arte.",
+      Decoration: "Objetos decorativos, acentos escultóricos y piezas tranquilas para superficies, estanterías y espacios.",
+      Tableware: "Vajilla y mesa: platos, cuencos, tazas y piezas de servicio seleccionadas por su materialidad.",
+      Glassware: "Cristalería, recipientes y objetos transparentes para mesa, bar y exposición.",
+      Kitchen: "Objetos funcionales de cocina con materiales duraderos, formas serenas y uso cotidiano.",
+      Textiles: "Textiles más allá de las alfombras: mantas, cojines, tejidos y superficies suaves.",
+      Outdoor: "Objetos y mobiliario para terrazas, jardines y espacios exteriores, elegidos por su resistencia material.",
+      Bath: "Objetos de baño, accesorios y detalles materiales para espacios privados tranquilos.",
+      Kids: "Objetos de diseño para habitaciones infantiles, con formas serenas, tacto y durabilidad.",
+    },
+    categoryMetaTitles: {
+      Decoration: "Decoración",
+      Tableware: "Vajilla",
+      Glassware: "Cristalería",
+      Kitchen: "Cocina",
+      Textiles: "Textiles",
+      Outdoor: "Diseño exterior",
+      Bath: "Baño",
+      Kids: "Diseño infantil",
+    },
+    categoryMetaDescriptions: {
+      Decoration: "Objetos decorativos, acentos escultóricos y piezas tranquilas para superficies, estanterías y espacios en GETYOUR.DESIGN.",
+      Tableware: "Vajilla y mesa en GETYOUR.DESIGN: platos, cuencos, tazas y piezas de servicio seleccionadas por su materialidad.",
+      Glassware: "Cristalería, recipientes y objetos transparentes para mesa, bar y exposición, curados para interiores serenos.",
+      Kitchen: "Objetos funcionales de cocina con materiales duraderos, formas serenas y uso cotidiano preciso.",
+      Textiles: "Textiles más allá de las alfombras: mantas, cojines, tejidos y superficies suaves para espacios vividos.",
+      Outdoor: "Diseño exterior para terrazas, jardines y espacios abiertos, seleccionado con atención al material.",
+      Bath: "Objetos de baño, accesorios y detalles materiales para espacios privados, elegidos con calma y precisión.",
+      Kids: "Diseño para habitaciones infantiles con formas serenas, materiales táctiles y objetos duraderos.",
+    },
+    categoryEmptyStates: {
+      Decoration: {
+        title: "Una selección decorativa está en preparación.",
+        text: "Los objetos y acentos se irán incorporando con atención al material, la proporción y la presencia en el espacio.",
+      },
+      Tableware: {
+        title: "La selección de vajilla se está curando.",
+        text: "Platos, cuencos, tazas y piezas de servicio se añadirán paso a paso cuando la selección esté lista.",
+      },
+      Glassware: {
+        title: "La cristalería está en preparación.",
+        text: "La futura selección se centrará en vasos, recipientes y objetos transparentes de carácter sereno.",
+      },
+      Kitchen: {
+        title: "Los objetos de cocina están en revisión.",
+        text: "Piezas funcionales para preparar, guardar y usar aparecerán aquí a medida que avance la curaduría.",
+      },
+      Textiles: {
+        title: "Una selección textil está tomando forma.",
+        text: "Mantas, cojines, tejidos y superficies suaves se añadirán con atención al tacto y al material.",
+      },
+      Outdoor: {
+        title: "Las piezas de exterior se están curando.",
+        text: "Objetos y mobiliario para espacios abiertos se incorporarán con especial atención al material y al entorno.",
+      },
+      Bath: {
+        title: "Los objetos de baño están en preparación.",
+        text: "Accesorios y detalles materiales para espacios privados se añadirán cuando la selección sea sólida.",
+      },
+      Kids: {
+        title: "Una selección tranquila para niños está en desarrollo.",
+        text: "Piezas duraderas, táctiles y cuidadas para habitaciones infantiles se introducirán gradualmente.",
+      },
     },
     categories: {
       Möbel: "Mobiliario",
@@ -1055,6 +1319,14 @@ const spanish: Dictionary = {
       Tabletop: "Accesorios",
       "Collectible Design": "Diseño coleccionable",
       Editionen: "Ediciones",
+      Decoration: "Decoración",
+      Tableware: "Vajilla",
+      Glassware: "Cristalería",
+      Kitchen: "Cocina",
+      Textiles: "Textiles",
+      Outdoor: "Exterior",
+      Bath: "Baño",
+      Kids: "Infantil",
     },
     cta: {
       "In den Warenkorb": "Añadir al carrito",
@@ -1287,6 +1559,68 @@ const chinese: Dictionary = {
       Teppiche: "具有结构、质感与来源感的地毯和织物作品。",
       Editionen: "小批量限量作品与精选作品。",
       "Collectible Design": "介于功能、工艺与艺术之间的收藏设计。",
+      Decoration: "用于台面、陈列与空间的装饰物件、雕塑感点缀和安静作品。",
+      Tableware: "餐具与桌面文化：以材质、比例和日常使用为重点的盘、碗、杯与服务器物。",
+      Glassware: "用于餐桌、吧台与陈列的玻璃器皿、容器和透明物件。",
+      Kitchen: "具有耐用材质、安静形态和日常功能的厨房物件。",
+      Textiles: "地毯之外的织物作品：毯子、靠垫、面料和柔软表面。",
+      Outdoor: "用于露台、花园与户外空间的物件和家具，注重材质耐久性。",
+      Bath: "用于安静私人空间的浴室物件、配件和材质细节。",
+      Kids: "儿童房设计物件，关注安静形态、触感和长期使用。",
+    },
+    categoryMetaTitles: {
+      Decoration: "装饰物件",
+      Tableware: "餐具",
+      Glassware: "玻璃器皿",
+      Kitchen: "厨房物件",
+      Textiles: "织物",
+      Outdoor: "户外设计",
+      Bath: "浴室物件",
+      Kids: "儿童房设计",
+    },
+    categoryMetaDescriptions: {
+      Decoration: "GETYOUR.DESIGN 精选装饰物件、雕塑感点缀和安静空间作品，注重材质、比例与空间感。",
+      Tableware: "GETYOUR.DESIGN 餐具与桌面文化：盘、碗、杯与服务器物，关注材质感和日常使用。",
+      Glassware: "用于餐桌、吧台与陈列的玻璃器皿、容器和透明物件，适合安静室内空间。",
+      Kitchen: "具有耐用材质、安静形态和精确日常功能的厨房物件。",
+      Textiles: "地毯之外的织物作品：毯子、靠垫、面料和柔软表面，为空间带来触感。",
+      Outdoor: "用于露台、花园与户外空间的设计物件和家具，关注材质与耐久性。",
+      Bath: "用于私人空间的浴室物件、配件和材质细节，以安静和精准为选择标准。",
+      Kids: "儿童房设计，包含安静形态、触感材质和可长期使用的物件。",
+    },
+    categoryEmptyStates: {
+      Decoration: {
+        title: "装饰物件正在策展中。",
+        text: "这一类别的物件和空间点缀将逐步加入，重点关注材质、比例和空间存在感。",
+      },
+      Tableware: {
+        title: "餐具选择正在整理。",
+        text: "盘、碗、杯与服务器物将在选择完成后逐步加入。",
+      },
+      Glassware: {
+        title: "玻璃器皿正在准备中。",
+        text: "未来选择将关注饮用玻璃、容器和具有安静气质的透明物件。",
+      },
+      Kitchen: {
+        title: "厨房物件正在审核。",
+        text: "用于准备、收纳和日常使用的功能物件将随策展进展逐步出现。",
+      },
+      Textiles: {
+        title: "织物选择正在建立。",
+        text: "毯子、靠垫、面料和柔软表面将以触感和材质为重点逐步加入。",
+      },
+      Outdoor: {
+        title: "户外作品正在策展中。",
+        text: "用于户外空间的物件和家具将根据材质、场景和耐久性逐步加入。",
+      },
+      Bath: {
+        title: "浴室物件正在准备中。",
+        text: "用于私人空间的配件和材质细节将在类别逐步完善时加入。",
+      },
+      Kids: {
+        title: "儿童房的安静选择正在形成。",
+        text: "耐用、有触感并经过审慎选择的儿童房物件将逐步推出。",
+      },
     },
     categories: {
       Möbel: "家具",
@@ -1297,6 +1631,14 @@ const chinese: Dictionary = {
       Tabletop: "配件",
       "Collectible Design": "收藏设计",
       Editionen: "限量作品",
+      Decoration: "装饰",
+      Tableware: "餐具",
+      Glassware: "玻璃器皿",
+      Kitchen: "厨房",
+      Textiles: "织物",
+      Outdoor: "户外",
+      Bath: "浴室",
+      Kids: "儿童",
     },
     cta: {
       "In den Warenkorb": "加入购物车",
@@ -1530,6 +1872,68 @@ const arabic: Dictionary = {
       Teppiche: "سجاد وأعمال نسيجية ذات بنية ومصدر واضح.",
       Editionen: "إصدارات محدودة وأعمال مختارة بكميات صغيرة.",
       "Collectible Design": "تصميم قابل للاقتناء بين الوظيفة والحرفة والفن.",
+      Decoration: "قطع زخرفية ولمسات نحتية وعناصر هادئة للأسطح والرفوف والمساحات.",
+      Tableware: "أدوات مائدة وثقافة طاولة: أطباق وأوعية وأكواب وقطع تقديم مختارة للمادة والنسبة.",
+      Glassware: "زجاجيات وأوعية وقطع شفافة للطاولة والبار والعرض.",
+      Kitchen: "قطع مطبخ وظيفية بمواد دائمة وأشكال هادئة واستخدام يومي واضح.",
+      Textiles: "منسوجات خارج فئة السجاد: أغطية ووسائد وأقمشة وأسطح ناعمة للمساحات المعاشة.",
+      Outdoor: "قطع وأثاث للتراسات والحدائق والمساحات الخارجية مع اهتمام بمتانة المادة.",
+      Bath: "قطع حمام وإكسسوارات وتفاصيل مادية لمساحات خاصة هادئة.",
+      Kids: "قطع تصميم لغرف الأطفال بأشكال هادئة وملمس واضح ومتانة طويلة.",
+    },
+    categoryMetaTitles: {
+      Decoration: "ديكور",
+      Tableware: "أدوات المائدة",
+      Glassware: "زجاجيات",
+      Kitchen: "المطبخ",
+      Textiles: "منسوجات",
+      Outdoor: "تصميم خارجي",
+      Bath: "الحمام",
+      Kids: "تصميم للأطفال",
+    },
+    categoryMetaDescriptions: {
+      Decoration: "قطع زخرفية ولمسات نحتية وعناصر هادئة للأسطح والرفوف والمساحات لدى GETYOUR.DESIGN.",
+      Tableware: "أدوات مائدة لدى GETYOUR.DESIGN: أطباق وأوعية وأكواب وقطع تقديم مختارة للمادة والاستخدام اليومي.",
+      Glassware: "زجاجيات وأوعية وقطع شفافة للطاولة والبار والعرض، مختارة لمساحات داخلية هادئة.",
+      Kitchen: "قطع مطبخ وظيفية بمواد دائمة وأشكال هادئة واستخدام يومي مدروس.",
+      Textiles: "منسوجات خارج فئة السجاد: أغطية ووسائد وأقمشة وأسطح ناعمة تضيف ملمسا للمساحات.",
+      Outdoor: "تصميم خارجي للتراسات والحدائق والمساحات المفتوحة مع اهتمام بالمادة والمتانة.",
+      Bath: "قطع حمام وإكسسوارات وتفاصيل مادية لمساحات خاصة، مختارة بهدوء ودقة.",
+      Kids: "تصميم لغرف الأطفال بأشكال هادئة ومواد ملموسة وقطع صالحة للاستخدام الطويل.",
+    },
+    categoryEmptyStates: {
+      Decoration: {
+        title: "يتم إعداد اختيار الديكور.",
+        text: "ستضاف القطع واللمسات لهذه الفئة تدريجيا مع التركيز على المادة والنسبة وحضور القطعة في المساحة.",
+      },
+      Tableware: {
+        title: "يتم تنسيق اختيار أدوات المائدة.",
+        text: "ستضاف الأطباق والأوعية والأكواب وقطع التقديم خطوة بخطوة عندما تكتمل عملية الاختيار.",
+      },
+      Glassware: {
+        title: "الزجاجيات قيد التحضير.",
+        text: "سيركز الاختيار القادم على الكؤوس والأوعية والقطع الشفافة ذات الطابع الهادئ.",
+      },
+      Kitchen: {
+        title: "تتم مراجعة قطع المطبخ.",
+        text: "ستظهر هنا قطع وظيفية للتحضير والحفظ والاستخدام مع تطور عملية التنسيق.",
+      },
+      Textiles: {
+        title: "يتم بناء اختيار المنسوجات.",
+        text: "ستضاف الأغطية والوسائد والأقمشة والأسطح الناعمة مع الاهتمام بالملمس والمادة.",
+      },
+      Outdoor: {
+        title: "يتم تنسيق قطع المساحات الخارجية.",
+        text: "ستتبع قطع وأثاث للمساحات المفتوحة مع اهتمام خاص بالمادة والسياق.",
+      },
+      Bath: {
+        title: "قطع الحمام قيد التحضير.",
+        text: "ستضاف الإكسسوارات والتفاصيل المادية للمساحات الخاصة مع اكتمال الاختيار.",
+      },
+      Kids: {
+        title: "يتم إعداد اختيار هادئ للأطفال.",
+        text: "ستقدم تدريجيا قطع متينة وملموسة ومدروسة لغرف الأطفال.",
+      },
     },
     categories: {
       Möbel: "أثاث",
@@ -1540,6 +1944,14 @@ const arabic: Dictionary = {
       Tabletop: "إكسسوارات",
       "Collectible Design": "تصميم قابل للاقتناء",
       Editionen: "إصدارات",
+      Decoration: "ديكور",
+      Tableware: "أدوات المائدة",
+      Glassware: "زجاجيات",
+      Kitchen: "المطبخ",
+      Textiles: "منسوجات",
+      Outdoor: "خارجي",
+      Bath: "الحمام",
+      Kids: "الأطفال",
     },
     cta: {
       "In den Warenkorb": "إضافة إلى السلة",
@@ -1667,6 +2079,18 @@ export function getDictionary(locale: Locale): Dictionary {
       categoryDescriptions: {
         ...english.shop.categoryDescriptions,
         ...dictionaries[locale].shop.categoryDescriptions,
+      },
+      categoryMetaTitles: {
+        ...english.shop.categoryMetaTitles,
+        ...dictionaries[locale].shop.categoryMetaTitles,
+      },
+      categoryMetaDescriptions: {
+        ...english.shop.categoryMetaDescriptions,
+        ...dictionaries[locale].shop.categoryMetaDescriptions,
+      },
+      categoryEmptyStates: {
+        ...english.shop.categoryEmptyStates,
+        ...dictionaries[locale].shop.categoryEmptyStates,
       },
       availability: {
         ...english.shop.availability,

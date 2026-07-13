@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { products, shopCategories } from "./data/products";
+import { products, visibleShopCategories } from "./data/products";
 import { getAlternateLanguages, getProductPath, getShopPath, localizedRoutes, locales, type Locale, type RouteKey } from "./lib/i18n";
 
 const siteUrl = "https://www.getyour.design";
@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     })),
   );
-  const shopRoutes = shopCategories.map((category) => category.slug).flatMap((slug) => {
+  const shopRoutes = visibleShopCategories.map((category) => category.slug).flatMap((slug) => {
     const languages = {
       ...Object.fromEntries(locales.map((locale) => [locale, getShopPath(locale, slug)])),
       "x-default": getShopPath("de", slug),
