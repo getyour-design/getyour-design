@@ -26,6 +26,35 @@ type CommerceMode = "direct" | "affiliate" | "inquiry";
 
 type InventoryMode = "tracked" | "untracked" | "made-to-order" | "single-piece";
 
+type ShopCategoryStatus = "active" | "draft";
+
+type LocalizedShopCategoryContent = {
+  title?: string;
+  slug?: string;
+  description?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+};
+
+export type ShopCategory = {
+  key?: string;
+  title: string;
+  slug: string;
+  label?: string;
+  description?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  heroImage?: string;
+  openGraphImage?: string;
+  featured?: boolean;
+  status?: ShopCategoryStatus;
+  commerceVisible?: boolean;
+  navigationVisible?: boolean;
+  sortOrder?: number;
+  parentKey?: string;
+  localized?: Partial<Record<ProductLocale, LocalizedShopCategoryContent>>;
+};
+
 type LocalizedProductContent = {
   title: string;
   cardTitle: string;
@@ -101,16 +130,33 @@ type ProductCategorySeed = {
   items: ProductSeed[];
 };
 
-export const shopCategories = [
-  { title: "Möbel", slug: "moebel" },
-  { title: "Leuchten", slug: "leuchten" },
-  { title: "Kunst", slug: "kunst" },
-  { title: "Teppiche", slug: "teppiche" },
-  { title: "Objekte", slug: "objekte" },
-  { title: "Tabletop", label: "Accessoires", slug: "tabletop" },
-  { title: "Collectible Design", slug: "collectible-design" },
-  { title: "Editionen", slug: "editionen" },
+export const shopCategories: ShopCategory[] = [
+  { key: "moebel", title: "Möbel", slug: "moebel", status: "active", commerceVisible: true, navigationVisible: true },
+  { key: "leuchten", title: "Leuchten", slug: "leuchten", status: "active", commerceVisible: true, navigationVisible: true },
+  { key: "kunst", title: "Kunst", slug: "kunst", status: "active", commerceVisible: true, navigationVisible: true },
+  { key: "teppiche", title: "Teppiche", slug: "teppiche", status: "active", commerceVisible: true, navigationVisible: true },
+  { key: "objekte", title: "Objekte", slug: "objekte", status: "active", commerceVisible: true, navigationVisible: true },
+  { key: "tabletop", title: "Tabletop", label: "Accessoires", slug: "tabletop", status: "active", commerceVisible: true, navigationVisible: true },
+  { key: "collectible-design", title: "Collectible Design", slug: "collectible-design", status: "active", commerceVisible: true, navigationVisible: true },
+  { key: "editionen", title: "Editionen", slug: "editionen", status: "active", commerceVisible: true, navigationVisible: true },
 ];
+
+export const draftShopCategories: ShopCategory[] = [
+  { key: "decoration", title: "Decoration", slug: "decoration", status: "draft", commerceVisible: false, navigationVisible: false },
+  { key: "tableware", title: "Tableware", slug: "tableware", status: "draft", commerceVisible: false, navigationVisible: false },
+  { key: "glassware", title: "Glassware", slug: "glassware", status: "draft", commerceVisible: false, navigationVisible: false },
+  { key: "kitchen", title: "Kitchen", slug: "kitchen", status: "draft", commerceVisible: false, navigationVisible: false },
+  { key: "textiles", title: "Textiles", slug: "textiles", status: "draft", commerceVisible: false, navigationVisible: false },
+  { key: "outdoor", title: "Outdoor", slug: "outdoor", status: "draft", commerceVisible: false, navigationVisible: false },
+  { key: "bath", title: "Bath", slug: "bath", status: "draft", commerceVisible: false, navigationVisible: false },
+  { key: "kids", title: "Kids", slug: "kids", status: "draft", commerceVisible: false, navigationVisible: false },
+];
+
+export const allShopCategories: ShopCategory[] = [...shopCategories, ...draftShopCategories];
+
+export const visibleShopCategories = allShopCategories.filter(
+  (category) => category.status !== "draft" && category.commerceVisible !== false,
+);
 
 const statuses: ProductStatus[] = [
   "sofort-kaufen",
