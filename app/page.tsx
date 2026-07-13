@@ -206,18 +206,19 @@ export default function Home() {
   return (
     <main className="bg-[#f3f2ef]">
       <section className="bg-[#8d8376]">
-        <div className="relative overflow-hidden bg-[#8d8376]">
-          <Image
-            alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
-            className="block h-[760px] w-full object-cover object-[50%_48%] md:h-[800px] lg:h-auto lg:object-fill"
-            height={1024}
-            priority
-            sizes="100vw"
-            src="/images/hero-editorial.png"
-            width={1536}
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,9,0.66)_0%,rgba(10,10,9,0.48)_24%,rgba(10,10,9,0.12)_40%,rgba(10,10,9,0)_50%)]" aria-hidden="true" />
-          <div className="absolute left-6 right-6 top-28 z-10 max-w-[36rem] text-[#f3f2ef] md:left-12 md:right-auto md:top-36 lg:left-[6.8%] lg:top-[26%] lg:w-[42%] lg:max-w-[40rem] [@media_(min-width:1024px)_and_(max-height:900px)]:top-[24%]">
+        <div className="overflow-hidden bg-[#8d8376] lg:flex lg:justify-center">
+          <div className="relative h-[760px] w-full md:h-[800px] lg:h-[calc(100vh-72px)] lg:max-h-[1024px] lg:w-fit lg:max-w-full">
+            <Image
+              alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
+              className="block h-full w-full object-cover object-[50%_48%] lg:w-auto lg:max-w-full lg:object-contain"
+              height={1024}
+              priority
+              sizes="100vw"
+              src="/images/hero-editorial.png"
+              width={1536}
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,9,0.66)_0%,rgba(10,10,9,0.48)_24%,rgba(10,10,9,0.12)_40%,rgba(10,10,9,0)_50%)]" aria-hidden="true" />
+            <div className="absolute left-6 right-6 top-28 z-10 max-w-[36rem] text-[#f3f2ef] md:left-12 md:right-auto md:top-36 lg:left-[6.8%] lg:top-[26%] lg:w-[42%] lg:max-w-[40rem] [@media_(min-width:1024px)_and_(max-height:900px)]:top-[24%]">
             <h1 className="serif text-balance text-[2.1rem] font-normal leading-[1.18] tracking-[0.02em] md:text-[2.5rem] lg:text-[2.65rem] xl:text-[2.78rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!text-[2.36rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!leading-[1.14]">
               Sagen Sie uns
               <br />
@@ -242,8 +243,8 @@ export default function Home() {
                 Kollektionen ansehen
               </Link>
             </div>
-          </div>
-          <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 font-sans md:px-8 lg:bottom-[5.4%] lg:px-[2.7%] lg:pb-0 [@media_(min-width:1024px)_and_(max-height:900px)]:bottom-[3.6%]">
+            </div>
+            <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 font-sans md:px-8 lg:bottom-[5.4%] lg:px-[2.7%] lg:pb-0 [@media_(min-width:1024px)_and_(max-height:900px)]:bottom-[3.6%]">
             <div className="mx-auto grid max-w-none auto-cols-[9.5rem] grid-flow-col grid-rows-2 overflow-x-auto border-l border-t border-[#f3f2ef]/25 bg-[#0f0f0e]/10 sm:auto-cols-auto sm:grid-flow-row sm:grid-cols-4 sm:overflow-hidden lg:grid-cols-8">
               {visibleShopCategories.map((item) => (
                 <Link
@@ -254,6 +255,7 @@ export default function Home() {
                   <span className={`whitespace-nowrap font-sans text-white ${item.title === "Collectible Design" ? "text-[0.6rem] tracking-[0.12em]" : ""}`}>{dictionary.shop.categories[item.title] ?? item.label ?? item.title}</span>
                 </Link>
               ))}
+            </div>
             </div>
           </div>
         </div>
