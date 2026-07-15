@@ -209,7 +209,7 @@ export default function Home() {
         <div className="relative h-[760px] w-full overflow-hidden bg-[#8d8376] md:h-[800px] lg:h-[calc(100svh-72px)] lg:min-h-[680px] lg:max-h-[960px]">
             <Image
               alt="Fotografie eines LC2-Sessels in architektonischem Interior-Kontext"
-              className="object-cover object-bottom"
+              className="object-cover object-[38%_bottom] lg:object-bottom"
               fill
               priority
               sizes="100vw"
@@ -217,7 +217,7 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,9,0.68)_0%,rgba(10,10,9,0.48)_38%,rgba(10,10,9,0.18)_52%,rgba(10,10,9,0)_64%)]" aria-hidden="true" />
             <div className="absolute left-6 right-6 top-28 z-10 max-w-[36rem] text-[#f3f2ef] md:left-12 md:right-auto md:top-36 lg:left-[6.8%] lg:top-[26%] lg:w-[42%] lg:max-w-[40rem] [@media_(min-width:1024px)_and_(max-height:900px)]:top-[24%]">
-            <h1 className="serif text-balance text-[2.1rem] font-normal leading-[1.18] tracking-[0.02em] md:text-[2.5rem] lg:text-[2.65rem] xl:text-[2.78rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!text-[2.36rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!leading-[1.14]">
+            <h1 className="serif text-balance text-[1.9rem] font-normal leading-[1.18] tracking-[0.02em] md:text-[2.5rem] lg:text-[2.65rem] xl:text-[2.78rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!text-[2.36rem] [@media_(min-width:1024px)_and_(max-height:900px)]:!leading-[1.14]">
               Sagen Sie uns
               <br />
               was Sie umgibt
