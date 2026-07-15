@@ -59,17 +59,38 @@ export function Navigation() {
         </div>
         <div className="flex items-center gap-4 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-[#10100f] lg:hidden">
           <Link href={localizeHref("/warenkorb", locale)}>Korb (0)</Link>
-          <button aria-expanded={mobileMenuOpen} aria-label="Menü öffnen" className="border-l border-black/15 pl-4" onClick={() => setMobileMenuOpen((open) => !open)} type="button">
-            Menü
+          <button aria-expanded={mobileMenuOpen} aria-label={mobileMenuOpen ? "Menü schließen" : "Menü öffnen"} className="flex h-8 w-8 items-center justify-center border-l border-black/15 pl-4" onClick={() => setMobileMenuOpen((open) => !open)} type="button">
+            <span className="relative block h-3 w-4" aria-hidden="true">
+              <span className={`absolute left-0 top-0 h-px w-4 bg-[#10100f] transition ${mobileMenuOpen ? "top-1.5 rotate-45" : ""}`} />
+              <span className={`absolute left-0 top-1.5 h-px w-4 bg-[#10100f] transition ${mobileMenuOpen ? "opacity-0" : ""}`} />
+              <span className={`absolute bottom-0 left-0 h-px w-4 bg-[#10100f] transition ${mobileMenuOpen ? "bottom-1.5 -rotate-45" : ""}`} />
+            </span>
           </button>
         </div>
       </nav>
       {mobileMenuOpen ? (
-        <div className="border-t hairline bg-[#f7f6f2] px-5 pb-6 pt-5 lg:hidden">
+        <div className="absolute inset-x-0 top-full z-50 border-t hairline bg-[#f7f6f2] px-5 pb-7 pt-5 shadow-[0_16px_30px_rgba(16,16,15,0.12)] lg:hidden">
           <div className="grid gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#10100f]">
             {navItems.map((item) => (
               <Link href={localizeHref(item.href, locale)} key={item.href} onClick={() => setMobileMenuOpen(false)}>
                 {dictionary.nav.labels[item.label] ?? item.label}
+              </Link>
+            ))}
+          </div>
+          <div className="mt-7 grid gap-4 border-t border-black/15 pt-6 text-[0.66rem] font-semibold uppercase tracking-[0.17em] text-[#10100f]">
+            <Link href={localizeHref("/suche", locale)} onClick={() => setMobileMenuOpen(false)}>{dictionary.nav.search}</Link>
+            <Link href={localizeHref("/trade", locale)} onClick={() => setMobileMenuOpen(false)}>{dictionary.nav.account}</Link>
+            <Link href={localizeHref("/warenkorb", locale)} onClick={() => setMobileMenuOpen(false)}>{dictionary.nav.cart}</Link>
+          </div>
+          <div className="mt-7 flex flex-wrap gap-x-3 gap-y-3 border-t border-black/15 pt-5 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-[#10100f]">
+            {locales.map((targetLocale) => (
+              <Link
+                className={locale === targetLocale ? "text-black" : "text-[#667174]"}
+                href={getLanguageSwitchPath(pathname, targetLocale)}
+                key={targetLocale}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {targetLocale.toUpperCase()}
               </Link>
             ))}
           </div>
