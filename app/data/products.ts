@@ -146,14 +146,14 @@ export const shopCategories: ShopCategory[] = [
 ];
 
 export const commerceExpansionShopCategories: ShopCategory[] = [
-  { key: "decoration", title: "Decoration", slug: "decoration", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 40 },
-  { key: "tableware", title: "Tableware", slug: "tableware", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 70 },
-  { key: "glassware", title: "Glassware", slug: "glassware", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 80 },
-  { key: "kitchen", title: "Kitchen", slug: "kitchen", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 90 },
-  { key: "textiles", title: "Textiles", slug: "textiles", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 100 },
-  { key: "outdoor", title: "Outdoor", slug: "outdoor", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 110 },
-  { key: "bath", title: "Bath", slug: "bath", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 120 },
-  { key: "kids", title: "Kids", slug: "kids", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 130 },
+  { key: "decoration", title: "Decoration", slug: "decoration", parentKey: "objekte", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 40 },
+  { key: "tableware", title: "Tableware", slug: "tableware", parentKey: "tabletop", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 70 },
+  { key: "glassware", title: "Glassware", slug: "glassware", parentKey: "tabletop", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 80 },
+  { key: "kitchen", title: "Kitchen", slug: "kitchen", parentKey: "tabletop", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 90 },
+  { key: "textiles", title: "Textiles", slug: "textiles", parentKey: "teppiche", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 100 },
+  { key: "outdoor", title: "Outdoor", slug: "outdoor", parentKey: "moebel", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 110 },
+  { key: "bath", title: "Bath", slug: "bath", parentKey: "tabletop", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 120 },
+  { key: "kids", title: "Kids", slug: "kids", parentKey: "moebel", status: "active", commerceVisible: true, navigationVisible: false, sortOrder: 130 },
 ];
 
 export const draftShopCategories = commerceExpansionShopCategories;
@@ -161,6 +161,16 @@ export const draftShopCategories = commerceExpansionShopCategories;
 export const allShopCategories: ShopCategory[] = [...shopCategories, ...commerceExpansionShopCategories];
 
 export const visibleShopCategories = allShopCategories.filter(
+  (category) => category.status !== "draft" && category.commerceVisible !== false,
+).sort((firstCategory, secondCategory) => (firstCategory.sortOrder ?? 0) - (secondCategory.sortOrder ?? 0));
+
+export const heroShopCategories = shopCategories.filter(
+  (category) => category.status !== "draft" && category.commerceVisible !== false,
+).sort((firstCategory, secondCategory) => (firstCategory.sortOrder ?? 0) - (secondCategory.sortOrder ?? 0));
+
+export const primaryShopCategories = heroShopCategories;
+
+export const subShopCategories = commerceExpansionShopCategories.filter(
   (category) => category.status !== "draft" && category.commerceVisible !== false,
 ).sort((firstCategory, secondCategory) => (firstCategory.sortOrder ?? 0) - (secondCategory.sortOrder ?? 0));
 
@@ -675,4 +685,20 @@ export const products = categorySeeds.flatMap((category) =>
       localized: item.localized,
     };
   }),
+);
+
+export type CatalogProduct = (typeof products)[number];
+
+export function getCategoryProducts(category: ShopCategory) {
+  return products.filter(
+    (product) => product.category === category.title || product.secondaryCategories.includes(category.title),
+  );
+}
+
+export function getCategoryChildren(category: ShopCategory) {
+  return subShopCategories.filter((child) => child.parentKey === category.key);
+}
+
+export const indexableShopCategories = visibleShopCategories.filter(
+  (category) => getCategoryProducts(category).length > 0,
 );

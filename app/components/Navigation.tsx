@@ -17,7 +17,7 @@ export function Navigation() {
         <Link className="serif shrink-0 text-[1.25rem] leading-none tracking-[0.12em] text-[#10100f] 2xl:text-[1.38rem]" href={localizeHref("/", locale)}>
           GETYOUR.DESIGN
         </Link>
-        <div className="order-3 flex max-w-full gap-5 overflow-x-auto border-t hairline pt-4 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[#10100f] md:gap-7 lg:order-none lg:border-0 lg:pt-0 2xl:gap-11 2xl:text-[0.66rem] 2xl:tracking-[0.2em]">
+        <div className="order-3 flex max-w-full gap-5 overflow-x-auto border-t hairline pt-4 text-[0.725rem] font-semibold uppercase tracking-[0.18em] text-[#10100f] md:gap-7 lg:order-none lg:border-0 lg:pt-0 2xl:gap-11 2xl:text-[0.785rem] 2xl:tracking-[0.2em]">
           {navItems.map((item) => {
             const isActive =
               pathname === localizeHref(item.href, locale) ||

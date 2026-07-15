@@ -4,7 +4,7 @@ import { PageHero } from "../components/PageHero";
 import { PlaceholderArtwork } from "../components/PlaceholderArtwork";
 import { EntityActions } from "../components/EntityActions";
 import { getDictionary } from "../data/dictionaries";
-import { products, visibleShopCategories } from "../data/products";
+import { primaryShopCategories, products } from "../data/products";
 import { getShopPath } from "../lib/i18n";
 
 export const metadata: Metadata = {
@@ -28,7 +28,7 @@ export default function ShopPage() {
       />
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
         <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
-          {visibleShopCategories.map((area) => (
+          {primaryShopCategories.map((area) => (
             <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath("de", area.slug)} key={area.slug}>
               {dictionary.shop.categories[area.title] ?? area.label ?? area.title}
             </Link>
