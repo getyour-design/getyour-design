@@ -50,7 +50,7 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
       <div className="relative aspect-[3/2] overflow-hidden border hairline bg-[#f8f8f6]">
         <Image
           alt={images[0].alt || title}
-          className="object-cover"
+          className="object-contain"
           fill
           priority
           sizes="(min-width: 1024px) 55vw, 100vw"
@@ -60,10 +60,10 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
       {images.length > 1 ? (
         <div className="grid gap-5 sm:grid-cols-2">
           {images.slice(1).map((image) => (
-            <div className="relative aspect-[3/2] overflow-hidden border hairline bg-[#f8f8f6]" key={image.src}>
+            <div className="relative aspect-[4/5] overflow-hidden border hairline bg-[#f8f8f6]" key={image.src}>
               <Image
                 alt={image.alt || title}
-                className="object-cover"
+                className="object-contain"
                 fill
                 sizes="(min-width: 1024px) 27vw, (min-width: 640px) 50vw, 100vw"
                 src={image.src}
