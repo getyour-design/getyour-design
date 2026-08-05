@@ -12,6 +12,21 @@ type ProductImage = {
   alt: string;
 };
 
+const cowhideSeatImageSources = [
+  "/images/products/cowhide-seat-v3-01-hero-rotated.png",
+  "/images/products/cowhide-seat-v3-02-lifestyle-natural.png",
+  "/images/products/cowhide-seat-v6-03-opposite-studio-natural-hair.png",
+  "/images/products/cowhide-seat-v2-04-side-profile.png",
+  "/images/products/cowhide-seat-v2-05-top-view.png",
+  "/images/products/cowhide-seat-v2-06-material-detail.png",
+  "/images/products/cowhide-seat-v3-07-long-hair-edge.png",
+  "/images/products/cowhide-seat-v2-08-room-scale.png",
+];
+
+function cowhideSeatImages(alts: string[]): ProductImage[] {
+  return cowhideSeatImageSources.map((src, index) => ({ src, alt: alts[index] }));
+}
+
 type ProductType =
   | "affiliate"
   | "physical"
@@ -250,22 +265,24 @@ const categorySeeds: ProductCategorySeed[] = [
           "Das Sitzobjekt wird aus ausgewähltem europäischem Kuhfell gefertigt und von Hand verarbeitet.",
           "Seine niedrige, kreisrunde Form wirkt zugleich ruhig und präsent. Die natürliche Zeichnung des Fells bestimmt den Charakter jedes einzelnen Stücks.",
           "Mit einem Durchmesser von 126 Zentimetern ist das Objekt als großzügige Sitzfläche, Mittelpunkt eines Raumes oder frei stehendes Möbel einsetzbar.",
-          "Jedes Exemplar unterscheidet sich in Farbe, Struktur und Fellverlauf. Diese Abweichungen sind materialbedingt und machen jedes Sitzobjekt zu einem Einzelstück.",
+          "Das Sitzobjekt ist auf Anfrage in weiteren Farbvarianten erhältlich. Farbe, Zeichnung und Fellverlauf werden vor der Fertigung individuell abgestimmt.",
         ],
         origin: "Handgefertigt in Europa",
         uniqueNote:
-          "Farbe, Zeichnung und Fellverlauf unterscheiden sich bei jedem Exemplar. Die gezeigten Bilder dienen als Referenz für Form und Materialwirkung.",
+          "Weitere Farbvarianten sind auf Anfrage erhältlich. Farbe, Zeichnung und Fellverlauf werden individuell abgestimmt; die gezeigten Bilder dienen als Referenz für Form und Materialwirkung.",
         ctaLabel: "Verfügbarkeit anfragen",
-        images: [
-          {
-            src: "/images/products/sculptural-cowhide-seat-hero.png",
-            alt: "Gelbes kreisrundes Sitzobjekt aus europäischem Kuhfell in hellem Raum",
-          },
-          {
-            src: "/images/products/yellow-cowhide-seat.webp",
-            alt: "Gelbes Sitzobjekt aus europäischem Kuhfell mit sichtbarer Fellstruktur",
-          },
-        ],
+        images: cowhideSeatImages([
+          "Gelbes kreisrundes Sitzobjekt aus europäischem Kuhfell in hellem Raum",
+          "Gelbes Sitzobjekt aus europäischem Kuhfell mit sichtbarer Fellstruktur",
+          "Gelber Hocker aus europäischem Kuhfell in Dreiviertelansicht im Garten",
+          "Gelber Hocker aus europäischem Kuhfell in seitlicher Ansicht im Garten",
+          "Gelber Hocker aus europäischem Kuhfell in Frontansicht im Garten",
+          "Detailansicht der Felloberfläche des gelben Hockers im Garten",
+          "Profilansicht des gelben Hockers aus europäischem Kuhfell im Garten",
+          "Niedrige Perspektive auf den gelben Hocker aus europäischem Kuhfell",
+          "Aufsicht auf die kreisrunde Sitzfläche des gelben Hockers",
+          "Detailansicht der Naht des gelben Hockers aus europäischem Kuhfell",
+        ]),
         metaTitle: "Sitzobjekt aus europäischem Kuhfell",
         metaDescription:
           "Kreisrundes Sitzobjekt aus europäischem Kuhfell, handgefertigt in Europa, 126 cm Durchmesser und 30 cm Höhe.",
@@ -280,7 +297,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "The seating object is made from selected European cowhide and finished by hand.",
               "Its low circular form is quiet yet visually present. The natural markings of the hide define the character of each individual piece.",
               "With a diameter of 126 centimetres, it can be used as a generous seat, a central element within a room or a freestanding furniture object.",
-              "Each piece differs in colour, texture and hair direction. These natural variations make every object unique.",
+              "The seating object is available on request in additional colourways. Colour, markings and hair direction are agreed individually before production.",
             ],
             dimensionsDetails: ["Diameter: 126 cm", "Height: 30 cm"],
             materialDetails: [
@@ -290,18 +307,20 @@ const categorySeeds: ProductCategorySeed[] = [
             ],
             origin: "Handcrafted in Europe",
             uniqueNote:
-              "Colour, markings and hair direction differ with every piece. The images shown serve as a reference for form and material effect.",
+              "Additional colourways are available on request. Colour, markings and hair direction are agreed individually; the images shown serve as a reference for form and material effect.",
             ctaLabel: "Request availability",
-            images: [
-              {
-                src: "/images/products/sculptural-cowhide-seat-hero.png",
-                alt: "Yellow circular seating object in European cowhide in a bright room",
-              },
-              {
-                src: "/images/products/yellow-cowhide-seat.webp",
-                alt: "Yellow seating object in European cowhide with visible hair texture",
-              },
-            ],
+            images: cowhideSeatImages([
+              "Yellow circular seating object in European cowhide in a bright room",
+              "Yellow European cowhide seating object with visible hair texture",
+              "Yellow European cowhide pouf in a three-quarter garden view",
+              "Yellow European cowhide pouf in a side garden view",
+              "Yellow European cowhide pouf in a frontal garden view",
+              "Detail of the yellow cowhide pouf surface in the garden",
+              "Profile view of the yellow European cowhide pouf in the garden",
+              "Low-angle view of the yellow European cowhide pouf",
+              "Top view of the circular yellow cowhide pouf",
+              "Seam detail of the yellow European cowhide pouf",
+            ]),
             metaTitle: "Sculptural Seat in European Cowhide",
             metaDescription:
               "Circular seating object in European cowhide, handcrafted in Europe, 126 cm in diameter and 30 cm high.",
@@ -316,7 +335,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "L'assise est réalisée en peau de vache européenne sélectionnée et finie à la main.",
               "Sa forme basse et circulaire est à la fois calme et présente. Les marques naturelles de la peau déterminent le caractère de chaque pièce.",
               "Avec un diamètre de 126 centimètres, elle peut servir d'assise généreuse, d'élément central dans une pièce ou de meuble indépendant.",
-              "Chaque exemplaire diffère par sa couleur, sa texture et le sens du poil. Ces variations naturelles font de chaque assise une pièce unique.",
+              "L'assise est disponible sur demande dans d'autres coloris. La couleur, le dessin et le sens du poil sont définis individuellement avant fabrication.",
             ],
             dimensionsDetails: ["Diamètre : 126 cm", "Hauteur : 30 cm"],
             materialDetails: [
@@ -326,18 +345,20 @@ const categorySeeds: ProductCategorySeed[] = [
             ],
             origin: "Fabriqué à la main en Europe",
             uniqueNote:
-              "La couleur, le dessin et le sens du poil varient d'un exemplaire à l'autre. Les images présentées servent de référence pour la forme et l'effet de matière.",
+              "D'autres coloris sont disponibles sur demande. La couleur, le dessin et le sens du poil sont définis individuellement ; les images présentées servent de référence pour la forme et l'effet de matière.",
             ctaLabel: "Demander la disponibilité",
-            images: [
-              {
-                src: "/images/products/sculptural-cowhide-seat-hero.png",
-                alt: "Assise circulaire jaune en peau de vache européenne dans un espace clair",
-              },
-              {
-                src: "/images/products/yellow-cowhide-seat.webp",
-                alt: "Assise jaune en peau de vache européenne avec texture du poil visible",
-              },
-            ],
+            images: cowhideSeatImages([
+              "Assise circulaire jaune en peau de vache européenne dans un espace clair",
+              "Assise jaune en peau de vache européenne avec texture du poil visible",
+              "Pouf jaune en peau de vache européenne, vue de trois-quarts au jardin",
+              "Pouf jaune en peau de vache européenne, vue latérale au jardin",
+              "Pouf jaune en peau de vache européenne, vue de face au jardin",
+              "Détail de la surface du pouf jaune au jardin",
+              "Vue de profil du pouf jaune en peau de vache européenne au jardin",
+              "Vue en contre-plongée du pouf jaune en peau de vache européenne",
+              "Vue de dessus de l'assise circulaire jaune en peau de vache",
+              "Détail de couture du pouf jaune en peau de vache européenne",
+            ]),
             metaTitle: "Assise sculpturale en peau de vache européenne",
             metaDescription:
               "Assise circulaire en peau de vache européenne, fabriquée à la main en Europe, 126 cm de diamètre et 30 cm de hauteur.",
@@ -352,7 +373,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "El asiento se realiza en piel de vaca europea seleccionada y se acaba a mano.",
               "Su forma baja y circular resulta serena y visualmente presente. Las marcas naturales de la piel definen el carácter de cada pieza.",
               "Con un diámetro de 126 centímetros, puede utilizarse como asiento amplio, elemento central de una estancia o mueble independiente.",
-              "Cada pieza difiere en color, textura y dirección del pelo. Estas variaciones naturales hacen que cada asiento sea único.",
+              "El asiento está disponible bajo pedido en otros colores. El color, el dibujo y la dirección del pelo se definen individualmente antes de la fabricación.",
             ],
             dimensionsDetails: ["Diámetro: 126 cm", "Altura: 30 cm"],
             materialDetails: [
@@ -362,18 +383,20 @@ const categorySeeds: ProductCategorySeed[] = [
             ],
             origin: "Hecho a mano en Europa",
             uniqueNote:
-              "El color, el dibujo y la dirección del pelo varían en cada pieza. Las imágenes mostradas sirven como referencia de forma y efecto material.",
+              "Hay otros colores disponibles bajo pedido. El color, el dibujo y la dirección del pelo se definen individualmente; las imágenes mostradas sirven como referencia de forma y efecto material.",
             ctaLabel: "Consultar disponibilidad",
-            images: [
-              {
-                src: "/images/products/sculptural-cowhide-seat-hero.png",
-                alt: "Asiento circular amarillo en piel de vaca europea en un espacio luminoso",
-              },
-              {
-                src: "/images/products/yellow-cowhide-seat.webp",
-                alt: "Asiento amarillo en piel de vaca europea con textura visible",
-              },
-            ],
+            images: cowhideSeatImages([
+              "Asiento circular amarillo en piel de vaca europea en un espacio luminoso",
+              "Asiento amarillo en piel de vaca europea con textura visible",
+              "Puf amarillo en piel de vaca europea, vista de tres cuartos en el jardín",
+              "Puf amarillo en piel de vaca europea, vista lateral en el jardín",
+              "Puf amarillo en piel de vaca europea, vista frontal en el jardín",
+              "Detalle de la superficie del puf amarillo en el jardín",
+              "Vista de perfil del puf amarillo en piel de vaca europea en el jardín",
+              "Vista en ángulo bajo del puf amarillo en piel de vaca europea",
+              "Vista superior del asiento circular amarillo en piel de vaca",
+              "Detalle de la costura del puf amarillo en piel de vaca europea",
+            ]),
             metaTitle: "Asiento escultórico en piel de vaca europea",
             metaDescription:
               "Asiento circular en piel de vaca europea, hecho a mano en Europa, 126 cm de diámetro y 30 cm de altura.",
@@ -388,24 +411,26 @@ const categorySeeds: ProductCategorySeed[] = [
               "这件座椅采用严选欧洲牛皮制成，并以手工完成。",
               "低矮的圆形形体安静而具有存在感。牛皮的天然纹理决定了每一件作品的性格。",
               "直径 126 厘米的尺度使其可作为宽大的坐面、空间中心或独立家具使用。",
-              "每一件在颜色、纹理与毛流方向上都会有所不同。这些天然差异使每件座椅都成为独件。",
+              "该座椅作品可按需提供其他颜色。颜色、纹理与毛流方向均在制作前单独确认。",
             ],
             dimensionsDetails: ["直径：126 厘米", "高度：30 厘米"],
             materialDetails: ["真正的欧洲牛皮", "高品质软包内芯", "欧洲手工制作"],
             origin: "欧洲手工制作",
             uniqueNote:
-              "每件作品的颜色、纹理与毛流方向都会不同。所示图片用于说明形态与材质效果。",
+              "可按需提供其他颜色。颜色、纹理与毛流方向均单独确认；所示图片用于说明形态与材质效果。",
             ctaLabel: "咨询库存",
-            images: [
-              {
-                src: "/images/products/sculptural-cowhide-seat-hero.png",
-                alt: "明亮空间中的黄色圆形欧洲牛皮座椅",
-              },
-              {
-                src: "/images/products/yellow-cowhide-seat.webp",
-                alt: "可见毛面纹理的黄色欧洲牛皮座椅",
-              },
-            ],
+            images: cowhideSeatImages([
+              "明亮空间中的黄色圆形欧洲牛皮座椅",
+              "可见毛面纹理的黄色欧洲牛皮座椅",
+              "花园中黄色欧洲牛皮座椅的四分之三视角",
+              "花园中黄色欧洲牛皮座椅的侧面视角",
+              "花园中黄色欧洲牛皮座椅的正面视角",
+              "花园中黄色牛皮座椅表面细节",
+              "花园中黄色欧洲牛皮座椅的侧面轮廓",
+              "低角度拍摄的黄色欧洲牛皮座椅",
+              "黄色圆形牛皮座椅的俯视图",
+              "黄色欧洲牛皮座椅的缝线细节",
+            ]),
             metaTitle: "欧洲牛皮雕塑感座椅",
             metaDescription:
               "欧洲手工制作的圆形欧洲牛皮座椅，直径 126 厘米，高 30 厘米。",
@@ -420,7 +445,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "يصنع المقعد من جلد بقر أوروبي مختار وينهى يدويا.",
               "يجمع شكله الدائري المنخفض بين الهدوء والحضور البصري. تحدد العلامات الطبيعية في الجلد طابع كل قطعة.",
               "بقطر يبلغ 126 سم، يمكن استخدامه كمقعد واسع أو كعنصر مركزي في الغرفة أو كقطعة أثاث قائمة بذاتها.",
-              "تختلف كل قطعة في اللون والملمس واتجاه الشعر. هذه الاختلافات الطبيعية تجعل كل مقعد قطعة فريدة.",
+              "يتوفر مقعد الجلوس عند الطلب بألوان إضافية. يتم تحديد اللون والرسم الطبيعي واتجاه الشعر بشكل فردي قبل التصنيع.",
             ],
             dimensionsDetails: ["القطر: 126 سم", "الارتفاع: 30 سم"],
             materialDetails: [
@@ -430,18 +455,20 @@ const categorySeeds: ProductCategorySeed[] = [
             ],
             origin: "مصنوع يدويا في أوروبا",
             uniqueNote:
-              "يختلف اللون والرسم الطبيعي واتجاه الشعر في كل قطعة. الصور المعروضة مرجع للشكل وتأثير المادة.",
+              "تتوفر ألوان إضافية عند الطلب. يتم تحديد اللون والرسم الطبيعي واتجاه الشعر بشكل فردي؛ الصور المعروضة مرجع للشكل وتأثير المادة.",
             ctaLabel: "استفسر عن التوفر",
-            images: [
-              {
-                src: "/images/products/sculptural-cowhide-seat-hero.png",
-                alt: "مقعد دائري أصفر من جلد البقر الأوروبي في مساحة مضيئة",
-              },
-              {
-                src: "/images/products/yellow-cowhide-seat.webp",
-                alt: "مقعد أصفر من جلد البقر الأوروبي مع ملمس شعر واضح",
-              },
-            ],
+            images: cowhideSeatImages([
+              "مقعد دائري أصفر من جلد البقر الأوروبي في مساحة مضيئة",
+              "مقعد أصفر من جلد البقر الأوروبي مع ملمس شعر واضح",
+              "منظر ثلاثي الأرباع لمقعد أصفر من جلد البقر الأوروبي في الحديقة",
+              "منظر جانبي لمقعد أصفر من جلد البقر الأوروبي في الحديقة",
+              "منظر أمامي لمقعد أصفر من جلد البقر الأوروبي في الحديقة",
+              "تفصيل سطح المقعد الأصفر من جلد البقر في الحديقة",
+              "منظر جانبي لمقعد أصفر من جلد البقر الأوروبي في الحديقة",
+              "منظر منخفض الزاوية لمقعد أصفر من جلد البقر الأوروبي",
+              "منظر علوي للمقعد الدائري الأصفر من جلد البقر",
+              "تفصيل خياطة المقعد الأصفر من جلد البقر الأوروبي",
+            ]),
             metaTitle: "مقعد نحتي من جلد البقر الأوروبي",
             metaDescription:
               "مقعد دائري من جلد البقر الأوروبي مصنوع يدويا في أوروبا، قطره 126 سم وارتفاعه 30 سم.",
