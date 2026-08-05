@@ -15,13 +15,10 @@ type ProductImage = {
 const cowhideSeatImageSources = [
   "/images/products/cowhide-seat-v3-01-hero-rotated.png",
   "/images/products/cowhide-seat-v3-02-lifestyle-natural.png",
-  "/images/products/cowhide-seat-v6-03-opposite-studio-natural-hair.png",
-  "/images/products/cowhide-seat-v2-04-side-profile.png",
   "/images/products/cowhide-seat-v2-05-top-view.png",
   "/images/products/cowhide-seat-v2-06-material-detail.png",
   "/images/products/cowhide-seat-v3-07-long-hair-edge.png",
   "/images/products/cowhide-seat-v2-08-room-scale.png",
-  "/images/products/cowhide-seat-v7-09-wine-red.png",
   "/images/products/cowhide-seat-v7-10-colour-palette.png",
 ];
 
@@ -245,7 +242,7 @@ const categorySeeds: ProductCategorySeed[] = [
       { title: "Stuhl mit Stahlrahmen", price: "EUR 1,980", material: "Stahl, Leder", dimensions: "52 x 56 x 78 cm" },
       { title: "Runder Tisch aus Esche", price: "EUR 4,300", material: "Esche, geölte Oberfläche", dimensions: "120 x 120 x 74 cm" },
       {
-        title: "Sitzobjekt aus europäischem Kuhfell",
+        title: "54COUTURE MÖBEL UND KUNST AUS HOCHWERTIGSTEN EUROPÄISCHEN FELLEN",
         cardTitle: "Sitzobjekt aus Kuhfell",
         pathMode: "nested",
         slug: "sitzobjekt-kuhfell",
@@ -276,13 +273,10 @@ const categorySeeds: ProductCategorySeed[] = [
         images: cowhideSeatImages([
           "Gelbes kreisrundes Sitzobjekt aus europäischem Kuhfell in hellem Raum",
           "Gelbes Sitzobjekt aus europäischem Kuhfell mit sichtbarer Fellstruktur",
-          "Gelber Hocker aus europäischem Kuhfell in Dreiviertelansicht im Garten",
-          "Gelber Hocker aus europäischem Kuhfell in seitlicher Ansicht im Garten",
           "Gelber Hocker aus europäischem Kuhfell in Frontansicht im Garten",
           "Detailansicht der Felloberfläche des gelben Hockers im Garten",
           "Profilansicht des gelben Hockers aus europäischem Kuhfell im Garten",
           "Niedrige Perspektive auf den gelben Hocker aus europäischem Kuhfell",
-          "Weinrotes kreisrundes Sitzobjekt aus europäischem Kuhfell",
           "Farbpalette mit verschiedenen Ausführungen aus europäischem Kuhfell",
         ]),
         metaTitle: "Sitzobjekt aus europäischem Kuhfell",
@@ -290,7 +284,7 @@ const categorySeeds: ProductCategorySeed[] = [
           "Kreisrundes Sitzobjekt aus europäischem Kuhfell, handgefertigt in Europa, 126 cm Durchmesser und 30 cm Höhe.",
         localized: {
           en: {
-            title: "Sculptural Seat in European Cowhide",
+            title: "54COUTURE FURNITURE AND ART IN THE FINEST EUROPEAN HIDES",
             cardTitle: "Cowhide Seating Object",
             priceNote: "Including statutory VAT, excluding shipping.",
             shortDescription:
@@ -314,13 +308,10 @@ const categorySeeds: ProductCategorySeed[] = [
             images: cowhideSeatImages([
               "Yellow circular seating object in European cowhide in a bright room",
               "Yellow European cowhide seating object with visible hair texture",
-              "Yellow European cowhide pouf in a three-quarter garden view",
-              "Yellow European cowhide pouf in a side garden view",
               "Yellow European cowhide pouf in a frontal garden view",
               "Detail of the yellow cowhide pouf surface in the garden",
               "Profile view of the yellow European cowhide pouf in the garden",
               "Low-angle view of the yellow European cowhide pouf",
-              "Wine-red circular seating object in European cowhide",
               "Colour palette with various European cowhide finishes",
             ]),
             metaTitle: "Sculptural Seat in European Cowhide",
@@ -328,7 +319,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "Circular seating object in European cowhide, handcrafted in Europe, 126 cm in diameter and 30 cm high.",
           },
           fr: {
-            title: "Assise sculpturale en peau de vache européenne",
+            title: "54COUTURE MOBILIER ET ART EN PEAUX EUROPÉENNES DE LA PLUS HAUTE QUALITÉ",
             cardTitle: "Assise en peau de vache",
             priceNote: "TVA légale incluse, frais de livraison en supplément.",
             shortDescription:
@@ -352,13 +343,10 @@ const categorySeeds: ProductCategorySeed[] = [
             images: cowhideSeatImages([
               "Assise circulaire jaune en peau de vache européenne dans un espace clair",
               "Assise jaune en peau de vache européenne avec texture du poil visible",
-              "Pouf jaune en peau de vache européenne, vue de trois-quarts au jardin",
-              "Pouf jaune en peau de vache européenne, vue latérale au jardin",
               "Pouf jaune en peau de vache européenne, vue de face au jardin",
               "Détail de la surface du pouf jaune au jardin",
               "Vue de profil du pouf jaune en peau de vache européenne au jardin",
               "Vue en contre-plongée du pouf jaune en peau de vache européenne",
-              "Assise circulaire lie-de-vin en peau de vache européenne",
               "Palette de couleurs avec différentes finitions en peau de vache européenne",
             ]),
             metaTitle: "Assise sculpturale en peau de vache européenne",
@@ -366,7 +354,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "Assise circulaire en peau de vache européenne, fabriquée à la main en Europe, 126 cm de diamètre et 30 cm de hauteur.",
           },
           es: {
-            title: "Asiento escultórico en piel de vaca europea",
+            title: "54COUTURE MUEBLES Y ARTE EN PIELES EUROPEAS DE LA MÁS ALTA CALIDAD",
             cardTitle: "Asiento en piel de vaca",
             priceNote: "IVA legal incluido, gastos de envío no incluidos.",
             shortDescription:
@@ -390,13 +378,10 @@ const categorySeeds: ProductCategorySeed[] = [
             images: cowhideSeatImages([
               "Asiento circular amarillo en piel de vaca europea en un espacio luminoso",
               "Asiento amarillo en piel de vaca europea con textura visible",
-              "Puf amarillo en piel de vaca europea, vista de tres cuartos en el jardín",
-              "Puf amarillo en piel de vaca europea, vista lateral en el jardín",
               "Puf amarillo en piel de vaca europea, vista frontal en el jardín",
               "Detalle de la superficie del puf amarillo en el jardín",
               "Vista de perfil del puf amarillo en piel de vaca europea en el jardín",
               "Vista en ángulo bajo del puf amarillo en piel de vaca europea",
-              "Asiento circular color vino en piel de vaca europea",
               "Paleta de colores con distintos acabados en piel de vaca europea",
             ]),
             metaTitle: "Asiento escultórico en piel de vaca europea",
@@ -404,7 +389,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "Asiento circular en piel de vaca europea, hecho a mano en Europa, 126 cm de diámetro y 30 cm de altura.",
           },
           zh: {
-            title: "欧洲牛皮雕塑感座椅",
+            title: "54COUTURE 采用顶级欧洲皮毛打造的家具与艺术",
             cardTitle: "欧洲牛皮座椅",
             priceNote: "含法定增值税，运费另计。",
             shortDescription:
@@ -424,13 +409,10 @@ const categorySeeds: ProductCategorySeed[] = [
             images: cowhideSeatImages([
               "明亮空间中的黄色圆形欧洲牛皮座椅",
               "可见毛面纹理的黄色欧洲牛皮座椅",
-              "花园中黄色欧洲牛皮座椅的四分之三视角",
-              "花园中黄色欧洲牛皮座椅的侧面视角",
               "花园中黄色欧洲牛皮座椅的正面视角",
               "花园中黄色牛皮座椅表面细节",
               "花园中黄色欧洲牛皮座椅的侧面轮廓",
               "低角度拍摄的黄色欧洲牛皮座椅",
-              "酒红色圆形欧洲牛皮座椅",
               "展示多种欧洲牛皮饰面的色彩样本",
             ]),
             metaTitle: "欧洲牛皮雕塑感座椅",
@@ -438,7 +420,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "欧洲手工制作的圆形欧洲牛皮座椅，直径 126 厘米，高 30 厘米。",
           },
           ar: {
-            title: "مقعد نحتي من جلد البقر الأوروبي",
+            title: "54COUTURE أثاث وفن من أجود الجلود الأوروبية",
             cardTitle: "مقعد من جلد البقر",
             priceNote: "شامل ضريبة القيمة المضافة القانونية، ولا يشمل تكاليف الشحن.",
             shortDescription:
@@ -462,13 +444,10 @@ const categorySeeds: ProductCategorySeed[] = [
             images: cowhideSeatImages([
               "مقعد دائري أصفر من جلد البقر الأوروبي في مساحة مضيئة",
               "مقعد أصفر من جلد البقر الأوروبي مع ملمس شعر واضح",
-              "منظر ثلاثي الأرباع لمقعد أصفر من جلد البقر الأوروبي في الحديقة",
-              "منظر جانبي لمقعد أصفر من جلد البقر الأوروبي في الحديقة",
               "منظر أمامي لمقعد أصفر من جلد البقر الأوروبي في الحديقة",
               "تفصيل سطح المقعد الأصفر من جلد البقر في الحديقة",
               "منظر جانبي لمقعد أصفر من جلد البقر الأوروبي في الحديقة",
               "منظر منخفض الزاوية لمقعد أصفر من جلد البقر الأوروبي",
-              "مقعد دائري بلون أحمر نبيذي من جلد البقر الأوروبي",
               "لوحة ألوان بتشطيبات متنوعة من جلد البقر الأوروبي",
             ]),
             metaTitle: "مقعد نحتي من جلد البقر الأوروبي",
