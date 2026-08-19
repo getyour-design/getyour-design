@@ -120,13 +120,25 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                 Shop / {product.category} / {product.title}
               </p>
               <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
-                {product.title}
+                {product.slug === "sitzobjekt-kuhfell" ? (
+                  <>
+                    <span className="block">54COUTURE - FURNITURE &amp; ART</span>
+                    <span className="mt-2 block">THE FINEST EUROPEAN HIDES</span>
+                  </>
+                ) : (
+                  product.title
+                )}
               </h1>
-              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 border-y border-black/15 py-5 text-sm text-[#353b3e]">
-                <p>{product.price}</p>
-                <p>{product.availability}</p>
+              <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{product.description}</p>
+              <div className="mt-8 border-y border-black/15 py-4 text-[#353b3e]">
+                <p className="text-base">{product.slug === "sitzobjekt-kuhfell" ? "Ab 7.200 €" : product.price}</p>
+                {product.priceNote ? (
+                  <p className="mt-2 text-[0.68rem] leading-5 text-[#667174]">
+                    <span className="mr-1 align-super text-[0.55rem]">*</span>
+                    {product.priceNote}
+                  </p>
+                ) : null}
               </div>
-              {product.priceNote ? <p className="mt-4 text-sm leading-7 text-[#4b5356]">{product.priceNote}</p> : null}
               <ProductCommerceBlock
                 checkoutErrorMessage="Der Checkout ist derzeit nicht verfügbar. Bitte nutzen Sie alternativ die Anfrage."
                 checkoutLoadingLabel="Checkout wird vorbereitet"
@@ -134,7 +146,6 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                 fallbackHref="/contact"
                 productSlug={product.slug}
               />
-              <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{product.description}</p>
               {product.longDescription ? (
                 <div className="mt-8 grid gap-4 text-sm leading-7 text-[#4b5356]">
                   {product.longDescription.map((paragraph) => (
@@ -142,12 +153,6 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                   ))}
                 </div>
               ) : null}
-              <EntityActions
-                href={productHref}
-                id={`product:${product.slug}`}
-                title={product.title}
-                type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
-              />
               <dl className="mt-10 grid gap-5 border-t border-black/15 pt-6 text-sm md:grid-cols-2">
                 <div>
                   <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Maße</dt>
@@ -176,6 +181,12 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                   </div>
                 ) : null}
               </dl>
+              <EntityActions
+                href={productHref}
+                id={`product:${product.slug}`}
+                title={product.title}
+                type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
+              />
             </div>
           </div>
         </section>

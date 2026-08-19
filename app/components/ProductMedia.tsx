@@ -28,40 +28,23 @@ function GalleryImage({
   title,
   sizes,
   priority = false,
+  cropClassName = "",
 }: {
   image: ProductImageAsset;
   title: string;
   sizes: string;
   priority?: boolean;
+  cropClassName?: string;
 }) {
-  const isColourPalette = image.src.includes("colour-palette");
-
   return (
-    <>
-      {isColourPalette ? (
-        <div aria-hidden="true" className="absolute inset-0 bg-[#eee7dd]" />
-      ) : (
-        <>
-          <Image
-            alt=""
-            aria-hidden="true"
-            className="scale-110 object-cover opacity-25 blur-2xl"
-            fill
-            sizes={sizes}
-            src={image.src}
-          />
-          <div aria-hidden="true" className="absolute inset-0 bg-[#f4efe7]/35" />
-        </>
-      )}
-      <Image
-        alt={image.alt || title}
-        className="object-contain"
-        fill
-        priority={priority}
-        sizes={sizes}
-        src={image.src}
-      />
-    </>
+    <Image
+      alt={image.alt || title}
+      className={`object-cover ${cropClassName}`}
+      fill
+      priority={priority}
+      sizes={sizes}
+      src={image.src}
+    />
   );
 }
 
@@ -102,10 +85,10 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
   }
 
   return (
-    <div className="grid gap-5">
+    <div>
       <button
         aria-label={`${images[0].alt || title} vergrößern`}
-        className="relative aspect-[3/2] w-full cursor-zoom-in overflow-hidden border hairline bg-[#f8f8f6]"
+        className="relative aspect-video w-full cursor-zoom-in overflow-hidden"
         onClick={() => setActiveImage(images[0])}
         type="button"
       >
@@ -117,21 +100,43 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
         />
       </button>
       {images.length > 1 ? (
-        <div className="grid gap-5 sm:grid-cols-2">
-          {images.slice(1).map((image) => (
-            <button
-              aria-label={`${image.alt || title} vergrößern`}
-              className="relative aspect-[4/5] w-full cursor-zoom-in overflow-hidden border hairline bg-[#f8f8f6]"
-              key={image.src}
-              onClick={() => setActiveImage(image)}
-              type="button"
-            >
-              <GalleryImage
-                image={image}
-                sizes="(min-width: 1024px) 27vw, (min-width: 640px) 50vw, 100vw"
-                title={title}
-              />
-            </button>
+        <div className="mt-5 grid gap-5 sm:grid-cols-2">
+          {[0, 1].map((columnIndex) => (
+            <div className="grid content-start gap-5" key={columnIndex}>
+              {images.slice(1).map((image, imageIndex) => {
+                const isFinalDetail = image.src.includes("cowhide-seat-v8-11-detail");
+                const targetColumn = isFinalDetail ? 1 : imageIndex % 2;
+                if (targetColumn !== columnIndex) return null;
+
+                const aspectRatio = isFinalDetail
+                  ? "aspect-[15/13]"
+                  : [
+                      "aspect-[4/5]",
+                      "aspect-square",
+                      "aspect-[3/2]",
+                      "aspect-[3/2]",
+                      "aspect-[4/5]",
+                      "aspect-video",
+                    ][imageIndex % 6];
+
+                return (
+                  <button
+                    aria-label={`${image.alt || title} vergrößern`}
+                    className={`relative w-full cursor-zoom-in overflow-hidden ${aspectRatio}`}
+                    key={image.src}
+                    onClick={() => setActiveImage(image)}
+                    type="button"
+                  >
+                    <GalleryImage
+                      cropClassName={isFinalDetail ? "object-[82%_center]" : undefined}
+                      image={image}
+                      sizes="(min-width: 1024px) 27vw, (min-width: 640px) 50vw, 100vw"
+                      title={title}
+                    />
+                  </button>
+                );
+              })}
+            </div>
           ))}
         </div>
       ) : null}

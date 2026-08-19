@@ -20,6 +20,7 @@ const cowhideSeatImageSources = [
   "/images/products/cowhide-seat-v3-07-long-hair-edge.png",
   "/images/products/cowhide-seat-v2-08-room-scale.png",
   "/images/products/cowhide-seat-v7-10-colour-palette.png",
+  "/images/products/cowhide-seat-v8-11-detail.jpeg",
 ];
 
 function cowhideSeatImages(alts: string[]): ProductImage[] {
@@ -278,6 +279,7 @@ const categorySeeds: ProductCategorySeed[] = [
           "Profilansicht des gelben Hockers aus europäischem Kuhfell im Garten",
           "Niedrige Perspektive auf den gelben Hocker aus europäischem Kuhfell",
           "Farbpalette mit verschiedenen Ausführungen aus europäischem Kuhfell",
+          "Detailansicht des gelben Sitzobjekts aus europäischem Kuhfell",
         ]),
         metaTitle: "Sitzobjekt aus europäischem Kuhfell",
         metaDescription:
@@ -313,6 +315,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "Profile view of the yellow European cowhide pouf in the garden",
               "Low-angle view of the yellow European cowhide pouf",
               "Colour palette with various European cowhide finishes",
+              "Detail view of the yellow European cowhide seating object",
             ]),
             metaTitle: "Sculptural Seat in European Cowhide",
             metaDescription:
@@ -348,6 +351,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "Vue de profil du pouf jaune en peau de vache européenne au jardin",
               "Vue en contre-plongée du pouf jaune en peau de vache européenne",
               "Palette de couleurs avec différentes finitions en peau de vache européenne",
+              "Vue détaillée de l'assise jaune en peau de vache européenne",
             ]),
             metaTitle: "Assise sculpturale en peau de vache européenne",
             metaDescription:
@@ -383,6 +387,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "Vista de perfil del puf amarillo en piel de vaca europea en el jardín",
               "Vista en ángulo bajo del puf amarillo en piel de vaca europea",
               "Paleta de colores con distintos acabados en piel de vaca europea",
+              "Detalle del asiento amarillo de piel de vaca europea",
             ]),
             metaTitle: "Asiento escultórico en piel de vaca europea",
             metaDescription:
@@ -414,6 +419,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "花园中黄色欧洲牛皮座椅的侧面轮廓",
               "低角度拍摄的黄色欧洲牛皮座椅",
               "展示多种欧洲牛皮饰面的色彩样本",
+              "黄色欧洲牛皮座椅的细节视图",
             ]),
             metaTitle: "欧洲牛皮雕塑感座椅",
             metaDescription:
@@ -449,6 +455,7 @@ const categorySeeds: ProductCategorySeed[] = [
               "منظر جانبي لمقعد أصفر من جلد البقر الأوروبي في الحديقة",
               "منظر منخفض الزاوية لمقعد أصفر من جلد البقر الأوروبي",
               "لوحة ألوان بتشطيبات متنوعة من جلد البقر الأوروبي",
+              "لقطة تفصيلية للمقعد الأصفر من جلد البقر الأوروبي",
             ]),
             metaTitle: "مقعد نحتي من جلد البقر الأوروبي",
             metaDescription:

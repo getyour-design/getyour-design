@@ -125,7 +125,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               </p>
               <h2 className="serif mt-3 text-balance text-2xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-3xl">
                 <Link href={featuredProductHref}>
-                  <span className="block">54COUTURE — FURNITURE &amp; ART</span>
+                  <span className="block">54COUTURE - FURNITURE &amp; ART</span>
                   <span className="mt-2 block">THE FINEST EUROPEAN HIDES</span>
                 </Link>
               </h2>

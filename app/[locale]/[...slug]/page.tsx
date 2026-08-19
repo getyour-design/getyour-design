@@ -577,13 +577,25 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                 {dictionary.shop.breadcrumbShop} / {getLocalizedCategoryLabel(locale, product.category)} / {productTitle}
               </p>
               <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
-                {productTitle}
+                {product.slug === "sitzobjekt-kuhfell" ? (
+                  <>
+                    <span className="block">54COUTURE - FURNITURE &amp; ART</span>
+                    <span className="mt-2 block">THE FINEST EUROPEAN HIDES</span>
+                  </>
+                ) : (
+                  productTitle
+                )}
               </h1>
-              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 border-y border-black/15 py-5 text-sm text-[#353b3e]">
-                <p>{product.price}</p>
-                <p>{dictionary.shop.availability[product.availability] ?? product.availability}</p>
+              <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{content?.shortDescription ?? dictionary.shop.productDescription}</p>
+              <div className="mt-8 border-y border-black/15 py-4 text-[#353b3e]">
+                <p className="text-base">{product.slug === "sitzobjekt-kuhfell" && locale === "en" ? "From €7,200" : product.price}</p>
+                {content?.priceNote ? (
+                  <p className="mt-2 text-[0.68rem] leading-5 text-[#667174]">
+                    <span className="mr-1 align-super text-[0.55rem]">*</span>
+                    {content.priceNote}
+                  </p>
+                ) : null}
               </div>
-              {content?.priceNote ? <p className="mt-4 text-sm leading-7 text-[#4b5356]">{content.priceNote}</p> : null}
               <ProductCommerceBlock
                 checkoutErrorMessage={checkoutCopy.errorMessage}
                 checkoutLoadingLabel={checkoutCopy.loadingLabel}
@@ -591,7 +603,6 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                 fallbackHref={localizedRoutes.contact[locale]}
                 productSlug={product.slug}
               />
-              <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{content?.shortDescription ?? dictionary.shop.productDescription}</p>
               {content?.longDescription ? (
                 <div className="mt-8 grid gap-4 text-sm leading-7 text-[#4b5356]">
                   {content.longDescription.map((paragraph) => (
@@ -599,12 +610,6 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                   ))}
                 </div>
               ) : null}
-              <EntityActions
-                href={productHref}
-                id={`product:${product.slug}`}
-                title={productTitle}
-                type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
-              />
               <dl className="mt-10 grid gap-5 border-t border-black/15 pt-6 text-sm md:grid-cols-2">
                 <div>
                   <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.dimensions}</dt>
@@ -633,6 +638,12 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                   </div>
                 ) : null}
               </dl>
+              <EntityActions
+                href={productHref}
+                id={`product:${product.slug}`}
+                title={productTitle}
+                type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
+              />
             </div>
           </div>
         </section>
