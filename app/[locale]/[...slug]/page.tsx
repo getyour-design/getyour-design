@@ -35,7 +35,7 @@ import { artworks } from "../../data/artworks";
 import { brands } from "../../data/brands";
 import { stories } from "../../data/stories";
 import { getCommerceCta } from "../../lib/commerce";
-import { getEnglishProductTitle } from "../../lib/productTitles";
+import { getCowhidePresentationCopy, getEnglishProductTitle } from "../../lib/productTitles";
 import {
   getAlternateLanguages,
   getLocalizedShopSlug,
@@ -551,6 +551,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
     const productHref = getLocalizedProductPath(locale, product);
     const productCta = content?.ctaLabel ? { ...cta, label: content.ctaLabel } : cta;
     const productImages = getLocalizedProductImages(locale, product);
+    const cowhidePresentation = product.slug === "sitzobjekt-kuhfell" ? getCowhidePresentationCopy(locale) : null;
     const checkoutCopy = getLocalizedCheckoutCopy(locale);
     const commerceCta = getCommerceCta({
       productSlug: product.slug,
@@ -578,10 +579,10 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                 {dictionary.shop.breadcrumbShop} / {getLocalizedCategoryLabel(locale, product.category)} / {productTitle}
               </p>
               <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
-                {product.slug === "sitzobjekt-kuhfell" ? (
+                {cowhidePresentation ? (
                   <>
-                    <span className="block">54COUTURE - FURNITURE &amp; ART</span>
-                    <span className="mt-2 block">THE FINEST EUROPEAN HIDES</span>
+                    <span className="block">{cowhidePresentation.title}</span>
+                    <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
                   </>
                 ) : (
                   productTitle
@@ -589,7 +590,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
               </h1>
               <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{content?.shortDescription ?? dictionary.shop.productDescription}</p>
               <div className="mt-8 border-y border-black/15 py-4 text-[#353b3e]">
-                <p className="text-base">{product.slug === "sitzobjekt-kuhfell" && locale === "en" ? "From €7,200" : product.price}</p>
+                <p className="text-base">{cowhidePresentation?.price ?? product.price}</p>
                 {content?.priceNote ? (
                   <p className="mt-2 text-[0.68rem] leading-5 text-[#667174]">
                     <span className="mr-1 align-super text-[0.55rem]">*</span>

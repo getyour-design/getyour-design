@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Home from "../page";
 import { LocalizedHomePage } from "../components/LocalizedHomePage";
 import { getDictionary } from "../data/dictionaries";
 import { getAlternateLanguages, isLocale, localizedRoutes, locales } from "../lib/i18n";
@@ -37,10 +36,6 @@ export default async function LocalizedHome({ params }: LocalizedHomeProps) {
 
   if (!isLocale(locale)) {
     notFound();
-  }
-
-  if (locale === "de") {
-    return <Home />;
   }
 
   return <LocalizedHomePage locale={locale} />;

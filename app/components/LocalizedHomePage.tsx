@@ -6,7 +6,7 @@ import { materialCards } from "../data/materials";
 import { heroShopCategories, products } from "../data/products";
 import { stories } from "../data/stories";
 import { getProductPath, getShopPath, localizeHref, type Locale } from "../lib/i18n";
-import { getEnglishProductTitle } from "../lib/productTitles";
+import { getCowhidePresentationCopy, getEnglishProductTitle } from "../lib/productTitles";
 
 const productImages = [
   "/images/product-stone-object.svg",
@@ -46,6 +46,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
   const featuredProductContent = featuredCommerceProduct?.localized?.[locale];
   const featuredProductImage = featuredProductContent?.images[0] ?? featuredCommerceProduct?.images?.[0];
   const featuredProductDescription = featuredProductContent?.shortDescription ?? featuredCommerceProduct?.description;
+  const cowhidePresentation = getCowhidePresentationCopy(locale);
   const featuredProductHref = featuredCommerceProduct
     ? getProductPath(locale, featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)
     : undefined;
@@ -125,12 +126,12 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               </p>
               <h2 className="serif mt-3 text-balance text-2xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-3xl">
                 <Link href={featuredProductHref}>
-                  <span className="block">54COUTURE - FURNITURE &amp; ART</span>
-                  <span className="mt-2 block">THE FINEST EUROPEAN HIDES</span>
+                  <span className="block">{cowhidePresentation.title}</span>
+                  <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
                 </Link>
               </h2>
               <p className="mt-5 text-sm text-[#353b3e]">
-                {locale === "en" ? "From €7,200" : locale === "de" ? "Ab 7.200 €" : featuredCommerceProduct.price}
+                {cowhidePresentation.price}
               </p>
               <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
                 {featuredProductDescription}

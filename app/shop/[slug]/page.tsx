@@ -7,6 +7,7 @@ import { ProductCommerceBlock } from "../../components/ProductCommerceBlock";
 import { getDictionary } from "../../data/dictionaries";
 import { getCommerceCta, getProductCta } from "../../lib/commerce";
 import { getProductPath } from "../../lib/i18n";
+import { getCowhidePresentationCopy } from "../../lib/productTitles";
 import { products, visibleShopCategories } from "../../data/products";
 
 type ShopSlugPageProps = {
@@ -94,6 +95,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
     const categoryHref = productCategory ? `/shop/${productCategory.slug}` : "/shop";
     const productHref = getRootProductPath(product);
     const productCta = product.ctaLabel ? { ...cta, label: product.ctaLabel } : cta;
+    const cowhidePresentation = product.slug === "sitzobjekt-kuhfell" ? getCowhidePresentationCopy("de") : null;
     const dictionary = getDictionary("de");
     const commerceCta = getCommerceCta({
       productSlug: product.slug,
@@ -121,10 +123,10 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                 Shop / {product.category} / {product.title}
               </p>
               <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
-                {product.slug === "sitzobjekt-kuhfell" ? (
+                {cowhidePresentation ? (
                   <>
-                    <span className="block">54COUTURE - FURNITURE &amp; ART</span>
-                    <span className="mt-2 block">THE FINEST EUROPEAN HIDES</span>
+                    <span className="block">{cowhidePresentation.title}</span>
+                    <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
                   </>
                 ) : (
                   product.title
@@ -132,7 +134,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
               </h1>
               <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{product.description}</p>
               <div className="mt-8 border-y border-black/15 py-4 text-[#353b3e]">
-                <p className="text-base">{product.slug === "sitzobjekt-kuhfell" ? "Ab 7.200 €" : product.price}</p>
+                <p className="text-base">{cowhidePresentation?.price ?? product.price}</p>
                 {product.priceNote ? (
                   <p className="mt-2 text-[0.68rem] leading-5 text-[#667174]">
                     <span className="mr-1 align-super text-[0.55rem]">*</span>

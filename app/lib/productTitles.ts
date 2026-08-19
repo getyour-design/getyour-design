@@ -1,3 +1,5 @@
+import type { Locale } from "./i18n";
+
 const englishProductTitles: Record<string, string> = {
   "Sitzobjekt aus europäischem Kuhfell": "Sculptural Seat in European Cowhide",
   "Sitzobjekt aus dunklem Holz": "Dark Wood Seating Object",
@@ -99,6 +101,43 @@ const englishProductTitles: Record<string, string> = {
 
 export function getEnglishProductTitle(title: string) {
   return englishProductTitles[title] ?? title;
+}
+
+export const cowhidePresentationCopy: Record<Locale, { title: string; subtitle: string; price: string }> = {
+  de: {
+    title: "54COUTURE - MÖBEL & KUNST",
+    subtitle: "AUS FEINSTEM EUROPÄISCHEM KUHFELL",
+    price: "Ab 7.200 €",
+  },
+  en: {
+    title: "54COUTURE - FURNITURE & ART",
+    subtitle: "THE FINEST EUROPEAN HIDES",
+    price: "From €7,200",
+  },
+  fr: {
+    title: "54COUTURE - MOBILIER & ART",
+    subtitle: "EN CUIR DE VACHE EUROPÉEN D’EXCEPTION",
+    price: "À partir de 7 200 €",
+  },
+  es: {
+    title: "54COUTURE - MUEBLES & ARTE",
+    subtitle: "EN LA MEJOR PIEL DE VACA EUROPEA",
+    price: "Desde 7.200 €",
+  },
+  zh: {
+    title: "54COUTURE - 家具与艺术",
+    subtitle: "精选欧洲牛皮",
+    price: "起价 €7,200",
+  },
+  ar: {
+    title: "54COUTURE - أثاث وفن",
+    subtitle: "من أجود جلود الأبقار الأوروبية",
+    price: "ابتداءً من 7,200 €",
+  },
+};
+
+export function getCowhidePresentationCopy(locale: Locale) {
+  return cowhidePresentationCopy[locale];
 }
 
 export const translatedEnglishProductTitles = englishProductTitles;
