@@ -70,16 +70,16 @@ export function Navigation() {
             );
           })}
         </div>
-        <div className="hidden shrink-0 justify-end gap-3 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-[#10100f] min-[900px]:flex md:gap-4 2xl:gap-5 2xl:text-[0.62rem] 2xl:tracking-[0.18em]">
+        <div className="hidden shrink-0 items-center justify-end gap-3 text-[0.58rem] font-semibold uppercase leading-none tracking-[0.16em] text-[#10100f] min-[900px]:flex md:gap-4 2xl:gap-5 2xl:text-[0.62rem] 2xl:tracking-[0.18em]">
           <Link className="hidden sm:inline" href={localizeHref("/suche", locale)}>{dictionary.nav.search}</Link>
           <Link className="hidden md:inline" href={localizeHref("/trade", locale)}>{dictionary.nav.account}</Link>
           <Link href={localizeHref("/warenkorb", locale)}>{dictionary.nav.cart}</Link>
-          <div className="relative hidden sm:block" ref={languageMenuRef}>
+          <div className="relative hidden self-stretch items-center sm:flex" ref={languageMenuRef}>
             <button
               aria-controls="desktop-language-menu"
               aria-expanded={languageMenuOpen}
               aria-label="Sprache auswählen"
-              className="flex items-center gap-2 py-1 transition hover:text-black"
+              className="flex h-full items-center gap-2 whitespace-nowrap leading-none"
               onClick={() => setLanguageMenuOpen((open) => !open)}
               type="button"
             >
