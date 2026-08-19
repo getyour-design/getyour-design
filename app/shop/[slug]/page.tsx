@@ -106,6 +106,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
         presentation: dictionary.shop.commerce,
       },
     });
+    const displayCommerceCta = product.slug === "sitzobjekt-kuhfell" ? { ...commerceCta, sellerLabel: undefined } : commerceCta;
 
     return (
       <main>
@@ -142,7 +143,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
               <ProductCommerceBlock
                 checkoutErrorMessage="Der Checkout ist derzeit nicht verfügbar. Bitte nutzen Sie alternativ die Anfrage."
                 checkoutLoadingLabel="Checkout wird vorbereitet"
-                commerceCta={commerceCta}
+                commerceCta={displayCommerceCta}
                 fallbackHref="/contact"
                 productSlug={product.slug}
               />

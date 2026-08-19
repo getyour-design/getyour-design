@@ -563,6 +563,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
         presentation: dictionary.shop.commerce,
       },
     });
+    const displayCommerceCta = product.slug === "sitzobjekt-kuhfell" ? { ...commerceCta, sellerLabel: undefined } : commerceCta;
 
     return (
       <main>
@@ -599,7 +600,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
               <ProductCommerceBlock
                 checkoutErrorMessage={checkoutCopy.errorMessage}
                 checkoutLoadingLabel={checkoutCopy.loadingLabel}
-                commerceCta={commerceCta}
+                commerceCta={displayCommerceCta}
                 fallbackHref={localizedRoutes.contact[locale]}
                 productSlug={product.slug}
               />

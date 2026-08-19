@@ -129,7 +129,9 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                   <span className="mt-2 block">THE FINEST EUROPEAN HIDES</span>
                 </Link>
               </h2>
-              <p className="mt-5 text-sm text-[#353b3e]">{featuredCommerceProduct.price}</p>
+              <p className="mt-5 text-sm text-[#353b3e]">
+                {locale === "en" ? "From €7,200" : locale === "de" ? "Ab 7.200 €" : featuredCommerceProduct.price}
+              </p>
               <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
                 {featuredProductDescription}
               </p>
