@@ -45,7 +45,6 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
   const heroLines = dictionary.home.heroTitle;
   const featuredProductContent = featuredCommerceProduct?.localized?.[locale];
   const featuredProductImage = featuredProductContent?.images[0] ?? featuredCommerceProduct?.images?.[0];
-  const featuredProductTitle = featuredProductContent?.title ?? featuredCommerceProduct?.title;
   const featuredProductDescription = featuredProductContent?.shortDescription ?? featuredCommerceProduct?.description;
   const featuredProductHref = featuredCommerceProduct
     ? getProductPath(locale, featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)
@@ -109,7 +108,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                 {featuredProductImage ? (
                   <Image
                     alt={featuredProductImage.alt}
-                    className="object-contain transition duration-500 group-hover:scale-[1.02]"
+                    className="object-cover transition duration-500 group-hover:scale-[1.02]"
                     fill
                     sizes="(min-width: 1024px) 48vw, 100vw"
                     src={featuredProductImage.src}
@@ -125,7 +124,10 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                 {dictionary.shop.categories[featuredCommerceProduct.category] ?? featuredCommerceProduct.category}
               </p>
               <h2 className="serif mt-3 text-balance text-2xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-3xl">
-                <Link href={featuredProductHref}>{featuredProductTitle}</Link>
+                <Link href={featuredProductHref}>
+                  <span className="block">54COUTURE — FURNITURE &amp; ART</span>
+                  <span className="mt-2 block">THE FINEST EUROPEAN HIDES</span>
+                </Link>
               </h2>
               <p className="mt-5 text-sm text-[#353b3e]">{featuredCommerceProduct.price}</p>
               <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
