@@ -28,6 +28,7 @@ import { PlaceholderArtwork } from "../../components/PlaceholderArtwork";
 import { ProductCardMedia, ProductGallery, type ProductImageAsset } from "../../components/ProductMedia";
 import { EntityActions } from "../../components/EntityActions";
 import { ProductCommerceBlock } from "../../components/ProductCommerceBlock";
+import { ProductStructuredData } from "../../components/StructuredData";
 import { LuxuryCoastersPage } from "../../components/LuxuryCoastersPage";
 import { getDictionary } from "../../data/dictionaries";
 import { primaryShopCategories, products, visibleShopCategories } from "../../data/products";
@@ -38,7 +39,7 @@ import { stories } from "../../data/stories";
 import { getCommerceCta } from "../../lib/commerce";
 import { get54CouturePresentationCopy, getEnglishProductTitle } from "../../lib/productTitles";
 import {
-  getAlternateLanguages,
+  getAbsoluteAlternateLanguages,
   getLocalizedShopSlug,
   getProductPath,
   getShopPath,
@@ -203,9 +204,9 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
         languages: {
           ...Object.fromEntries(locales.map((targetLocale) => [
             targetLocale,
-            product ? getLocalizedProductPath(targetLocale, product) : getShopPath(targetLocale, route.slug),
+            `https://www.getyour.design${product ? getLocalizedProductPath(targetLocale, product) : getShopPath(targetLocale, route.slug)}`,
           ])),
-          "x-default": product ? getLocalizedProductPath("de", product) : getShopPath("de", route.slug),
+          "x-default": `https://www.getyour.design${product ? getLocalizedProductPath("de", product) : getShopPath("de", route.slug)}`,
         },
       },
     };
@@ -213,22 +214,31 @@ export async function generateMetadata({ params }: LocalizedPageProps): Promise<
 
   const dictionary = getDictionary(locale);
   const page = dictionary.pages[route.key];
+  const title = page?.title ?? (locale === "de" ? titles[route.key] : englishTitles[route.key] ?? dictionary.metadata.title);
+  const description = page?.description ?? (locale === "de" ? dictionary.metadata.description : englishDescriptions[route.key] ?? dictionary.metadata.description);
 
   return {
-    title: page?.title ?? (locale === "de" ? titles[route.key] : englishTitles[route.key] ?? dictionary.metadata.title),
-    description: page?.description ?? (locale === "de" ? undefined : englishDescriptions[route.key] ?? dictionary.metadata.description),
+    title,
+    description,
     robots: route.key === "warenkorb" ? {
       index: false,
       follow: false,
     } : undefined,
-    openGraph: locale === "de" ? undefined : {
-      title: page?.title ?? englishTitles[route.key] ?? dictionary.metadata.title,
-      description: page?.description ?? englishDescriptions[route.key] ?? dictionary.metadata.description,
+    openGraph: {
+      title,
+      description,
       url: localizedRoutes[route.key][locale],
+      images: [{ url: "/images/hero-editorial.png", alt: "GETYOUR.DESIGN interior context" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/images/hero-editorial.png"],
     },
     alternates: {
       canonical: localizedRoutes[route.key][locale],
-      languages: getAlternateLanguages(route.key),
+      languages: getAbsoluteAlternateLanguages(route.key),
     },
   };
 }
@@ -247,11 +257,28 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
   }
 
   if (route.kind === "shopItem") {
+    const product = products.find((item) => item.slug === route.slug);
+    const productSchema = product ? (
+      <ProductStructuredData
+        product={{
+          category: product.category,
+          description: getLocalizedProductContent(locale, product)?.shortDescription ?? product.description,
+          images: getLocalizedProductImages(locale, product),
+          maker: product.maker,
+          material: product.material,
+          price: get54CouturePresentationCopy(product.slug, locale)?.price ?? product.price,
+          slug: product.slug,
+          title: getLocalizedProductTitle(locale, product, products.findIndex((item) => item.slug === product.slug)),
+          url: getLocalizedProductPath(locale, product),
+        }}
+      />
+    ) : null;
+
     if (locale === "de") {
-      return <ShopSlugPage params={Promise.resolve({ slug: route.slug })} />;
+      return <>{productSchema}<ShopSlugPage params={Promise.resolve({ slug: route.slug })} /></>;
     }
 
-    return <LocalizedShopSlugPage locale={locale} slug={route.slug} />;
+    return <>{productSchema}<LocalizedShopSlugPage locale={locale} slug={route.slug} /></>;
   }
 
   if (route.key === "luxury-coasters") {

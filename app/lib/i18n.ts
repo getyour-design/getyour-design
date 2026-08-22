@@ -1,4 +1,5 @@
 export const locales = ["de", "en", "fr", "es", "zh", "ar"] as const;
+export const siteUrl = "https://www.getyour.design";
 
 export type Locale = (typeof locales)[number];
 
@@ -113,6 +114,12 @@ export function getAlternateLanguages(routeKey: RouteKey, suffix = "") {
     ),
     "x-default": `${localizedRoutes[routeKey].de}${suffix}`,
   };
+}
+
+export function getAbsoluteAlternateLanguages(routeKey: RouteKey, suffix = "") {
+  return Object.fromEntries(
+    Object.entries(getAlternateLanguages(routeKey, suffix)).map(([locale, path]) => [locale, `${siteUrl}${path}`]),
+  );
 }
 
 export const localizedShopCategorySlugs: Record<Locale, Record<string, string>> = {

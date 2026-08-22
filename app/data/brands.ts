@@ -20,6 +20,7 @@ export type Brand = {
   logo?: string;
   heroImage?: string;
   detailImage?: string;
+  founderImage?: string;
   featured?: boolean;
   status?: BrandStatus;
   localized?: Partial<Record<BrandLocale, LocalizedBrandContent>>;
@@ -30,16 +31,17 @@ export const brands: Brand[] = [
     name: "54COUTURE",
     slug: "54couture",
     description:
-      "54COUTURE verbindet handwerkliche Präzision mit einer expressiven Materialästhetik. Die Kollektionen umfassen Möbel, Teppiche und Objekte aus ausgewählten europäischen Kuh- und Lammfellen.",
+      "54COUTURE ist ein Berliner Label für sammelbare Arbeiten an der Schnittstelle von Kunst, Material und Raum. Möbel, Teppiche und Objekte entstehen aus Leder und ausgewählten europäischen Kuhfellen.",
     website: "https://www.54couture.com/",
-    heroImage: "/images/ateliers/54couture-atelier-rug.jpg",
+    heroImage: "/images/ateliers/54couture-atelier-red-detail.jpg",
     detailImage: "/images/ateliers/54couture-atelier-object.png",
+    founderImage: "/images/ateliers/54couture-marlene.jpg",
     featured: true,
     status: "active",
     localized: {
       en: {
         description:
-          "54COUTURE combines artisan precision with an expressive material language. Its collections include furniture, rugs and objects in selected European cowhide and lambskin.",
+          "54COUTURE is a Berlin label for collectible works at the intersection of art, material and space. Furniture, rugs and objects are made in leather and selected European cowhide.",
       },
     },
   },

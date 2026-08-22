@@ -13,11 +13,13 @@ function getAtelierCopy(locale: Locale) {
   if (locale === "en") {
     return {
       back: "Back to Ateliers",
-      eyebrow: "Atelier portrait",
-      whoTitle: "About 54COUTURE",
-      whoText: "54COUTURE is an atelier shaped by artisan precision and an expressive approach to material. Each work is conceived as an individual presence for an interior rather than a standard product.",
-      whatTitle: "What they make",
-      whatText: "The collections bring together furniture, rugs and objects in selected European cowhide and lambskin. Material, colour, natural texture and proportion guide every piece.",
+      eyebrow: "About 54COUTURE",
+      title: "Cultivating spaces of presence.",
+      paragraphs: [
+        "Founded by Marlene, 54COUTURE is a Berlin label shaped by a fascination with space, materiality and artistic expression. Her work sits at the intersection of art, material and space, creating collectible pieces with emotional and architectural presence.",
+        "Working with leather, hair-on-hide and tactile surfaces, 54COUTURE transforms natural material into rugs, furniture and objects. Each piece is made by hand in Europe and shaped by the individual texture, colour and character of the hide.",
+        "The hides are responsibly sourced by-products of the European food industry and are reimagined as lasting works. Bold colour, couture craftsmanship and the signature purple backing make every original unmistakably 54COUTURE.",
+      ],
       works: "Selected works",
       request: "Available on request",
     };
@@ -25,11 +27,13 @@ function getAtelierCopy(locale: Locale) {
 
   return {
     back: "Zurück zu Ateliers",
-    eyebrow: "Atelierporträt",
-    whoTitle: "Über 54COUTURE",
-    whoText: "54COUTURE ist ein Atelier, das handwerkliche Präzision mit einer expressiven Materialästhetik verbindet. Jede Arbeit wird als eigenständige Präsenz für einen Raum gedacht – nicht als Serienprodukt.",
-    whatTitle: "Was 54COUTURE macht",
-    whatText: "Die Kollektionen umfassen Möbel, Teppiche und Objekte aus ausgewählten europäischen Kuh- und Lammfellen. Material, Farbe, natürliche Textur und Proportion bestimmen jede Arbeit.",
+    eyebrow: "About 54COUTURE",
+    title: "Räume mit Präsenz gestalten.",
+    paragraphs: [
+      "54COUTURE wurde von Marlene gegründet, die ihre Faszination für Raum, Materialität und künstlerischen Ausdruck in sammelbare Arbeiten übersetzt. Das Berliner Label bewegt sich an der Schnittstelle von Kunst, Material und Raum und schafft Stücke mit emotionaler und architektonischer Präsenz.",
+      "Mit Leder, Kuhfell und haptischen Oberflächen verwandelt 54COUTURE natürliche Materialien in Teppiche, Möbel und Objekte. Jede Arbeit wird in Europa von Hand gefertigt und von der individuellen Textur, Farbe und Eigenart des Fells geprägt.",
+      "Die Felle stammen verantwortungsvoll als Nebenprodukte aus der europäischen Lebensmittelindustrie und werden zu Arbeiten mit Bestand neu gedacht. Kräftige Farben, Couture-Handwerk und die charakteristische violette Rückseite machen jedes Original unverkennbar 54COUTURE.",
+    ],
     works: "Ausgewählte Arbeiten",
     request: "Auf Anfrage",
   };
@@ -56,6 +60,7 @@ export async function generateMetadata({ params }: AtelierPageProps): Promise<Me
     description,
     alternates: { canonical: path },
     openGraph: brand.heroImage ? { title, description, url: path, images: [{ url: brand.heroImage, alt: `${brand.name} atelier` }] } : undefined,
+    twitter: brand.heroImage ? { card: "summary_large_image", title, description, images: [brand.heroImage] } : undefined,
   };
 }
 
@@ -89,17 +94,19 @@ export default async function AtelierDetailPage({ params }: AtelierPageProps) {
         </div>
       </section>
 
-      <section className="border-y hairline bg-[#e8eceb] px-5 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto grid max-w-[1540px] gap-10 md:grid-cols-2">
+      <section className="border-y hairline bg-[#e8eceb] px-5 py-14 lg:px-10 lg:py-20">
+        <div className="mx-auto grid max-w-[1540px] gap-10 lg:grid-cols-[0.27fr_0.3fr_0.43fr]">
           <div>
-            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">01</p>
-            <h2 className="serif mt-4 text-2xl tracking-[0.08em]">{copy.whoTitle}</h2>
-            <p className="mt-5 max-w-xl text-sm leading-7 text-[#4b5356]">{copy.whoText}</p>
+            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{copy.eyebrow}</p>
+            <h2 className="serif mt-4 max-w-md text-2xl leading-snug tracking-[0.08em] lg:text-3xl">{copy.title}</h2>
           </div>
-          <div>
-            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">02</p>
-            <h2 className="serif mt-4 text-2xl tracking-[0.08em]">{copy.whatTitle}</h2>
-            <p className="mt-5 max-w-xl text-sm leading-7 text-[#4b5356]">{copy.whatText}</p>
+          {brand.founderImage ? (
+            <div className="relative aspect-[2/3] overflow-hidden bg-[#d8d2c8]">
+              <Image alt="Marlene, Gründerin und Designerin von 54COUTURE" className="object-cover" fill sizes="(min-width: 1024px) 28vw, (min-width: 768px) 45vw, 100vw" src={brand.founderImage} />
+            </div>
+          ) : null}
+          <div className="grid max-w-2xl gap-5 text-sm leading-7 text-[#4b5356]">
+            {copy.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </div>
       </section>

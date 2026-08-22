@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import "./globals.css";
 import { Footer } from "./components/Footer";
 import { Navigation } from "./components/Navigation";
+import { SiteStructuredData } from "./components/StructuredData";
 
 const pinterestVerificationCode = "58d43fc30c175ae8e21a59237709dc23";
 
@@ -36,6 +38,13 @@ export const metadata: Metadata = {
       "Contemporary Design, Kunst, Möbel, Objekte, Leuchten, Teppiche und Editionen.",
     type: "website",
     url: "https://www.getyour.design",
+    images: [{ url: "/images/hero-editorial.png", alt: "GETYOUR.DESIGN interior context" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GETYOUR.DESIGN",
+    description: "Contemporary Design, Kunst, Möbel, Objekte, Leuchten, Teppiche und Editionen.",
+    images: ["/images/hero-editorial.png"],
   },
   robots: {
     index: true,
@@ -56,14 +65,18 @@ export const metadata: Metadata = {
     : {}),
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const requestHeaders = await headers();
+  const htmlLang = requestHeaders.get("x-getyour-locale") ?? "de";
+
   return (
-    <html lang="de">
+    <html lang={htmlLang}>
       <body>
+        <SiteStructuredData />
         <Navigation />
         {children}
         <Footer />

@@ -1,9 +1,8 @@
 import type { MetadataRoute } from "next";
 import { indexableShopCategories, products } from "./data/products";
-import { getAlternateLanguages, getProductPath, getShopPath, localizedRoutes, locales, type Locale, type RouteKey } from "./lib/i18n";
+import { getAbsoluteAlternateLanguages, getProductPath, getShopPath, localizedRoutes, locales, siteUrl, type Locale, type RouteKey } from "./lib/i18n";
 
-const siteUrl = "https://www.getyour.design";
-const lastModified = new Date("2026-06-23");
+const lastModified = new Date("2026-08-22");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = Object.entries(localizedRoutes).flatMap(([routeKey, paths]) =>
@@ -11,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}${paths[locale]}`,
       lastModified,
       alternates: {
-        languages: absoluteLanguages(getAlternateLanguages(routeKey as RouteKey)),
+        languages: getAbsoluteAlternateLanguages(routeKey as RouteKey),
       },
     })),
   );
@@ -48,12 +47,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteUrl}/luxury-coasters`,
       lastModified,
       alternates: {
-        languages: absoluteLanguages(getAlternateLanguages("luxury-coasters")),
+        languages: getAbsoluteAlternateLanguages("luxury-coasters"),
       },
     },
   ];
 
-  return [...staticRoutes, ...legacyRoutes, ...shopRoutes, ...productRoutes];
+  const atelierRoutes = locales.map((locale) => ({
+    url: `${siteUrl}/${locale}/ateliers/54couture`,
+    lastModified,
+    alternates: {
+      languages: Object.fromEntries([
+        ...locales.map((targetLocale) => [targetLocale, `${siteUrl}/${targetLocale}/ateliers/54couture`]),
+        ["x-default", `${siteUrl}/de/ateliers/54couture`],
+      ]),
+    },
+  }));
+
+  return [...staticRoutes, ...legacyRoutes, ...shopRoutes, ...productRoutes, ...atelierRoutes];
 }
 
 function absoluteLanguages(languages: Record<string, string>) {

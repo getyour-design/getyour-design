@@ -14,11 +14,6 @@ export const metadata: Metadata = {
   },
 };
 
-const atelierTopics = [
-  "Sonderanfertigungen",
-  "Individuelle Projektanfragen",
-];
-
 export default function AteliersPage() {
   return (
     <main>
@@ -27,24 +22,6 @@ export default function AteliersPage() {
         title="Werkstätten, Materialien und Arbeiten nach Maß."
         description="Ein ruhiger Blick auf Ateliers, Manufakturen und Herstellungsprozesse hinter Möbeln, Leuchten, Objekten, Editionen und individuellen Projekten."
       />
-
-      <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-6 lg:grid-cols-[0.38fr_0.62fr]">
-          <div>
-            <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">Schwerpunkte</p>
-            <h2 className="serif mt-4 max-w-lg text-xl font-normal leading-snug tracking-[0.08em]">
-              Vertrauen entsteht dort, wo Material, Prozess und Haltung sichtbar werden.
-            </h2>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {atelierTopics.map((topic) => (
-              <div className="border-t border-black/20 pt-4 text-sm leading-7 text-[#353b3e]" key={topic}>
-                {topic}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="border-y hairline bg-[#e8eceb] px-5 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-[1540px]">
