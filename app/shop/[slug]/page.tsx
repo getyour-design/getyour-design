@@ -156,6 +156,12 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                   ))}
                 </div>
               ) : null}
+              {product.artistBio ? (
+                <section className="mt-10 border-t border-black/15 pt-6">
+                  <h2 className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Über den Künstler</h2>
+                  <p className="mt-3 text-sm leading-7 text-[#4b5356]">{product.artistBio}</p>
+                </section>
+              ) : null}
               <dl className="mt-10 grid gap-5 border-t border-black/15 pt-6 text-sm md:grid-cols-2">
                 <div>
                   <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Maße</dt>
@@ -241,7 +247,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                       images={item.images}
                       fit={cowhidePresentation ? "cover" : undefined}
                       index={index}
-                      imageIndex={cowhidePresentation ? 1 : undefined}
+                      imageIndex={item.slug === "sitzobjekt-kuhfell" ? 1 : undefined}
                       palette={item.palette}
                       title={item.cardTitle}
                     />

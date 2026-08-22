@@ -6,7 +6,7 @@ import { materialCards } from "../data/materials";
 import { heroShopCategories, products } from "../data/products";
 import { stories } from "../data/stories";
 import { getProductPath, getShopPath, localizeHref, type Locale } from "../lib/i18n";
-import { get54CouturePresentationCopy, getCowhidePresentationCopy, getEnglishProductTitle } from "../lib/productTitles";
+import { getCowhidePresentationCopy, getEnglishProductTitle } from "../lib/productTitles";
 
 const productImages = [
   "/images/product-stone-object.svg",
@@ -27,72 +27,15 @@ const collectionImages = [
 ];
 
 const featuredCommerceProduct = products.find((product) => product.slug === "sitzobjekt-kuhfell");
-const featuredRugProduct = products.find((product) => product.slug === "54couture-teppich-kuhfell");
+const featuredArtworkProduct = products.find((product) => product.slug === "sebastian-schrader-bauernopfer");
 
-const featuredRugCopy: Record<Locale, { title: string; subtitle: string; price: string; description: string }> = {
-  de: {
-    title: "54COUTURE - MÖBEL & KUNST",
-    subtitle: "AUS FEINSTEM EUROPÄISCHEM KUHFELL",
-    price: "Ab 5.700 €",
-    description: "54COUTURE Teppich · 2,60 × 3,40 m",
-  },
-  en: {
-    title: "54COUTURE - FURNITURE & ART",
-    subtitle: "THE FINEST EUROPEAN HIDES",
-    price: "From €5,700",
-    description: "54COUTURE rug · 2.60 × 3.40 m",
-  },
-  fr: {
-    title: "54COUTURE - MOBILIER & ART",
-    subtitle: "EN CUIR DE VACHE EUROPÉEN D’EXCEPTION",
-    price: "À partir de 5 700 €",
-    description: "Tapis 54COUTURE · 2,60 × 3,40 m",
-  },
-  es: {
-    title: "54COUTURE - MUEBLES & ARTE",
-    subtitle: "EN LA MEJOR PIEL DE VACA EUROPEA",
-    price: "Desde 5.700 €",
-    description: "Alfombra 54COUTURE · 2,60 × 3,40 m",
-  },
-  zh: {
-    title: "54COUTURE - 家具与艺术",
-    subtitle: "精选欧洲牛皮",
-    price: "起价 €5,700",
-    description: "54COUTURE 地毯 · 2.60 × 3.40 米",
-  },
-  ar: {
-    title: "54COUTURE - أثاث وفن",
-    subtitle: "من أجود جلود الأبقار الأوروبية",
-    price: "ابتداءً من 5,700 €",
-    description: "سجادة 54COUTURE · 2.60 × 3.40 م",
-  },
-};
-
-const featuredObjectDescriptions: Record<Locale, { pouf: string; rug: string }> = {
-  de: {
-    pouf: "Skulpturales Sitzobjekt aus echtem europäischem Kuhfell.",
-    rug: "Teppich aus echtem europäischem Kuhfell mit außergewöhnlicher natürlicher Textur.",
-  },
-  en: {
-    pouf: "A sculptural seating object in genuine European cowhide.",
-    rug: "A genuine European cowhide rug with an exceptional natural texture.",
-  },
-  fr: {
-    pouf: "Une assise sculpturale en véritable peau de vache européenne.",
-    rug: "Un tapis en véritable peau de vache européenne à la texture naturelle singulière.",
-  },
-  es: {
-    pouf: "Un asiento escultórico de auténtica piel de vaca europea.",
-    rug: "Una alfombra de auténtica piel de vaca europea con una textura natural extraordinaria.",
-  },
-  zh: {
-    pouf: "一件采用真正欧洲牛皮制成的雕塑感座椅。",
-    rug: "一张采用真正欧洲牛皮制成、拥有非凡天然纹理的地毯。",
-  },
-  ar: {
-    pouf: "مقعد نحتي من جلد بقر أوروبي أصلي.",
-    rug: "سجادة من جلد بقر أوروبي أصلي بملمس طبيعي استثنائي.",
-  },
+const featuredArtworkDescription: Record<Locale, string> = {
+  de: "Figuren, Alltagsobjekte und malerische Zitate verdichten sich zu einer spannungsvollen Szene.",
+  en: "Figures, everyday objects and painterly quotations come together in a charged scene.",
+  fr: "Figures, objets du quotidien et citations picturales se condensent en une scène tendue.",
+  es: "Figuras, objetos cotidianos y citas pictóricas se condensan en una escena cargada de tensión.",
+  zh: "人物、日常物件与绘画式引述共同凝聚为富有张力的场景。",
+  ar: "تتجمع الشخصيات والأشياء اليومية والإشارات التصويرية في مشهد مشحون بالتوتر.",
 };
 
 function getProductTitle(locale: Locale, title: string, index: number) {
@@ -117,14 +60,13 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
     ?? featuredCommerceProduct?.images?.[0];
   const featuredProductDescription = featuredProductContent?.shortDescription ?? featuredCommerceProduct?.description;
   const cowhidePresentation = getCowhidePresentationCopy(locale);
-  const rugPresentation = get54CouturePresentationCopy("54couture-teppich-kuhfell", locale) ?? featuredRugCopy[locale];
-  const featuredDescriptions = featuredObjectDescriptions[locale];
   const featuredProductHref = featuredCommerceProduct
     ? getProductPath(locale, featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)
     : undefined;
-  const featuredRugHref = featuredRugProduct
-    ? getProductPath(locale, featuredRugProduct.categorySlug, featuredRugProduct.slug)
+  const featuredArtworkHref = featuredArtworkProduct
+    ? getShopPath(locale, featuredArtworkProduct.slug)
     : undefined;
+  const featuredArtworkImage = featuredArtworkProduct?.images?.[0];
 
   return (
     <main className="bg-[#f3f2ef]">
@@ -185,7 +127,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                   {featuredProductImage ? (
                     <Image
                       alt={featuredProductImage.alt}
-                      className="object-cover object-[50%_68%] transition duration-500 group-hover:scale-[1.02]"
+                      className="object-cover object-[50%_68%] transition duration-700 ease-out group-hover:scale-[1.04]"
                       fill
                       sizes="(min-width: 1024px) 48vw, 100vw"
                       src={featuredProductImage.src}
@@ -220,16 +162,25 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             </article>
 
             <article>
-              {featuredRugHref ? (
-                <Link className="group block" href={featuredRugHref}>
+              {featuredArtworkHref ? (
+                <Link className="group block" href={featuredArtworkHref}>
                   <div
-                    aria-label={`${rugPresentation.title} ${rugPresentation.subtitle}`}
-                    className="aspect-[4/3] border hairline bg-[#f8f8f6]"
-                  />
+                    className="relative aspect-[4/3] overflow-hidden border hairline bg-[#f8f8f6]"
+                  >
+                    {featuredArtworkImage ? (
+                      <Image
+                        alt={featuredArtworkImage.alt}
+                        className="object-cover object-center transition duration-700 ease-out group-hover:scale-[1.04]"
+                        fill
+                        sizes="(min-width: 1024px) 48vw, 100vw"
+                        src={featuredArtworkImage.src}
+                      />
+                    ) : null}
+                  </div>
                 </Link>
               ) : (
                 <div
-                  aria-label={`${rugPresentation.title} ${rugPresentation.subtitle}`}
+                  aria-label="Sebastian Schrader, Bauernopfer"
                   className="aspect-[4/3] border hairline bg-[#f8f8f6]"
                 />
               )}
@@ -238,31 +189,31 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                   {dictionary.home.featuredProductEyebrow}
                 </p>
                 <p className="mt-7 text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">
-                  {dictionary.shop.categories.Teppiche ?? "Rugs"}
+                  {dictionary.shop.categories.Kunst ?? "Art"}
                 </p>
                 <h2 className="serif mt-3 text-balance text-xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-2xl">
-                  {featuredRugHref ? (
-                    <Link href={featuredRugHref}>
-                      54COUTURE
+                  {featuredArtworkHref ? (
+                    <Link href={featuredArtworkHref}>
+                      Bauernopfer
                       <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
-                        THE FINEST EUROPEAN COW HIDES
+                        Sebastian Schrader
                       </span>
                     </Link>
                   ) : (
                     <>
-                      54COUTURE
+                      Bauernopfer
                       <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
-                        THE FINEST EUROPEAN COW HIDES
+                        Sebastian Schrader
                       </span>
                     </>
                   )}
                 </h2>
-                <p className="mt-5 text-sm text-[#353b3e]">{rugPresentation.price}</p>
-                <p className="mt-5 max-w-xl text-sm leading-7 text-[#4b5356]">{featuredDescriptions.rug}</p>
-                {featuredRugHref ? (
+                <p className="mt-5 text-sm text-[#353b3e]">{locale === "de" ? "Auf Anfrage" : "On request"}</p>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-[#4b5356]">{featuredArtworkDescription[locale]}</p>
+                {featuredArtworkHref ? (
                   <Link
                     className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]"
-                    href={featuredRugHref}
+                    href={featuredArtworkHref}
                   >
                     {dictionary.home.featuredProductLink}
                   </Link>
@@ -290,7 +241,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                 <div className="overflow-hidden border hairline bg-[#f8f8f6]">
                   <img
                     alt={getProductTitle(locale, item.title, index)}
-                    className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    className="aspect-[4/5] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                     src={productImages[index % productImages.length]}
                   />
                 </div>
@@ -333,7 +284,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                 <div className="overflow-hidden bg-[#f7f7f5]">
                   <img
                     alt={getProductTitle(locale, work.title, index)}
-                    className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    className="aspect-[3/4] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                     src={productImages[index % productImages.length]}
                   />
                 </div>
@@ -422,7 +373,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                 <div>
                   <img
                     alt={dictionary.collections[item.key]?.title ?? item.title}
-                    className="mb-6 h-32 w-full object-cover"
+                    className="mb-6 h-32 w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                     src={collectionImages[index % collectionImages.length]}
                   />
                   <h3 className="serif text-xl leading-snug tracking-[0.08em]">

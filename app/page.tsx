@@ -268,7 +268,7 @@ export default function Home() {
                 {featuredCommerceProduct.images?.[0] ? (
                   <Image
                     alt={featuredCommerceProduct.images[0].alt}
-                    className="object-contain transition duration-500 group-hover:scale-[1.02]"
+                    className="object-contain transition duration-700 ease-out group-hover:scale-[1.04]"
                     fill
                     sizes="(min-width: 1024px) 48vw, 100vw"
                     src={featuredCommerceProduct.images[0].src}
@@ -321,7 +321,7 @@ export default function Home() {
                 <div className="overflow-hidden border hairline bg-[#f8f8f6]">
                   <img
                     alt={item.title}
-                    className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    className="aspect-[4/5] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                     src={productImages[index % productImages.length]}
                   />
                 </div>
@@ -355,7 +355,7 @@ export default function Home() {
                 <div className="overflow-hidden bg-[#f7f7f5]">
                   <img
                     alt={work.title}
-                    className="aspect-[3/4] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    className="aspect-[3/4] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                     src={work.image}
                   />
                 </div>
@@ -395,7 +395,7 @@ export default function Home() {
                 <div className="overflow-hidden border hairline bg-[#f8f8f6]">
                   <img
                     alt={item.title}
-                    className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    className="aspect-[4/5] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                     src={item.image}
                   />
                 </div>

@@ -1,4 +1,30 @@
-export const artworks = [
+export type Artwork = {
+  title: string;
+  artist: string;
+  medium: string;
+  year: string;
+  price: string;
+  palette: string;
+  productSlug?: string;
+  images?: { src: string; alt: string }[];
+};
+
+export const artworks: Artwork[] = [
+  {
+    title: "Bauernopfer",
+    artist: "Sebastian Schrader",
+    medium: "Malerei auf Leinwand",
+    year: "Datierung auf Anfrage",
+    price: "Auf Anfrage",
+    palette: "bg-[#282427]",
+    productSlug: "sebastian-schrader-bauernopfer",
+    images: [
+      {
+        src: "/images/products/sebastian-schrader-bauernopfer-01-cover.jpg",
+        alt: "Sebastian Schrader, Bauernopfer, Gesamtansicht des Gemäldes",
+      },
+    ],
+  },
   {
     title: "Papierarbeit mit mineralischer Fläche",
     artist: "Künstlerposition A",

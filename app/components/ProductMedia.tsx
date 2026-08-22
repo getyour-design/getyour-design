@@ -31,17 +31,21 @@ function GalleryImage({
   sizes,
   priority = false,
   cropClassName = "",
+  fit = "cover",
+  disableHover = false,
 }: {
   image: ProductImageAsset;
   title: string;
   sizes: string;
   priority?: boolean;
   cropClassName?: string;
+  fit?: "contain" | "cover";
+  disableHover?: boolean;
 }) {
   return (
     <Image
       alt={image.alt || title}
-      className={`object-cover ${cropClassName}`}
+      className={`${fit === "contain" ? "object-contain" : "object-cover"} transition duration-700 ease-out ${disableHover ? "" : "group-hover:scale-[1.04]"} ${cropClassName}`}
       fill
       priority={priority}
       sizes={sizes}
@@ -65,10 +69,10 @@ export function ProductCardMedia({
   }
 
   return (
-    <div className="relative aspect-[4/5] overflow-hidden border hairline bg-[#f8f8f6]">
+    <div className="group relative aspect-[4/5] overflow-hidden border hairline bg-[#f8f8f6]">
       <Image
         alt={image.alt || title}
-        className={fit === "cover" ? "object-cover" : "object-contain"}
+        className={`${fit === "cover" ? "object-cover" : "object-contain"} transition duration-700 ease-out group-hover:scale-[1.05]`}
         fill
         sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw"
         src={image.src}
@@ -93,16 +97,19 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
     return <PlaceholderArtwork index={index} palette={palette} />;
   }
 
+  const isArtworkCover = images[0].src.includes("sebastian-schrader-");
+
   return (
     <div>
       <button
         aria-label={`${images[0].alt || title} vergrößern`}
-        className="relative aspect-video w-full cursor-zoom-in overflow-hidden"
+        className={`group relative w-full cursor-zoom-in overflow-hidden ${isArtworkCover ? "aspect-[4/3] bg-[#f8f8f6]" : "aspect-video"}`}
         onClick={() => setActiveImage(images[0])}
         type="button"
       >
         <GalleryImage
           image={images[0]}
+          fit={isArtworkCover ? "contain" : "cover"}
           priority
           sizes="(min-width: 1024px) 55vw, 100vw"
           title={title}
@@ -114,10 +121,13 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
             <div className="grid content-start gap-5" key={columnIndex}>
               {images.slice(1).map((image, imageIndex) => {
                 const isFinalDetail = image.src.includes("cowhide-seat-v8-11-detail");
+                const isColourPalette = image.src.includes("colour-palette");
                 const targetColumn = isFinalDetail ? 1 : imageIndex % 2;
                 if (targetColumn !== columnIndex) return null;
 
-                const aspectRatio = isFinalDetail
+                const aspectRatio = isColourPalette
+                  ? "aspect-[4/3]"
+                  : isFinalDetail
                   ? "aspect-[15/13]"
                   : [
                       "aspect-[4/5]",
@@ -131,13 +141,15 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
                 return (
                   <button
                     aria-label={`${image.alt || title} vergrößern`}
-                    className={`relative w-full cursor-zoom-in overflow-hidden ${aspectRatio}`}
+                    className={`group relative w-full cursor-zoom-in overflow-hidden ${isColourPalette ? "bg-[#f8f8f6]" : ""} ${aspectRatio}`}
                     key={image.src}
                     onClick={() => setActiveImage(image)}
                     type="button"
                   >
                     <GalleryImage
                       cropClassName={isFinalDetail ? "object-[82%_center]" : undefined}
+                      disableHover={isColourPalette}
+                      fit={isColourPalette ? "contain" : "cover"}
                       image={image}
                       sizes="(min-width: 1024px) 27vw, (min-width: 640px) 50vw, 100vw"
                       title={title}

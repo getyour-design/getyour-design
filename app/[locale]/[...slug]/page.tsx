@@ -339,6 +339,7 @@ function getLocalizedProductContent(locale: Locale, product: Product) {
       materialDetails: product.materialDetails,
       origin: product.origin,
       uniqueNote: product.uniqueNote,
+      artistBio: product.artistBio,
       ctaLabel: product.ctaLabel,
       images: product.images,
       metaTitle: product.metaTitle,
@@ -509,13 +510,14 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => {
             const cowhidePresentation = get54CouturePresentationCopy(product.slug, locale);
+            const productDescription = getLocalizedProductContent(locale, product)?.shortDescription ?? product.description;
 
             return (
               <article className="group" key={product.slug}>
               <Link href={getLocalizedProductPath(locale, product)}>
                 <ProductCardMedia
                   images={getLocalizedProductImages(locale, product)}
-                  fit={product.slug === "sitzobjekt-kuhfell" ? "cover" : undefined}
+                  fit={cowhidePresentation ? "cover" : undefined}
                   index={index}
                   imageIndex={product.slug === "sitzobjekt-kuhfell" ? 1 : undefined}
                   palette={product.palette}
@@ -529,13 +531,19 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
                     <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
                       {cowhidePresentation ? (
                         <>
-                          <span className="block">{cowhidePresentation.title}</span>
-                          <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
+                          <span className="block">54COUTURE</span>
+                          <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
+                            THE FINEST EUROPEAN COW HIDES
+                          </span>
                         </>
                       ) : getLocalizedProductCardTitle(locale, product, index)}
                     </h2>
                   </Link>
-                  <p className="mt-2 text-sm text-[#4b5356]">{product.maker.replace("Künstlerposition", "Artist Position")}</p>
+                  {cowhidePresentation ? (
+                    <p className="mt-3 max-w-md text-sm leading-7 text-[#4b5356]">{productDescription}</p>
+                  ) : (
+                    <p className="mt-2 text-sm text-[#4b5356]">{product.maker.replace("Künstlerposition", "Artist Position")}</p>
+                  )}
                   <EntityActions
                     href={getLocalizedProductPath(locale, product)}
                     id={`product:${product.slug}`}
@@ -630,6 +638,14 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                   ))}
                 </div>
               ) : null}
+              {content?.artistBio ?? product.artistBio ? (
+                <section className="mt-10 border-t border-black/15 pt-6">
+                  <h2 className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">
+                    {locale === "de" ? "Über den Künstler" : "About the Artist"}
+                  </h2>
+                  <p className="mt-3 text-sm leading-7 text-[#4b5356]">{content?.artistBio ?? product.artistBio}</p>
+                </section>
+              ) : null}
               <dl className="mt-10 grid gap-5 border-t border-black/15 pt-6 text-sm md:grid-cols-2">
                 <div>
                   <dt className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.dimensions}</dt>
@@ -713,7 +729,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                       images={getLocalizedProductImages(locale, item)}
                       fit={cowhidePresentation ? "cover" : undefined}
                       index={index}
-                      imageIndex={cowhidePresentation ? 1 : undefined}
+                      imageIndex={item.slug === "sitzobjekt-kuhfell" ? 1 : undefined}
                       palette={item.palette}
                       title={getLocalizedProductCardTitle(locale, item, index)}
                     />
@@ -877,18 +893,32 @@ function EnglishArtPage() {
       <PageHero eyebrow="Art" title="Artworks, works on paper, sculptures and editions." description="Selected works for rooms, collections and interiors with an independent point of view." />
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
-          {artworks.map((artwork, index) => (
+          {artworks.map((artwork, index) => {
+            const productHref = artwork.productSlug ? `/en/shop/${artwork.productSlug}` : undefined;
+
+            return (
             <article key={artwork.title}>
-              <PlaceholderArtwork index={index} palette={artwork.palette} />
+              {artwork.images && productHref ? (
+                <Link className="group block" href={productHref}>
+                  <ProductCardMedia images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+                </Link>
+              ) : artwork.images ? (
+                <ProductCardMedia images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+              ) : (
+                <PlaceholderArtwork index={index} palette={artwork.palette} />
+              )}
               <div className="mt-5">
                 <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{artwork.artist.replace("Künstlerposition", "Artist Position")}</p>
-                <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{artwork.title}</h2>
+                <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
+                  {productHref ? <Link href={productHref}>{artwork.title}</Link> : artwork.title}
+                </h2>
                 <p className="mt-3 text-sm leading-6 text-[#4b5356]">{artwork.medium}, {artwork.year}</p>
                 <p className="mt-3 text-sm text-[#11100f]">{artwork.price}</p>
-                <EntityActions href="/en/art" id={`artwork:${artwork.title}`} title={artwork.title} type="Kunstwerk" />
+                <EntityActions href={productHref ?? "/en/art"} id={`artwork:${artwork.title}`} title={artwork.title} type="Kunstwerk" />
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </section>
     </main>

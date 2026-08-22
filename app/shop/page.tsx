@@ -46,7 +46,7 @@ export default function ShopPage() {
               <Link href={`/shop/${product.slug}`}>
                 <ProductCardMedia
                   images={product.images}
-                  fit={product.slug === "sitzobjekt-kuhfell" ? "cover" : undefined}
+                  fit={cowhidePresentation ? "cover" : undefined}
                   index={index}
                   imageIndex={product.slug === "sitzobjekt-kuhfell" ? 1 : undefined}
                   palette={product.palette}
@@ -60,15 +60,21 @@ export default function ShopPage() {
                     <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
                       {cowhidePresentation ? (
                         <>
-                          <span className="block">{cowhidePresentation.title}</span>
-                          <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
+                          <span className="block">54COUTURE</span>
+                          <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
+                            THE FINEST EUROPEAN COW HIDES
+                          </span>
                         </>
                       ) : product.title}
                     </h2>
                   </Link>
-                  <Link className="mt-2 inline-block text-sm text-[#4b5356] hover:text-black" href={product.maker.includes("Künstlerposition") ? "/artists" : "/brands"}>
-                    {product.maker}
-                  </Link>
+                  {cowhidePresentation ? (
+                    <p className="mt-3 max-w-md text-sm leading-7 text-[#4b5356]">{product.description}</p>
+                  ) : (
+                    <Link className="mt-2 inline-block text-sm text-[#4b5356] hover:text-black" href={product.maker.includes("Künstlerposition") ? "/artists" : "/brands"}>
+                      {product.maker}
+                    </Link>
+                  )}
                   <EntityActions
                     href={`/shop/${product.slug}`}
                     id={`product:${product.slug}`}

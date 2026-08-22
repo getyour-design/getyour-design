@@ -12,6 +12,17 @@ type ProductImage = {
   alt: string;
 };
 
+const bauernopferImageSources = [
+  "/images/products/sebastian-schrader-bauernopfer-01-cover.jpg",
+  "/images/products/sebastian-schrader-bauernopfer-02-detail.jpg",
+  "/images/products/sebastian-schrader-bauernopfer-03-detail.jpg",
+  "/images/products/sebastian-schrader-bauernopfer-04-detail.jpg",
+];
+
+function bauernopferImages(alts: string[]): ProductImage[] {
+  return bauernopferImageSources.map((src, index) => ({ src, alt: alts[index] }));
+}
+
 const cowhideSeatImageSources = [
   "/images/products/cowhide-seat-v3-01-hero-rotated.png",
   "/images/products/cowhide-seat-v3-02-lifestyle-natural.png",
@@ -27,8 +38,18 @@ function cowhideSeatImages(alts: string[]): ProductImage[] {
   return cowhideSeatImageSources.map((src, index) => ({ src, alt: alts[index] }));
 }
 
-function rugPlaceholderImages(alts: string[]): ProductImage[] {
-  return alts.map((alt) => ({ src: "/images/product-rug.svg", alt }));
+const rugImageSources = [
+  "/images/products/54couture-rug-01-loft.jpeg",
+  "/images/products/54couture-rug-02-red-texture.jpg",
+  "/images/products/54couture-rug-03-edge-detail.png",
+  "/images/products/54couture-rug-04-red-texture.jpg",
+  "/images/products/54couture-rug-05-city-detail.jpg",
+  "/images/products/54couture-rug-06-bordeaux-blue-detail.png",
+  "/images/products/cowhide-seat-v7-10-colour-palette.png",
+];
+
+function rugImages(alts: string[]): ProductImage[] {
+  return rugImageSources.map((src, index) => ({ src, alt: alts[index] }));
 }
 
 type ProductType =
@@ -88,6 +109,7 @@ type LocalizedProductContent = {
   materialDetails: string[];
   origin: string;
   uniqueNote: string;
+  artistBio?: string;
   ctaLabel: string;
   images: ProductImage[];
   metaTitle: string;
@@ -112,6 +134,7 @@ type ProductSeed = {
   longDescription?: string[];
   origin?: string;
   uniqueNote?: string;
+  artistBio?: string;
   ctaLabel?: string;
   images?: ProductImage[];
   metaTitle?: string;
@@ -503,6 +526,35 @@ const categorySeeds: ProductCategorySeed[] = [
     description:
       "Arbeit zwischen Fläche, Material und Raumwirkung, ausgewählt für ruhige Interieurs.",
     items: [
+      {
+        title: "Bauernopfer",
+        maker: "Sebastian Schrader",
+        slug: "sebastian-schrader-bauernopfer",
+        price: "Auf Anfrage",
+        material: "Malerei auf Leinwand",
+        dimensions: "Maße auf Anfrage",
+        status: "preis-auf-anfrage",
+        availability: "Preis auf Anfrage",
+        description:
+          "In \u201eBauernopfer\u201c verdichtet Sebastian Schrader Figuren, Alltagsobjekte und malerische Zitate zu einer spannungsvollen Szene. Das Bild bewegt sich zwischen erzählerischer Geste und genau beobachteter Oberfläche.",
+        longDescription: [
+          "Die Komposition vereint figürliche Präsenz, ein Schachpferd und beiläufige Gegenstände zu einem offenen Bildraum.",
+          "Dunkle Flächen, leuchtende Akzente und die sichtbare, körperhafte Malweise geben dem Werk seine unmittelbare Spannung.",
+        ],
+        artistBio:
+          "Sebastian Schrader, geboren 1978 in Berlin, studierte Malerei an der Kunsthochschule Berlin-Weißensee bei Prof. Werner Liebmann. Nach seinem Diplom 2006 wurde er 2007 Meisterschüler; er lebt und arbeitet in Berlin.",
+        origin: "Berlin, Deutschland",
+        uniqueNote: "Unikat. Zustand, Maße und Verfügbarkeit werden auf Anfrage bestätigt.",
+        ctaLabel: "Verfügbarkeit anfragen",
+        images: bauernopferImages([
+          "Sebastian Schrader, Bauernopfer, Gesamtansicht des Gemäldes",
+          "Sebastian Schrader, Bauernopfer, Detail mit Figur und Schachpferd",
+          "Sebastian Schrader, Bauernopfer, Detail der malerischen Oberfläche mit Modellauto",
+          "Sebastian Schrader, Bauernopfer, Detail mit liegender Figur",
+        ]),
+        metaTitle: "Sebastian Schrader \u2013 Bauernopfer",
+        metaDescription: "Bauernopfer von Sebastian Schrader. Malerei auf Leinwand, Preis auf Anfrage.",
+      },
       { title: "Papierarbeit mit Struktur", slug: "papierarbeit-mit-struktur", price: "Auf Anfrage", material: "Papier, Pigment, Strukturauftrag", dimensions: "70 x 100 cm" },
       { title: "Mineralische Fläche auf Leinen", price: "EUR 4,200", material: "Mineralpigment auf Leinen", dimensions: "90 x 120 cm" },
       { title: "Kleine Bronzeplastik", price: "EUR 2,900", material: "Gegossene Bronze", dimensions: "18 x 12 x 24 cm" },
@@ -547,13 +599,16 @@ const categorySeeds: ProductCategorySeed[] = [
           "Farbe, Zeichnung und Fellverlauf werden vor der Fertigung individuell abgestimmt.",
         ],
         origin: "Handgefertigt in Europa",
-        uniqueNote: "Die gezeigten Bilder sind Platzhalter. Das finale Materialbild wird vor der Fertigung individuell abgestimmt.",
+        uniqueNote: "Farbe, Zeichnung und Fellverlauf werden vor der Fertigung individuell abgestimmt.",
         ctaLabel: "Verfügbarkeit anfragen",
-        images: rugPlaceholderImages([
-          "Platzhalter für den 54COUTURE Teppich",
-          "Platzhalter für eine Teppichansicht",
-          "Platzhalter für eine Detailansicht des Teppichs",
-          "Platzhalter für eine Materialansicht des Teppichs",
+        images: rugImages([
+          "Bordeauxroter 54COUTURE Teppich in einem Loft-Interieur",
+          "Detailansicht der bordeauxroten Kuhfellstruktur des 54COUTURE Teppichs",
+          "Kanten- und Nahtdetail des bordeauxroten 54COUTURE Teppichs",
+          "Detailansicht der außergewöhnlichen Textur des bordeauxroten 54COUTURE Teppichs",
+          "Bordeauxroter 54COUTURE Teppich vor klassischer Stadtarchitektur",
+          "Bordeaux- und blaue Kuhfellflächen des 54COUTURE Teppichs mit sichtbaren Nähten",
+          "Farbpalette mit verschiedenen Ausführungen aus europäischem Kuhfell",
         ]),
         metaTitle: "54COUTURE Teppich aus europäischem Kuhfell",
         metaDescription: "54COUTURE Teppich aus europäischem Kuhfell, handgefertigt in Europa, 260 x 340 cm.",
@@ -704,6 +759,7 @@ const allSeedProducts = categorySeeds.flatMap((category) =>
       materialDetails: item.materialDetails,
       origin: item.origin ?? origin,
       uniqueNote: item.uniqueNote,
+      artistBio: item.artistBio,
       ctaLabel: item.ctaLabel,
       images: item.images,
       metaTitle: item.metaTitle,
@@ -744,9 +800,9 @@ const allSeedProducts = categorySeeds.flatMap((category) =>
 // The remaining seed entries stay available as drafts for future curation.
 const curatedShopProductSlugs = [
   "sitzobjekt-kuhfell",
-  "leuchte-aus-bronze",
-  "papierarbeit-mit-struktur",
   "54couture-teppich-kuhfell",
+  "leuchte-aus-bronze",
+  "sebastian-schrader-bauernopfer",
   "beistelltisch-aus-naturstein",
   "vase-aus-glasierter-keramik",
 ];
