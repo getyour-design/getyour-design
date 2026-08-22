@@ -7,7 +7,7 @@ import { ProductCommerceBlock } from "../../components/ProductCommerceBlock";
 import { getDictionary } from "../../data/dictionaries";
 import { getCommerceCta, getProductCta } from "../../lib/commerce";
 import { getProductPath } from "../../lib/i18n";
-import { getCowhidePresentationCopy } from "../../lib/productTitles";
+import { get54CouturePresentationCopy } from "../../lib/productTitles";
 import { products, visibleShopCategories } from "../../data/products";
 
 type ShopSlugPageProps = {
@@ -95,7 +95,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
     const categoryHref = productCategory ? `/shop/${productCategory.slug}` : "/shop";
     const productHref = getRootProductPath(product);
     const productCta = product.ctaLabel ? { ...cta, label: product.ctaLabel } : cta;
-    const cowhidePresentation = product.slug === "sitzobjekt-kuhfell" ? getCowhidePresentationCopy("de") : null;
+    const cowhidePresentation = get54CouturePresentationCopy(product.slug, "de");
     const dictionary = getDictionary("de");
     const commerceCta = getCommerceCta({
       productSlug: product.slug,
@@ -232,17 +232,32 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
             <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {categoryProducts.map((item) => {
               const index = products.findIndex((productItem) => productItem.slug === item.slug);
+              const cowhidePresentation = get54CouturePresentationCopy(item.slug, "de");
 
               return (
                 <article className="group" key={item.slug}>
                   <Link href={getRootProductPath(item)}>
-                    <ProductCardMedia images={item.images} index={index} palette={item.palette} title={item.cardTitle} />
+                    <ProductCardMedia
+                      images={item.images}
+                      fit={cowhidePresentation ? "cover" : undefined}
+                      index={index}
+                      imageIndex={cowhidePresentation ? 1 : undefined}
+                      palette={item.palette}
+                      title={item.cardTitle}
+                    />
                   </Link>
                   <div className="mt-5 flex items-start justify-between gap-4">
                     <div>
                       <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{item.category}</p>
                       <Link href={getRootProductPath(item)}>
-                        <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{item.cardTitle}</h2>
+                        <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
+                          {cowhidePresentation ? (
+                            <>
+                              <span className="block">{cowhidePresentation.title}</span>
+                              <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
+                            </>
+                          ) : item.cardTitle}
+                        </h2>
                       </Link>
                       <p className="mt-2 text-sm text-[#4b5356]">{item.maker}</p>
                       <EntityActions
@@ -252,7 +267,7 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                         type={item.category === "Kunst" || item.category === "Editionen" ? "Kunstwerk" : item.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
                       />
                     </div>
-                    <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
+                    <p className="shrink-0 text-sm text-[#353b3e]">{cowhidePresentation?.price ?? item.price}</p>
                   </div>
                 </article>
               );

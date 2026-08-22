@@ -8,6 +8,13 @@
   --charcoal: #171717;
   --font-canela: "Canela Light", Canela, "Canela Deck", "Canela Text",
     "Times New Roman", serif;
+  /* Tailwind's sans utility is used for navigation and small labels.
+     Point it to the same house typeface as the rest of the site. */
+  --font-sans: var(--font-canela);
+  --font-serif: var(--font-canela);
+  --type-label: 0.6875rem;
+  --type-body: 0.9375rem;
+  --type-heading: clamp(1.5rem, 2.2vw, 2.25rem);
 }
 
 * {
@@ -23,7 +30,16 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-canela);
+  font-size: var(--type-body);
+  line-height: 1.55;
   letter-spacing: 0.01em;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 ::selection {
@@ -41,6 +57,25 @@ a {
   font-weight: 300;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+/* Reusable hierarchy: labels, reading text and headings stay consistent
+   even where pages use different Tailwind layout utilities. */
+.type-label {
+  font-size: var(--type-label);
+  line-height: 1.35;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.type-body {
+  font-size: var(--type-body);
+  line-height: 1.65;
+}
+
+.type-heading {
+  font-size: var(--type-heading);
+  line-height: 1.1;
 }
 
 .text-balance {

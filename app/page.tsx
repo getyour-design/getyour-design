@@ -8,6 +8,7 @@ import { materialCards } from "./data/materials";
 import { heroShopCategories, products } from "./data/products";
 import { stories } from "./data/stories";
 import { getProductPath, getShopPath } from "./lib/i18n";
+import { getCowhidePresentationCopy } from "./lib/productTitles";
 
 export const metadata: Metadata = {
   alternates: {
@@ -139,6 +140,7 @@ const smallObjects = [
 
 const featuredCommerceProduct = products.find((product) => product.slug === "sitzobjekt-kuhfell");
 const dictionary = getDictionary("de");
+const cowhidePresentation = getCowhidePresentationCopy("de");
 
 function ProductVisual({ index, palette }: { index: number; palette: string }) {
   const modes = [
@@ -281,10 +283,13 @@ export default function Home() {
               </p>
               <h2 className="serif mt-3 text-balance text-2xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-3xl">
                 <Link href={getProductPath("de", featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)}>
-                  {featuredCommerceProduct.title}
+                  <>
+                    <span className="block">{cowhidePresentation.title}</span>
+                    <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
+                  </>
                 </Link>
               </h2>
-              <p className="mt-5 text-sm text-[#353b3e]">{featuredCommerceProduct.price}</p>
+              <p className="mt-5 text-sm text-[#353b3e]">{cowhidePresentation.price}</p>
               <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
                 {featuredCommerceProduct.description}
               </p>

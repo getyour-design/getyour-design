@@ -27,6 +27,10 @@ function cowhideSeatImages(alts: string[]): ProductImage[] {
   return cowhideSeatImageSources.map((src, index) => ({ src, alt: alts[index] }));
 }
 
+function rugPlaceholderImages(alts: string[]): ProductImage[] {
+  return alts.map((alt) => ({ src: "/images/product-rug.svg", alt }));
+}
+
 type ProductType =
   | "affiliate"
   | "physical"
@@ -93,6 +97,7 @@ type LocalizedProductContent = {
 type ProductSeed = {
   title: string;
   cardTitle?: string;
+  maker?: string;
   pathMode?: "flat" | "nested";
   price: string;
   priceNote?: string;
@@ -245,9 +250,10 @@ const categorySeeds: ProductCategorySeed[] = [
       {
         title: "54COUTURE MÖBEL UND KUNST AUS HOCHWERTIGSTEN EUROPÄISCHEN FELLEN",
         cardTitle: "Sitzobjekt aus Kuhfell",
+        maker: "54COUTURE",
         pathMode: "nested",
         slug: "sitzobjekt-kuhfell",
-        price: "7.200 €",
+        price: "Ab 7.200 €",
         priceNote: "inkl. gesetzlicher Umsatzsteuer, zzgl. Versandkosten",
         material: "Echtes europäisches Kuhfell, hochwertiger Polsterkern",
         materialDetails: [
@@ -520,6 +526,38 @@ const categorySeeds: ProductCategorySeed[] = [
     description:
       "Textile Arbeit mit ruhiger Oberfläche, feiner Haptik und klarer Wirkung im Raum.",
     items: [
+      {
+        title: "54COUTURE - MÖBEL & KUNST",
+        cardTitle: "54COUTURE Teppich",
+        maker: "54COUTURE",
+        pathMode: "nested",
+        slug: "54couture-teppich-kuhfell",
+        price: "Ab 5.700 €",
+        priceNote: "inkl. gesetzlicher Umsatzsteuer, zzgl. Versandkosten",
+        material: "Europäisches Kuhfell, handgefertigt",
+        materialDetails: ["Echtes europäisches Kuhfell", "Handgefertigt in Europa"],
+        dimensions: "260 x 340 cm",
+        dimensionsDetails: ["Breite: 260 cm", "Länge: 340 cm"],
+        status: "anfragen",
+        availability: "Auf Anfrage verfügbar",
+        description: "Ein großformatiger 54COUTURE Teppich aus feinstem europäischem Kuhfell. Material, Farbe und Fellstruktur werden für jedes Stück individuell abgestimmt.",
+        longDescription: [
+          "Der Teppich wird aus ausgewähltem europäischem Kuhfell gefertigt und von Hand verarbeitet.",
+          "Mit seinen Maßen von 260 x 340 Zentimetern schafft er eine ruhige, präzise Fläche im Raum.",
+          "Farbe, Zeichnung und Fellverlauf werden vor der Fertigung individuell abgestimmt.",
+        ],
+        origin: "Handgefertigt in Europa",
+        uniqueNote: "Die gezeigten Bilder sind Platzhalter. Das finale Materialbild wird vor der Fertigung individuell abgestimmt.",
+        ctaLabel: "Verfügbarkeit anfragen",
+        images: rugPlaceholderImages([
+          "Platzhalter für den 54COUTURE Teppich",
+          "Platzhalter für eine Teppichansicht",
+          "Platzhalter für eine Detailansicht des Teppichs",
+          "Platzhalter für eine Materialansicht des Teppichs",
+        ]),
+        metaTitle: "54COUTURE Teppich aus europäischem Kuhfell",
+        metaDescription: "54COUTURE Teppich aus europäischem Kuhfell, handgefertigt in Europa, 260 x 340 cm.",
+      },
       { title: "Wollteppich in Naturtönen", slug: "wollteppich-in-naturtoenen", price: "Ab EUR 7,400", material: "Wolle", dimensions: "Individuelle Maße" },
       { title: "Flacher Teppich aus Leinen", price: "EUR 3,600", material: "Leinen, Wolle", dimensions: "240 x 300 cm" },
       { title: "Handgeknüpfter Teppich in Grau", price: "EUR 8,200", material: "Wolle, Seide", dimensions: "250 x 350 cm" },
@@ -639,10 +677,10 @@ function toSlug(value: string) {
     .replace(/^-|-$/g, "");
 }
 
-export const products = categorySeeds.flatMap((category) =>
+const allSeedProducts = categorySeeds.flatMap((category) =>
   category.items.map((item, index) => {
     const status = statuses[index % statuses.length];
-    const maker = `${category.makerPrefix} ${String.fromCharCode(65 + (index % 8))}`;
+    const maker = item.maker ?? `${category.makerPrefix} ${String.fromCharCode(65 + (index % 8))}`;
     const origin = `${category.originPrefix} ${String.fromCharCode(65 + (index % 8))}`;
 
     return {
@@ -701,6 +739,22 @@ export const products = categorySeeds.flatMap((category) =>
     };
   }),
 );
+
+// Only this compact, editorial selection is published in the Design Shop.
+// The remaining seed entries stay available as drafts for future curation.
+const curatedShopProductSlugs = [
+  "sitzobjekt-kuhfell",
+  "leuchte-aus-bronze",
+  "papierarbeit-mit-struktur",
+  "54couture-teppich-kuhfell",
+  "beistelltisch-aus-naturstein",
+  "vase-aus-glasierter-keramik",
+];
+
+export const products = curatedShopProductSlugs.flatMap((slug) => {
+  const product = allSeedProducts.find((item) => item.slug === slug);
+  return product ? [product] : [];
+});
 
 export type CatalogProduct = (typeof products)[number];
 

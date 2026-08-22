@@ -35,7 +35,7 @@ import { artworks } from "../../data/artworks";
 import { brands } from "../../data/brands";
 import { stories } from "../../data/stories";
 import { getCommerceCta } from "../../lib/commerce";
-import { getCowhidePresentationCopy, getEnglishProductTitle } from "../../lib/productTitles";
+import { get54CouturePresentationCopy, getEnglishProductTitle } from "../../lib/productTitles";
 import {
   getAlternateLanguages,
   getLocalizedShopSlug,
@@ -507,16 +507,33 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
       </section>
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product, index) => (
-            <article className="group" key={product.slug}>
+          {products.map((product, index) => {
+            const cowhidePresentation = get54CouturePresentationCopy(product.slug, locale);
+
+            return (
+              <article className="group" key={product.slug}>
               <Link href={getLocalizedProductPath(locale, product)}>
-                <PlaceholderArtwork index={index} palette={product.palette} />
+                <ProductCardMedia
+                  images={getLocalizedProductImages(locale, product)}
+                  fit={product.slug === "sitzobjekt-kuhfell" ? "cover" : undefined}
+                  index={index}
+                  imageIndex={product.slug === "sitzobjekt-kuhfell" ? 1 : undefined}
+                  palette={product.palette}
+                  title={getLocalizedProductCardTitle(locale, product, index)}
+                />
               </Link>
               <div className="mt-5 flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getLocalizedCategoryLabel(locale, product.category)}</p>
                   <Link href={getLocalizedProductPath(locale, product)}>
-                    <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getLocalizedProductCardTitle(locale, product, index)}</h2>
+                    <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
+                      {cowhidePresentation ? (
+                        <>
+                          <span className="block">{cowhidePresentation.title}</span>
+                          <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
+                        </>
+                      ) : getLocalizedProductCardTitle(locale, product, index)}
+                    </h2>
                   </Link>
                   <p className="mt-2 text-sm text-[#4b5356]">{product.maker.replace("Künstlerposition", "Artist Position")}</p>
                   <EntityActions
@@ -526,10 +543,11 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
                     type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
                   />
                 </div>
-                <p className="shrink-0 text-sm text-[#353b3e]">{product.price}</p>
+                <p className="shrink-0 text-sm text-[#353b3e]">{cowhidePresentation?.price ?? product.price}</p>
               </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </section>
     </main>
@@ -551,7 +569,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
     const productHref = getLocalizedProductPath(locale, product);
     const productCta = content?.ctaLabel ? { ...cta, label: content.ctaLabel } : cta;
     const productImages = getLocalizedProductImages(locale, product);
-    const cowhidePresentation = product.slug === "sitzobjekt-kuhfell" ? getCowhidePresentationCopy(locale) : null;
+    const cowhidePresentation = get54CouturePresentationCopy(product.slug, locale);
     const checkoutCopy = getLocalizedCheckoutCopy(locale);
     const commerceCta = getCommerceCta({
       productSlug: product.slug,
@@ -686,13 +704,16 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
             <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
               {categoryProducts.map((item) => {
               const index = products.findIndex((productItem) => productItem.slug === item.slug);
+              const cowhidePresentation = get54CouturePresentationCopy(item.slug, locale);
 
               return (
                 <article className="group" key={item.slug}>
                   <Link href={getLocalizedProductPath(locale, item)}>
                     <ProductCardMedia
                       images={getLocalizedProductImages(locale, item)}
+                      fit={cowhidePresentation ? "cover" : undefined}
                       index={index}
+                      imageIndex={cowhidePresentation ? 1 : undefined}
                       palette={item.palette}
                       title={getLocalizedProductCardTitle(locale, item, index)}
                     />
@@ -701,7 +722,14 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                     <div>
                       <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getLocalizedCategoryLabel(locale, item.category)}</p>
                       <Link href={getLocalizedProductPath(locale, item)}>
-                        <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getLocalizedProductCardTitle(locale, item, index)}</h2>
+                        <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
+                          {cowhidePresentation ? (
+                            <>
+                              <span className="block">{cowhidePresentation.title}</span>
+                              <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
+                            </>
+                          ) : getLocalizedProductCardTitle(locale, item, index)}
+                        </h2>
                       </Link>
                       <p className="mt-2 text-sm text-[#4b5356]">{item.maker.replace("Künstlerposition", "Artist Position")}</p>
                       <EntityActions
@@ -711,7 +739,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                         type={item.category === "Kunst" || item.category === "Editionen" ? "Kunstwerk" : item.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
                       />
                     </div>
-                    <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
+                    <p className="shrink-0 text-sm text-[#353b3e]">{cowhidePresentation?.price ?? item.price}</p>
                   </div>
                 </article>
               );

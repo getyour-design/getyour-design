@@ -6,7 +6,7 @@ import { materialCards } from "../data/materials";
 import { heroShopCategories, products } from "../data/products";
 import { stories } from "../data/stories";
 import { getProductPath, getShopPath, localizeHref, type Locale } from "../lib/i18n";
-import { getCowhidePresentationCopy, getEnglishProductTitle } from "../lib/productTitles";
+import { get54CouturePresentationCopy, getCowhidePresentationCopy, getEnglishProductTitle } from "../lib/productTitles";
 
 const productImages = [
   "/images/product-stone-object.svg",
@@ -27,6 +27,73 @@ const collectionImages = [
 ];
 
 const featuredCommerceProduct = products.find((product) => product.slug === "sitzobjekt-kuhfell");
+const featuredRugProduct = products.find((product) => product.slug === "54couture-teppich-kuhfell");
+
+const featuredRugCopy: Record<Locale, { title: string; subtitle: string; price: string; description: string }> = {
+  de: {
+    title: "54COUTURE - MÖBEL & KUNST",
+    subtitle: "AUS FEINSTEM EUROPÄISCHEM KUHFELL",
+    price: "Ab 5.700 €",
+    description: "54COUTURE Teppich · 2,60 × 3,40 m",
+  },
+  en: {
+    title: "54COUTURE - FURNITURE & ART",
+    subtitle: "THE FINEST EUROPEAN HIDES",
+    price: "From €5,700",
+    description: "54COUTURE rug · 2.60 × 3.40 m",
+  },
+  fr: {
+    title: "54COUTURE - MOBILIER & ART",
+    subtitle: "EN CUIR DE VACHE EUROPÉEN D’EXCEPTION",
+    price: "À partir de 5 700 €",
+    description: "Tapis 54COUTURE · 2,60 × 3,40 m",
+  },
+  es: {
+    title: "54COUTURE - MUEBLES & ARTE",
+    subtitle: "EN LA MEJOR PIEL DE VACA EUROPEA",
+    price: "Desde 5.700 €",
+    description: "Alfombra 54COUTURE · 2,60 × 3,40 m",
+  },
+  zh: {
+    title: "54COUTURE - 家具与艺术",
+    subtitle: "精选欧洲牛皮",
+    price: "起价 €5,700",
+    description: "54COUTURE 地毯 · 2.60 × 3.40 米",
+  },
+  ar: {
+    title: "54COUTURE - أثاث وفن",
+    subtitle: "من أجود جلود الأبقار الأوروبية",
+    price: "ابتداءً من 5,700 €",
+    description: "سجادة 54COUTURE · 2.60 × 3.40 م",
+  },
+};
+
+const featuredObjectDescriptions: Record<Locale, { pouf: string; rug: string }> = {
+  de: {
+    pouf: "Skulpturales Sitzobjekt aus echtem europäischem Kuhfell.",
+    rug: "Teppich aus echtem europäischem Kuhfell mit außergewöhnlicher natürlicher Textur.",
+  },
+  en: {
+    pouf: "A sculptural seating object in genuine European cowhide.",
+    rug: "A genuine European cowhide rug with an exceptional natural texture.",
+  },
+  fr: {
+    pouf: "Une assise sculpturale en véritable peau de vache européenne.",
+    rug: "Un tapis en véritable peau de vache européenne à la texture naturelle singulière.",
+  },
+  es: {
+    pouf: "Un asiento escultórico de auténtica piel de vaca europea.",
+    rug: "Una alfombra de auténtica piel de vaca europea con una textura natural extraordinaria.",
+  },
+  zh: {
+    pouf: "一件采用真正欧洲牛皮制成的雕塑感座椅。",
+    rug: "一张采用真正欧洲牛皮制成、拥有非凡天然纹理的地毯。",
+  },
+  ar: {
+    pouf: "مقعد نحتي من جلد بقر أوروبي أصلي.",
+    rug: "سجادة من جلد بقر أوروبي أصلي بملمس طبيعي استثنائي.",
+  },
+};
 
 function getProductTitle(locale: Locale, title: string, index: number) {
   if (locale === "de") {
@@ -44,11 +111,19 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
   const heroLines = dictionary.home.heroTitle;
   const featuredProductContent = featuredCommerceProduct?.localized?.[locale];
-  const featuredProductImage = featuredProductContent?.images[0] ?? featuredCommerceProduct?.images?.[0];
+  const featuredProductImage = featuredProductContent?.images[1]
+    ?? featuredProductContent?.images[0]
+    ?? featuredCommerceProduct?.images?.[1]
+    ?? featuredCommerceProduct?.images?.[0];
   const featuredProductDescription = featuredProductContent?.shortDescription ?? featuredCommerceProduct?.description;
   const cowhidePresentation = getCowhidePresentationCopy(locale);
+  const rugPresentation = get54CouturePresentationCopy("54couture-teppich-kuhfell", locale) ?? featuredRugCopy[locale];
+  const featuredDescriptions = featuredObjectDescriptions[locale];
   const featuredProductHref = featuredCommerceProduct
     ? getProductPath(locale, featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)
+    : undefined;
+  const featuredRugHref = featuredRugProduct
+    ? getProductPath(locale, featuredRugProduct.categorySlug, featuredRugProduct.slug)
     : undefined;
 
   return (
@@ -103,46 +178,97 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
 
       {featuredCommerceProduct && featuredProductHref ? (
         <section className="border-b hairline bg-[#f3f2ef] px-5 py-14 lg:px-10 lg:py-16">
-          <div className="mx-auto grid max-w-[1540px] gap-8 lg:grid-cols-[0.48fr_0.52fr] lg:items-center">
-            <Link className="group block" href={featuredProductHref}>
-              <div className="relative aspect-[3/2] overflow-hidden border hairline bg-[#f8f8f6]">
-                {featuredProductImage ? (
-                  <Image
-                    alt={featuredProductImage.alt}
-                    className="object-cover transition duration-500 group-hover:scale-[1.02]"
-                    fill
-                    sizes="(min-width: 1024px) 48vw, 100vw"
-                    src={featuredProductImage.src}
+          <div className="mx-auto grid max-w-[1540px] gap-12 lg:grid-cols-2">
+            <article>
+              <Link className="group block" href={featuredProductHref}>
+                <div className="relative aspect-[4/3] overflow-hidden border hairline bg-[#f8f8f6]">
+                  {featuredProductImage ? (
+                    <Image
+                      alt={featuredProductImage.alt}
+                      className="object-cover object-[50%_68%] transition duration-500 group-hover:scale-[1.02]"
+                      fill
+                      sizes="(min-width: 1024px) 48vw, 100vw"
+                      src={featuredProductImage.src}
+                    />
+                  ) : null}
+                </div>
+              </Link>
+              <div className="pt-6">
+                <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">
+                  {dictionary.home.featuredProductEyebrow}
+                </p>
+                <p className="mt-7 text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">
+                  {dictionary.shop.categories[featuredCommerceProduct.category] ?? featuredCommerceProduct.category}
+                </p>
+                <h2 className="serif mt-3 text-balance text-xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-2xl">
+                  <Link href={featuredProductHref}>
+                    54COUTURE
+                    <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
+                      THE FINEST EUROPEAN COW HIDES
+                    </span>
+                  </Link>
+                </h2>
+                <p className="mt-5 text-sm text-[#353b3e]">{cowhidePresentation.price}</p>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-[#4b5356]">{featuredProductDescription}</p>
+                <Link
+                  className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]"
+                  href={featuredProductHref}
+                >
+                  {dictionary.home.featuredProductLink}
+                </Link>
+              </div>
+            </article>
+
+            <article>
+              {featuredRugHref ? (
+                <Link className="group block" href={featuredRugHref}>
+                  <div
+                    aria-label={`${rugPresentation.title} ${rugPresentation.subtitle}`}
+                    className="aspect-[4/3] border hairline bg-[#f8f8f6]"
                   />
+                </Link>
+              ) : (
+                <div
+                  aria-label={`${rugPresentation.title} ${rugPresentation.subtitle}`}
+                  className="aspect-[4/3] border hairline bg-[#f8f8f6]"
+                />
+              )}
+              <div className="pt-6">
+                <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">
+                  {dictionary.home.featuredProductEyebrow}
+                </p>
+                <p className="mt-7 text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">
+                  {dictionary.shop.categories.Teppiche ?? "Rugs"}
+                </p>
+                <h2 className="serif mt-3 text-balance text-xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-2xl">
+                  {featuredRugHref ? (
+                    <Link href={featuredRugHref}>
+                      54COUTURE
+                      <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
+                        THE FINEST EUROPEAN COW HIDES
+                      </span>
+                    </Link>
+                  ) : (
+                    <>
+                      54COUTURE
+                      <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
+                        THE FINEST EUROPEAN COW HIDES
+                      </span>
+                    </>
+                  )}
+                </h2>
+                <p className="mt-5 text-sm text-[#353b3e]">{rugPresentation.price}</p>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-[#4b5356]">{featuredDescriptions.rug}</p>
+                {featuredRugHref ? (
+                  <Link
+                    className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]"
+                    href={featuredRugHref}
+                  >
+                    {dictionary.home.featuredProductLink}
+                  </Link>
                 ) : null}
               </div>
-            </Link>
-            <div className="max-w-2xl">
-              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">
-                {dictionary.home.featuredProductEyebrow}
-              </p>
-              <p className="mt-7 text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">
-                {dictionary.shop.categories[featuredCommerceProduct.category] ?? featuredCommerceProduct.category}
-              </p>
-              <h2 className="serif mt-3 text-balance text-2xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-3xl">
-                <Link href={featuredProductHref}>
-                  <span className="block">{cowhidePresentation.title}</span>
-                  <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
-                </Link>
-              </h2>
-              <p className="mt-5 text-sm text-[#353b3e]">
-                {cowhidePresentation.price}
-              </p>
-              <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
-                {featuredProductDescription}
-              </p>
-              <Link
-                className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]"
-                href={featuredProductHref}
-              >
-                {dictionary.home.featuredProductLink}
-              </Link>
-            </div>
+            </article>
           </div>
         </section>
       ) : null}
@@ -171,9 +297,18 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
                     <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.categories[item.category] ?? item.category}</p>
-                    <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{getProductTitle(locale, item.title, index)}</h3>
+                    <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
+                      {item.slug === "sitzobjekt-kuhfell" ? (
+                        <>
+                          <span className="block">{cowhidePresentation.title}</span>
+                          <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
+                        </>
+                      ) : getProductTitle(locale, item.title, index)}
+                    </h3>
                   </div>
-                  <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
+                  <p className="shrink-0 text-sm text-[#353b3e]">
+                    {item.slug === "sitzobjekt-kuhfell" ? cowhidePresentation.price : item.price}
+                  </p>
                 </div>
               </article>
             ))}
@@ -205,7 +340,14 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                 <div className="mt-5 flex items-start justify-between gap-5 border-t border-black/15 pt-4">
                   <div>
                     <p className="text-[0.65rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
-                    <h3 className="serif mt-2 text-lg leading-snug tracking-[0.08em]">{getProductTitle(locale, work.title, index)}</h3>
+                    <h3 className="serif mt-2 text-lg leading-snug tracking-[0.08em]">
+                      {work.slug === "sitzobjekt-kuhfell" ? (
+                        <>
+                          <span className="block">{cowhidePresentation.title}</span>
+                          <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
+                        </>
+                      ) : getProductTitle(locale, work.title, index)}
+                    </h3>
                   </div>
                   <p className="max-w-[8rem] text-right text-xs leading-5 text-[#4b5356]">{dictionary.shop.categories[work.category] ?? work.category}</p>
                 </div>

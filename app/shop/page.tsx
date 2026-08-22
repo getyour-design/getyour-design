@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "../components/PageHero";
-import { PlaceholderArtwork } from "../components/PlaceholderArtwork";
+import { ProductCardMedia } from "../components/ProductMedia";
 import { EntityActions } from "../components/EntityActions";
 import { getDictionary } from "../data/dictionaries";
 import { primaryShopCategories, products } from "../data/products";
 import { getShopPath } from "../lib/i18n";
+import { get54CouturePresentationCopy } from "../lib/productTitles";
 
 export const metadata: Metadata = {
   title: "Shop",
@@ -37,16 +38,33 @@ export default function ShopPage() {
       </section>
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product, index) => (
-            <article className="group" key={product.title}>
+          {products.map((product, index) => {
+            const cowhidePresentation = get54CouturePresentationCopy(product.slug, "de");
+
+            return (
+              <article className="group" key={product.slug}>
               <Link href={`/shop/${product.slug}`}>
-                <PlaceholderArtwork index={index} palette={product.palette} />
+                <ProductCardMedia
+                  images={product.images}
+                  fit={product.slug === "sitzobjekt-kuhfell" ? "cover" : undefined}
+                  index={index}
+                  imageIndex={product.slug === "sitzobjekt-kuhfell" ? 1 : undefined}
+                  palette={product.palette}
+                  title={product.cardTitle}
+                />
               </Link>
               <div className="mt-5 flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{product.category}</p>
                   <Link href={`/shop/${product.slug}`}>
-                    <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{product.title}</h2>
+                    <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
+                      {cowhidePresentation ? (
+                        <>
+                          <span className="block">{cowhidePresentation.title}</span>
+                          <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
+                        </>
+                      ) : product.title}
+                    </h2>
                   </Link>
                   <Link className="mt-2 inline-block text-sm text-[#4b5356] hover:text-black" href={product.maker.includes("Künstlerposition") ? "/artists" : "/brands"}>
                     {product.maker}
@@ -58,10 +76,11 @@ export default function ShopPage() {
                     type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
                   />
                 </div>
-                <p className="shrink-0 text-sm text-[#353b3e]">{product.price}</p>
+                <p className="shrink-0 text-sm text-[#353b3e]">{cowhidePresentation?.price ?? product.price}</p>
               </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
       </section>
     </main>

@@ -140,4 +140,25 @@ export function getCowhidePresentationCopy(locale: Locale) {
   return cowhidePresentationCopy[locale];
 }
 
+export function get54CouturePresentationCopy(slug: string, locale: Locale) {
+  if (slug === "sitzobjekt-kuhfell") {
+    return cowhidePresentationCopy[locale];
+  }
+
+  if (slug === "54couture-teppich-kuhfell") {
+    const price = {
+      de: "Ab 5.700 €",
+      en: "From €5,700",
+      fr: "À partir de 5 700 €",
+      es: "Desde 5.700 €",
+      zh: "起价 €5,700",
+      ar: "ابتداءً من 5,700 €",
+    }[locale];
+
+    return { ...cowhidePresentationCopy[locale], price };
+  }
+
+  return undefined;
+}
+
 export const translatedEnglishProductTitles = englishProductTitles;

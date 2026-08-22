@@ -14,6 +14,8 @@ type ProductCardMediaProps = {
   index: number;
   palette: string;
   title: string;
+  imageIndex?: number;
+  fit?: "contain" | "cover";
 };
 
 type ProductGalleryProps = {
@@ -48,8 +50,15 @@ function GalleryImage({
   );
 }
 
-export function ProductCardMedia({ images, index, palette, title }: ProductCardMediaProps) {
-  const image = images?.[0];
+export function ProductCardMedia({
+  images,
+  index,
+  palette,
+  title,
+  imageIndex = 0,
+  fit = "contain",
+}: ProductCardMediaProps) {
+  const image = images?.[imageIndex] ?? images?.[0];
 
   if (!image) {
     return <PlaceholderArtwork index={index} palette={palette} />;
@@ -59,7 +68,7 @@ export function ProductCardMedia({ images, index, palette, title }: ProductCardM
     <div className="relative aspect-[4/5] overflow-hidden border hairline bg-[#f8f8f6]">
       <Image
         alt={image.alt || title}
-        className="object-contain"
+        className={fit === "cover" ? "object-cover" : "object-contain"}
         fill
         sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw"
         src={image.src}
