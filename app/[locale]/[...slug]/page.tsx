@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ComponentType } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AgbPage from "../../agb/page";
@@ -892,7 +893,7 @@ function EnglishArtPage() {
     <main>
       <PageHero eyebrow="Art" title="Artworks, works on paper, sculptures and editions." description="Selected works for rooms, collections and interiors with an independent point of view." />
       <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           {artworks.map((artwork, index) => {
             const productHref = artwork.productSlug ? `/en/shop/${artwork.productSlug}` : undefined;
 
@@ -900,12 +901,12 @@ function EnglishArtPage() {
             <article key={artwork.title}>
               {artwork.images && productHref ? (
                 <Link className="group block" href={productHref}>
-                  <ProductCardMedia images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+                  <ProductCardMedia aspectClassName="aspect-[4/3]" images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
                 </Link>
               ) : artwork.images ? (
-                <ProductCardMedia images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+                <ProductCardMedia aspectClassName="aspect-[4/3]" images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
               ) : (
-                <PlaceholderArtwork index={index} palette={artwork.palette} />
+                <PlaceholderArtwork aspectClassName="aspect-[4/3]" index={index} palette={artwork.palette} />
               )}
               <div className="mt-5">
                 <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{artwork.artist.replace("Künstlerposition", "Artist Position")}</p>
@@ -935,9 +936,15 @@ function EnglishAteliersPage() {
             <article className="grid min-h-72 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
               <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Atelier 0{index + 1}</p>
               <div>
-                <div className={`mb-8 h-28 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
-                <h2 className="serif text-2xl tracking-[0.08em]">{brand.name}</h2>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-[#4b5356]">{englishBrandDescriptions[index] ?? "An atelier selected for material knowledge, precise making and object culture."}</p>
+                {brand.heroImage ? (
+                  <Link className="group relative mb-8 block aspect-[16/10] overflow-hidden bg-[#181615]" href={`/en/ateliers/${brand.slug}`}>
+                      <Image alt={`${brand.name} studio view`} className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]" fill sizes="(min-width: 1024px) 38vw, 100vw" src={brand.heroImage} />
+                  </Link>
+                ) : (
+                  <div className={`mb-8 h-28 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
+                )}
+                <h2 className="serif text-2xl tracking-[0.08em]"><Link href={`/en/ateliers/${brand.slug}`}>{brand.name}</Link></h2>
+                <p className="mt-4 max-w-xl text-sm leading-7 text-[#4b5356]">{brand.localized?.en?.description ?? englishBrandDescriptions[index] ?? "An atelier selected for material knowledge, precise making and object culture."}</p>
                 <EntityActions href="/en/ateliers" id={`atelier:${brand.name}`} title={brand.name} type="Atelier" />
               </div>
             </article>

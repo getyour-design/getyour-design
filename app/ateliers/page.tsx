@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "../components/PageHero";
 import { EntityActions } from "../components/EntityActions";
@@ -63,8 +64,20 @@ export default function AteliersPage() {
               <article className="grid min-h-72 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
                 <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Atelier 0{index + 1}</p>
                 <div>
-                  <div className={`mb-8 h-28 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
-                  <h3 className="serif text-2xl tracking-[0.08em]">{brand.name}</h3>
+                  {brand.heroImage ? (
+                    <Link className="group relative mb-8 block aspect-[16/10] overflow-hidden bg-[#181615]" href={`/de/ateliers/${brand.slug}`}>
+                      <Image
+                        alt={`${brand.name} Atelieransicht`}
+                        className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                        fill
+                        sizes="(min-width: 1024px) 38vw, 100vw"
+                        src={brand.heroImage}
+                      />
+                    </Link>
+                  ) : (
+                    <div className={`mb-8 h-28 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
+                  )}
+                  <h3 className="serif text-2xl tracking-[0.08em]"><Link href={`/de/ateliers/${brand.slug}`}>{brand.name}</Link></h3>
                   <p className="mt-4 max-w-xl text-sm leading-7 text-[#4b5356]">{brand.description}</p>
                   <EntityActions
                     href="/ateliers"

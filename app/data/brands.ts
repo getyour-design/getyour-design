@@ -19,6 +19,7 @@ export type Brand = {
   website?: string;
   logo?: string;
   heroImage?: string;
+  detailImage?: string;
   featured?: boolean;
   status?: BrandStatus;
   localized?: Partial<Record<BrandLocale, LocalizedBrandContent>>;
@@ -26,10 +27,21 @@ export type Brand = {
 
 export const brands: Brand[] = [
   {
-    name: "Atelier A",
-    slug: "atelier-a",
-    description: "Steinbasierte Möbel und Objekte mit ruhiger, architektonischer Präsenz.",
-    status: "editorial",
+    name: "54COUTURE",
+    slug: "54couture",
+    description:
+      "54COUTURE verbindet handwerkliche Präzision mit einer expressiven Materialästhetik. Die Kollektionen umfassen Möbel, Teppiche und Objekte aus ausgewählten europäischen Kuh- und Lammfellen.",
+    website: "https://www.54couture.com/",
+    heroImage: "/images/ateliers/54couture-atelier-rug.jpg",
+    detailImage: "/images/ateliers/54couture-atelier-object.png",
+    featured: true,
+    status: "active",
+    localized: {
+      en: {
+        description:
+          "54COUTURE combines artisan precision with an expressive material language. Its collections include furniture, rugs and objects in selected European cowhide and lambskin.",
+      },
+    },
   },
   {
     name: "Manufaktur B",

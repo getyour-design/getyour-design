@@ -5,6 +5,7 @@ export type Artwork = {
   year: string;
   price: string;
   palette: string;
+  aspectClassName?: string;
   productSlug?: string;
   images?: { src: string; alt: string }[];
 };
@@ -17,6 +18,7 @@ export const artworks: Artwork[] = [
     year: "Datierung auf Anfrage",
     price: "Auf Anfrage",
     palette: "bg-[#282427]",
+    aspectClassName: "aspect-[4/3]",
     productSlug: "sebastian-schrader-bauernopfer",
     images: [
       {

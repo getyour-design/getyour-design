@@ -24,7 +24,7 @@ export default function ArtPage() {
         description="Ausgewählte Arbeiten für Räume, Sammlungen und Interieurs mit eigenem Blick."
       />
       <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           {artworks.map((artwork, index) => {
             const productHref = artwork.productSlug ? `/de/shop/${artwork.productSlug}` : undefined;
 
@@ -32,12 +32,12 @@ export default function ArtPage() {
             <article key={artwork.title}>
               {artwork.images && productHref ? (
                 <Link className="group block" href={productHref}>
-                  <ProductCardMedia images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+                  <ProductCardMedia aspectClassName="aspect-[4/3]" images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
                 </Link>
               ) : artwork.images ? (
-                <ProductCardMedia images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+                <ProductCardMedia aspectClassName="aspect-[4/3]" images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
               ) : (
-                <PlaceholderArtwork index={index} palette={artwork.palette} />
+                <PlaceholderArtwork aspectClassName="aspect-[4/3]" index={index} palette={artwork.palette} />
               )}
               <div className="mt-5">
                 <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{artwork.artist}</p>

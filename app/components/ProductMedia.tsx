@@ -16,6 +16,7 @@ type ProductCardMediaProps = {
   title: string;
   imageIndex?: number;
   fit?: "contain" | "cover";
+  aspectClassName?: string;
 };
 
 type ProductGalleryProps = {
@@ -61,6 +62,7 @@ export function ProductCardMedia({
   title,
   imageIndex = 0,
   fit = "contain",
+  aspectClassName = "aspect-[4/5]",
 }: ProductCardMediaProps) {
   const image = images?.[imageIndex] ?? images?.[0];
 
@@ -69,7 +71,7 @@ export function ProductCardMedia({
   }
 
   return (
-    <div className="group relative aspect-[4/5] overflow-hidden border hairline bg-[#f8f8f6]">
+    <div className={`group relative ${aspectClassName} overflow-hidden border hairline bg-[#f8f8f6]`}>
       <Image
         alt={image.alt || title}
         className={`${fit === "cover" ? "object-cover" : "object-contain"} transition duration-700 ease-out group-hover:scale-[1.05]`}
@@ -126,7 +128,7 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
                 if (targetColumn !== columnIndex) return null;
 
                 const aspectRatio = isColourPalette
-                  ? "aspect-[4/3]"
+                  ? "aspect-video"
                   : isFinalDetail
                   ? "aspect-[15/13]"
                   : [
@@ -141,7 +143,7 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
                 return (
                   <button
                     aria-label={`${image.alt || title} vergrößern`}
-                    className={`group relative w-full cursor-zoom-in overflow-hidden ${isColourPalette ? "bg-[#f8f8f6]" : ""} ${aspectRatio}`}
+                    className={`group relative w-full cursor-zoom-in overflow-hidden ${aspectRatio}`}
                     key={image.src}
                     onClick={() => setActiveImage(image)}
                     type="button"
@@ -149,7 +151,7 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
                     <GalleryImage
                       cropClassName={isFinalDetail ? "object-[82%_center]" : undefined}
                       disableHover={isColourPalette}
-                      fit={isColourPalette ? "contain" : "cover"}
+                      fit="cover"
                       image={image}
                       sizes="(min-width: 1024px) 27vw, (min-width: 640px) 50vw, 100vw"
                       title={title}
