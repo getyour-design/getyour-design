@@ -535,11 +535,7 @@ const categorySeeds: ProductCategorySeed[] = [
         status: "preis-auf-anfrage",
         availability: "Preis auf Anfrage",
         description:
-          "In \u201eBauernopfer\u201c verdichtet Sebastian Schrader Figuren, Alltagsobjekte und malerische Zitate zu einer spannungsvollen Szene. Das Bild bewegt sich zwischen erzählerischer Geste und genau beobachteter Oberfläche.",
-        longDescription: [
-          "Die Komposition vereint figürliche Präsenz, ein Schachpferd und beiläufige Gegenstände zu einem offenen Bildraum.",
-          "Dunkle Flächen, leuchtende Akzente und die sichtbare, körperhafte Malweise geben dem Werk seine unmittelbare Spannung.",
-        ],
+          "In \u201eBauernopfer\u201c verdichtet Sebastian Schrader Figuren, Alltagsobjekte und malerische Zitate zu einer spannungsvollen Szene.",
         artistBio:
           "Sebastian Schrader, geboren 1978 in Berlin, studierte Malerei an der Kunsthochschule Berlin-Weißensee bei Prof. Werner Liebmann. Nach seinem Diplom 2006 wurde er 2007 Meisterschüler; er lebt und arbeitet in Berlin.",
         origin: "Berlin, Deutschland",
