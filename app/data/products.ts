@@ -14,9 +14,6 @@ type ProductImage = {
 
 const bauernopferImageSources = [
   "/images/products/sebastian-schrader-bauernopfer-01-cover.jpg",
-  "/images/products/sebastian-schrader-bauernopfer-02-detail.jpg",
-  "/images/products/sebastian-schrader-bauernopfer-03-detail.jpg",
-  "/images/products/sebastian-schrader-bauernopfer-04-detail.jpg",
 ];
 
 function bauernopferImages(alts: string[]): ProductImage[] {
@@ -550,9 +547,6 @@ const categorySeeds: ProductCategorySeed[] = [
         ctaLabel: "Verfügbarkeit anfragen",
         images: bauernopferImages([
           "Sebastian Schrader, Bauernopfer, Gesamtansicht des Gemäldes",
-          "Sebastian Schrader, Bauernopfer, Detail mit Figur und Schachpferd",
-          "Sebastian Schrader, Bauernopfer, Detail der malerischen Oberfläche mit Modellauto",
-          "Sebastian Schrader, Bauernopfer, Detail mit liegender Figur",
         ]),
         metaTitle: "Sebastian Schrader \u2013 Bauernopfer",
         metaDescription: "Bauernopfer (2010) von Sebastian Schrader. Öl auf Leinwand, 180 × 240 cm, Preis auf Anfrage.",
