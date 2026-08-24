@@ -72,7 +72,7 @@ export function ProductCardMedia({
 
   const isBauernopfer = image.src.includes("sebastian-schrader-bauernopfer-");
   const resolvedAspectClassName = aspectClassName ?? (isBauernopfer ? "aspect-[4/3]" : "aspect-[4/5]");
-  const resolvedFit = fit ?? (isBauernopfer ? "cover" : "contain");
+  const resolvedFit = fit ?? "cover";
 
   return (
     <div className={`group relative ${resolvedAspectClassName} overflow-hidden border hairline bg-[#f8f8f6]`}>

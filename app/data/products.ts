@@ -35,6 +35,14 @@ function cowhideSeatImages(alts: string[]): ProductImage[] {
   return cowhideSeatImageSources.map((src, index) => ({ src, alt: alts[index] }));
 }
 
+const up7ImageSources = [
+  "/images/products/gaetano-pesce-up7-01-cover.png",
+];
+
+function up7Images(alts: string[]): ProductImage[] {
+  return up7ImageSources.map((src, index) => ({ src, alt: alts[index] }));
+}
+
 const rugImageSources = [
   "/images/products/54couture-rug-01-loft.jpeg",
   "/images/products/54couture-rug-02-red-texture.jpg",
@@ -267,6 +275,120 @@ const categorySeeds: ProductCategorySeed[] = [
       { title: "Sideboard mit Steinauflage", price: "EUR 9,200", material: "Holz, Naturstein", dimensions: "210 x 48 x 72 cm" },
       { title: "Stuhl mit Stahlrahmen", price: "EUR 1,980", material: "Stahl, Leder", dimensions: "52 x 56 x 78 cm" },
       { title: "Runder Tisch aus Esche", price: "EUR 4,300", material: "Esche, geölte Oberfläche", dimensions: "120 x 120 x 74 cm" },
+      {
+        title: "UP7 – IL PIEDE",
+        cardTitle: "UP7 – Gaetano Pesce",
+        maker: "Gaetano Pesce",
+        brand: "B&B Italia",
+        pathMode: "nested",
+        slug: "gaetano-pesce-up7-il-piede",
+        price: "Auf Anfrage",
+        priceNote: "Preis und Verfügbarkeit auf Anfrage.",
+        material: "Polyurethan-Schaumstoff",
+        materialDetails: ["Polyurethan-Schaumstoff", "Skulpturale Sitzform", "Entwurf von 1969"],
+        dimensions: "Maße auf Anfrage",
+        dimensionsDetails: ["Maße auf Anfrage"],
+        status: "preis-auf-anfrage",
+        availability: "Preis auf Anfrage",
+        description:
+          "UP7 – Il Piede von Gaetano Pesce ist ein ikonisches Sitzobjekt in Form eines überdimensionierten Fußes – zwischen Möbel, Skulptur und Designgeschichte.",
+        longDescription: [
+          "Der Entwurf aus dem Jahr 1969 übersetzt den menschlichen Fuß in eine weiche, körperhafte Sitzform. Seine unverwechselbare Silhouette macht UP7 zu einem eigenständigen Objekt im Raum.",
+          "Als Teil der UP-Serie steht das Objekt exemplarisch für Gaetano Pesces spielerischen, emotionalen Umgang mit Form, Maßstab und Material.",
+        ],
+        origin: "Italien",
+        uniqueNote:
+          "Die gezeigte Abbildung dient als Referenz für Form und Wirkung. Ausführung, Zustand und Verfügbarkeit werden individuell bestätigt.",
+        artistBio:
+          "Gaetano Pesce (1939–2024) war ein italienischer Architekt, Designer und Künstler. Seine Arbeiten verbinden experimentelle Materialien mit expressiven, erzählerischen Formen.",
+        ctaLabel: "Preis anfragen",
+        images: up7Images([
+          "UP7 Il Piede von Gaetano Pesce als schwarzes skulpturales Sitzobjekt im Garten",
+        ]),
+        metaTitle: "UP7 – Il Piede von Gaetano Pesce",
+        metaDescription:
+          "UP7 – Il Piede von Gaetano Pesce: ikonisches Sitzobjekt zwischen Skulptur, Möbel und Designgeschichte. Preis auf Anfrage.",
+        productType: "collectible",
+        commerceMode: "inquiry",
+        inventoryMode: "single-piece",
+        localized: {
+          en: {
+            title: "UP7 – IL PIEDE",
+            cardTitle: "UP7 – Gaetano Pesce",
+            priceNote: "Price and availability on request.",
+            shortDescription: "UP7 – Il Piede by Gaetano Pesce is an iconic seating object in the form of an oversized foot – between furniture, sculpture and design history.",
+            longDescription: ["The 1969 design translates the human foot into a soft, corporeal seating form. Its unmistakable silhouette makes UP7 an autonomous presence within a room.", "As part of the UP series, the object exemplifies Gaetano Pesce's playful and emotional approach to form, scale and material."],
+            dimensionsDetails: ["Dimensions on request"],
+            materialDetails: ["Polyurethane foam", "Sculptural seating form", "Designed in 1969"],
+            origin: "Italy",
+            uniqueNote: "The image shown serves as a reference for form and presence. Execution, condition and availability are confirmed individually.",
+            ctaLabel: "Request price",
+            images: up7Images(["UP7 Il Piede by Gaetano Pesce, a black sculptural seating object in a garden"]),
+            metaTitle: "UP7 – Il Piede by Gaetano Pesce",
+            metaDescription: "UP7 – Il Piede by Gaetano Pesce: an iconic seating object between sculpture, furniture and design history. Price on request.",
+          },
+          fr: {
+            title: "UP7 – IL PIEDE",
+            cardTitle: "UP7 – Gaetano Pesce",
+            priceNote: "Prix et disponibilité sur demande.",
+            shortDescription: "UP7 – Il Piede de Gaetano Pesce est une assise iconique en forme de pied surdimensionné, entre meuble, sculpture et histoire du design.",
+            longDescription: ["Le dessin de 1969 traduit le pied humain en une forme d'assise souple et corporelle. Sa silhouette singulière fait de UP7 une présence autonome dans l'espace.", "Comme élément de la série UP, l'objet illustre l'approche ludique et émotionnelle de Gaetano Pesce envers la forme, l'échelle et la matière."],
+            dimensionsDetails: ["Dimensions sur demande"],
+            materialDetails: ["Mousse de polyuréthane", "Forme d'assise sculpturale", "Dessiné en 1969"],
+            origin: "Italie",
+            uniqueNote: "L'image présentée sert de référence pour la forme et la présence. L'exécution, l'état et la disponibilité sont confirmés individuellement.",
+            ctaLabel: "Demander le prix",
+            images: up7Images(["UP7 Il Piede de Gaetano Pesce, assise sculpturale noire dans un jardin"]),
+            metaTitle: "UP7 – Il Piede de Gaetano Pesce",
+            metaDescription: "UP7 – Il Piede de Gaetano Pesce : assise iconique entre sculpture, mobilier et histoire du design. Prix sur demande.",
+          },
+          es: {
+            title: "UP7 – IL PIEDE",
+            cardTitle: "UP7 – Gaetano Pesce",
+            priceNote: "Precio y disponibilidad bajo consulta.",
+            shortDescription: "UP7 – Il Piede de Gaetano Pesce es un icónico objeto de asiento con forma de pie sobredimensionado, entre mueble, escultura e historia del diseño.",
+            longDescription: ["El diseño de 1969 traduce el pie humano en una forma de asiento suave y corpórea. Su inconfundible silueta convierte a UP7 en una presencia autónoma en el espacio.", "Como parte de la serie UP, el objeto ejemplifica la aproximación lúdica y emocional de Gaetano Pesce a la forma, la escala y el material."],
+            dimensionsDetails: ["Dimensiones bajo consulta"],
+            materialDetails: ["Espuma de poliuretano", "Forma de asiento escultórica", "Diseñado en 1969"],
+            origin: "Italia",
+            uniqueNote: "La imagen mostrada sirve de referencia para la forma y la presencia. La ejecución, el estado y la disponibilidad se confirman individualmente.",
+            ctaLabel: "Consultar precio",
+            images: up7Images(["UP7 Il Piede de Gaetano Pesce, objeto de asiento escultórico negro en un jardín"]),
+            metaTitle: "UP7 – Il Piede de Gaetano Pesce",
+            metaDescription: "UP7 – Il Piede de Gaetano Pesce: objeto de asiento icónico entre escultura, mobiliario e historia del diseño. Precio bajo consulta.",
+          },
+          zh: {
+            title: "UP7 – IL PIEDE",
+            cardTitle: "UP7 – Gaetano Pesce",
+            priceNote: "价格与供应情况请咨询。",
+            shortDescription: "Gaetano Pesce 设计的 UP7 – Il Piede 是一件以放大脚部为造型的标志性座椅，介于家具、雕塑与设计史之间。",
+            longDescription: ["这件1969年的设计将人的脚转化为柔软而富有身体感的座椅形态。其鲜明轮廓使 UP7 成为空间中独立而醒目的存在。", "作为 UP 系列的一部分，这件作品体现了 Gaetano Pesce 对形式、尺度与材质的趣味性和情感化处理。"],
+            dimensionsDetails: ["尺寸请咨询"],
+            materialDetails: ["聚氨酯泡沫", "雕塑感座椅形态", "设计于1969年"],
+            origin: "意大利",
+            uniqueNote: "展示图片仅作为形态与空间感的参考。具体版本、状态与供应情况将单独确认。",
+            ctaLabel: "咨询价格",
+            images: up7Images(["Gaetano Pesce 设计的 UP7 Il Piede，花园中的黑色雕塑感座椅"]),
+            metaTitle: "Gaetano Pesce 设计的 UP7 – Il Piede",
+            metaDescription: "Gaetano Pesce 设计的 UP7 – Il Piede：一件介于雕塑、家具与设计史之间的标志性座椅。价格请咨询。",
+          },
+          ar: {
+            title: "UP7 – IL PIEDE",
+            cardTitle: "UP7 – Gaetano Pesce",
+            priceNote: "السعر والتوفر عند الطلب.",
+            shortDescription: "UP7 – Il Piede من تصميم غايتانو بيتشي هو مقعد أيقوني على هيئة قدم كبيرة، بين الأثاث والنحت وتاريخ التصميم.",
+            longDescription: ["يحوّل تصميم عام 1969 القدم البشرية إلى هيئة جلوس ناعمة وجسدية. ويجعل شكله المميز من UP7 حضوراً مستقلاً داخل المكان.", "وبوصفه جزءاً من سلسلة UP، يجسد هذا العمل مقاربة غايتانو بيتشي المرحة والعاطفية للشكل والمقياس والمادة."],
+            dimensionsDetails: ["الأبعاد عند الطلب"],
+            materialDetails: ["رغوة البولي يوريثان", "هيئة جلوس نحتية", "صُمم عام 1969"],
+            origin: "إيطاليا",
+            uniqueNote: "الصورة المعروضة مرجع للشكل والحضور. يتم تأكيد النسخة والحالة والتوفر بشكل فردي.",
+            ctaLabel: "طلب السعر",
+            images: up7Images(["UP7 Il Piede من تصميم غايتانو بيتشي، مقعد نحتي أسود في حديقة"]),
+            metaTitle: "UP7 – Il Piede من تصميم غايتانو بيتشي",
+            metaDescription: "UP7 – Il Piede من تصميم غايتانو بيتشي: مقعد أيقوني بين النحت والأثاث وتاريخ التصميم. السعر عند الطلب.",
+          },
+        },
+      },
       {
         title: "54COUTURE MÖBEL UND KUNST AUS HOCHWERTIGSTEN EUROPÄISCHEN FELLEN",
         cardTitle: "Sitzobjekt aus Kuhfell",
@@ -794,6 +916,7 @@ const allSeedProducts = categorySeeds.flatMap((category) =>
 // The remaining seed entries stay available as drafts for future curation.
 const curatedShopProductSlugs = [
   "sitzobjekt-kuhfell",
+  "gaetano-pesce-up7-il-piede",
   "54couture-teppich-kuhfell",
   "leuchte-aus-bronze",
   "sebastian-schrader-bauernopfer",

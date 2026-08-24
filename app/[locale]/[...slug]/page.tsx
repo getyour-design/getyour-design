@@ -417,6 +417,28 @@ function getUniqueNoteLabel(locale: Locale) {
   }[locale];
 }
 
+function getObjectInfoLabel(locale: Locale) {
+  return {
+    de: "Über das Objekt",
+    en: "About the Object",
+    fr: "À propos de l'objet",
+    es: "Sobre el objeto",
+    zh: "关于作品",
+    ar: "عن القطعة",
+  }[locale];
+}
+
+function getArtistBioLabel(locale: Locale) {
+  return {
+    de: "Über den Künstler",
+    en: "About the Artist",
+    fr: "À propos de l'artiste",
+    es: "Sobre el artista",
+    zh: "关于艺术家",
+    ar: "عن الفنان",
+  }[locale];
+}
+
 function getLocalizedCta(locale: Locale, status: string) {
   const dictionary = getDictionary(locale);
 
@@ -660,17 +682,18 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                 productSlug={product.slug}
               />
               {content?.longDescription ? (
-                <div className="mt-8 grid gap-4 text-sm leading-7 text-[#4b5356]">
-                  {content.longDescription.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
+                <section className="mt-10 border-t border-black/15 pt-6">
+                  <h2 className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getObjectInfoLabel(locale)}</h2>
+                  <div className="mt-3 grid gap-4 text-sm leading-7 text-[#4b5356]">
+                    {content.longDescription.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </section>
               ) : null}
               {content?.artistBio ?? product.artistBio ? (
                 <section className="mt-10 border-t border-black/15 pt-6">
-                  <h2 className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">
-                    {locale === "de" ? "Über den Künstler" : "About the Artist"}
-                  </h2>
+                  <h2 className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getArtistBioLabel(locale)}</h2>
                   <p className="mt-3 text-sm leading-7 text-[#4b5356]">{content?.artistBio ?? product.artistBio}</p>
                 </section>
               ) : null}

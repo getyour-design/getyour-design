@@ -150,11 +150,14 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                 productSlug={product.slug}
               />
               {product.longDescription ? (
-                <div className="mt-8 grid gap-4 text-sm leading-7 text-[#4b5356]">
-                  {product.longDescription.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
+                <section className="mt-10 border-t border-black/15 pt-6">
+                  <h2 className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Über das Objekt</h2>
+                  <div className="mt-3 grid gap-4 text-sm leading-7 text-[#4b5356]">
+                    {product.longDescription.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </section>
               ) : null}
               {product.artistBio ? (
                 <section className="mt-10 border-t border-black/15 pt-6">
