@@ -24,7 +24,7 @@ export default function BrandsPage() {
         <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2">
           {brands.map((brand, index) => (
             <article className="grid min-h-72 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
-              <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Atelier 0{index + 1}</p>
+              <p className="text-[0.68rem] tracking-[0.2em] text-[#667174]">{brand.name.toLowerCase()}</p>
               <div>
                 <div className={`mb-8 h-28 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
                 <h2 className="serif text-2xl tracking-[0.08em]">{brand.name}</h2>

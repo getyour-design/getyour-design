@@ -39,7 +39,7 @@ export default function AteliersPage() {
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {brands.map((brand, index) => (
               <article className="grid min-h-72 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
-                <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Atelier 0{index + 1}</p>
+                <p className="text-[0.68rem] tracking-[0.2em] text-[#667174]">{brand.name.toLowerCase()}</p>
                 <div>
                   {brand.heroImage ? (
                     <Link className="group relative mb-8 block aspect-[16/10] overflow-hidden bg-[#181615]" href={`/de/ateliers/${brand.slug}`}>

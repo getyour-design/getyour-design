@@ -61,8 +61,8 @@ export function ProductCardMedia({
   palette,
   title,
   imageIndex = 0,
-  fit = "contain",
-  aspectClassName = "aspect-[4/5]",
+  fit,
+  aspectClassName,
 }: ProductCardMediaProps) {
   const image = images?.[imageIndex] ?? images?.[0];
 
@@ -70,11 +70,15 @@ export function ProductCardMedia({
     return <PlaceholderArtwork index={index} palette={palette} />;
   }
 
+  const isBauernopfer = image.src.includes("sebastian-schrader-bauernopfer-");
+  const resolvedAspectClassName = aspectClassName ?? (isBauernopfer ? "aspect-[4/3]" : "aspect-[4/5]");
+  const resolvedFit = fit ?? (isBauernopfer ? "cover" : "contain");
+
   return (
-    <div className={`group relative ${aspectClassName} overflow-hidden border hairline bg-[#f8f8f6]`}>
+    <div className={`group relative ${resolvedAspectClassName} overflow-hidden border hairline bg-[#f8f8f6]`}>
       <Image
         alt={image.alt || title}
-        className={`${fit === "cover" ? "object-cover" : "object-contain"} transition duration-700 ease-out group-hover:scale-[1.05]`}
+        className={`${resolvedFit === "cover" ? "object-cover" : "object-contain"} transition duration-700 ease-out group-hover:scale-[1.05]`}
         fill
         sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw"
         src={image.src}
