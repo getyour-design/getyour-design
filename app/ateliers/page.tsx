@@ -38,7 +38,7 @@ export default function AteliersPage() {
           </div>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {brands.map((brand, index) => (
-              <article className="grid min-h-72 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
+              <article className="grid min-h-60 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
                 <p className="text-[0.68rem] tracking-[0.2em] text-[#667174]">{brand.name.toLowerCase()}</p>
                 <div>
                   {brand.heroImage ? (

@@ -501,7 +501,7 @@ function LocalizedStaticPlaceholder({ locale, routeKey }: { locale: Locale; rout
         <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2 lg:grid-cols-3">
           {dictionary.home.areas.slice(0, 3).map((item) => (
             <Link
-              className="grid min-h-56 content-between border hairline bg-[#f7f7f5] p-6 transition hover:bg-[#f8f8f6]"
+              className="grid min-h-44 content-between border hairline bg-[#f7f7f5] p-6 transition hover:bg-[#f8f8f6]"
               href={localizedRoutes.shop[locale]}
               key={item.title}
             >
@@ -528,7 +528,7 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
         <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
           {primaryShopCategories.map((area) => (
-            <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath(locale, area.slug)} key={area.slug}>
+            <Link className="border hairline bg-[#f7f7f5] px-4 py-3.5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath(locale, area.slug)} key={area.slug}>
               {getLocalizedCategoryLabel(locale, area.title)}
             </Link>
           ))}
@@ -814,7 +814,7 @@ function LocalizedJournalPage({ locale }: { locale: Locale }) {
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-6 md:grid-cols-2 lg:grid-cols-4">
           {stories.map((story, index) => (
-            <article className="grid min-h-80 content-between border hairline bg-[#f7f7f5] p-6" key={story.title}>
+            <article className="grid min-h-64 content-between border hairline bg-[#f7f7f5] p-6" key={story.title}>
               <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.journal.categories[index] ?? dictionary.journal.eyebrow}</p>
               <div>
                 <h2 className="serif text-2xl leading-snug tracking-[0.08em]">{dictionary.journal.titles[index] ?? story.title}</h2>
@@ -841,7 +841,7 @@ function LocalizedCollectionsPage({ locale }: { locale: Locale }) {
             const localizedCollection = dictionary.collections[collection.key] ?? collection;
 
             return (
-              <article className="grid min-h-96 content-between border hairline bg-[#f7f7f5] p-6" key={collection.key}>
+              <article className="grid min-h-72 content-between border hairline bg-[#f7f7f5] p-6" key={collection.key}>
                 <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
                 <div>
                   <div className={`mb-7 h-36 ${index % 3 === 0 ? "bg-[#11100f]" : index % 3 === 1 ? "bg-[#c7beb1]" : "bg-[#e8e1d6]"}`} />
@@ -960,7 +960,7 @@ function EnglishAteliersPage() {
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2">
           {brands.map((brand, index) => (
-            <article className="grid min-h-72 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
+            <article className="grid min-h-60 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
               <p className="text-[0.68rem] tracking-[0.2em] text-[#667174]">{brand.name.toLowerCase()}</p>
               <div>
                 {brand.heroImage ? (

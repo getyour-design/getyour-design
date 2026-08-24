@@ -326,9 +326,9 @@ const english: Dictionary = {
   },
   shop: {
     title: "Design Shop",
-    headline: "Furniture, lighting, art, rugs, objects and editions.",
+    headline: "Selected works for distinctive spaces.",
     description:
-      "A curated selection of design furniture, artworks, lighting, rugs, accessories, objects and editions for distinctive rooms.",
+      "Furniture, art and objects with character, materiality and lasting presence.",
     categoryDescriptions: {
       Kunst: "Selected artworks, editions and collectible pieces by artists and ateliers.",
       Möbel: "Furniture with architectural clarity, lasting materials and quiet presence.",
@@ -625,9 +625,9 @@ const german: Dictionary = {
   shop: {
     ...english.shop,
     title: "Design-Shop",
-    headline: "Möbel, Leuchten, Kunst, Teppiche, Objekte und Editionen.",
+    headline: "Ausgewählte Arbeiten für besondere Räume.",
     description:
-      "Eine kuratierte Auswahl aus Möbeln, Leuchten, Teppichen, Dekoration, Accessoires, Geschirr, Glaswaren, Textilien, Kunst, Collectible Design, Objekten und Editionen für besondere Räume.",
+      "Möbel, Kunst und Objekte mit Charakter, Materialität und bleibender Präsenz.",
     backToShop: "Zurück zum Shop",
     backToCategory: "Zurück zu",
     works: "Arbeiten",
@@ -923,9 +923,9 @@ const french: Dictionary = {
   shop: {
     ...english.shop,
     title: "Boutique Design",
-    headline: "Mobilier, luminaires, art, tapis, objets et éditions.",
+    headline: "Œuvres choisies pour des espaces singuliers.",
     description:
-      "Une sélection de mobilier, œuvres, luminaires, tapis, accessoires, objets et éditions pour des espaces distinctifs.",
+      "Mobilier, art et objets avec caractère, matière et présence durable.",
     backToShop: "Retour à la boutique",
     backToCategory: "Retour à",
     works: "Œuvres",
@@ -1234,9 +1234,9 @@ const spanish: Dictionary = {
   shop: {
     ...english.shop,
     title: "Tienda de diseño",
-    headline: "Mobiliario, iluminación, arte, alfombras, objetos y ediciones.",
+    headline: "Obras seleccionadas para espacios singulares.",
     description:
-      "Una selección de mobiliario, obras, iluminación, alfombras, accesorios, objetos y ediciones para espacios distintivos.",
+      "Muebles, arte y objetos con carácter, materialidad y presencia duradera.",
     backToShop: "Volver a la tienda",
     backToCategory: "Volver a",
     works: "Obras",
@@ -1546,9 +1546,9 @@ const chinese: Dictionary = {
   shop: {
     ...english.shop,
     title: "设计商店",
-    headline: "家具、灯具、艺术、地毯、物件与限量作品",
+    headline: "为独特空间甄选的作品。",
     description:
-      "为独特空间精选的家具、艺术作品、灯具、地毯、配件、物件与限量作品。",
+      "具有个性、材质感与持久存在感的家具、艺术与物件。",
     backToShop: "返回商店",
     backToCategory: "返回",
     works: "作品",
@@ -1859,9 +1859,9 @@ const arabic: Dictionary = {
   shop: {
     ...english.shop,
     title: "متجر التصميم",
-    headline: "أثاث وإضاءة وفن وسجاد وقطع وإصدارات.",
+    headline: "أعمال مختارة لمساحات مميزة.",
     description:
-      "مختارات من الأثاث والأعمال الفنية والإضاءة والسجاد والإكسسوارات والقطع والإصدارات لمساحات مميزة.",
+      "أثاث وفن وقطع تتمتع بالشخصية والحضور المادي والدائم.",
     backToShop: "العودة إلى المتجر",
     backToCategory: "العودة إلى",
     works: "أعمال",

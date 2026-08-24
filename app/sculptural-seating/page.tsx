@@ -29,7 +29,7 @@ export default function SculpturalSeatingPage() {
       <section className="section-pad">
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2">
           {seating.map((item, index) => (
-            <article className="grid min-h-80 content-between border hairline bg-[#fbf8f1] p-6" key={item}>
+            <article className="grid min-h-64 content-between border hairline bg-[#fbf8f1] p-6" key={item}>
               <div className={`h-44 ${index % 2 === 0 ? "bg-[#171717]" : "bg-[#d8cfc2]"}`} />
               <div>
                 <p className="text-xs uppercase tracking-[0.18em] text-[#786f64]">Edition auf Anfrage</p>

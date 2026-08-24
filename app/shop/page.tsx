@@ -30,7 +30,7 @@ export default function ShopPage() {
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
         <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
           {primaryShopCategories.map((area) => (
-            <Link className="border hairline bg-[#f7f7f5] px-4 py-5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath("de", area.slug)} key={area.slug}>
+            <Link className="border hairline bg-[#f7f7f5] px-4 py-3.5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath("de", area.slug)} key={area.slug}>
               {dictionary.shop.categories[area.title] ?? area.label ?? area.title}
             </Link>
           ))}

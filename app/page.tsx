@@ -453,7 +453,7 @@ export default function Home() {
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {platformAreas.map((area, index) => (
                 <Link
-                  className="grid min-h-44 content-between border hairline bg-[#f7f7f5] p-5 transition hover:bg-[#f8f8f6]"
+                  className="grid min-h-36 content-between border hairline bg-[#f7f7f5] p-5 transition hover:bg-[#f8f8f6]"
                   href={area.href}
                   key={area.title}
                 >
@@ -484,7 +484,7 @@ export default function Home() {
           </div>
           <div className="mt-8 grid gap-4 lg:grid-cols-6">
             {collections.map((item, index) => (
-              <Link className="group grid min-h-80 content-between border hairline bg-[#f7f7f5] p-5 transition hover:bg-[#f8f8f6]" href="/collections" key={item.title}>
+              <Link className="group grid min-h-64 content-between border hairline bg-[#f7f7f5] p-5 transition hover:bg-[#f8f8f6]" href="/collections" key={item.title}>
                 <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">
                   Kollektion 0{index + 1}
                 </p>

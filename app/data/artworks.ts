@@ -43,20 +43,4 @@ export const artworks: Artwork[] = [
     price: "Auf Anfrage",
     palette: "bg-[#5d5247]",
   },
-  {
-    title: "Arbeit aus Papier, Asche und Pigment",
-    artist: "Künstlerposition C",
-    medium: "Papier, Asche, Naturpigment",
-    year: "2026",
-    price: "EUR 2,900",
-    palette: "bg-[#c8c0b2]",
-  },
-  {
-    title: "Reliefobjekt aus hellem Holz",
-    artist: "Künstlerposition D",
-    medium: "Geschnitztes Eichenrelief",
-    year: "2024",
-    price: "Auf Anfrage",
-    palette: "bg-[#171615]",
-  },
 ];

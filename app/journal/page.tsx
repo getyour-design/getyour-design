@@ -41,7 +41,7 @@ export default function JournalPage() {
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-6 md:grid-cols-2 lg:grid-cols-4">
           {stories.map((story) => (
-            <article className="grid min-h-80 content-between border hairline bg-[#f7f7f5] p-6" key={story.title}>
+            <article className="grid min-h-64 content-between border hairline bg-[#f7f7f5] p-6" key={story.title}>
               <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{story.category}</p>
               <div>
                 <h2 className="serif text-2xl leading-snug tracking-[0.08em]">{story.title}</h2>
@@ -68,7 +68,7 @@ export default function JournalPage() {
           </div>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {journalConnections.map((item) => (
-              <Link className="grid min-h-56 content-between border hairline bg-[#f7f7f5] p-6 transition hover:bg-[#f8f8f6]" href={item.href} key={item.title}>
+              <Link className="grid min-h-44 content-between border hairline bg-[#f7f7f5] p-6 transition hover:bg-[#f8f8f6]" href={item.href} key={item.title}>
                 <h3 className="serif text-xl leading-snug tracking-[0.08em]">{item.title}</h3>
                 <p className="text-sm leading-7 text-[#4b5356]">{item.text}</p>
               </Link>

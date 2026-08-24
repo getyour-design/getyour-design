@@ -83,7 +83,7 @@ a {
 }
 
 .section-pad {
-  padding: clamp(4rem, 8vw, 8rem) clamp(1.25rem, 4vw, 4rem);
+  padding: clamp(3rem, 5vw, 5.5rem) clamp(1.25rem, 4vw, 4rem);
 }
 
 .hairline {
