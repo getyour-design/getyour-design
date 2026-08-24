@@ -14,8 +14,8 @@ export const artworks: Artwork[] = [
   {
     title: "Bauernopfer",
     artist: "Sebastian Schrader",
-    medium: "Malerei auf Leinwand",
-    year: "Datierung auf Anfrage",
+    medium: "Öl auf Leinwand",
+    year: "2010",
     price: "Auf Anfrage",
     palette: "bg-[#282427]",
     aspectClassName: "aspect-[4/3]",

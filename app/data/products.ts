@@ -533,8 +533,8 @@ const categorySeeds: ProductCategorySeed[] = [
         maker: "Sebastian Schrader",
         slug: "sebastian-schrader-bauernopfer",
         price: "Auf Anfrage",
-        material: "Malerei auf Leinwand",
-        dimensions: "Maße auf Anfrage",
+        material: "Öl auf Leinwand",
+        dimensions: "180 × 240 cm",
         status: "preis-auf-anfrage",
         availability: "Preis auf Anfrage",
         description:
@@ -546,7 +546,7 @@ const categorySeeds: ProductCategorySeed[] = [
         artistBio:
           "Sebastian Schrader, geboren 1978 in Berlin, studierte Malerei an der Kunsthochschule Berlin-Weißensee bei Prof. Werner Liebmann. Nach seinem Diplom 2006 wurde er 2007 Meisterschüler; er lebt und arbeitet in Berlin.",
         origin: "Berlin, Deutschland",
-        uniqueNote: "Unikat. Zustand, Maße und Verfügbarkeit werden auf Anfrage bestätigt.",
+        uniqueNote: "Unikat, 2010. Öl auf Leinwand, 180 × 240 cm. Zustand und Verfügbarkeit werden auf Anfrage bestätigt.",
         ctaLabel: "Verfügbarkeit anfragen",
         images: bauernopferImages([
           "Sebastian Schrader, Bauernopfer, Gesamtansicht des Gemäldes",
@@ -555,7 +555,7 @@ const categorySeeds: ProductCategorySeed[] = [
           "Sebastian Schrader, Bauernopfer, Detail mit liegender Figur",
         ]),
         metaTitle: "Sebastian Schrader \u2013 Bauernopfer",
-        metaDescription: "Bauernopfer von Sebastian Schrader. Malerei auf Leinwand, Preis auf Anfrage.",
+        metaDescription: "Bauernopfer (2010) von Sebastian Schrader. Öl auf Leinwand, 180 × 240 cm, Preis auf Anfrage.",
       },
       { title: "Papierarbeit mit Struktur", slug: "papierarbeit-mit-struktur", price: "Auf Anfrage", material: "Papier, Pigment, Strukturauftrag", dimensions: "70 x 100 cm" },
       { title: "Mineralische Fläche auf Leinen", price: "EUR 4,200", material: "Mineralpigment auf Leinen", dimensions: "90 x 120 cm" },
