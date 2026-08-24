@@ -144,12 +144,10 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                 </p>
                 <h2 className="serif mt-3 text-balance text-xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-2xl">
                   <Link href={featuredProductHref}>
-                    54COUTURE
-                    <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
-                      THE FINEST EUROPEAN COW HIDES
-                    </span>
+                    {featuredProductContent?.cardTitle ?? featuredCommerceProduct.cardTitle}
                   </Link>
                 </h2>
+                <p className="mt-3 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">54COUTURE – THE FINEST EUROPEAN COW HIDES</p>
                 <p className="mt-5 text-sm text-[#353b3e]">{cowhidePresentation.price}</p>
                 <p className="mt-5 max-w-xl text-sm leading-7 text-[#4b5356]">{featuredProductDescription}</p>
                 <Link
@@ -249,13 +247,12 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                   <div>
                     <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.categories[item.category] ?? item.category}</p>
                     <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
-                      {item.slug === "sitzobjekt-kuhfell" ? (
-                        <>
-                          <span className="block">{cowhidePresentation.title}</span>
-                          <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
-                        </>
-                      ) : getProductTitle(locale, item.title, index)}
+                      {item.slug === "sitzobjekt-kuhfell" ? featuredProductContent?.cardTitle ?? item.cardTitle : getProductTitle(locale, item.title, index)}
                     </h3>
+                    <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                      {item.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : item.maker}
+                    </p>
+                    <p className="mt-3 text-sm leading-7 text-[#4b5356]">{item.slug === "sitzobjekt-kuhfell" ? featuredProductDescription : item.description}</p>
                   </div>
                   <p className="shrink-0 text-sm text-[#353b3e]">
                     {item.slug === "sitzobjekt-kuhfell" ? cowhidePresentation.price : item.price}
@@ -292,13 +289,12 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                   <div>
                     <p className="text-[0.65rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
                     <h3 className="serif mt-2 text-lg leading-snug tracking-[0.08em]">
-                      {work.slug === "sitzobjekt-kuhfell" ? (
-                        <>
-                          <span className="block">{cowhidePresentation.title}</span>
-                          <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
-                        </>
-                      ) : getProductTitle(locale, work.title, index)}
+                      {work.slug === "sitzobjekt-kuhfell" ? featuredProductContent?.cardTitle ?? work.cardTitle : getProductTitle(locale, work.title, index)}
                     </h3>
+                    <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                      {work.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : work.maker}
+                    </p>
+                    <p className="mt-3 text-sm leading-7 text-[#4b5356]">{work.slug === "sitzobjekt-kuhfell" ? featuredProductDescription : work.description}</p>
                   </div>
                   <p className="max-w-[8rem] text-right text-xs leading-5 text-[#4b5356]">{dictionary.shop.categories[work.category] ?? work.category}</p>
                 </div>

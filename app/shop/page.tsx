@@ -58,23 +58,13 @@ export default function ShopPage() {
                   <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{product.category}</p>
                   <Link href={`/shop/${product.slug}`}>
                     <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
-                      {cowhidePresentation ? (
-                        <>
-                          <span className="block">54COUTURE</span>
-                          <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
-                            THE FINEST EUROPEAN COW HIDES
-                          </span>
-                        </>
-                      ) : product.title}
+                      {product.cardTitle}
                     </h2>
                   </Link>
-                  {cowhidePresentation ? (
-                    <p className="mt-3 max-w-md text-sm leading-7 text-[#4b5356]">{product.description}</p>
-                  ) : (
-                    <Link className="mt-2 inline-block text-sm text-[#4b5356] hover:text-black" href={product.maker.includes("Künstlerposition") ? "/artists" : "/brands"}>
-                      {product.maker}
-                    </Link>
-                  )}
+                  <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                    {product.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : product.maker}
+                  </p>
+                  <p className="mt-3 max-w-md text-sm leading-7 text-[#4b5356]">{product.description}</p>
                   <EntityActions
                     href={`/shop/${product.slug}`}
                     id={`product:${product.slug}`}

@@ -283,12 +283,10 @@ export default function Home() {
               </p>
               <h2 className="serif mt-3 text-balance text-2xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-3xl">
                 <Link href={getProductPath("de", featuredCommerceProduct.categorySlug, featuredCommerceProduct.slug)}>
-                  <>
-                    <span className="block">{cowhidePresentation.title}</span>
-                    <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
-                  </>
+                  {featuredCommerceProduct.cardTitle}
                 </Link>
               </h2>
+              <p className="mt-3 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">54COUTURE – THE FINEST EUROPEAN COW HIDES</p>
               <p className="mt-5 text-sm text-[#353b3e]">{cowhidePresentation.price}</p>
               <p className="mt-6 max-w-xl text-sm leading-7 text-[#4b5356]">
                 {featuredCommerceProduct.description}
@@ -327,8 +325,11 @@ export default function Home() {
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{item.maker}</p>
-                    <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">{item.title}</h3>
+                    <h3 className="serif text-xl leading-snug tracking-[0.08em]">{item.cardTitle}</h3>
+                    <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                      {item.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : item.maker}
+                    </p>
+                    <p className="mt-3 text-sm leading-7 text-[#4b5356]">{item.description}</p>
                   </div>
                   <p className="shrink-0 text-sm text-[#353b3e]">{item.price}</p>
                 </div>

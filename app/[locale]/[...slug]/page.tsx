@@ -561,6 +561,7 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
           {products.map((product, index) => {
             const cowhidePresentation = get54CouturePresentationCopy(product.slug, locale);
             const productDescription = getLocalizedProductContent(locale, product)?.shortDescription ?? product.description;
+            const productCardTitle = getLocalizedProductCardTitle(locale, product, index);
 
             return (
               <article className="group" key={product.slug}>
@@ -579,21 +580,13 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
                   <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getLocalizedCategoryLabel(locale, product.category)}</p>
                   <Link href={getLocalizedProductPath(locale, product)}>
                     <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
-                      {cowhidePresentation ? (
-                        <>
-                          <span className="block">54COUTURE</span>
-                          <span className="mt-2 block text-[0.6em] font-normal tracking-[0.16em]">
-                            THE FINEST EUROPEAN COW HIDES
-                          </span>
-                        </>
-                      ) : getLocalizedProductCardTitle(locale, product, index)}
+                      {productCardTitle}
                     </h2>
                   </Link>
-                  {cowhidePresentation ? (
-                    <p className="mt-3 max-w-md text-sm leading-7 text-[#4b5356]">{productDescription}</p>
-                  ) : (
-                    <p className="mt-2 text-sm text-[#4b5356]">{product.maker.replace("Künstlerposition", "Artist Position")}</p>
-                  )}
+                  <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                    {product.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : product.maker.replace("Künstlerposition", "Artist Position")}
+                  </p>
+                  <p className="mt-3 max-w-md text-sm leading-7 text-[#4b5356]">{productDescription}</p>
                   <EntityActions
                     href={getLocalizedProductPath(locale, product)}
                     id={`product:${product.slug}`}
@@ -655,15 +648,11 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                 {dictionary.shop.breadcrumbShop} / {getLocalizedCategoryLabel(locale, product.category)} / {productTitle}
               </p>
               <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
-                {cowhidePresentation ? (
-                  <>
-                    <span className="block">{cowhidePresentation.title}</span>
-                    <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
-                  </>
-                ) : (
-                  productTitle
-                )}
+                {getLocalizedProductCardTitle(locale, product, productIndex)}
               </h1>
+              <p className="mt-3 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                {product.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : product.maker.replace("Künstlerposition", "Artist Position")}
+              </p>
               <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{content?.shortDescription ?? dictionary.shop.productDescription}</p>
               <div className="mt-8 border-y border-black/15 py-4 text-[#353b3e]">
                 <p className="text-base">{cowhidePresentation?.price ?? product.price}</p>
@@ -790,15 +779,13 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                       <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{getLocalizedCategoryLabel(locale, item.category)}</p>
                       <Link href={getLocalizedProductPath(locale, item)}>
                         <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
-                          {cowhidePresentation ? (
-                            <>
-                              <span className="block">{cowhidePresentation.title}</span>
-                              <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
-                            </>
-                          ) : getLocalizedProductCardTitle(locale, item, index)}
+                          {getLocalizedProductCardTitle(locale, item, index)}
                         </h2>
                       </Link>
-                      <p className="mt-2 text-sm text-[#4b5356]">{item.maker.replace("Künstlerposition", "Artist Position")}</p>
+                      <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                        {item.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : item.maker.replace("Künstlerposition", "Artist Position")}
+                      </p>
+                      <p className="mt-3 max-w-md text-sm leading-7 text-[#4b5356]">{getLocalizedProductContent(locale, item)?.shortDescription ?? item.description}</p>
                       <EntityActions
                         href={getLocalizedProductPath(locale, item)}
                         id={`product:${item.slug}`}

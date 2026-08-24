@@ -123,15 +123,11 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                 Shop / {product.category} / {product.title}
               </p>
               <h1 className="serif mt-5 text-balance text-3xl font-normal leading-tight tracking-[0.08em] text-[#10100f] md:text-4xl">
-                {cowhidePresentation ? (
-                  <>
-                    <span className="block">{cowhidePresentation.title}</span>
-                    <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
-                  </>
-                ) : (
-                  product.title
-                )}
+                {product.cardTitle}
               </h1>
+              <p className="mt-3 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                {product.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : product.maker}
+              </p>
               <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{product.description}</p>
               <div className="mt-8 border-y border-black/15 py-4 text-[#353b3e]">
                 <p className="text-base">{cowhidePresentation?.price ?? product.price}</p>
@@ -260,15 +256,13 @@ export default async function ShopSlugPage({ params }: ShopSlugPageProps) {
                       <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{item.category}</p>
                       <Link href={getRootProductPath(item)}>
                         <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
-                          {cowhidePresentation ? (
-                            <>
-                              <span className="block">{cowhidePresentation.title}</span>
-                              <span className="mt-2 block">{cowhidePresentation.subtitle}</span>
-                            </>
-                          ) : item.cardTitle}
+                          {item.cardTitle}
                         </h2>
                       </Link>
-                      <p className="mt-2 text-sm text-[#4b5356]">{item.maker}</p>
+                      <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                        {item.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : item.maker}
+                      </p>
+                      <p className="mt-3 max-w-md text-sm leading-7 text-[#4b5356]">{item.description}</p>
                       <EntityActions
                         href={getRootProductPath(item)}
                         id={`product:${item.slug}`}

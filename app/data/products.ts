@@ -37,6 +37,7 @@ function cowhideSeatImages(alts: string[]): ProductImage[] {
 
 const up7ImageSources = [
   "/images/products/gaetano-pesce-up7-01-cover.png",
+  "/images/products/gaetano-pesce-up7-02-detail.png",
 ];
 
 function up7Images(alts: string[]): ProductImage[] {
@@ -304,6 +305,7 @@ const categorySeeds: ProductCategorySeed[] = [
         ctaLabel: "Preis anfragen",
         images: up7Images([
           "UP7 Il Piede von Gaetano Pesce als schwarzes skulpturales Sitzobjekt im Garten",
+          "Detailansicht der Fußform von UP7 Il Piede von Gaetano Pesce im Garten",
         ]),
         metaTitle: "UP7 – Il Piede von Gaetano Pesce",
         metaDescription:
@@ -323,7 +325,10 @@ const categorySeeds: ProductCategorySeed[] = [
             origin: "Italy",
             uniqueNote: "The image shown serves as a reference for form and presence. Execution, condition and availability are confirmed individually.",
             ctaLabel: "Request price",
-            images: up7Images(["UP7 Il Piede by Gaetano Pesce, a black sculptural seating object in a garden"]),
+            images: up7Images([
+              "UP7 Il Piede by Gaetano Pesce, a black sculptural seating object in a garden",
+              "Detail view of the foot-shaped UP7 Il Piede by Gaetano Pesce in a garden",
+            ]),
             metaTitle: "UP7 – Il Piede by Gaetano Pesce",
             metaDescription: "UP7 – Il Piede by Gaetano Pesce: an iconic seating object between sculpture, furniture and design history. Price on request.",
           },
@@ -338,7 +343,10 @@ const categorySeeds: ProductCategorySeed[] = [
             origin: "Italie",
             uniqueNote: "L'image présentée sert de référence pour la forme et la présence. L'exécution, l'état et la disponibilité sont confirmés individuellement.",
             ctaLabel: "Demander le prix",
-            images: up7Images(["UP7 Il Piede de Gaetano Pesce, assise sculpturale noire dans un jardin"]),
+            images: up7Images([
+              "UP7 Il Piede de Gaetano Pesce, assise sculpturale noire dans un jardin",
+              "Vue détaillée de la forme de pied de UP7 Il Piede de Gaetano Pesce dans un jardin",
+            ]),
             metaTitle: "UP7 – Il Piede de Gaetano Pesce",
             metaDescription: "UP7 – Il Piede de Gaetano Pesce : assise iconique entre sculpture, mobilier et histoire du design. Prix sur demande.",
           },
@@ -353,7 +361,10 @@ const categorySeeds: ProductCategorySeed[] = [
             origin: "Italia",
             uniqueNote: "La imagen mostrada sirve de referencia para la forma y la presencia. La ejecución, el estado y la disponibilidad se confirman individualmente.",
             ctaLabel: "Consultar precio",
-            images: up7Images(["UP7 Il Piede de Gaetano Pesce, objeto de asiento escultórico negro en un jardín"]),
+            images: up7Images([
+              "UP7 Il Piede de Gaetano Pesce, objeto de asiento escultórico negro en un jardín",
+              "Vista detallada de la forma de pie de UP7 Il Piede de Gaetano Pesce en un jardín",
+            ]),
             metaTitle: "UP7 – Il Piede de Gaetano Pesce",
             metaDescription: "UP7 – Il Piede de Gaetano Pesce: objeto de asiento icónico entre escultura, mobiliario e historia del diseño. Precio bajo consulta.",
           },
@@ -368,7 +379,10 @@ const categorySeeds: ProductCategorySeed[] = [
             origin: "意大利",
             uniqueNote: "展示图片仅作为形态与空间感的参考。具体版本、状态与供应情况将单独确认。",
             ctaLabel: "咨询价格",
-            images: up7Images(["Gaetano Pesce 设计的 UP7 Il Piede，花园中的黑色雕塑感座椅"]),
+            images: up7Images([
+              "Gaetano Pesce 设计的 UP7 Il Piede，花园中的黑色雕塑感座椅",
+              "花园中 Gaetano Pesce 设计的 UP7 Il Piede 脚部造型细节",
+            ]),
             metaTitle: "Gaetano Pesce 设计的 UP7 – Il Piede",
             metaDescription: "Gaetano Pesce 设计的 UP7 – Il Piede：一件介于雕塑、家具与设计史之间的标志性座椅。价格请咨询。",
           },
@@ -383,15 +397,18 @@ const categorySeeds: ProductCategorySeed[] = [
             origin: "إيطاليا",
             uniqueNote: "الصورة المعروضة مرجع للشكل والحضور. يتم تأكيد النسخة والحالة والتوفر بشكل فردي.",
             ctaLabel: "طلب السعر",
-            images: up7Images(["UP7 Il Piede من تصميم غايتانو بيتشي، مقعد نحتي أسود في حديقة"]),
+            images: up7Images([
+              "UP7 Il Piede من تصميم غايتانو بيتشي، مقعد نحتي أسود في حديقة",
+              "لقطة تفصيلية لشكل القدم في UP7 Il Piede من تصميم غايتانو بيتشي في حديقة",
+            ]),
             metaTitle: "UP7 – Il Piede من تصميم غايتانو بيتشي",
             metaDescription: "UP7 – Il Piede من تصميم غايتانو بيتشي: مقعد أيقوني بين النحت والأثاث وتاريخ التصميم. السعر عند الطلب.",
           },
         },
       },
       {
-        title: "54COUTURE MÖBEL UND KUNST AUS HOCHWERTIGSTEN EUROPÄISCHEN FELLEN",
-        cardTitle: "Sitzobjekt aus Kuhfell",
+        title: "Gelber Fell-Pouf",
+        cardTitle: "Gelber Fell-Pouf",
         maker: "54COUTURE",
         brand: "54COUTURE",
         brandSlug: "54couture",
@@ -437,7 +454,7 @@ const categorySeeds: ProductCategorySeed[] = [
         localized: {
           en: {
             title: "54COUTURE FURNITURE AND ART IN THE FINEST EUROPEAN HIDES",
-            cardTitle: "Cowhide Seating Object",
+            cardTitle: "Yellow Cowhide Pouf",
             priceNote: "Including statutory VAT, excluding shipping.",
             shortDescription:
               "A sculptural seating object made from carefully selected European cowhide. Its low circular form brings the material, colour and natural texture into focus.",
@@ -473,7 +490,7 @@ const categorySeeds: ProductCategorySeed[] = [
           },
           fr: {
             title: "54COUTURE MOBILIER ET ART EN PEAUX EUROPÉENNES DE LA PLUS HAUTE QUALITÉ",
-            cardTitle: "Assise en peau de vache",
+            cardTitle: "Pouf jaune en peau de vache",
             priceNote: "TVA légale incluse, frais de livraison en supplément.",
             shortDescription:
               "Une assise sculpturale réalisée en peau de vache européenne soigneusement sélectionnée. Sa forme basse et circulaire met la matière, la couleur et la texture naturelle au premier plan.",
@@ -509,7 +526,7 @@ const categorySeeds: ProductCategorySeed[] = [
           },
           es: {
             title: "54COUTURE MUEBLES Y ARTE EN PIELES EUROPEAS DE LA MÁS ALTA CALIDAD",
-            cardTitle: "Asiento en piel de vaca",
+            cardTitle: "Pouf amarillo en piel de vaca",
             priceNote: "IVA legal incluido, gastos de envío no incluidos.",
             shortDescription:
               "Un asiento escultórico realizado en piel de vaca europea cuidadosamente seleccionada. Su forma baja y circular sitúa el material, el color y la textura natural en primer plano.",
@@ -545,7 +562,7 @@ const categorySeeds: ProductCategorySeed[] = [
           },
           zh: {
             title: "54COUTURE 采用顶级欧洲皮毛打造的家具与艺术",
-            cardTitle: "欧洲牛皮座椅",
+            cardTitle: "黄色牛皮矮凳",
             priceNote: "含法定增值税，运费另计。",
             shortDescription:
               "一件采用严选欧洲牛皮制成的雕塑感座椅。低矮的圆形结构让材质、色彩与天然毛面纹理成为视觉重点。",
@@ -577,7 +594,7 @@ const categorySeeds: ProductCategorySeed[] = [
           },
           ar: {
             title: "54COUTURE أثاث وفن من أجود الجلود الأوروبية",
-            cardTitle: "مقعد من جلد البقر",
+            cardTitle: "بوف أصفر من جلد البقر",
             priceNote: "شامل ضريبة القيمة المضافة القانونية، ولا يشمل تكاليف الشحن.",
             shortDescription:
               "مقعد نحتي مصنوع من جلد بقر أوروبي مختار بعناية. يبرز شكله الدائري المنخفض المادة واللون والملمس الطبيعي للجلد.",
@@ -693,8 +710,8 @@ const categorySeeds: ProductCategorySeed[] = [
       "Textile Arbeit mit ruhiger Oberfläche, feiner Haptik und klarer Wirkung im Raum.",
     items: [
       {
-        title: "54COUTURE - MÖBEL & KUNST",
-        cardTitle: "54COUTURE Teppich",
+        title: "Bordeauxroter Kuhfell-Teppich",
+        cardTitle: "Bordeauxroter Kuhfell-Teppich",
         maker: "54COUTURE",
         brand: "54COUTURE",
         brandSlug: "54couture",
