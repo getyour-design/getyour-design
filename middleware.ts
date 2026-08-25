@@ -4,6 +4,7 @@ import { englishShopCategorySlugs, rootRedirects } from "./app/lib/i18n";
 
 const publicFilePattern = /\.(.*)$/;
 const locales = new Set(["de", "en", "fr", "es", "zh", "ar"]);
+const isComingSoonMode = process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SITE_MODE !== "live";
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -16,6 +17,12 @@ export function middleware(request: NextRequest) {
     publicFilePattern.test(pathname)
   ) {
     return NextResponse.next();
+  }
+
+  if (isComingSoonMode && pathname !== "/coming-soon") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/coming-soon";
+    return NextResponse.rewrite(url);
   }
 
   if (pathname.startsWith("/de/art")) {

@@ -6,6 +6,7 @@ import { Navigation } from "./components/Navigation";
 import { SiteStructuredData } from "./components/StructuredData";
 
 const pinterestVerificationCode = "58d43fc30c175ae8e21a59237709dc23";
+const isComingSoonMode = process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SITE_MODE !== "live";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.getyour.design"),
@@ -76,10 +77,10 @@ export default async function RootLayout({
   return (
     <html lang={htmlLang}>
       <body>
-        <SiteStructuredData />
-        <Navigation />
+        {isComingSoonMode ? null : <SiteStructuredData />}
+        {isComingSoonMode ? null : <Navigation />}
         {children}
-        <Footer />
+        {isComingSoonMode ? null : <Footer />}
       </body>
     </html>
   );

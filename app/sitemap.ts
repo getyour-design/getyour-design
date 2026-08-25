@@ -5,6 +5,10 @@ import { getAbsoluteAlternateLanguages, getProductPath, getShopPath, localizedRo
 const lastModified = new Date("2026-08-22");
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SITE_MODE !== "live") {
+    return [];
+  }
+
   const staticRoutes = Object.entries(localizedRoutes).flatMap(([routeKey, paths]) =>
     locales.map((locale) => ({
       url: `${siteUrl}${paths[locale]}`,
