@@ -6,7 +6,7 @@ import { materialCards } from "../data/materials";
 import { heroShopCategories, products } from "../data/products";
 import { stories } from "../data/stories";
 import { getProductPath, getShopPath, localizeHref, type Locale } from "../lib/i18n";
-import { getCowhidePresentationCopy, getEnglishProductTitle } from "../lib/productTitles";
+import { getCowhidePresentationCopy, getEnglishProductTitle, getLocalizedProductPrice } from "../lib/productTitles";
 
 const productImages = [
   "/images/product-stone-object.svg",
@@ -206,7 +206,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                     </>
                   )}
                 </h2>
-                <p className="mt-5 text-sm text-[#353b3e]">{locale === "de" ? "Auf Anfrage" : "On request"}</p>
+                <p className="mt-5 text-sm text-[#353b3e]">{getLocalizedProductPrice("Auf Anfrage", locale)}</p>
                 <p className="mt-5 max-w-xl text-sm leading-7 text-[#4b5356]">{featuredArtworkDescription[locale]}</p>
                 {featuredArtworkHref ? (
                   <Link
@@ -255,7 +255,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                     <p className="mt-3 text-sm leading-7 text-[#4b5356]">{item.slug === "sitzobjekt-kuhfell" ? featuredProductDescription : item.description}</p>
                   </div>
                   <p className="shrink-0 text-sm text-[#353b3e]">
-                    {item.slug === "sitzobjekt-kuhfell" ? cowhidePresentation.price : item.price}
+                    {getLocalizedProductPrice(item.slug === "sitzobjekt-kuhfell" ? cowhidePresentation.price : item.price, locale)}
                   </p>
                 </div>
               </article>

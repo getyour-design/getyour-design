@@ -103,6 +103,37 @@ export function getEnglishProductTitle(title: string) {
   return englishProductTitles[title] ?? title;
 }
 
+const priceOnRequest: Record<Locale, string> = {
+  de: "Auf Anfrage",
+  en: "On request",
+  fr: "Sur demande",
+  es: "A consultar",
+  zh: "价格面议",
+  ar: "السعر عند الطلب",
+};
+
+const fromPrice: Record<Locale, string> = {
+  de: "Ab",
+  en: "From",
+  fr: "À partir de",
+  es: "Desde",
+  zh: "起价",
+  ar: "ابتداءً من",
+};
+
+/** Keeps price labels in the active site language, including products without bespoke translations. */
+export function getLocalizedProductPrice(price: string, locale: Locale) {
+  if (price === "Auf Anfrage" || price === "Preis auf Anfrage") {
+    return priceOnRequest[locale];
+  }
+
+  if (price.startsWith("Ab ")) {
+    return `${fromPrice[locale]} ${price.slice(3)}`;
+  }
+
+  return price;
+}
+
 export const cowhidePresentationCopy: Record<Locale, { title: string; subtitle: string; price: string }> = {
   de: {
     title: "54COUTURE - MÖBEL & KUNST",

@@ -37,7 +37,7 @@ import { artworks } from "../../data/artworks";
 import { brands } from "../../data/brands";
 import { stories } from "../../data/stories";
 import { getCommerceCta } from "../../lib/commerce";
-import { get54CouturePresentationCopy, getEnglishProductTitle } from "../../lib/productTitles";
+import { get54CouturePresentationCopy, getEnglishProductTitle, getLocalizedProductPrice } from "../../lib/productTitles";
 import {
   getAbsoluteAlternateLanguages,
   getLocalizedShopSlug,
@@ -266,7 +266,7 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
           images: getLocalizedProductImages(locale, product),
           maker: product.maker,
           material: product.material,
-          price: get54CouturePresentationCopy(product.slug, locale)?.price ?? product.price,
+          price: getLocalizedProductPrice(get54CouturePresentationCopy(product.slug, locale)?.price ?? product.price, locale),
           slug: product.slug,
           title: getLocalizedProductTitle(locale, product, products.findIndex((item) => item.slug === product.slug)),
           url: getLocalizedProductPath(locale, product),
@@ -594,7 +594,7 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
                     type={product.category === "Kunst" || product.category === "Editionen" ? "Kunstwerk" : product.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
                   />
                 </div>
-                <p className="shrink-0 text-sm text-[#353b3e]">{cowhidePresentation?.price ?? product.price}</p>
+                <p className="shrink-0 text-sm text-[#353b3e]">{getLocalizedProductPrice(cowhidePresentation?.price ?? product.price, locale)}</p>
               </div>
               </article>
             );
@@ -655,7 +655,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
               </p>
               <p className="mt-8 max-w-2xl text-base leading-8 text-[#4b5356]">{content?.shortDescription ?? dictionary.shop.productDescription}</p>
               <div className="mt-8 border-y border-black/15 py-4 text-[#353b3e]">
-                <p className="text-base">{cowhidePresentation?.price ?? product.price}</p>
+                <p className="text-base">{getLocalizedProductPrice(cowhidePresentation?.price ?? product.price, locale)}</p>
                 {content?.priceNote ? (
                   <p className="mt-2 text-[0.68rem] leading-5 text-[#667174]">
                     <span className="mr-1 align-super text-[0.55rem]">*</span>
@@ -793,7 +793,7 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                         type={item.category === "Kunst" || item.category === "Editionen" ? "Kunstwerk" : item.category === "Collectible Design" ? "Collectible Design" : "Produkt"}
                       />
                     </div>
-                    <p className="shrink-0 text-sm text-[#353b3e]">{cowhidePresentation?.price ?? item.price}</p>
+                    <p className="shrink-0 text-sm text-[#353b3e]">{getLocalizedProductPrice(cowhidePresentation?.price ?? item.price, locale)}</p>
                   </div>
                 </article>
               );
@@ -951,7 +951,7 @@ function EnglishArtPage() {
                   {productHref ? <Link href={productHref}>{artwork.title}</Link> : artwork.title}
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-[#4b5356]">{artwork.medium}, {artwork.year}</p>
-                <p className="mt-3 text-sm text-[#11100f]">{artwork.price}</p>
+                <p className="mt-3 text-sm text-[#11100f]">{getLocalizedProductPrice(artwork.price, "en")}</p>
                 <EntityActions href={productHref ?? "/en/art"} id={`artwork:${artwork.title}`} title={artwork.title} type="Kunstwerk" />
               </div>
             </article>
