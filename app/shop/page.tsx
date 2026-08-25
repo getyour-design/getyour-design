@@ -45,8 +45,9 @@ export default function ShopPage() {
               <article className="group" key={product.slug}>
               <Link href={`/shop/${product.slug}`}>
                 <ProductCardMedia
+                  aspectClassName="aspect-[4/5]"
                   images={product.images}
-                  fit={cowhidePresentation ? "cover" : undefined}
+                  fit="cover"
                   index={index}
                   imageIndex={product.slug === "sitzobjekt-kuhfell" ? 1 : undefined}
                   palette={product.palette}

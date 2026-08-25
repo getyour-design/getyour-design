@@ -105,6 +105,7 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
 
   const isArtworkCover = images[0].src.includes("sebastian-schrader-") || images[0].src.includes("christian-achenbach-");
   const artworkAspectClass = images[0].src.includes("christian-achenbach-") ? "aspect-[184/154]" : "aspect-[4/3]";
+  const isUp7Cover = images[0].src.includes("gaetano-pesce-up7-01-cover");
 
   return (
     <div>
@@ -118,6 +119,7 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
           image={images[0]}
           fit="cover"
           priority
+          cropClassName={isUp7Cover ? "object-[center_75%]" : undefined}
           sizes="(min-width: 1024px) 55vw, 100vw"
           title={title}
         />

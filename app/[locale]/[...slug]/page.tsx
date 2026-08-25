@@ -567,8 +567,9 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
               <article className="group" key={product.slug}>
               <Link href={getLocalizedProductPath(locale, product)}>
                 <ProductCardMedia
+                  aspectClassName="aspect-[4/5]"
                   images={getLocalizedProductImages(locale, product)}
-                  fit={cowhidePresentation ? "cover" : undefined}
+                  fit="cover"
                   index={index}
                   imageIndex={product.slug === "sitzobjekt-kuhfell" ? 1 : undefined}
                   palette={product.palette}
