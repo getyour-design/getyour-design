@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "../components/PageHero";
 import { PlaceholderArtwork } from "../components/PlaceholderArtwork";
-import { ProductCardMedia } from "../components/ProductMedia";
 import { EntityActions } from "../components/EntityActions";
 import { artworks } from "../data/artworks";
 
@@ -24,7 +24,7 @@ export default function ArtPage() {
         description="Ausgewählte Arbeiten für Räume, Sammlungen und Interieurs mit eigenem Blick."
       />
       <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-[1320px] gap-x-5 gap-y-10 md:grid-cols-[1.6fr_1fr] md:items-start">
           {artworks.map((artwork, index) => {
             const productHref = artwork.productSlug ? `/de/shop/${artwork.productSlug}` : undefined;
 
@@ -32,10 +32,10 @@ export default function ArtPage() {
             <article key={artwork.title}>
               {artwork.images && productHref ? (
                 <Link className="group block" href={productHref}>
-                  <ProductCardMedia aspectClassName="aspect-[4/3]" images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+                  <Image alt={artwork.images[0].alt || artwork.title} className="h-auto w-full" height={artwork.imageHeight ?? 1200} sizes="(min-width: 768px) 60vw, 100vw" src={artwork.images[0].src} width={artwork.imageWidth ?? 1200} />
                 </Link>
               ) : artwork.images ? (
-                <ProductCardMedia aspectClassName="aspect-[4/3]" images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+                <Image alt={artwork.images[0].alt || artwork.title} className="h-auto w-full" height={artwork.imageHeight ?? 1200} sizes="(min-width: 768px) 60vw, 100vw" src={artwork.images[0].src} width={artwork.imageWidth ?? 1200} />
               ) : (
                 <PlaceholderArtwork aspectClassName="aspect-[4/3]" index={index} palette={artwork.palette} />
               )}

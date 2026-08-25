@@ -930,7 +930,7 @@ function EnglishArtPage() {
     <main>
       <PageHero eyebrow="Art" title="Artworks, works on paper, sculptures and editions." description="Selected works for rooms, collections and interiors with an independent point of view." />
       <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-[1320px] gap-x-5 gap-y-10 md:grid-cols-[1.6fr_1fr] md:items-start">
           {artworks.map((artwork, index) => {
             const productHref = artwork.productSlug ? `/en/shop/${artwork.productSlug}` : undefined;
 
@@ -938,10 +938,10 @@ function EnglishArtPage() {
             <article key={artwork.title}>
               {artwork.images && productHref ? (
                 <Link className="group block" href={productHref}>
-                  <ProductCardMedia aspectClassName="aspect-[4/3]" images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+                  <Image alt={artwork.images[0].alt || artwork.title} className="h-auto w-full" height={artwork.imageHeight ?? 1200} sizes="(min-width: 768px) 60vw, 100vw" src={artwork.images[0].src} width={artwork.imageWidth ?? 1200} />
                 </Link>
               ) : artwork.images ? (
-                <ProductCardMedia aspectClassName="aspect-[4/3]" images={artwork.images} fit="cover" index={index} palette={artwork.palette} title={artwork.title} />
+                <Image alt={artwork.images[0].alt || artwork.title} className="h-auto w-full" height={artwork.imageHeight ?? 1200} sizes="(min-width: 768px) 60vw, 100vw" src={artwork.images[0].src} width={artwork.imageWidth ?? 1200} />
               ) : (
                 <PlaceholderArtwork aspectClassName="aspect-[4/3]" index={index} palette={artwork.palette} />
               )}

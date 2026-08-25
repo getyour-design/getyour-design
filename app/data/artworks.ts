@@ -6,6 +6,8 @@ export type Artwork = {
   price: string;
   palette: string;
   aspectClassName?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   productSlug?: string;
   images?: { src: string; alt: string }[];
 };
@@ -19,6 +21,8 @@ export const artworks: Artwork[] = [
     price: "Auf Anfrage",
     palette: "bg-[#282427]",
     aspectClassName: "aspect-[4/3]",
+    imageWidth: 3508,
+    imageHeight: 2616,
     productSlug: "sebastian-schrader-bauernopfer",
     images: [
       {
@@ -28,19 +32,21 @@ export const artworks: Artwork[] = [
     ],
   },
   {
-    title: "Papierarbeit mit mineralischer Fläche",
-    artist: "Künstlerposition A",
-    medium: "Mineralpigment auf Leinen",
-    year: "2026",
-    price: "EUR 4,200",
-    palette: "bg-[#e7e0d5]",
-  },
-  {
-    title: "Kleine Skulptur aus Bronze",
-    artist: "Künstlerposition B",
-    medium: "Gegossene Bronze",
-    year: "2025",
+    title: "GUCKST DU",
+    artist: "Christian Achenbach",
+    medium: "Öl und Acryl auf Leinwand, gerahmt",
+    year: "2011",
     price: "Auf Anfrage",
-    palette: "bg-[#5d5247]",
+    palette: "bg-[#e2ddd3]",
+    aspectClassName: "aspect-[184/154]",
+    imageWidth: 1481,
+    imageHeight: 1772,
+    productSlug: "christian-achenbach-guckst-du",
+    images: [
+      {
+        src: "/images/products/christian-achenbach-guckst-du-01-cover.jpg",
+        alt: "Christian Achenbach, GUCKST DU, 2011, Öl und Acryl auf Leinwand, gerahmt",
+      },
+    ],
   },
 ];

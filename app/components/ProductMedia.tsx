@@ -103,19 +103,20 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
     return <PlaceholderArtwork index={index} palette={palette} />;
   }
 
-  const isArtworkCover = images[0].src.includes("sebastian-schrader-");
+  const isArtworkCover = images[0].src.includes("sebastian-schrader-") || images[0].src.includes("christian-achenbach-");
+  const artworkAspectClass = images[0].src.includes("christian-achenbach-") ? "aspect-[184/154]" : "aspect-[4/3]";
 
   return (
     <div>
       <button
         aria-label={`${images[0].alt || title} vergrößern`}
-        className={`group relative w-full cursor-zoom-in overflow-hidden ${isArtworkCover ? "aspect-[4/3] bg-[#f8f8f6]" : "aspect-video"}`}
+        className={`group relative w-full cursor-zoom-in overflow-hidden ${isArtworkCover ? `${artworkAspectClass} bg-[#f8f8f6]` : "aspect-video"}`}
         onClick={() => setActiveImage(images[0])}
         type="button"
       >
         <GalleryImage
           image={images[0]}
-          fit={isArtworkCover ? "contain" : "cover"}
+          fit="cover"
           priority
           sizes="(min-width: 1024px) 55vw, 100vw"
           title={title}
