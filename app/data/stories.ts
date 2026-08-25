@@ -12,6 +12,16 @@ export type Story = {
 
 export const stories: Story[] = [
   {
+    title: "Farbe als Ausgangspunkt",
+    subtitle: "Paletten für Räume und Objekte",
+    category: "Gestaltung & Materialien",
+    teaser: "Wie digitale Farbpaletten helfen, Material, Licht und Atmosphäre bewusster zusammenzudenken – vom ersten Entwurf bis zum realen Raum.",
+    href: "/de/journal/farbe-als-ausgangspunkt",
+    image: "/images/journal-farbe-als-ausgangspunkt-cover.png",
+    publishedAt: "10. August 2026",
+    publishedAtIso: "2026-08-10",
+  },
+  {
     title: "Milan Design Week 2026",
     subtitle: "Design als Prozess",
     category: "Messen & Veranstaltungen",
