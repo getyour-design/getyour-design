@@ -24,6 +24,7 @@ import SearchPage from "../../suche/page";
 import TradePage from "../../trade/page";
 import CartPage from "../../warenkorb/page";
 import { PageHero } from "../../components/PageHero";
+import { LocalizedArtPage } from "../../components/LocalizedArtPage";
 import { PlaceholderArtwork } from "../../components/PlaceholderArtwork";
 import { ProductCardMedia, ProductGallery, type ProductImageAsset } from "../../components/ProductMedia";
 import { EntityActions } from "../../components/EntityActions";
@@ -295,6 +296,10 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
     return <LegalPlaceholderPage locale={locale} routeKey={route.key} />;
   }
 
+  if (route.key === "art") {
+    return <LocalizedArtPage locale={locale} />;
+  }
+
   if (locale === "en") {
     return <EnglishStaticPage routeKey={route.key} />;
   }
@@ -414,6 +419,17 @@ function getUniqueNoteLabel(locale: Locale) {
     es: "Nota de pieza única",
     zh: "独件说明",
     ar: "ملاحظة عن التفرد",
+  }[locale];
+}
+
+function getSourceLinkLabel(locale: Locale) {
+  return {
+    de: "Artikel zum Wandgemälde lesen",
+    en: "Read the article about the mural",
+    fr: "Lire l’article sur la peinture murale",
+    es: "Leer el artículo sobre el mural",
+    zh: "阅读壁画相关文章",
+    ar: "اقرأ المقال عن الجدارية",
   }[locale];
 }
 
@@ -679,6 +695,16 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
                       <p key={paragraph}>{paragraph}</p>
                     ))}
                   </div>
+                  {product.sourceUrl ? (
+                    <a
+                      className="mt-5 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.16em] text-[#353b3e]"
+                      href={product.sourceUrl}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      {getSourceLinkLabel(locale)}
+                    </a>
+                  ) : null}
                 </section>
               ) : null}
               {content?.artistBio ?? product.artistBio ? (

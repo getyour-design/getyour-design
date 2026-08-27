@@ -103,8 +103,15 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
     return <PlaceholderArtwork index={index} palette={palette} />;
   }
 
-  const isArtworkCover = images[0].src.includes("sebastian-schrader-") || images[0].src.includes("christian-achenbach-");
-  const artworkAspectClass = images[0].src.includes("christian-achenbach-") ? "aspect-[184/154]" : "aspect-[4/3]";
+  const isArtworkCover = [
+    "sebastian-schrader-",
+    "christian-achenbach-",
+    "michael-fischer-art-",
+    "stefan-hirsig-",
+    "silke-weyer-",
+    "gudrun-bruene-",
+  ].some((prefix) => images[0].src.includes(prefix));
+  const artworkAspectClass = "aspect-[4/5]";
   const isUp7Cover = images[0].src.includes("gaetano-pesce-up7-01-cover");
 
   return (
@@ -117,7 +124,7 @@ export function ProductGallery({ images, index, palette, title }: ProductGallery
       >
         <GalleryImage
           image={images[0]}
-          fit="cover"
+          fit={isArtworkCover ? "contain" : "cover"}
           priority
           cropClassName={isUp7Cover ? "object-[center_75%]" : undefined}
           sizes="(min-width: 1024px) 55vw, 100vw"

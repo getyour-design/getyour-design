@@ -28,6 +28,45 @@ function guckstDuImages(alts: string[]): ProductImage[] {
   return guckstDuImageSources.map((src, index) => ({ src, alt: alts[index] }));
 }
 
+const michaelFischerArtImageSources = [
+  "/images/products/michael-fischer-art-untitled-2024-01.png",
+  "/images/products/michael-fischer-art-wandstueck-wall.jpg",
+];
+
+function michaelFischerArtImages(alts: string[]): ProductImage[] {
+  return michaelFischerArtImageSources.map((src, index) => ({ src, alt: alts[index] }));
+}
+
+const stefanHirsigImageSources = [
+  "/images/products/stefan-hirsig-die-erklaerung-der-welt-01.png",
+];
+
+function stefanHirsigImages(alts: string[]): ProductImage[] {
+  return stefanHirsigImageSources.map((src, index) => ({ src, alt: alts[index] }));
+}
+
+const silkeWeyerImageSources = [
+  "/images/products/silke-weyer-paso-due-01.webp",
+];
+
+function silkeWeyerImages(alts: string[]): ProductImage[] {
+  return silkeWeyerImageSources.map((src, index) => ({ src, alt: alts[index] }));
+}
+
+const toroBlancoImageSources = [
+  "/images/products/silke-weyer-toro-blanco-01.webp",
+];
+
+function toroBlancoImages(alts: string[]): ProductImage[] {
+  return toroBlancoImageSources.map((src, index) => ({ src, alt: alts[index] }));
+}
+
+const gudrunBrueneImageSources = ["/images/products/gudrun-bruene-bernhard-heisig-01.png"];
+
+function gudrunBrueneImages(alts: string[]): ProductImage[] {
+  return gudrunBrueneImageSources.map((src, index) => ({ src, alt: alts[index] }));
+}
+
 const cowhideSeatImageSources = [
   "/images/products/cowhide-seat-v3-01-hero-rotated.png",
   "/images/products/cowhide-seat-v3-02-lifestyle-natural.png",
@@ -50,6 +89,14 @@ const up7ImageSources = [
 
 function up7Images(alts: string[]): ProductImage[] {
   return up7ImageSources.map((src, index) => ({ src, alt: alts[index] }));
+}
+
+const apCollectionImageSources = [
+  "/images/products/ap-collection-animal-chair-01.png",
+];
+
+function apCollectionImages(alts: string[]): ProductImage[] {
+  return apCollectionImageSources.map((src, index) => ({ src, alt: alts[index] }));
 }
 
 const rugImageSources = [
@@ -415,6 +462,140 @@ const categorySeeds: ProductCategorySeed[] = [
         },
       },
       {
+        title: "Animal Chair",
+        cardTitle: "Animal Chair",
+        maker: "AP Collection",
+        brand: "AP Collection",
+        pathMode: "nested",
+        slug: "ap-collection-animal-chair",
+        price: "Auf Anfrage",
+        priceNote: "Preis und Verfügbarkeit auf Anfrage.",
+        material: "Textile Figuren, Kunstfell, Polsterung, lackierter Stahlfuß",
+        materialDetails: ["Individuell ausgewählte textile Figuren", "Polsterung", "Lackierter Stahlfuß"],
+        dimensions: "Maße je nach Ausführung",
+        dimensionsDetails: ["Maße je nach Ausführung"],
+        status: "preis-auf-anfrage",
+        availability: "Preis auf Anfrage",
+        description:
+          "Ein expressives Sitzobjekt von AP Collection, als eigenständiges Stück aus individuell zusammengestellten textilen Figuren gefertigt.",
+        longDescription: [
+          "Die Animal Chairs von AP Collection verbinden die vertraute Silhouette eines drehbaren Sessels mit einer collageartigen Oberfläche aus textilen Figuren. Jede Zusammenstellung verleiht dem Objekt einen eigenen Charakter.",
+          "Ausführung, Farbwelt und Zusammenstellung können auf Anfrage individuell abgestimmt werden. So entsteht ein Einzelstück, das auf den jeweiligen Raum und seine Atmosphäre reagiert.",
+        ],
+        origin: "Auf Anfrage",
+        uniqueNote:
+          "Jeder Animal Chair ist ein Einzelstück. Die gezeigte Ausführung dient als Referenz; Materialmix, Figuren und Farbwelt können individuell variieren.",
+        artistBio:
+          "AP Collection entwickelt expressive Sitzobjekte an der Schnittstelle von Komfort, Humor und skulpturaler Präsenz.",
+        ctaLabel: "Verfügbarkeit anfragen",
+        images: apCollectionImages([
+          "Animal Chairs von AP Collection als textile Sitzobjekte in einem hellen Interieur",
+        ]),
+        metaTitle: "Animal Chair von AP Collection",
+        metaDescription:
+          "Animal Chair von AP Collection: ein individuelles textiles Sitzobjekt, als Einzelstück und in verschiedenen Varianten auf Anfrage erhältlich.",
+        productType: "collectible",
+        commerceMode: "inquiry",
+        inventoryMode: "single-piece",
+        localized: {
+          en: {
+            title: "Animal Chair",
+            cardTitle: "Animal Chair",
+            priceNote: "Price and availability on request.",
+            shortDescription: "An expressive seating object by AP Collection, made as an individual piece from a curated composition of textile figures.",
+            longDescription: [
+              "AP Collection's Animal Chairs combine the familiar silhouette of a swivel chair with a collage-like surface of textile figures. Each composition gives the object its own distinct character.",
+              "Finish, colour palette and composition can be tailored on request. The result is a one-of-a-kind piece that responds to its particular space and atmosphere.",
+            ],
+            dimensionsDetails: ["Dimensions vary by configuration"],
+            materialDetails: ["Individually selected textile figures", "Upholstery", "Lacquered steel base"],
+            origin: "On request",
+            uniqueNote: "Each Animal Chair is one of a kind. The version shown is a reference; the material mix, figures and colour palette can vary individually.",
+            artistBio: "AP Collection creates expressive seating objects at the intersection of comfort, humour and sculptural presence.",
+            ctaLabel: "Request availability",
+            images: apCollectionImages(["Animal Chairs by AP Collection as textile seating objects in a bright interior"]),
+            metaTitle: "Animal Chair by AP Collection",
+            metaDescription: "Animal Chair by AP Collection: an individual textile seating object, available as a one-of-a-kind piece in different variations on request.",
+          },
+          fr: {
+            title: "Animal Chair",
+            cardTitle: "Animal Chair",
+            priceNote: "Prix et disponibilité sur demande.",
+            shortDescription: "Une assise expressive d’AP Collection, réalisée comme pièce unique à partir d’une composition de figures textiles.",
+            longDescription: [
+              "Les Animal Chairs d’AP Collection associent la silhouette familière d’un fauteuil pivotant à une surface en collage de figures textiles. Chaque composition donne à l’objet son propre caractère.",
+              "La finition, la palette de couleurs et la composition peuvent être définies sur demande. Il en résulte une pièce unique, pensée pour son espace et son atmosphère.",
+            ],
+            dimensionsDetails: ["Dimensions selon la configuration"],
+            materialDetails: ["Figures textiles sélectionnées individuellement", "Rembourrage", "Piètement en acier laqué"],
+            origin: "Sur demande",
+            uniqueNote: "Chaque Animal Chair est une pièce unique. La version présentée sert de référence ; les matériaux, figures et couleurs peuvent varier individuellement.",
+            artistBio: "AP Collection développe des assises expressives à la croisée du confort, de l’humour et de la présence sculpturale.",
+            ctaLabel: "Demander la disponibilité",
+            images: apCollectionImages(["Animal Chairs d’AP Collection, assises textiles dans un intérieur lumineux"]),
+            metaTitle: "Animal Chair d’AP Collection",
+            metaDescription: "Animal Chair d’AP Collection : une assise textile individuelle, disponible comme pièce unique dans différentes variations sur demande.",
+          },
+          es: {
+            title: "Animal Chair",
+            cardTitle: "Animal Chair",
+            priceNote: "Precio y disponibilidad bajo consulta.",
+            shortDescription: "Un asiento expresivo de AP Collection, creado como pieza individual a partir de una composición de figuras textiles.",
+            longDescription: [
+              "Las Animal Chairs de AP Collection combinan la silueta familiar de un sillón giratorio con una superficie tipo collage de figuras textiles. Cada composición confiere al objeto un carácter propio.",
+              "El acabado, la paleta cromática y la composición se pueden definir bajo consulta. El resultado es una pieza única que responde a su espacio y atmósfera.",
+            ],
+            dimensionsDetails: ["Las dimensiones varían según la configuración"],
+            materialDetails: ["Figuras textiles seleccionadas individualmente", "Tapizado", "Base de acero lacado"],
+            origin: "Bajo consulta",
+            uniqueNote: "Cada Animal Chair es una pieza única. La versión mostrada es una referencia; la mezcla de materiales, las figuras y la paleta de color pueden variar individualmente.",
+            artistBio: "AP Collection crea asientos expresivos en la intersección entre confort, humor y presencia escultórica.",
+            ctaLabel: "Solicitar disponibilidad",
+            images: apCollectionImages(["Animal Chairs de AP Collection como asientos textiles en un interior luminoso"]),
+            metaTitle: "Animal Chair de AP Collection",
+            metaDescription: "Animal Chair de AP Collection: un asiento textil individual, disponible como pieza única en diferentes variaciones bajo consulta.",
+          },
+          zh: {
+            title: "动物椅",
+            cardTitle: "动物椅",
+            priceNote: "价格与供应情况请咨询。",
+            shortDescription: "AP Collection 的一件富有表现力的座椅作品，由精心组合的纺织玩偶构成独一无二的形式。",
+            longDescription: [
+              "AP Collection 的 Animal Chairs 将旋转椅熟悉的轮廓与拼贴般的纺织玩偶表面相结合。每一种组合都赋予作品独特的个性。",
+              "表面处理、配色与组合方式均可按需定制，最终形成一件回应具体空间与氛围的独一无二作品。",
+            ],
+            dimensionsDetails: ["尺寸视具体配置而定"],
+            materialDetails: ["个别挑选的纺织玩偶", "软垫", "烤漆钢制底座"],
+            origin: "请咨询",
+            uniqueNote: "每一把 Animal Chair 都是独一无二的作品。展示版本仅供参考；材料组合、玩偶与配色均可个别变化。",
+            artistBio: "AP Collection 创作兼具舒适、幽默与雕塑感的表现性座椅。",
+            ctaLabel: "咨询供应情况",
+            images: apCollectionImages(["AP Collection 的 Animal Chairs，明亮室内的纺织座椅作品"]),
+            metaTitle: "AP Collection 动物椅",
+            metaDescription: "AP Collection 动物椅：可按需提供不同变体的独一无二纺织座椅作品。",
+          },
+          ar: {
+            title: "كرسي الحيوانات",
+            cardTitle: "كرسي الحيوانات",
+            priceNote: "السعر والتوفر عند الطلب.",
+            shortDescription: "قطعة جلوس معبّرة من AP Collection، تُنفذ كعمل فردي من تكوين مختار من الشخصيات النسيجية.",
+            longDescription: [
+              "تجمع Animal Chairs من AP Collection بين هيئة كرسي دوار مألوفة وسطح يشبه الكولاج من شخصيات نسيجية. ويمنح كل تكوين القطعة طابعها الخاص.",
+              "يمكن تنسيق التشطيب ولوحة الألوان والتكوين عند الطلب. والنتيجة قطعة فريدة تستجيب لمساحتها وأجوائها الخاصة.",
+            ],
+            dimensionsDetails: ["تختلف الأبعاد بحسب التكوين"],
+            materialDetails: ["شخصيات نسيجية مختارة فردياً", "تنجيد", "قاعدة فولاذية مطلية"],
+            origin: "عند الطلب",
+            uniqueNote: "كل Animal Chair قطعة فريدة. النسخة المعروضة مرجع فقط؛ ويمكن أن يختلف مزيج المواد والشخصيات ولوحة الألوان بشكل فردي.",
+            artistBio: "تبتكر AP Collection قطع جلوس معبّرة عند تقاطع الراحة والفكاهة والحضور النحتي.",
+            ctaLabel: "طلب التوفر",
+            images: apCollectionImages(["Animal Chairs من AP Collection كقطع جلوس نسيجية في داخل مشرق"]),
+            metaTitle: "Animal Chair من AP Collection",
+            metaDescription: "Animal Chair من AP Collection: قطعة جلوس نسيجية فردية متاحة كعمل فريد وبنسخ مختلفة عند الطلب.",
+          },
+        },
+      },
+      {
         title: "Fell-Pouf",
         cardTitle: "Fell-Pouf",
         maker: "54COUTURE",
@@ -672,6 +853,309 @@ const categorySeeds: ProductCategorySeed[] = [
     description:
       "Arbeit zwischen Fläche, Material und Raumwirkung, ausgewählt für ruhige Interieurs.",
     items: [
+      {
+        title: "Wandstück",
+        cardTitle: "Wandstück",
+        maker: "Michael Fischer-Art",
+        slug: "michael-fischer-art-untitled-2024",
+        price: "Auf Anfrage",
+        priceNote: "Preis und Verfügbarkeit auf Anfrage.",
+        material: "Bemalte Holzarbeit",
+        materialDetails: ["Bemalte Holzarbeit", "Handgefertigtes Unikat", "2024"],
+        dimensions: "Maße auf Anfrage",
+        dimensionsDetails: ["Maße auf Anfrage"],
+        status: "preis-auf-anfrage",
+        availability: "Preis auf Anfrage",
+        description: "Ein originales Wandfragment von Michael Fischer-Art – ein Stück Leipziger Stadtgeschichte, das aus dem früheren Wandgemälde am Brühl gesichert wurde.",
+        longDescription: [
+          "Dieses Wandstück stammt aus dem Wandgemälde von Michael Fischer-Art, das am Brühl in Leipzig sichtbar war. Die historischen Fragmente wurden durch die Initiative Kunstfreiheit gesichert, bewahrt und für eine neue Öffentlichkeit zugänglich gemacht.",
+          "Das Wandgemälde gilt als kraftvolles Zeichen der Friedlichen Revolution von 1989. Kleine und größere Fragmente der limitierten Wandelemente wurden 2025 im Historischen Wartesaal des Leipziger Hauptbahnhofs präsentiert.",
+        ],
+        origin: "Leipzig, Deutschland",
+        uniqueNote: "Originales Wandfragment. Form, Zustand und Verfügbarkeit werden individuell bestätigt. Ergänzende Bilddokumentation: Wandgemälde am Brühl in Leipzig, Foto: commlab GmbH.",
+        artistBio: "Michael Fischer-Art, geboren 1969 in Leipzig, studierte von 1992 bis 1997 an der Hochschule für Grafik und Buchkunst Leipzig. Er arbeitet als Künstler, Designer und Autor mit starken Farben, einfachen Strukturen und comicartigen Figuren – von Tafelarbeiten bis zu großflächigen Projekten im öffentlichen Raum.",
+        ctaLabel: "Verfügbarkeit anfragen",
+        images: michaelFischerArtImages(["Michael Fischer-Art, Wandstück, originales Wandfragment", "Das Wandgemälde am Brühl in Leipzig von Michael Fischer-Art, Foto: commlab GmbH"]),
+        sourceUrl: "https://www.leipziginfo.de/aktuelles/artikel/gerettet-bewahrt-praesentiert-das-wandgemaelde-von-michael-fischer-art-als-neues-highlight-im-leipziger-hauptbahnhof/",
+        metaTitle: "Michael Fischer-Art – Wandstück",
+        metaDescription: "Wandstück von Michael Fischer-Art: originales Fragment des Wandgemäldes am Brühl in Leipzig. Preis auf Anfrage.",
+        localized: {
+          en: {
+            title: "Wandstück", cardTitle: "Wandstück", priceNote: "Price and availability on request.",
+            shortDescription: "An original wall fragment by Michael Fischer-Art – a piece of Leipzig's urban history, secured from the former mural at Brühl.",
+            longDescription: ["This wall piece comes from Michael Fischer-Art's mural that was visible at Brühl in Leipzig. The historic fragments were secured and preserved by the Kunstfreiheit initiative, then made accessible to a new public.", "The mural is regarded as a powerful symbol of the Peaceful Revolution of 1989. Smaller and larger fragments of the limited wall elements were presented in 2025 in the Historic Waiting Hall of Leipzig Central Station."],
+            dimensionsDetails: ["Dimensions on request"], materialDetails: ["Painted wood work", "Handcrafted unique piece", "2024"], origin: "Leipzig, Germany",
+            uniqueNote: "Original wall fragment. Form, condition and availability are confirmed individually. Supplementary image documentation: mural at Brühl in Leipzig, photo: commlab GmbH.",
+            artistBio: "Michael Fischer-Art, born in Leipzig in 1969, studied at the Academy of Visual Arts Leipzig from 1992 to 1997. As an artist, designer and author, he works with strong colour, simple structures and comic-like figures, from panel works to large public-space projects.",
+            ctaLabel: "Request availability", images: michaelFischerArtImages(["Michael Fischer-Art, Wandstück, original wall fragment", "Mural at Brühl in Leipzig by Michael Fischer-Art, photo: commlab GmbH"]),
+            metaTitle: "Michael Fischer-Art – Wandstück", metaDescription: "Wandstück by Michael Fischer-Art: an original fragment of the Brühl mural in Leipzig. Price on request.",
+          },
+          fr: {
+            title: "Wandstück", cardTitle: "Wandstück", priceNote: "Prix et disponibilité sur demande.",
+            shortDescription: "Un fragment mural original de Michael Fischer-Art, issu de l’ancienne peinture murale du Brühl à Leipzig.",
+            longDescription: ["Cette pièce murale provient de la peinture murale de Michael Fischer-Art visible au Brühl à Leipzig. Les fragments historiques ont été sauvés et préservés par l’initiative Kunstfreiheit, puis rendus accessibles à un nouveau public.", "La peinture murale est considérée comme un symbole fort de la Révolution pacifique de 1989. Des fragments des éléments muraux limités ont été présentés en 2025 dans la salle d’attente historique de la gare centrale de Leipzig."],
+            dimensionsDetails: ["Dimensions sur demande"], materialDetails: ["Œuvre en bois peint", "Pièce unique réalisée à la main", "2024"], origin: "Leipzig, Allemagne",
+            uniqueNote: "Fragment mural original. Forme, état et disponibilité confirmés individuellement. Documentation photographique complémentaire : peinture murale du Brühl à Leipzig, photo : commlab GmbH.", artistBio: "Michael Fischer-Art, né à Leipzig en 1969, a étudié de 1992 à 1997 à l’Académie des arts visuels de Leipzig. Artiste, designer et auteur, il travaille avec des couleurs fortes, des structures simples et des figures proches de la bande dessinée.",
+            ctaLabel: "Demander la disponibilité", images: michaelFischerArtImages(["Michael Fischer-Art, Wandstück, fragment mural original", "Peinture murale du Brühl à Leipzig de Michael Fischer-Art, photo : commlab GmbH"]), metaTitle: "Michael Fischer-Art – Wandstück", metaDescription: "Wandstück de Michael Fischer-Art : fragment original de la peinture murale du Brühl à Leipzig. Prix sur demande.",
+          },
+          es: {
+            title: "Wandstück", cardTitle: "Wandstück", priceNote: "Precio y disponibilidad bajo consulta.",
+            shortDescription: "Un fragmento mural original de Michael Fischer-Art, procedente del antiguo mural de Brühl en Leipzig.",
+            longDescription: ["Esta pieza mural procede del mural de Michael Fischer-Art que estuvo visible en Brühl, Leipzig. Los fragmentos históricos fueron rescatados y preservados por la iniciativa Kunstfreiheit y puestos al alcance de un nuevo público.", "El mural se considera un símbolo poderoso de la Revolución pacífica de 1989. Fragmentos de los elementos murales limitados se presentaron en 2025 en la Sala de Espera Histórica de la Estación Central de Leipzig."],
+            dimensionsDetails: ["Dimensiones bajo consulta"], materialDetails: ["Obra en madera pintada", "Pieza única hecha a mano", "2024"], origin: "Leipzig, Alemania",
+            uniqueNote: "Fragmento mural original. La forma, el estado y la disponibilidad se confirman individualmente. Documentación fotográfica complementaria: mural de Brühl en Leipzig, foto: commlab GmbH.", artistBio: "Michael Fischer-Art, nacido en Leipzig en 1969, estudió de 1992 a 1997 en la Academia de Artes Visuales de Leipzig. Como artista, diseñador y autor, trabaja con colores fuertes, estructuras sencillas y figuras de lenguaje cercano al cómic.",
+            ctaLabel: "Consultar disponibilidad", images: michaelFischerArtImages(["Michael Fischer-Art, Wandstück, fragmento mural original", "Mural de Brühl en Leipzig de Michael Fischer-Art, foto: commlab GmbH"]), metaTitle: "Michael Fischer-Art – Wandstück", metaDescription: "Wandstück de Michael Fischer-Art: fragmento original del mural de Brühl en Leipzig. Precio bajo consulta.",
+          },
+          zh: {
+            title: "Wandstück", cardTitle: "Wandstück", priceNote: "价格与供应情况请咨询。",
+            shortDescription: "Michael Fischer-Art 的一件原始墙体碎片，来自莱比锡布吕尔旧壁画，是城市历史的一部分。",
+            longDescription: ["这件墙体作品来自 Michael Fischer-Art 曾创作于莱比锡布吕尔的壁画。历史碎片由 Kunstfreiheit 倡议保存，并再次向公众开放。", "该壁画被视为1989年和平革命的有力象征。限量墙体元素的大大小小碎片于2025年在莱比锡中央火车站历史候车厅展出。"],
+            dimensionsDetails: ["尺寸请咨询"], materialDetails: ["彩绘木质作品", "手工独件", "2024"], origin: "德国莱比锡",
+            uniqueNote: "原始墙体碎片。具体形态、状态与供应情况将单独确认。补充图像资料：莱比锡布吕尔壁画，摄影：commlab GmbH。", artistBio: "Michael Fischer-Art 1969 年出生于莱比锡，1992 至 1997 年就读于莱比锡视觉艺术学院。他以强烈色彩、简洁结构和漫画感人物形象进行创作，涵盖架上作品及大型公共空间项目。",
+            ctaLabel: "咨询供应情况", images: michaelFischerArtImages(["Michael Fischer-Art，《Wandstück》，原始墙体碎片", "Michael Fischer-Art 创作的莱比锡布吕尔壁画，摄影：commlab GmbH"]), metaTitle: "Michael Fischer-Art – Wandstück", metaDescription: "Michael Fischer-Art 的《Wandstück》：莱比锡布吕尔壁画的原始碎片。价格请咨询。",
+          },
+          ar: {
+            title: "Wandstück", cardTitle: "Wandstück", priceNote: "السعر والتوفر عند الطلب.",
+            shortDescription: "قطعة جدارية أصلية من Michael Fischer-Art، من بقايا الجدارية السابقة في برول بمدينة لايبزيغ.",
+            longDescription: ["تأتي هذه القطعة الجدارية من جدارية Michael Fischer-Art التي كانت ظاهرة في برول في لايبزيغ. وقد أنقذت مبادرة Kunstfreiheit الأجزاء التاريخية وحافظت عليها ثم أتاحت وصولها إلى جمهور جديد.", "تُعد الجدارية رمزاً قوياً للثورة السلمية عام 1989. وعُرضت أجزاء صغيرة وكبيرة من عناصر الجدار المحدودة عام 2025 في قاعة الانتظار التاريخية بمحطة لايبزيغ المركزية."],
+            dimensionsDetails: ["الأبعاد عند الطلب"], materialDetails: ["عمل خشبي مطلي", "قطعة فريدة مصنوعة يدوياً", "2024"], origin: "لايبزيغ، ألمانيا",
+            uniqueNote: "قطعة جدارية أصلية. يتم تأكيد الشكل والحالة والتوفر بشكل فردي. توثيق مصوّر إضافي: جدارية برول في لايبزيغ، صورة: commlab GmbH.", artistBio: "وُلد Michael Fischer-Art في لايبزيغ عام 1969 ودرس في أكاديمية الفنون البصرية في لايبزيغ بين 1992 و1997. يعمل كفنان ومصمم ومؤلف بألوان قوية وبنى بسيطة وشخصيات ذات طابع كرتوني.",
+            ctaLabel: "طلب التوفر", images: michaelFischerArtImages(["Michael Fischer-Art، Wandstück، قطعة جدارية أصلية", "جدارية برول في لايبزيغ من Michael Fischer-Art، صورة: commlab GmbH"]), metaTitle: "Michael Fischer-Art – Wandstück", metaDescription: "Wandstück من Michael Fischer-Art: جزء أصلي من جدارية برول في لايبزيغ. السعر عند الطلب.",
+          },
+        },
+      },
+      {
+        title: "Die Erklärung der Welt",
+        maker: "Stefan Hirsig",
+        slug: "stefan-hirsig-die-erklaerung-der-welt",
+        price: "Auf Anfrage",
+        priceNote: "Preis und Verfügbarkeit auf Anfrage.",
+        material: "Öl auf Leinwand",
+        materialDetails: ["Öl auf Leinwand", "2010"],
+        dimensions: "140 × 110 cm",
+        dimensionsDetails: ["Höhe: 140 cm", "Breite: 110 cm"],
+        status: "preis-auf-anfrage",
+        availability: "Preis auf Anfrage",
+        description: "In „Die Erklärung der Welt“ verdichtet Stefan Hirsig Figur, Blick und abstrakte Struktur zu einer vielschichtigen Bildwelt.",
+        longDescription: [
+          "Die Arbeit verbindet ein figürliches Antlitz mit überlagerten Augen, spiralartigen Linien und malerischen Farbflächen. So entsteht ein Bildraum zwischen Wahrnehmung, Erinnerung und offener Erzählung.",
+          "Hirsigs Malerei bewegt sich zwischen Abstraktion und Figuration. Organische Formverläufe, geometrische Strukturen und fragmentierte Körper- oder Gesichtselemente werden im Arbeitsprozess immer wieder überarbeitet und neu zueinander gesetzt.",
+        ],
+        origin: "Berlin, Deutschland",
+        uniqueNote: "Unikat, 2010. Öl auf Leinwand, 140 × 110 cm. Zustand und Verfügbarkeit auf Anfrage.",
+        artistBio: "Stefan Hirsig, geboren 1966 in West-Berlin, studierte Malerei an der Hochschule der Künste Berlin bei Bernd Koberling und schloss sein Studium 1993 ab. Seine Arbeiten werden seit den 1990er-Jahren international gezeigt; er lebt und arbeitet in Berlin.",
+        ctaLabel: "Verfügbarkeit anfragen",
+        images: stefanHirsigImages(["Stefan Hirsig, Die Erklärung der Welt, 2010, Öl auf Leinwand"]),
+        metaTitle: "Stefan Hirsig – Die Erklärung der Welt",
+        metaDescription: "Die Erklärung der Welt (2010) von Stefan Hirsig. Öl auf Leinwand, 140 × 110 cm. Preis auf Anfrage.",
+        localized: {
+          en: {
+            title: "The Explanation of the World", cardTitle: "The Explanation of the World", priceNote: "Price and availability on request.",
+            shortDescription: "In The Explanation of the World, Stefan Hirsig condenses figure, gaze and abstract structure into a layered visual world.",
+            longDescription: ["The work combines a figurative face with layered eyes, spiral-like lines and painted fields of colour. The result is a pictorial space between perception, memory and open narrative.", "Hirsig's painting moves between abstraction and figuration. Organic forms, geometric structures and fragmented elements of bodies or faces are repeatedly reworked and repositioned during the process."],
+            dimensionsDetails: ["Height: 140 cm", "Width: 110 cm"], materialDetails: ["Oil on canvas", "2010"], origin: "Berlin, Germany",
+            uniqueNote: "Unique piece, 2010. Oil on canvas, 140 × 110 cm. Condition and availability on request.", artistBio: "Stefan Hirsig, born in West Berlin in 1966, studied painting at the Berlin University of the Arts with Bernd Koberling and completed his studies in 1993. His works have been shown internationally since the 1990s; he lives and works in Berlin.",
+            ctaLabel: "Request availability", images: stefanHirsigImages(["Stefan Hirsig, The Explanation of the World, 2010, oil on canvas"]), metaTitle: "Stefan Hirsig – The Explanation of the World", metaDescription: "The Explanation of the World (2010) by Stefan Hirsig. Oil on canvas, 140 × 110 cm. Price on request.",
+          },
+          fr: {
+            title: "L’explication du monde", cardTitle: "L’explication du monde", priceNote: "Prix et disponibilité sur demande.",
+            shortDescription: "Dans L’explication du monde, Stefan Hirsig condense figure, regard et structure abstraite en un univers visuel complexe.",
+            longDescription: ["L’œuvre associe un visage figuratif à des yeux superposés, des lignes en spirale et des champs colorés. Elle crée un espace pictural entre perception, mémoire et narration ouverte.", "La peinture de Hirsig se situe entre abstraction et figuration. Formes organiques, structures géométriques et fragments de corps ou de visages sont sans cesse retravaillés et repositionnés."],
+            dimensionsDetails: ["Hauteur : 140 cm", "Largeur : 110 cm"], materialDetails: ["Huile sur toile", "2010"], origin: "Berlin, Allemagne",
+            uniqueNote: "Pièce unique, 2010. Huile sur toile, 140 × 110 cm. État et disponibilité sur demande.", artistBio: "Stefan Hirsig, né à Berlin-Ouest en 1966, a étudié la peinture à l’Université des arts de Berlin auprès de Bernd Koberling et a terminé ses études en 1993. Ses œuvres sont présentées internationalement depuis les années 1990 ; il vit et travaille à Berlin.",
+            ctaLabel: "Demander la disponibilité", images: stefanHirsigImages(["Stefan Hirsig, L’explication du monde, 2010, huile sur toile"]), metaTitle: "Stefan Hirsig – L’explication du monde", metaDescription: "L’explication du monde (2010) de Stefan Hirsig. Huile sur toile, 140 × 110 cm. Prix sur demande.",
+          },
+          es: {
+            title: "La explicación del mundo", cardTitle: "La explicación del mundo", priceNote: "Precio y disponibilidad bajo consulta.",
+            shortDescription: "En La explicación del mundo, Stefan Hirsig condensa figura, mirada y estructura abstracta en un universo visual complejo.",
+            longDescription: ["La obra combina un rostro figurativo con ojos superpuestos, líneas en espiral y campos de color. Así surge un espacio pictórico entre percepción, memoria y narración abierta.", "La pintura de Hirsig se mueve entre abstracción y figuración. Formas orgánicas, estructuras geométricas y fragmentos de cuerpos o rostros se reelaboran y reposicionan constantemente."],
+            dimensionsDetails: ["Alto: 140 cm", "Ancho: 110 cm"], materialDetails: ["Óleo sobre lienzo", "2010"], origin: "Berlín, Alemania",
+            uniqueNote: "Pieza única, 2010. Óleo sobre lienzo, 140 × 110 cm. Estado y disponibilidad bajo consulta.", artistBio: "Stefan Hirsig, nacido en Berlín Occidental en 1966, estudió pintura en la Universidad de las Artes de Berlín con Bernd Koberling y terminó sus estudios en 1993. Sus obras se muestran internacionalmente desde los años noventa; vive y trabaja en Berlín.",
+            ctaLabel: "Consultar disponibilidad", images: stefanHirsigImages(["Stefan Hirsig, La explicación del mundo, 2010, óleo sobre lienzo"]), metaTitle: "Stefan Hirsig – La explicación del mundo", metaDescription: "La explicación del mundo (2010) de Stefan Hirsig. Óleo sobre lienzo, 140 × 110 cm. Precio bajo consulta.",
+          },
+          zh: {
+            title: "世界的解释", cardTitle: "世界的解释", priceNote: "价格与供应情况请咨询。",
+            shortDescription: "在《世界的解释》中，Stefan Hirsig 将人物、目光与抽象结构凝练为多层次的视觉世界。",
+            longDescription: ["作品把具象面孔与层叠的眼睛、螺旋线及色彩区域结合起来，形成介于感知、记忆与开放叙事之间的画面空间。", "Hirsig 的绘画游走于抽象与具象之间。创作过程中，有机形态、几何结构以及身体或面部碎片会被不断重绘并重新组织。"],
+            dimensionsDetails: ["高度：140 厘米", "宽度：110 厘米"], materialDetails: ["布面油画", "2010"], origin: "德国柏林",
+            uniqueNote: "独一无二作品，2010。布面油画，140 × 110 厘米。状态与供应情况请咨询。", artistBio: "Stefan Hirsig 1966 年生于西柏林，曾师从 Bernd Koberling 于柏林艺术大学学习绘画，并于 1993 年完成学业。自 1990 年代起，他的作品在国际范围展出；现生活和工作于柏林。",
+            ctaLabel: "咨询供应情况", images: stefanHirsigImages(["Stefan Hirsig，《世界的解释》，2010，布面油画"]), metaTitle: "Stefan Hirsig – 世界的解释", metaDescription: "Stefan Hirsig《世界的解释》（2010）。布面油画，140 × 110 厘米。价格请咨询。",
+          },
+          ar: {
+            title: "تفسير العالم", cardTitle: "تفسير العالم", priceNote: "السعر والتوفر عند الطلب.",
+            shortDescription: "في تفسير العالم، يختزل Stefan Hirsig الشكل والنظرة والبنية التجريدية في عالم بصري متعدد الطبقات.",
+            longDescription: ["يجمع العمل وجهاً تصويرياً مع عيون متراكبة وخطوط لولبية ومساحات لونية، فينشئ فضاءً تصويرياً بين الإدراك والذاكرة والسرد المفتوح.", "تتحرك لوحة Hirsig بين التجريد والتصوير. وتُعاد معالجة الأشكال العضوية والبنى الهندسية وأجزاء الأجساد أو الوجوه وتغيير مواضعها باستمرار خلال العمل."],
+            dimensionsDetails: ["الارتفاع: 140 سم", "العرض: 110 سم"], materialDetails: ["زيت على قماش", "2010"], origin: "برلين، ألمانيا",
+            uniqueNote: "قطعة فريدة، 2010. زيت على قماش، 140 × 110 سم. الحالة والتوفر عند الطلب.", artistBio: "وُلد Stefan Hirsig في برلين الغربية عام 1966 ودرس الرسم في جامعة الفنون في برلين مع Bernd Koberling وأكمل دراسته عام 1993. تُعرض أعماله دولياً منذ التسعينيات ويعيش ويعمل في برلين.",
+            ctaLabel: "طلب التوفر", images: stefanHirsigImages(["Stefan Hirsig، تفسير العالم، 2010، زيت على قماش"]), metaTitle: "Stefan Hirsig – تفسير العالم", metaDescription: "تفسير العالم (2010) من Stefan Hirsig. زيت على قماش، 140 × 110 سم. السعر عند الطلب.",
+          },
+        },
+      },
+      {
+        title: "Paso Due",
+        maker: "Silke Weyer",
+        slug: "silke-weyer-paso-due",
+        price: "Auf Anfrage",
+        priceNote: "Preis und Verfügbarkeit auf Anfrage.",
+        material: "Öl auf Leinwand",
+        materialDetails: ["Öl auf Leinwand", "2009"],
+        dimensions: "250 × 250 cm",
+        dimensionsDetails: ["Höhe: 250 cm", "Breite: 250 cm"],
+        status: "preis-auf-anfrage",
+        availability: "Preis auf Anfrage",
+        description: "In „Paso Due“ verdichtet Silke Weyer eine helle, offene Bildfläche zu einer spannungsvollen Verbindung von Geste, Farbe und materieller Spur.",
+        longDescription: [
+          "Die großformatige Arbeit entwickelt ihre Wirkung aus der Balance von Leere und Verdichtung. Eine dunkle, bewegte Form setzt sich gegen die helle Fläche und macht den Malprozess unmittelbar sichtbar.",
+          "Silke Weyers Malerei verbindet körperhafte Farbspuren mit einer offenen Bildanlage. Die Arbeit lässt Raum für Assoziationen und verändert sich mit Abstand, Licht und Blickwinkel.",
+        ],
+        origin: "Berlin, Deutschland",
+        uniqueNote: "Unikat, 2009. Öl auf Leinwand, 250 × 250 cm. Zustand und Verfügbarkeit auf Anfrage.",
+        artistBio: "Silke Weyer studierte Malerei an der Kunsthochschule Berlin Weißensee, schloss 2009 ihr Diplom ab und war 2009 bis 2010 Meisterschülerin bei Prof. Werner Liebmann. Sie lebt und arbeitet in Berlin.",
+        ctaLabel: "Verfügbarkeit anfragen",
+        images: silkeWeyerImages(["Silke Weyer, Paso Due, 2009, Öl auf Leinwand"]),
+        metaTitle: "Silke Weyer – Paso Due",
+        metaDescription: "Paso Due (2009) von Silke Weyer. Öl auf Leinwand, 250 × 250 cm. Preis auf Anfrage.",
+        localized: {
+          en: {
+            title: "Paso Due", cardTitle: "Paso Due", priceNote: "Price and availability on request.",
+            shortDescription: "In Paso Due, Silke Weyer condenses a bright, open picture field into a tense connection of gesture, colour and material trace.",
+            longDescription: ["The large-scale work draws its effect from the balance of emptiness and concentration. A dark, animated form is set against the bright ground, making the painting process immediately visible.", "Silke Weyer's painting combines corporeal traces of colour with an open pictorial structure. The work leaves room for association and shifts with distance, light and viewpoint."],
+            dimensionsDetails: ["Height: 250 cm", "Width: 250 cm"], materialDetails: ["Oil on canvas", "2009"], origin: "Berlin, Germany",
+            uniqueNote: "Unique piece, 2009. Oil on canvas, 250 × 250 cm. Condition and availability on request.", artistBio: "Silke Weyer studied painting at the Berlin Weißensee School of Art, completed her diploma in 2009 and was a master student of Prof. Werner Liebmann from 2009 to 2010. She lives and works in Berlin.",
+            ctaLabel: "Request availability", images: silkeWeyerImages(["Silke Weyer, Paso Due, 2009, oil on canvas"]), metaTitle: "Silke Weyer – Paso Due", metaDescription: "Paso Due (2009) by Silke Weyer. Oil on canvas, 250 × 250 cm. Price on request.",
+          },
+          fr: {
+            title: "Paso Due", cardTitle: "Paso Due", priceNote: "Prix et disponibilité sur demande.",
+            shortDescription: "Dans Paso Due, Silke Weyer condense un champ pictural clair et ouvert en une tension entre geste, couleur et trace matérielle.",
+            longDescription: ["Cette œuvre grand format tire sa force de l’équilibre entre vide et densité. Une forme sombre et mouvante se détache du fond clair et rend le processus de peinture visible.", "La peinture de Silke Weyer associe des traces de couleur corporelles à une construction picturale ouverte. L’œuvre se transforme selon la distance, la lumière et le regard."],
+            dimensionsDetails: ["Hauteur : 250 cm", "Largeur : 250 cm"], materialDetails: ["Huile sur toile", "2009"], origin: "Berlin, Allemagne",
+            uniqueNote: "Pièce unique, 2009. Huile sur toile, 250 × 250 cm. État et disponibilité sur demande.", artistBio: "Silke Weyer a étudié la peinture à la Kunsthochschule Berlin Weißensee, a obtenu son diplôme en 2009 et a été Meisterschülerin du Prof. Werner Liebmann de 2009 à 2010. Elle vit et travaille à Berlin.",
+            ctaLabel: "Demander la disponibilité", images: silkeWeyerImages(["Silke Weyer, Paso Due, 2009, huile sur toile"]), metaTitle: "Silke Weyer – Paso Due", metaDescription: "Paso Due (2009) de Silke Weyer. Huile sur toile, 250 × 250 cm. Prix sur demande.",
+          },
+          es: {
+            title: "Paso Due", cardTitle: "Paso Due", priceNote: "Precio y disponibilidad bajo consulta.",
+            shortDescription: "En Paso Due, Silke Weyer condensa un campo pictórico claro y abierto en una tensión de gesto, color y huella material.",
+            longDescription: ["La obra de gran formato deriva su fuerza del equilibrio entre vacío y densidad. Una forma oscura y dinámica se enfrenta al fondo claro y hace visible el proceso de pintura.", "La pintura de Silke Weyer combina rastros corporales de color con una estructura pictórica abierta. La obra cambia con la distancia, la luz y el punto de vista."],
+            dimensionsDetails: ["Alto: 250 cm", "Ancho: 250 cm"], materialDetails: ["Óleo sobre lienzo", "2009"], origin: "Berlín, Alemania",
+            uniqueNote: "Pieza única, 2009. Óleo sobre lienzo, 250 × 250 cm. Estado y disponibilidad bajo consulta.", artistBio: "Silke Weyer estudió pintura en la Kunsthochschule Berlin Weißensee, obtuvo su diploma en 2009 y fue Meisterschülerin del Prof. Werner Liebmann de 2009 a 2010. Vive y trabaja en Berlín.",
+            ctaLabel: "Consultar disponibilidad", images: silkeWeyerImages(["Silke Weyer, Paso Due, 2009, óleo sobre lienzo"]), metaTitle: "Silke Weyer – Paso Due", metaDescription: "Paso Due (2009) de Silke Weyer. Óleo sobre lienzo, 250 × 250 cm. Precio bajo consulta.",
+          },
+          zh: {
+            title: "Paso Due", cardTitle: "Paso Due", priceNote: "价格与供应情况请咨询。",
+            shortDescription: "在《Paso Due》中，Silke Weyer 将明亮、开放的画面凝练为手势、色彩与材质痕迹之间的张力。",
+            longDescription: ["这件大型作品在留白与凝聚之间取得平衡。一处深色而富有动感的形态置于明亮底色之上，使绘画过程清晰可见。", "Silke Weyer 的绘画将富有身体感的色彩痕迹与开放的画面结构结合起来。作品会随距离、光线和观看角度而变化。"],
+            dimensionsDetails: ["高度：250 厘米", "宽度：250 厘米"], materialDetails: ["布面油画", "2009"], origin: "德国柏林",
+            uniqueNote: "独一无二作品，2009。布面油画，250 × 250 厘米。状态与供应情况请咨询。", artistBio: "Silke Weyer 曾就读于柏林魏森塞艺术学院绘画专业，2009 年取得文凭，并于 2009 至 2010 年师从 Werner Liebmann 教授。她生活和工作于柏林。",
+            ctaLabel: "咨询供应情况", images: silkeWeyerImages(["Silke Weyer，《Paso Due》，2009，布面油画"]), metaTitle: "Silke Weyer – Paso Due", metaDescription: "Silke Weyer《Paso Due》（2009）。布面油画，250 × 250 厘米。价格请咨询。",
+          },
+          ar: {
+            title: "Paso Due", cardTitle: "Paso Due", priceNote: "السعر والتوفر عند الطلب.",
+            shortDescription: "في Paso Due، تكثف Silke Weyer مساحة تصويرية فاتحة ومفتوحة في توتر بين الإيماءة واللون والأثر المادي.",
+            longDescription: ["يستمد العمل كبير الحجم قوته من التوازن بين الفراغ والكثافة. تقف هيئة داكنة ومتحركة أمام الخلفية الفاتحة وتُظهر عملية الرسم مباشرة.", "تجمع لوحة Silke Weyer بين آثار لونية جسدية وبنية تصويرية مفتوحة. ويتغير العمل مع المسافة والضوء وزاوية النظر."],
+            dimensionsDetails: ["الارتفاع: 250 سم", "العرض: 250 سم"], materialDetails: ["زيت على قماش", "2009"], origin: "برلين، ألمانيا",
+            uniqueNote: "قطعة فريدة، 2009. زيت على قماش، 250 × 250 سم. الحالة والتوفر عند الطلب.", artistBio: "درست Silke Weyer الرسم في Kunsthochschule Berlin Weißensee وحصلت على الدبلوم عام 2009 وكانت Meisterschülerin لدى Prof. Werner Liebmann بين 2009 و2010. تعيش وتعمل في برلين.",
+            ctaLabel: "طلب التوفر", images: silkeWeyerImages(["Silke Weyer، Paso Due، 2009، زيت على قماش"]), metaTitle: "Silke Weyer – Paso Due", metaDescription: "Paso Due (2009) من Silke Weyer. زيت على قماش، 250 × 250 سم. السعر عند الطلب.",
+          },
+        },
+      },
+      {
+        title: "Toro Blanco",
+        maker: "Silke Weyer",
+        slug: "silke-weyer-toro-blanco",
+        price: "Auf Anfrage",
+        priceNote: "Preis und Verfügbarkeit auf Anfrage.",
+        material: "Öl auf Leinwand",
+        materialDetails: ["Öl auf Leinwand", "2009"],
+        dimensions: "250 × 250 cm",
+        dimensionsDetails: ["Höhe: 250 cm", "Breite: 250 cm"],
+        status: "preis-auf-anfrage",
+        availability: "Preis auf Anfrage",
+        description: "„Toro Blanco“ von Silke Weyer verbindet eine fast schwerelose, helle Bildfläche mit einer konzentrierten malerischen Bewegung.",
+        longDescription: ["Die Arbeit aus dem Jahr 2009 entwickelt aus wenigen Farbresten, Linien und transparenten Schichten eine offene, körperhafte Form. Das große quadratische Format lässt der Malerei zugleich Präsenz und Ruhe.", "Silke Weyers Malerei bleibt im Wechselspiel von Spur, Material und Leere. Das Bild öffnet einen Raum für Assoziationen, ohne seine Bewegung festzuschreiben."],
+        origin: "Berlin, Deutschland",
+        uniqueNote: "Unikat, 2009. Öl auf Leinwand, 250 × 250 cm. Zustand und Verfügbarkeit auf Anfrage.",
+        artistBio: "Silke Weyer studierte Malerei an der Kunsthochschule Berlin Weißensee, schloss 2009 ihr Diplom ab und war 2009 bis 2010 Meisterschülerin bei Prof. Werner Liebmann. Sie lebt und arbeitet in Berlin.",
+        ctaLabel: "Verfügbarkeit anfragen",
+        images: toroBlancoImages(["Silke Weyer, Toro Blanco, 2009, Öl auf Leinwand"]),
+        metaTitle: "Silke Weyer – Toro Blanco",
+        metaDescription: "Toro Blanco (2009) von Silke Weyer. Öl auf Leinwand, 250 × 250 cm. Preis auf Anfrage.",
+        localized: {
+          en: {
+            title: "Toro Blanco", cardTitle: "Toro Blanco", priceNote: "Price and availability on request.", shortDescription: "Toro Blanco by Silke Weyer pairs an almost weightless, bright picture field with a concentrated painterly movement.",
+            longDescription: ["Created in 2009, the work develops an open, bodily form from sparse traces of colour, lines and transparent layers. Its large square format gives the painting both presence and calm.", "Silke Weyer's painting moves between trace, material and emptiness. The picture opens a space for association without fixing its movement."],
+            dimensionsDetails: ["Height: 250 cm", "Width: 250 cm"], materialDetails: ["Oil on canvas", "2009"], origin: "Berlin, Germany", uniqueNote: "Unique piece, 2009. Oil on canvas, 250 × 250 cm. Condition and availability on request.", artistBio: "Silke Weyer studied painting at the Berlin Weißensee School of Art, completed her diploma in 2009 and was a master student of Prof. Werner Liebmann from 2009 to 2010. She lives and works in Berlin.", ctaLabel: "Request availability", images: toroBlancoImages(["Silke Weyer, Toro Blanco, 2009, oil on canvas"]), metaTitle: "Silke Weyer – Toro Blanco", metaDescription: "Toro Blanco (2009) by Silke Weyer. Oil on canvas, 250 × 250 cm. Price on request.",
+          },
+          fr: {
+            title: "Toro Blanco", cardTitle: "Toro Blanco", priceNote: "Prix et disponibilité sur demande.", shortDescription: "Toro Blanco de Silke Weyer associe un champ pictural clair, presque immatériel, à un mouvement de peinture concentré.",
+            longDescription: ["Réalisée en 2009, l’œuvre fait naître une forme ouverte et corporelle à partir de traces de couleur, de lignes et de couches transparentes. Son grand format carré donne à la peinture présence et calme.", "La peinture de Silke Weyer se déploie entre trace, matière et vide. L’image ouvre un espace d’associations sans fixer son mouvement."],
+            dimensionsDetails: ["Hauteur : 250 cm", "Largeur : 250 cm"], materialDetails: ["Huile sur toile", "2009"], origin: "Berlin, Allemagne", uniqueNote: "Pièce unique, 2009. Huile sur toile, 250 × 250 cm. État et disponibilité sur demande.", artistBio: "Silke Weyer a étudié la peinture à la Kunsthochschule Berlin Weißensee, a obtenu son diplôme en 2009 et a été Meisterschülerin du Prof. Werner Liebmann de 2009 à 2010. Elle vit et travaille à Berlin.", ctaLabel: "Demander la disponibilité", images: toroBlancoImages(["Silke Weyer, Toro Blanco, 2009, huile sur toile"]), metaTitle: "Silke Weyer – Toro Blanco", metaDescription: "Toro Blanco (2009) de Silke Weyer. Huile sur toile, 250 × 250 cm. Prix sur demande.",
+          },
+          es: {
+            title: "Toro Blanco", cardTitle: "Toro Blanco", priceNote: "Precio y disponibilidad bajo consulta.", shortDescription: "Toro Blanco de Silke Weyer une un campo pictórico claro, casi ingrávido, con un movimiento pictórico concentrado.",
+            longDescription: ["La obra de 2009 desarrolla una forma abierta y corpórea a partir de rastros de color, líneas y capas transparentes. Su gran formato cuadrado otorga a la pintura presencia y calma.", "La pintura de Silke Weyer se mueve entre huella, material y vacío. La imagen abre un espacio de asociaciones sin fijar su movimiento."],
+            dimensionsDetails: ["Alto: 250 cm", "Ancho: 250 cm"], materialDetails: ["Óleo sobre lienzo", "2009"], origin: "Berlín, Alemania", uniqueNote: "Pieza única, 2009. Óleo sobre lienzo, 250 × 250 cm. Estado y disponibilidad bajo consulta.", artistBio: "Silke Weyer estudió pintura en la Kunsthochschule Berlin Weißensee, obtuvo su diploma en 2009 y fue Meisterschülerin del Prof. Werner Liebmann de 2009 a 2010. Vive y trabaja en Berlín.", ctaLabel: "Consultar disponibilidad", images: toroBlancoImages(["Silke Weyer, Toro Blanco, 2009, óleo sobre lienzo"]), metaTitle: "Silke Weyer – Toro Blanco", metaDescription: "Toro Blanco (2009) de Silke Weyer. Óleo sobre lienzo, 250 × 250 cm. Precio bajo consulta.",
+          },
+          zh: {
+            title: "Toro Blanco", cardTitle: "Toro Blanco", priceNote: "价格与供应情况请咨询。", shortDescription: "Silke Weyer 的《Toro Blanco》将近乎无重的明亮画面与凝练的绘画动势结合起来。",
+            longDescription: ["这件 2009 年作品由少量色彩痕迹、线条和透明层次发展出开放而富有身体感的形态。大幅正方形尺寸赋予绘画存在感与宁静。", "Silke Weyer 的绘画在痕迹、材质与留白之间展开。画面为联想打开空间，却不固定其运动。"],
+            dimensionsDetails: ["高度：250 厘米", "宽度：250 厘米"], materialDetails: ["布面油画", "2009"], origin: "德国柏林", uniqueNote: "独一无二作品，2009。布面油画，250 × 250 厘米。状态与供应情况请咨询。", artistBio: "Silke Weyer 曾就读于柏林魏森塞艺术学院绘画专业，2009 年取得文凭，并于 2009 至 2010 年师从 Werner Liebmann 教授。她生活和工作于柏林。", ctaLabel: "咨询供应情况", images: toroBlancoImages(["Silke Weyer，《Toro Blanco》，2009，布面油画"]), metaTitle: "Silke Weyer – Toro Blanco", metaDescription: "Silke Weyer《Toro Blanco》（2009）。布面油画，250 × 250 厘米。价格请咨询。",
+          },
+          ar: {
+            title: "Toro Blanco", cardTitle: "Toro Blanco", priceNote: "السعر والتوفر عند الطلب.", shortDescription: "يجمع Toro Blanco من Silke Weyer مساحة تصويرية فاتحة تكاد تكون بلا وزن مع حركة رسم مركزة.",
+            longDescription: ["يُطوّر عمل عام 2009 شكلاً مفتوحاً وجسدياً من آثار لون قليلة وخطوط وطبقات شفافة. ويمنح الشكل المربع الكبير اللوحة حضوراً وهدوءاً.", "تتحرك لوحة Silke Weyer بين الأثر والمادة والفراغ. وتفتح الصورة مجالاً للتداعي دون أن تثبت حركتها."],
+            dimensionsDetails: ["الارتفاع: 250 سم", "العرض: 250 سم"], materialDetails: ["زيت على قماش", "2009"], origin: "برلين، ألمانيا", uniqueNote: "قطعة فريدة، 2009. زيت على قماش، 250 × 250 سم. الحالة والتوفر عند الطلب.", artistBio: "درست Silke Weyer الرسم في Kunsthochschule Berlin Weißensee وحصلت على الدبلوم عام 2009 وكانت Meisterschülerin لدى Prof. Werner Liebmann بين 2009 و2010. تعيش وتعمل في برلين.", ctaLabel: "طلب التوفر", images: toroBlancoImages(["Silke Weyer، Toro Blanco، 2009، زيت على قماش"]), metaTitle: "Silke Weyer – Toro Blanco", metaDescription: "Toro Blanco (2009) من Silke Weyer. زيت على قماش، 250 × 250 سم. السعر عند الطلب.",
+          },
+        },
+      },
+      {
+        title: "Bernhard Heisig",
+        maker: "Gudrun Brüne",
+        slug: "gudrun-bruene-bernhard-heisig",
+        price: "Auf Anfrage",
+        priceNote: "Preis und Verfügbarkeit auf Anfrage.",
+        material: "Mischtechnik auf Hartfaser",
+        materialDetails: ["Mischtechnik auf Hartfaser", "2011"],
+        dimensions: "80 × 60 cm",
+        dimensionsDetails: ["Höhe: 80 cm", "Breite: 60 cm"],
+        status: "preis-auf-anfrage",
+        availability: "Preis auf Anfrage",
+        description: "Gudrun Brüne verbindet im Porträt „Bernhard Heisig“ präzise Beobachtung mit einer körperhaften, expressiven Malweise.",
+        longDescription: ["Die Arbeit zeigt Bernhard Heisig im Profil, begleitet von zwei überlagerten Köpfen. Dunkler Grund, dichte Farbspuren und die sichtbare Bewegung des Pinselstrichs machen das Porträt zugleich intim und vielschichtig.", "Gudrun Brüne studierte bei Bernhard Heisig an der Hochschule für Grafik und Buchkunst Leipzig. Das Werk von 2011 verhandelt Nähe, künstlerische Beziehung und Erinnerung in einer konzentrierten Bildform."],
+        origin: "Leipzig, Deutschland",
+        uniqueNote: "Unikat, 2011. Mischtechnik auf Hartfaser, 80 × 60 cm. Zustand und Verfügbarkeit auf Anfrage.",
+        artistBio: "Gudrun Brüne (1941–2025) war eine deutsche Malerin und Hochschullehrerin. Sie studierte ab 1961 an der Hochschule für Grafik und Buchkunst Leipzig, war dort Schülerin von Bernhard Heisig und lehrte von 1979 bis 1999 an der Kunsthochschule Burg Giebichenstein.",
+        ctaLabel: "Verfügbarkeit anfragen",
+        images: gudrunBrueneImages(["Gudrun Brüne, Bernhard Heisig, 2011, Mischtechnik auf Hartfaser"]),
+        metaTitle: "Gudrun Brüne – Bernhard Heisig",
+        metaDescription: "Bernhard Heisig (2011) von Gudrun Brüne. Mischtechnik auf Hartfaser, 80 × 60 cm. Preis auf Anfrage.",
+        localized: {
+          en: {
+            title: "Bernhard Heisig", cardTitle: "Bernhard Heisig", priceNote: "Price and availability on request.", shortDescription: "In the portrait Bernhard Heisig, Gudrun Brüne combines close observation with a physical, expressive painterly language.",
+            longDescription: ["The work shows Bernhard Heisig in profile, accompanied by two overlapping heads. A dark ground, dense traces of colour and visible brush movement make the portrait both intimate and layered.", "Gudrun Brüne studied with Bernhard Heisig at the Academy of Visual Arts Leipzig. The 2011 work explores proximity, artistic relationship and memory in a concentrated pictorial form."],
+            dimensionsDetails: ["Height: 80 cm", "Width: 60 cm"], materialDetails: ["Mixed media on hardboard", "2011"], origin: "Leipzig, Germany", uniqueNote: "Unique piece, 2011. Mixed media on hardboard, 80 × 60 cm. Condition and availability on request.", artistBio: "Gudrun Brüne (1941–2025) was a German painter and university lecturer. From 1961, she studied at the Academy of Visual Arts Leipzig with Bernhard Heisig and taught at Burg Giebichenstein University of Art and Design from 1979 to 1999.", ctaLabel: "Request availability", images: gudrunBrueneImages(["Gudrun Brüne, Bernhard Heisig, 2011, mixed media on hardboard"]), metaTitle: "Gudrun Brüne – Bernhard Heisig", metaDescription: "Bernhard Heisig (2011) by Gudrun Brüne. Mixed media on hardboard, 80 × 60 cm. Price on request.",
+          },
+          fr: {
+            title: "Bernhard Heisig", cardTitle: "Bernhard Heisig", priceNote: "Prix et disponibilité sur demande.", shortDescription: "Dans le portrait Bernhard Heisig, Gudrun Brüne associe observation précise et langage pictural physique et expressif.",
+            longDescription: ["L'œuvre montre Bernhard Heisig de profil, accompagné de deux têtes superposées. Le fond sombre, les traces de couleur denses et le geste visible du pinceau rendent ce portrait à la fois intime et complexe.", "Gudrun Brüne a étudié auprès de Bernhard Heisig à l'École supérieure des arts graphiques et du livre de Leipzig. Cette œuvre de 2011 explore la proximité, la relation artistique et la mémoire dans une forme picturale concentrée."],
+            dimensionsDetails: ["Hauteur : 80 cm", "Largeur : 60 cm"], materialDetails: ["Technique mixte sur panneau de fibres", "2011"], origin: "Leipzig, Allemagne", uniqueNote: "Pièce unique, 2011. Technique mixte sur panneau de fibres, 80 × 60 cm. État et disponibilité sur demande.", artistBio: "Gudrun Brüne (1941–2025) était une peintre et enseignante allemande. À partir de 1961, elle a étudié à l'École supérieure des arts graphiques et du livre de Leipzig auprès de Bernhard Heisig, puis a enseigné à la Burg Giebichenstein de 1979 à 1999.", ctaLabel: "Demander la disponibilité", images: gudrunBrueneImages(["Gudrun Brüne, Bernhard Heisig, 2011, technique mixte sur panneau de fibres"]), metaTitle: "Gudrun Brüne – Bernhard Heisig", metaDescription: "Bernhard Heisig (2011) de Gudrun Brüne. Technique mixte sur panneau de fibres, 80 × 60 cm. Prix sur demande.",
+          },
+          es: {
+            title: "Bernhard Heisig", cardTitle: "Bernhard Heisig", priceNote: "Precio y disponibilidad bajo consulta.", shortDescription: "En el retrato Bernhard Heisig, Gudrun Brüne combina observación precisa con un lenguaje pictórico físico y expresivo.",
+            longDescription: ["La obra muestra a Bernhard Heisig de perfil, acompañado por dos cabezas superpuestas. El fondo oscuro, las densas huellas de color y el movimiento visible del pincel hacen del retrato una obra íntima y compleja.", "Gudrun Brüne estudió con Bernhard Heisig en la Academia de Artes Visuales de Leipzig. La obra de 2011 aborda cercanía, relación artística y memoria en una forma pictórica concentrada."],
+            dimensionsDetails: ["Alto: 80 cm", "Ancho: 60 cm"], materialDetails: ["Técnica mixta sobre tablero de fibra", "2011"], origin: "Leipzig, Alemania", uniqueNote: "Pieza única, 2011. Técnica mixta sobre tablero de fibra, 80 × 60 cm. Estado y disponibilidad bajo consulta.", artistBio: "Gudrun Brüne (1941–2025) fue una pintora y profesora universitaria alemana. Desde 1961 estudió en la Academia de Artes Visuales de Leipzig con Bernhard Heisig y enseñó en la Universidad de Arte y Diseño Burg Giebichenstein entre 1979 y 1999.", ctaLabel: "Consultar disponibilidad", images: gudrunBrueneImages(["Gudrun Brüne, Bernhard Heisig, 2011, técnica mixta sobre tablero de fibra"]), metaTitle: "Gudrun Brüne – Bernhard Heisig", metaDescription: "Bernhard Heisig (2011), de Gudrun Brüne. Técnica mixta sobre tablero de fibra, 80 × 60 cm. Precio bajo consulta.",
+          },
+          zh: {
+            title: "Bernhard Heisig", cardTitle: "Bernhard Heisig", priceNote: "价格与供应情况请咨询。", shortDescription: "在肖像作品《Bernhard Heisig》中，Gudrun Brüne 将细致观察与富有力量的表现性绘画语言结合在一起。",
+            longDescription: ["作品描绘侧身的 Bernhard Heisig，身旁叠加着两张头像。深色背景、浓密的色彩痕迹与可见的笔触运动，使这幅肖像既亲密又层次丰富。", "Gudrun Brüne 曾在莱比锡视觉艺术学院师从 Bernhard Heisig。这件2011年的作品以凝练的绘画形式探讨亲近、艺术关系与记忆。"],
+            dimensionsDetails: ["高度：80 厘米", "宽度：60 厘米"], materialDetails: ["纤维板综合材料", "2011年"], origin: "德国莱比锡", uniqueNote: "孤品，2011年。纤维板综合材料，80 × 60 厘米。状态与供应情况请咨询。", artistBio: "Gudrun Brüne（1941–2025）是德国画家与大学教师。自1961年起，她在莱比锡视觉艺术学院师从 Bernhard Heisig，并于1979至1999年间在 Burg Giebichenstein 艺术与设计学院任教。", ctaLabel: "咨询供应情况", images: gudrunBrueneImages(["Gudrun Brüne，《Bernhard Heisig》，2011年，纤维板综合材料"]), metaTitle: "Gudrun Brüne – Bernhard Heisig", metaDescription: "Gudrun Brüne 的《Bernhard Heisig》（2011年）。纤维板综合材料，80 × 60 厘米。价格请咨询。",
+          },
+          ar: {
+            title: "Bernhard Heisig", cardTitle: "Bernhard Heisig", priceNote: "السعر والتوفر عند الطلب.", shortDescription: "تجمع Gudrun Brüne في بورتريه Bernhard Heisig بين الملاحظة الدقيقة ولغة تصويرية جسدية وتعبيرية.",
+            longDescription: ["يُظهر العمل Bernhard Heisig في وضع جانبي، ترافقه رأسان متراكبان. تجعل الأرضية الداكنة وآثار اللون الكثيفة وحركة الفرشاة المرئية من البورتريه عملاً حميمياً ومتعدد الطبقات.", "درست Gudrun Brüne لدى Bernhard Heisig في أكاديمية الفنون البصرية في لايبزيغ. يتناول عمل عام 2011 القرب والعلاقة الفنية والذاكرة في صيغة تصويرية مركزة."],
+            dimensionsDetails: ["الارتفاع: 80 سم", "العرض: 60 سم"], materialDetails: ["تقنيات مختلطة على لوح ألياف", "2011"], origin: "لايبزيغ، ألمانيا", uniqueNote: "قطعة فريدة، 2011. تقنيات مختلطة على لوح ألياف، 80 × 60 سم. الحالة والتوفر عند الطلب.", artistBio: "Gudrun Brüne (1941–2025) كانت رسامة وأستاذة جامعية ألمانية. منذ عام 1961 درست في أكاديمية الفنون البصرية في لايبزيغ لدى Bernhard Heisig، ودرّست في جامعة Burg Giebichenstein للفنون والتصميم من 1979 إلى 1999.", ctaLabel: "طلب التوفر", images: gudrunBrueneImages(["Gudrun Brüne، Bernhard Heisig، 2011، تقنيات مختلطة على لوح ألياف"]), metaTitle: "Gudrun Brüne – Bernhard Heisig", metaDescription: "Bernhard Heisig (2011) من Gudrun Brüne. تقنيات مختلطة على لوح ألياف، 80 × 60 سم. السعر عند الطلب.",
+          },
+        },
+      },
       {
         title: "Bauernopfer",
         maker: "Sebastian Schrader",
@@ -1118,8 +1602,14 @@ const allSeedProducts = categorySeeds.flatMap((category) =>
 const curatedShopProductSlugs = [
   "sitzobjekt-kuhfell",
   "gaetano-pesce-up7-il-piede",
+  "ap-collection-animal-chair",
   "54couture-teppich-kuhfell",
   "leuchte-aus-bronze",
+  "michael-fischer-art-untitled-2024",
+  "stefan-hirsig-die-erklaerung-der-welt",
+  "silke-weyer-paso-due",
+  "silke-weyer-toro-blanco",
+  "gudrun-bruene-bernhard-heisig",
   "sebastian-schrader-bauernopfer",
   "christian-achenbach-guckst-du",
   "beistelltisch-aus-naturstein",

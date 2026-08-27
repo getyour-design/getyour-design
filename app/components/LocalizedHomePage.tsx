@@ -8,15 +8,6 @@ import { stories } from "../data/stories";
 import { getProductPath, getShopPath, localizeHref, type Locale } from "../lib/i18n";
 import { getCowhidePresentationCopy, getEnglishProductTitle, getLocalizedProductPrice } from "../lib/productTitles";
 
-const productImages = [
-  "/images/product-stone-object.svg",
-  "/images/product-stone-table.svg",
-  "/images/product-ceramic.svg",
-  "/images/product-paper.svg",
-  "/images/product-rug.svg",
-  "/images/product-bronze-lamp.svg",
-];
-
 const collectionImages = [
   "/images/collection-materials.svg",
   "/images/collection-studio.svg",
@@ -28,6 +19,24 @@ const collectionImages = [
 
 const featuredCommerceProduct = products.find((product) => product.slug === "sitzobjekt-kuhfell");
 const featuredArtworkProduct = products.find((product) => product.slug === "sebastian-schrader-bauernopfer");
+const newArrivalSlugs = [
+  "gaetano-pesce-up7-il-piede",
+  "ap-collection-animal-chair",
+  "sitzobjekt-kuhfell",
+  "54couture-teppich-kuhfell",
+  "michael-fischer-art-untitled-2024",
+  "gudrun-bruene-bernhard-heisig",
+];
+const newArrivalProducts = newArrivalSlugs.flatMap((slug) => {
+  const product = products.find((item) => item.slug === slug);
+  return product ? [product] : [];
+});
+const newArrivalImagesBySlug = {
+  "sitzobjekt-kuhfell": {
+    src: "/images/products/yellow-cowhide-seat.webp",
+    alt: "Gelbes Sitzobjekt aus europäischem Kuhfell in einem hellen Interieur",
+  },
+};
 
 const featuredArtworkDescription: Record<Locale, string> = {
   de: "Figuren, Alltagsobjekte und malerische Zitate verdichten sich zu einer spannungsvollen Szene.",
@@ -234,72 +243,50 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             </Link>
           </div>
           <div className="mt-8 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {products.slice(0, 8).map((item, index) => (
-              <article className="group" key={item.title}>
-                <div className="overflow-hidden border hairline bg-[#f8f8f6]">
-                  <img
-                    alt={getProductTitle(locale, item.title, index)}
-                    className="aspect-[4/5] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
-                    src={productImages[index % productImages.length]}
-                  />
-                </div>
-                <div className="mt-5 flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.categories[item.category] ?? item.category}</p>
-                    <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
-                      {item.slug === "sitzobjekt-kuhfell" ? featuredProductContent?.cardTitle ?? item.cardTitle : getProductTitle(locale, item.title, index)}
-                    </h3>
-                    <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
-                      {item.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : item.maker}
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-[#4b5356]">{item.slug === "sitzobjekt-kuhfell" ? featuredProductDescription : item.description}</p>
-                  </div>
-                  <p className="shrink-0 text-sm text-[#353b3e]">
-                    {getLocalizedProductPrice(item.slug === "sitzobjekt-kuhfell" ? cowhidePresentation.price : item.price, locale)}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+            {newArrivalProducts.map((item, index) => {
+              const localizedContent = locale === "de" ? undefined : item.localized?.[locale];
+              const itemImage = newArrivalImagesBySlug[item.slug as keyof typeof newArrivalImagesBySlug]
+                ?? localizedContent?.images?.[0]
+                ?? item.images?.[0];
+              const itemTitle = localizedContent?.cardTitle ?? localizedContent?.title ?? item.cardTitle ?? getProductTitle(locale, item.title, index);
+              const itemDescription = localizedContent?.shortDescription ?? item.description;
+              const itemHref = item.pathMode === "nested"
+                ? getProductPath(locale, item.categorySlug, item.slug)
+                : getShopPath(locale, item.slug);
 
-      <section className="border-y hairline bg-[#e8eceb] px-5 py-16 lg:px-10 lg:py-20">
-        <div className="mx-auto max-w-[1540px]">
-          <div className="flex flex-col justify-between gap-6 border-b border-black/15 pb-7 md:flex-row md:items-end">
-            <div>
-              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{dictionary.home.selectedWorksEyebrow}</p>
-              <h2 className="serif mt-3 text-lg font-normal tracking-[0.08em] lg:text-xl">{dictionary.home.selectedWorksTitle}</h2>
-            </div>
-            <Link className="text-xs uppercase tracking-[0.2em] underline underline-offset-8" href={localizedHref("/shop", locale)}>
-              {dictionary.home.selectedWorksCta}
-            </Link>
-          </div>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {products.slice(0, 4).map((work, index) => (
-              <Link className="group" href={localizedHref("/shop", locale)} key={work.title}>
-                <div className="overflow-hidden bg-[#f7f7f5]">
-                  <img
-                    alt={getProductTitle(locale, work.title, index)}
-                    className="aspect-[3/4] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
-                    src={productImages[index % productImages.length]}
-                  />
-                </div>
-                <div className="mt-5 flex items-start justify-between gap-5 border-t border-black/15 pt-4">
-                  <div>
-                    <p className="text-[0.65rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
-                    <h3 className="serif mt-2 text-lg leading-snug tracking-[0.08em]">
-                      {work.slug === "sitzobjekt-kuhfell" ? featuredProductContent?.cardTitle ?? work.cardTitle : getProductTitle(locale, work.title, index)}
-                    </h3>
-                    <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
-                      {work.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : work.maker}
+              return (
+                <article className="group" key={item.slug}>
+                  <Link className="block" href={itemHref}>
+                    <div className="relative aspect-[4/5] overflow-hidden bg-[#ebeae7]">
+                      {itemImage ? (
+                        <Image
+                          alt={itemImage.alt}
+                          className={`${item.slug === "sitzobjekt-kuhfell" ? "object-cover" : "object-contain"} transition duration-700 ease-out group-hover:scale-[1.04]`}
+                          fill
+                          sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw"
+                          src={itemImage.src}
+                        />
+                      ) : null}
+                    </div>
+                  </Link>
+                  <div className="mt-5 flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.categories[item.category] ?? item.category}</p>
+                      <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
+                        <Link href={itemHref}>{itemTitle}</Link>
+                      </h3>
+                      <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                        {item.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : item.maker}
+                      </p>
+                      <p className="mt-3 text-sm leading-7 text-[#4b5356]">{itemDescription}</p>
+                    </div>
+                    <p className="shrink-0 text-sm text-[#353b3e]">
+                      {getLocalizedProductPrice(item.slug === "sitzobjekt-kuhfell" ? cowhidePresentation.price : item.price, locale)}
                     </p>
-                    <p className="mt-3 text-sm leading-7 text-[#4b5356]">{work.slug === "sitzobjekt-kuhfell" ? featuredProductDescription : work.description}</p>
                   </div>
-                  <p className="max-w-[8rem] text-right text-xs leading-5 text-[#4b5356]">{dictionary.shop.categories[work.category] ?? work.category}</p>
-                </div>
-              </Link>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -319,34 +306,6 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             <Link className="mt-8 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href={localizedHref("/arbeit-einreichen", locale)}>
               {dictionary.home.submitCta}
             </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b hairline bg-[#f3f2ef] px-5 py-12 lg:px-10 lg:py-14">
-        <div className="mx-auto max-w-[1540px]">
-          <div className="grid gap-10 lg:grid-cols-[0.32fr_0.68fr] lg:items-start">
-            <div className="max-w-[28rem]">
-              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{dictionary.home.orientationEyebrow}</p>
-              <h2 className="serif mt-4 text-balance text-base leading-snug tracking-[0.08em] lg:text-lg">
-                {dictionary.home.orientationTitle}
-              </h2>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {dictionary.home.areas.map((area, index) => (
-                <Link
-                  className="grid min-h-36 content-between border hairline bg-[#f7f7f5] p-5 transition hover:bg-[#f8f8f6]"
-                  href={localizedHref(area.href, locale)}
-                  key={area.title}
-                >
-                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
-                  <div>
-                    <h3 className="serif text-base leading-snug tracking-[0.08em]">{area.title}</h3>
-                    <p className="mt-3 text-sm leading-6 text-[#4b5356]">{area.text}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -413,7 +372,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               <h2 className="serif mt-4 text-xl leading-snug tracking-[0.08em]">{dictionary.home.journalTitle}</h2>
             </div>
             <div className="divide-y divide-black/15 border-y border-black/15">
-              {stories.map((story, index) => (
+              {stories.slice(0, 3).map((story, index) => (
                 <Link className="grid gap-5 py-7 md:grid-cols-[1fr_auto] md:items-center" href={localizedHref("/journal", locale)} key={story.title}>
                   <h3 className="serif text-xl leading-snug tracking-[0.08em]">{dictionary.journal.titles[index] ?? story.title}</h3>
                   <span className="text-xs uppercase tracking-[0.2em] text-[#667174]">{dictionary.home.journalRead}</span>
