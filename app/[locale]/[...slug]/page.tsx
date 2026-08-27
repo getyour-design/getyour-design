@@ -35,7 +35,7 @@ import { primaryShopCategories, products, visibleShopCategories } from "../../da
 import { collections } from "../../data/collections";
 import { artworks } from "../../data/artworks";
 import { brands } from "../../data/brands";
-import { stories } from "../../data/stories";
+import { getLocalizedStories } from "../../data/stories";
 import { getCommerceCta } from "../../lib/commerce";
 import { get54CouturePresentationCopy, getEnglishProductTitle, getLocalizedProductPrice } from "../../lib/productTitles";
 import {
@@ -550,7 +550,7 @@ function LocalizedShopPage({ locale }: { locale: Locale }) {
       <section className="border-b hairline bg-[#f3f2ef] px-5 py-8 lg:px-10">
         <div className="mx-auto grid max-w-[1540px] gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
           {primaryShopCategories.map((area) => (
-            <Link className="border hairline bg-[#f7f7f5] px-4 py-3.5 text-center text-[0.68rem] uppercase tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath(locale, area.slug)} key={area.slug}>
+            <Link className="flex min-h-[64px] items-center justify-center border hairline bg-[#f7f7f5] px-4 py-2 text-center text-[0.68rem] uppercase leading-tight tracking-[0.2em] text-[#353b3e] transition hover:bg-[#f8f8f6] hover:text-black" href={getShopPath(locale, area.slug)} key={area.slug}>
               {getLocalizedCategoryLabel(locale, area.title)}
             </Link>
           ))}
@@ -818,21 +818,61 @@ function LocalizedShopSlugPage({ locale, slug }: { locale: Locale; slug: string 
 
 function LocalizedJournalPage({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
+  const localizedStories = getLocalizedStories(locale).map((story, index) => {
+    if (index < 4) return story;
+
+    const placeholderIndex = index - 4;
+    return {
+      ...story,
+      category: dictionary.journal.categories[placeholderIndex] ?? story.category,
+      title: dictionary.journal.titles[placeholderIndex] ?? story.title,
+      teaser: dictionary.journal.teasers[placeholderIndex] ?? story.teaser,
+    };
+  });
+  const orderedStories = [...localizedStories].sort((a, b) =>
+    (b.publishedAtIso ?? "").localeCompare(a.publishedAtIso ?? "")
+  );
 
   return (
     <main>
       <PageHero eyebrow={dictionary.journal.eyebrow} title={dictionary.journal.title} description={dictionary.journal.description} />
       <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {stories.map((story, index) => (
-            <article className="grid min-h-64 content-between border hairline bg-[#f7f7f5] p-6" key={story.title}>
-              <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.journal.categories[index] ?? dictionary.journal.eyebrow}</p>
-              <div>
-                <h2 className="serif text-2xl leading-snug tracking-[0.08em]">{dictionary.journal.titles[index] ?? story.title}</h2>
-                <p className="mt-5 text-sm leading-7 text-[#4b5356]">{dictionary.journal.teasers[index] ?? dictionary.journal.description}</p>
+        <div className="mx-auto grid max-w-[1660px] auto-rows-fr gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {orderedStories.map((story) => {
+            const href = story.href ? `/${locale}${story.href.replace(/^\/de/, "")}` : localizedRoutes.journal[locale];
+
+            return (
+            <article className="flex h-full min-h-[34rem] flex-col border hairline bg-[#f7f7f5]" key={story.title}>
+              {story.image ? (
+                <Link className="block overflow-hidden" href={href}>
+                  <Image
+                    alt={story.title}
+                    className="aspect-[16/10] w-full shrink-0 bg-[#e8eceb] object-cover transition duration-500 hover:scale-[1.02]"
+                    height={941}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                    src={story.image}
+                    width={1672}
+                  />
+                </Link>
+              ) : (
+                <div className="flex aspect-[16/10] shrink-0 items-end border-b hairline bg-[#e8eceb] p-6">
+                  <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Journal</p>
+                </div>
+              )}
+              <div className="flex flex-1 flex-col p-6">
+                <p className="min-h-[2.5rem] text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{story.category}</p>
+                <h2 className="serif min-h-[4rem] text-[1.22rem] leading-[1.22] tracking-[0.035em] lg:text-[1.32rem]">
+                  <Link href={href}>{story.title}</Link>
+                </h2>
+                <div className="min-h-[3rem]">
+                  {story.subtitle ? <p className="serif text-[0.95rem] leading-snug tracking-[0.035em] text-[#667174]">{story.subtitle}</p> : null}
+                </div>
+                <p className="mt-4 min-h-[5.25rem] text-sm leading-7 text-[#4b5356]">{story.teaser}</p>
+                {story.publishedAt ? <time className="mt-auto pt-6 text-[0.68rem] uppercase tracking-[0.12em] text-[#667174]">{story.publishedAt}</time> : null}
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </section>
     </main>
@@ -971,19 +1011,21 @@ function EnglishAteliersPage() {
       <section className="section-pad bg-[#f3f2ef]">
         <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2">
           {brands.map((brand, index) => (
-            <article className="grid min-h-60 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
+            <article className="flex min-h-[35rem] flex-col border hairline bg-[#f7f7f5] p-7" key={brand.name}>
               <p className="text-[0.68rem] tracking-[0.2em] text-[#667174]">{brand.name.toLowerCase()}</p>
-              <div>
+              <div className="mt-8 flex flex-1 flex-col">
                 {brand.heroImage ? (
                   <Link className="group relative mb-8 block aspect-[16/10] overflow-hidden bg-[#181615]" href={`/en/ateliers/${brand.slug}`}>
                       <Image alt={`${brand.name} studio view`} className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]" fill sizes="(min-width: 1024px) 38vw, 100vw" src={brand.heroImage} />
                   </Link>
                 ) : (
-                  <div className={`mb-8 h-28 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
+                  <div className={`mb-8 aspect-[16/10] ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
                 )}
-                <h2 className="serif text-2xl tracking-[0.08em]"><Link href={`/en/ateliers/${brand.slug}`}>{brand.name}</Link></h2>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-[#4b5356]">{brand.localized?.en?.description ?? englishBrandDescriptions[index] ?? "An atelier selected for material knowledge, precise making and object culture."}</p>
-                <EntityActions href="/en/ateliers" id={`atelier:${brand.name}`} title={brand.name} type="Atelier" />
+                <h2 className="serif min-h-[3.5rem] text-2xl tracking-[0.08em]"><Link href={`/en/ateliers/${brand.slug}`}>{brand.name}</Link></h2>
+                <p className="mt-4 min-h-[5.25rem] max-w-xl text-sm leading-7 text-[#4b5356]">{brand.localized?.en?.description ?? englishBrandDescriptions[index] ?? "An atelier selected for material knowledge, precise making and object culture."}</p>
+                <div className="mt-auto">
+                  <EntityActions href="/en/ateliers" id={`atelier:${brand.name}`} title={brand.name} type="Atelier" />
+                </div>
               </div>
             </article>
           ))}

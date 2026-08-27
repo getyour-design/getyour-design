@@ -44,14 +44,14 @@ export default function JournalPage() {
         description="Einblicke in Kunst, Design, Materialien, Ateliers und Räume. Zurückhaltend kuratiert und eng mit den Arbeiten auf GETYOUR.DESIGN verbunden."
       />
       <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] auto-rows-fr gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-[1660px] auto-rows-fr gap-6 md:grid-cols-2 lg:grid-cols-4">
           {orderedStories.map((story) => (
-            <article className="flex h-full min-h-[25rem] flex-col overflow-hidden border hairline bg-[#f7f7f5]" key={story.title}>
+            <article className="flex h-full min-h-[34rem] flex-col border hairline bg-[#f7f7f5]" key={story.title}>
               {story.image ? (
                 <Link className="block overflow-hidden" href={story.href ?? "/de/journal"}>
                   <Image
                     alt={`Editoriale Visualisierung zu ${story.title}`}
-                    className="aspect-[16/9] w-full bg-[#e8eceb] object-cover transition duration-500 hover:scale-[1.02]"
+                    className="aspect-[16/10] w-full shrink-0 bg-[#e8eceb] object-cover transition duration-500 hover:scale-[1.02]"
                     height={941}
                     sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
                     src={story.image}
@@ -59,26 +59,20 @@ export default function JournalPage() {
                   />
                 </Link>
               ) : (
-                <div className="flex aspect-[16/9] items-end border-b hairline bg-[#e8eceb] p-6">
+                <div className="flex aspect-[16/10] shrink-0 items-end border-b hairline bg-[#e8eceb] p-6">
                   <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">Journal</p>
                 </div>
               )}
               <div className="flex flex-1 flex-col p-6">
-                <div className="flex min-h-10 items-start justify-between gap-4 text-[0.68rem] uppercase tracking-[0.2em] text-[#667174] lg:min-h-[3.25rem]">
-                  <p>{story.category}</p>
+                <p className="min-h-[2.5rem] text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{story.category}</p>
+                <h2 className="serif min-h-[4rem] text-[1.22rem] leading-[1.22] tracking-[0.035em] lg:text-[1.32rem]">
+                  {story.href ? <Link href={story.href}>{story.title}</Link> : story.title}
+                </h2>
+                <div className="min-h-[3rem]">
+                  {story.subtitle ? <p className="serif text-[0.95rem] leading-snug tracking-[0.035em] text-[#667174]">{story.subtitle}</p> : null}
                 </div>
-                <div className="mt-4 grid flex-1 grid-rows-[4.25rem_3.25rem_1fr]">
-                  <h2 className="serif text-[1.35rem] leading-[1.2] tracking-[0.04em] lg:text-[1.45rem]">
-                    {story.href ? <Link href={story.href}>{story.title}</Link> : story.title}
-                  </h2>
-                  <div>
-                    {story.subtitle ? <p className="serif text-[0.95rem] leading-snug tracking-[0.035em] text-[#667174]">{story.subtitle}</p> : null}
-                  </div>
-                  <div className="flex h-full flex-col">
-                    <p className="text-sm leading-7 text-[#4b5356]">{story.teaser}</p>
-                    {story.publishedAt ? <time className="mt-auto pt-6 text-[0.68rem] uppercase tracking-[0.12em] text-[#667174]">{story.publishedAt}</time> : null}
-                  </div>
-                </div>
+                <p className="mt-4 min-h-[5.25rem] text-sm leading-7 text-[#4b5356]">{story.teaser}</p>
+                {story.publishedAt ? <time className="mt-auto pt-6 text-[0.68rem] uppercase tracking-[0.12em] text-[#667174]">{story.publishedAt}</time> : null}
               </div>
             </article>
           ))}

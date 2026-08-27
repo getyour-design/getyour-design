@@ -38,9 +38,9 @@ export default function AteliersPage() {
           </div>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {brands.map((brand, index) => (
-              <article className="grid min-h-60 content-between border hairline bg-[#f7f7f5] p-7" key={brand.name}>
+              <article className="flex min-h-[35rem] flex-col border hairline bg-[#f7f7f5] p-7" key={brand.name}>
                 <p className="text-[0.68rem] tracking-[0.2em] text-[#667174]">{brand.name.toLowerCase()}</p>
-                <div>
+                <div className="mt-8 flex flex-1 flex-col">
                   {brand.heroImage ? (
                     <Link className="group relative mb-8 block aspect-[16/10] overflow-hidden bg-[#181615]" href={`/de/ateliers/${brand.slug}`}>
                       <Image
@@ -52,16 +52,18 @@ export default function AteliersPage() {
                       />
                     </Link>
                   ) : (
-                    <div className={`mb-8 h-28 ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
+                    <div className={`mb-8 aspect-[16/10] ${index % 2 === 0 ? "bg-[#11100f]" : "bg-[#c7beb1]"}`} />
                   )}
-                  <h3 className="serif text-2xl tracking-[0.08em]"><Link href={`/de/ateliers/${brand.slug}`}>{brand.name}</Link></h3>
-                  <p className="mt-4 max-w-xl text-sm leading-7 text-[#4b5356]">{brand.description}</p>
-                  <EntityActions
-                    href="/ateliers"
-                    id={`atelier:${brand.name}`}
-                    title={brand.name}
-                    type="Atelier"
-                  />
+                  <h3 className="serif min-h-[3.5rem] text-2xl tracking-[0.08em]"><Link href={`/de/ateliers/${brand.slug}`}>{brand.name}</Link></h3>
+                  <p className="mt-4 min-h-[5.25rem] max-w-xl text-sm leading-7 text-[#4b5356]">{brand.description}</p>
+                  <div className="mt-auto">
+                    <EntityActions
+                      href="/ateliers"
+                      id={`atelier:${brand.name}`}
+                      title={brand.name}
+                      type="Atelier"
+                    />
+                  </div>
                 </div>
               </article>
             ))}

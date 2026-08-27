@@ -46,10 +46,28 @@ export const brands: Brand[] = [
     },
   },
   {
-    name: "Manufaktur B",
-    slug: "manufaktur-b",
-    description: "Limitierte Sitzobjekte und Editionen mit skulpturalen, weichen Linien.",
+    name: "ABC Manufaktur",
+    slug: "abc-manufaktur",
+    description: "Handgeformte Keramik und kleine Editionen aus Ton – ruhig, materiell und für besondere Räume gedacht.",
+    heroImage: "/images/ateliers/abc-manufaktur-clay-studio.png",
     status: "editorial",
+    localized: {
+      en: {
+        description: "Hand-formed ceramics and small clay editions – quiet, tactile and made for distinctive spaces.",
+      },
+      fr: {
+        description: "Céramiques façonnées à la main et petites éditions en terre – calmes, tactiles et pensées pour des espaces singuliers.",
+      },
+      es: {
+        description: "Cerámica modelada a mano y pequeñas ediciones de arcilla: sobrias, táctiles y pensadas para espacios singulares.",
+      },
+      zh: {
+        description: "手工塑形的陶瓷与小型陶土作品，安静、富有触感，专为独特空间而作。",
+      },
+      ar: {
+        description: "خزف مشكّل يدويًا وإصدارات صغيرة من الطين، هادئة وملموسة ومصممة لمساحات مميزة.",
+      },
+    },
   },
   {
     name: "Textilmanufaktur C",
