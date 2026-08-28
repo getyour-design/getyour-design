@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import type { ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import AgbPage from "../../agb/page";
 import SubmitWorkPage from "../../arbeit-einreichen/page";
 import ArtPage from "../../art/page";
 import ArtistsPage from "../../artists/page";
-import AteliersPage from "../../ateliers/page";
 import BrandsPage from "../../brands/page";
 import CollectionsPage from "../../collections/page";
 import ContactPage from "../../contact/page";
@@ -33,7 +32,6 @@ import { ProductStructuredData } from "../../components/StructuredData";
 import { LuxuryCoastersPage } from "../../components/LuxuryCoastersPage";
 import { getDictionary } from "../../data/dictionaries";
 import { primaryShopCategories, products, visibleShopCategories } from "../../data/products";
-import { collections } from "../../data/collections";
 import { artworks } from "../../data/artworks";
 import { brands } from "../../data/brands";
 import { getLocalizedStories } from "../../data/stories";
@@ -62,7 +60,6 @@ const pageComponents: Partial<Record<RouteKey, ComponentType>> = {
   "arbeit-einreichen": SubmitWorkPage,
   art: ArtPage,
   artists: ArtistsPage,
-  ateliers: AteliersPage,
   brands: BrandsPage,
   collections: CollectionsPage,
   contact: ContactPage,
@@ -300,6 +297,10 @@ export default async function LocalizedPage({ params }: LocalizedPageProps) {
     return <LocalizedArtPage locale={locale} />;
   }
 
+  if (route.key === "ateliers") {
+    redirect(localizedRoutes.collections[locale]);
+  }
+
   if (locale === "en") {
     return <EnglishStaticPage routeKey={route.key} />;
   }
@@ -520,6 +521,10 @@ function LocalizedStaticPlaceholder({ locale, routeKey }: { locale: Locale; rout
 
   if (routeKey === "collections") {
     return <LocalizedCollectionsPage locale={locale} />;
+  }
+
+  if (routeKey === "ateliers") {
+    redirect(localizedRoutes.collections[locale]);
   }
 
   if (routeKey === "warenkorb") {
@@ -907,27 +912,33 @@ function LocalizedJournalPage({ locale }: { locale: Locale }) {
 
 function LocalizedCollectionsPage({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
-  const page = dictionary.pages.collections;
+  const page = dictionary.pages.ateliers;
 
   return (
     <main>
-      <PageHero eyebrow={page.title} title={page.title} description={page.description} />
-      <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {collections.map((collection, index) => {
-            const localizedCollection = dictionary.collections[collection.key] ?? collection;
-
-            return (
-              <article className="grid min-h-72 content-between border hairline bg-[#f7f7f5] p-6" key={collection.key}>
-                <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
-                <div>
-                  <div className={`mb-7 h-36 ${index % 3 === 0 ? "bg-[#11100f]" : index % 3 === 1 ? "bg-[#c7beb1]" : "bg-[#e8e1d6]"}`} />
-                  <h2 className="serif text-2xl leading-snug tracking-[0.08em]">{localizedCollection.title}</h2>
-                  <p className="mt-4 text-sm leading-7 text-[#4b5356]">{localizedCollection.description}</p>
+      <PageHero eyebrow={dictionary.pages.collections.title} title={page.title} description={page.description} />
+      <section className="border-y hairline bg-[#e8eceb] px-5 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-[1540px]">
+          <div className="flex flex-col justify-between gap-6 border-b border-black/15 pb-7 md:flex-row md:items-end">
+            <div>
+              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{page.title}</p>
+              <h2 className="serif mt-3 text-lg font-normal tracking-[0.08em] lg:text-xl">{page.description}</h2>
+            </div>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {brands.map((brand) => (
+              <article className="flex min-h-[35rem] flex-col border hairline bg-[#f7f7f5] p-7" key={brand.slug}>
+                <p className="text-[0.68rem] tracking-[0.2em] text-[#667174]">{brand.name.toLowerCase()}</p>
+                <div className="mt-8 flex flex-1 flex-col">
+                  <Link className="group relative mb-8 block aspect-[16/10] overflow-hidden bg-[#181615]" href={`/${locale}/collections/${brand.slug}`}>
+                    {brand.heroImage ? <Image alt={`${brand.name} atelier`} className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]" fill sizes="(min-width: 1024px) 38vw, 100vw" src={brand.heroImage} /> : null}
+                  </Link>
+                  <h2 className="serif min-h-[3.5rem] text-2xl tracking-[0.08em]"><Link href={`/${locale}/collections/${brand.slug}`}>{brand.name}</Link></h2>
+                  <p className="mt-4 min-h-[5.25rem] max-w-xl text-sm leading-7 text-[#4b5356]">{brand.localized?.[locale]?.description ?? brand.description}</p>
                 </div>
               </article>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
     </main>

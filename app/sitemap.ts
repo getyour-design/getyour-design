@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { indexableShopCategories, products } from "./data/products";
+import { brands } from "./data/brands";
 import { getAbsoluteAlternateLanguages, getProductPath, getShopPath, localizedRoutes, locales, siteUrl, type Locale, type RouteKey } from "./lib/i18n";
 
 const lastModified = new Date("2026-08-22");
@@ -9,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [];
   }
 
-  const staticRoutes = Object.entries(localizedRoutes).flatMap(([routeKey, paths]) =>
+  const staticRoutes = Object.entries(localizedRoutes).filter(([routeKey]) => routeKey !== "ateliers").flatMap(([routeKey, paths]) =>
     locales.map((locale) => ({
       url: `${siteUrl}${paths[locale]}`,
       lastModified,
@@ -56,18 +57,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const atelierRoutes = locales.map((locale) => ({
-    url: `${siteUrl}/${locale}/ateliers/54couture`,
+  const collectionProfileRoutes = brands.filter((brand) => brand.heroImage).flatMap((brand) => locales.map((locale) => ({
+    url: `${siteUrl}/${locale}/collections/${brand.slug}`,
     lastModified,
     alternates: {
       languages: Object.fromEntries([
-        ...locales.map((targetLocale) => [targetLocale, `${siteUrl}/${targetLocale}/ateliers/54couture`]),
-        ["x-default", `${siteUrl}/de/ateliers/54couture`],
+        ...locales.map((targetLocale) => [targetLocale, `${siteUrl}/${targetLocale}/collections/${brand.slug}`]),
+        ["x-default", `${siteUrl}/de/collections/${brand.slug}`],
       ]),
     },
-  }));
+  })));
 
-  return [...staticRoutes, ...legacyRoutes, ...shopRoutes, ...productRoutes, ...atelierRoutes];
+  return [...staticRoutes, ...legacyRoutes, ...shopRoutes, ...productRoutes, ...collectionProfileRoutes];
 }
 
 function absoluteLanguages(languages: Record<string, string>) {

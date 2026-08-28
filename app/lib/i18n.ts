@@ -74,7 +74,7 @@ export const rootRedirects: Record<string, string> = {
   "/arbeit-einreichen": localizedRoutes["arbeit-einreichen"].de,
   "/art": localizedRoutes.art.de,
   "/artists": localizedRoutes.artists.de,
-  "/ateliers": localizedRoutes.ateliers.de,
+  "/ateliers": localizedRoutes.collections.de,
   "/brands": localizedRoutes.brands.de,
   "/collections": localizedRoutes.collections.de,
   "/contact": localizedRoutes.contact.de,

@@ -1,21 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getDictionary } from "../data/dictionaries";
-import { collections } from "../data/collections";
+import { brands } from "../data/brands";
 import { materialCards } from "../data/materials";
 import { heroShopCategories, products } from "../data/products";
-import { stories } from "../data/stories";
+import { getLocalizedStories } from "../data/stories";
 import { getProductPath, getShopPath, localizeHref, type Locale } from "../lib/i18n";
 import { getCowhidePresentationCopy, getEnglishProductTitle, getLocalizedProductPrice } from "../lib/productTitles";
-
-const collectionImages = [
-  "/images/collection-materials.svg",
-  "/images/collection-studio.svg",
-  "/images/collection-art.svg",
-  "/images/collection-ceramic.svg",
-  "/images/collection-lighting.svg",
-  "/images/collection-textile.svg",
-];
 
 const featuredCommerceProduct = products.find((product) => product.slug === "sitzobjekt-kuhfell");
 const featuredArtworkProduct = products.find((product) => product.slug === "sebastian-schrader-bauernopfer");
@@ -37,6 +28,7 @@ const newArrivalImagesBySlug = {
     alt: "Gelbes Sitzobjekt aus europäischem Kuhfell in einem hellen Interieur",
   },
 };
+const featuredAteliers = brands.filter((brand) => brand.heroImage);
 
 const featuredArtworkDescription: Record<Locale, string> = {
   de: "Figuren, Alltagsobjekte und malerische Zitate verdichten sich zu einer spannungsvollen Szene.",
@@ -76,6 +68,9 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
     ? getShopPath(locale, featuredArtworkProduct.slug)
     : undefined;
   const featuredArtworkImage = featuredArtworkProduct?.images?.[0];
+  const journalStories = getLocalizedStories(locale)
+    .filter((story) => story.href)
+    .slice(0, 3);
 
   return (
     <main className="bg-[#f3f2ef]">
@@ -270,15 +265,15 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                     </div>
                   </Link>
                   <div className="mt-5 flex items-start justify-between gap-4">
-                    <div>
+                    <div className="grid flex-1 grid-rows-[1.5rem_minmax(3.5rem,max-content)_1.5rem_minmax(5.25rem,max-content)] content-start">
                       <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.categories[item.category] ?? item.category}</p>
-                      <h3 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
+                      <h3 className="serif pt-2 text-xl leading-snug tracking-[0.08em]">
                         <Link href={itemHref}>{itemTitle}</Link>
                       </h3>
-                      <p className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
+                      <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">
                         {item.maker === "54COUTURE" ? "54COUTURE – THE FINEST EUROPEAN COW HIDES" : item.maker}
                       </p>
-                      <p className="mt-3 text-sm leading-7 text-[#4b5356]">{itemDescription}</p>
+                      <p className="pt-3 text-sm leading-7 text-[#4b5356]">{itemDescription}</p>
                     </div>
                     <p className="shrink-0 text-sm text-[#353b3e]">
                       {getLocalizedProductPrice(item.slug === "sitzobjekt-kuhfell" ? cowhidePresentation.price : item.price, locale)}
@@ -314,31 +309,36 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
         <div className="mx-auto max-w-[1540px]">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{dictionary.home.collectionsEyebrow}</p>
-              <h2 className="serif mt-3 text-lg font-normal tracking-[0.08em] lg:text-xl">{dictionary.home.collectionsTitle}</h2>
+              <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{dictionary.pages.ateliers?.title ?? "Ateliers"}</p>
+              <h2 className="serif mt-3 text-lg font-normal tracking-[0.08em] lg:text-xl">{dictionary.pages.ateliers?.description ?? "Ateliers, makers and workshops behind selected works."}</h2>
             </div>
             <Link className="text-xs uppercase tracking-[0.2em] underline underline-offset-8" href={localizedHref("/collections", locale)}>
-              {dictionary.home.collectionsCta}
+              {dictionary.home.materialsCta}
             </Link>
           </div>
-          <div className="mt-8 grid gap-4 lg:grid-cols-6">
-            {collections.map((item, index) => (
-              <Link className="group grid min-h-64 content-between border hairline bg-[#f7f7f5] p-5 transition hover:bg-[#f8f8f6]" href={localizedHref("/collections", locale)} key={item.key}>
-                <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">0{index + 1}</p>
-                <div>
-                  <img
-                    alt={dictionary.collections[item.key]?.title ?? item.title}
-                    className="mb-6 h-32 w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
-                    src={collectionImages[index % collectionImages.length]}
-                  />
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {featuredAteliers.map((atelier) => (
+              <article className="group" key={atelier.slug}>
+                <Link className="block" href={localizedAtelierHref(atelier.slug, locale)}>
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[#181615]">
+                    <Image
+                      alt={`${atelier.name} atelier`}
+                      className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      src={atelier.heroImage!}
+                    />
+                  </div>
+                </Link>
+                <div className="mt-5">
                   <h3 className="serif text-xl leading-snug tracking-[0.08em]">
-                    {dictionary.collections[item.key]?.title ?? item.title}
+                    <Link href={localizedAtelierHref(atelier.slug, locale)}>{atelier.name}</Link>
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-[#4b5356]">
-                    {dictionary.collections[item.key]?.description ?? item.description}
+                  <p className="mt-3 max-w-xl text-sm leading-6 text-[#4b5356]">
+                    {atelier.localized?.[locale]?.description ?? atelier.description}
                   </p>
                 </div>
-              </Link>
+              </article>
             ))}
           </div>
         </div>
@@ -349,13 +349,13 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
           <div>
             <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#667174]">{dictionary.home.materialsEyebrow}</p>
             <h2 className="serif mt-4 text-xl leading-snug tracking-[0.08em]">{dictionary.home.materialsTitle}</h2>
-            <Link className="mt-7 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href={localizedHref("/ateliers", locale)}>
-              {dictionary.home.materialsCta}
+            <Link className="mt-7 inline-block border-b border-black pb-2 text-xs uppercase tracking-[0.2em]" href={localizedHref("/collections", locale)}>
+              {dictionary.home.collectionsCta}
             </Link>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {materialCards.map((material) => (
-              <Link className="border hairline bg-[#f3f2ef] p-5" href={localizedHref("/materials", locale)} key={material.name}>
+              <Link className="border hairline bg-[#f3f2ef] p-5" href={localizedHref("/collections", locale)} key={material.name}>
                 <div className={`mb-5 h-24 ${material.palette}`} />
                 <h3 className="serif text-xl tracking-[0.08em]">{dictionary.home.materialLabels[material.name] ?? material.name}</h3>
               </Link>
@@ -372,9 +372,9 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               <h2 className="serif mt-4 text-xl leading-snug tracking-[0.08em]">{dictionary.home.journalTitle}</h2>
             </div>
             <div className="divide-y divide-black/15 border-y border-black/15">
-              {stories.slice(0, 3).map((story, index) => (
-                <Link className="grid gap-5 py-7 md:grid-cols-[1fr_auto] md:items-center" href={localizedHref("/journal", locale)} key={story.title}>
-                  <h3 className="serif text-xl leading-snug tracking-[0.08em]">{dictionary.journal.titles[index] ?? story.title}</h3>
+              {journalStories.map((story) => (
+                <Link className="grid gap-5 py-7 md:grid-cols-[1fr_auto] md:items-center" href={localizedStoryHref(story.href, locale)} key={story.title}>
+                  <h3 className="serif text-xl leading-snug tracking-[0.08em]">{story.title}</h3>
                   <span className="text-xs uppercase tracking-[0.2em] text-[#667174]">{dictionary.home.journalRead}</span>
                 </Link>
               ))}
@@ -413,4 +413,16 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
 
 function localizedHref(href: string, locale: Locale) {
   return localizeHref(href, locale);
+}
+
+function localizedAtelierHref(slug: string, locale: Locale) {
+  return `/${locale}/collections/${slug}`;
+}
+
+function localizedStoryHref(href: string | undefined, locale: Locale) {
+  if (!href) {
+    return localizedHref("/journal", locale);
+  }
+
+  return locale === "de" ? href : `/${locale}${href.replace(/^\/de/, "")}`;
 }

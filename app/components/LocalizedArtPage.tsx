@@ -38,6 +38,24 @@ const artCopy: Record<Locale, { eyebrow: string; title: string; description: str
   },
 };
 
+const artworkDetailsFallback: Partial<Record<Locale, Record<string, string>>> = {
+  en: { "sebastian-schrader-bauernopfer": "Oil on canvas · 180 × 240 cm" },
+  fr: { "sebastian-schrader-bauernopfer": "Huile sur toile · 180 × 240 cm" },
+  es: { "sebastian-schrader-bauernopfer": "Óleo sobre lienzo · 180 × 240 cm" },
+  zh: { "sebastian-schrader-bauernopfer": "布面油画 · 180 × 240 厘米" },
+  ar: { "sebastian-schrader-bauernopfer": "زيت على قماش · 180 × 240 سم" },
+};
+
+const artworkImageDimensions: Record<string, { width: number; height: number }> = {
+  "michael-fischer-art-untitled-2024": { width: 1023, height: 1537 },
+  "stefan-hirsig-die-erklaerung-der-welt": { width: 1187, height: 1326 },
+  "silke-weyer-paso-due": { width: 567, height: 567 },
+  "silke-weyer-toro-blanco": { width: 567, height: 589 },
+  "gudrun-bruene-bernhard-heisig": { width: 1080, height: 1456 },
+  "sebastian-schrader-bauernopfer": { width: 3508, height: 2616 },
+  "christian-achenbach-guckst-du": { width: 1481, height: 1772 },
+};
+
 const artProducts = products.filter((product) => product.category === "Kunst");
 
 export function LocalizedArtPage({ locale }: { locale: Locale }) {
@@ -55,38 +73,47 @@ export function LocalizedArtPage({ locale }: { locale: Locale }) {
       </section>
 
       <section className="section-pad bg-[#f3f2ef]">
-        <div className="mx-auto grid max-w-[1540px] gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto max-w-[1540px] columns-1 gap-5 sm:columns-2">
           {artProducts.map((product) => {
             const localizedContent = locale === "de" ? undefined : product.localized?.[locale];
             const image = localizedContent?.images?.[0] ?? product.images?.[0];
             const title = localizedContent?.cardTitle ?? localizedContent?.title ?? product.cardTitle ?? product.title;
             const description = localizedContent?.shortDescription ?? product.description;
+            const materials = (localizedContent?.materialDetails ?? product.materialDetails ?? [product.material])
+              .filter((detail) => !/^\d{4}$/.test(detail));
+            const localizedDimensions = localizedContent?.dimensionsDetails;
+            const dimensions = localizedDimensions?.length === 1 && !/\d/.test(localizedDimensions[0])
+              ? localizedDimensions[0]
+              : product.dimensions;
+            const artworkDetails = artworkDetailsFallback[locale]?.[product.slug]
+              ?? [...materials, dimensions].join(" · ");
+            const imageDimensions = artworkImageDimensions[product.slug] ?? { width: 1200, height: 1200 };
             const href = product.pathMode === "nested"
               ? getProductPath(locale, product.categorySlug, product.slug)
               : getShopPath(locale, product.slug);
 
             return (
-              <article className="flex h-full flex-col" key={product.slug}>
-                <Link className="group block" href={href}>
-                  <div className="relative aspect-[4/5] overflow-hidden bg-[#ebeae7]">
-                    {image ? (
-                      <Image
-                        alt={image.alt || title}
-                        className="object-contain transition duration-700 ease-out group-hover:scale-[1.04]"
-                        fill
-                        sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw"
-                        src={image.src}
-                      />
-                    ) : null}
-                  </div>
+              <article className="mb-12 break-inside-avoid" key={product.slug}>
+                <Link className="group block overflow-hidden bg-[#e2e1dd]" href={href}>
+                  {image ? (
+                    <Image
+                      alt={image.alt || title}
+                      className="block h-auto w-full transition duration-700 ease-out group-hover:scale-[1.04]"
+                      height={imageDimensions.height}
+                      sizes="(min-width: 640px) 50vw, 100vw"
+                      src={image.src}
+                      width={imageDimensions.width}
+                    />
+                  ) : null}
                 </Link>
-                <div className="mt-5 grid flex-1 grid-rows-[1.5rem_3.5rem_1.5rem_5.25rem_auto] content-start">
+                <div className="mt-5">
                   <p className="text-[0.68rem] uppercase tracking-[0.2em] text-[#667174]">{dictionary.shop.categories.Kunst ?? copy.eyebrow}</p>
-                  <h2 className="serif overflow-hidden pt-2 text-xl leading-snug tracking-[0.08em]">
+                  <h2 className="serif mt-2 text-xl leading-snug tracking-[0.08em]">
                     <Link href={href}>{title}</Link>
                   </h2>
-                  <p className="text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">{product.maker}</p>
-                  <p className="overflow-hidden pt-3 text-sm leading-7 text-[#4b5356]">{description}</p>
+                  <p className="mt-0.5 text-[0.68rem] uppercase leading-5 tracking-[0.14em] text-[#667174]">{artworkDetails}</p>
+                  <p className="mt-1 text-[0.68rem] uppercase tracking-[0.16em] text-[#667174]">{product.maker}</p>
+                  <p className="mt-3 text-sm leading-7 text-[#4b5356]">{description}</p>
                   <p className="pt-4 text-sm text-[#353b3e]">{getLocalizedProductPrice(product.price, locale)}</p>
                 </div>
               </article>

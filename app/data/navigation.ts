@@ -2,7 +2,6 @@ export const navItems = [
   { label: "Design-Shop", href: "/shop" },
   { label: "Kunst", href: "/art" },
   { label: "Kollektionen", href: "/collections" },
-  { label: "Ateliers", href: "/ateliers" },
   { label: "Journal", href: "/journal" },
 ];
 
@@ -22,6 +21,5 @@ export const footerNavItems = [
   { label: "Materialien", href: "/materials" },
   { label: "Journal", href: "/journal" },
   { label: "Commissions & Collaborations", href: "/trade" },
-  { label: "Ateliers", href: "/ateliers" },
   { label: "Arbeit einreichen", href: "/arbeit-einreichen" },
 ];
